@@ -1,2 +1,3 @@
-# pages-module
+# Pages Module
+
 Pages management. 
