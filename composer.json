@@ -1,5 +1,5 @@
 {
-    "name": "anomaly/pagesu-module",
+    "name": "anomaly/pages-module",
     "type": "streams-addon",
     "description": "Pages management.",
     "keywords": ["streams-addon", "pages", "pyrocms", "laravel"],
