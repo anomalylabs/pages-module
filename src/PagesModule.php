@@ -33,4 +33,5 @@ class PagesModule extends Module
             'url' => 'admin/pages/types',
         ],
     ];
+
 }

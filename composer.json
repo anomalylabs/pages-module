@@ -2,7 +2,12 @@
     "name": "anomaly/pages-module",
     "type": "streams-addon",
     "description": "Pages management.",
-    "keywords": ["streams-addon", "pages", "pyrocms", "laravel"],
+    "keywords": [
+        "streams-addon",
+        "pages",
+        "pyrocms",
+        "laravel"
+    ],
     "homepage": "http://anomaly.is/",
     "license": "MIT",
     "authors": [

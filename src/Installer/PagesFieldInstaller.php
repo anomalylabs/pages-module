@@ -20,4 +20,5 @@ class PagesFieldInstaller
         'title' => 'text',
         'slug'  => 'slug',
     ];
+
 }
