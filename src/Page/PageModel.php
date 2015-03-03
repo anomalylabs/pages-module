@@ -14,4 +14,13 @@ use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 class PageModel extends PagesPagesEntryModel implements PageInterface
 {
 
+    /**
+     * Get the path.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 }

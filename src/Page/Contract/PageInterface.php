@@ -11,4 +11,10 @@
 interface PageInterface
 {
 
+    /**
+     * Get the path.
+     *
+     * @return string
+     */
+    public function getPath();
 }

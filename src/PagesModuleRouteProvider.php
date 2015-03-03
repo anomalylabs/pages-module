@@ -1,6 +1,8 @@
 <?php namespace Anomaly\PagesModule;
 
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 
 /**
@@ -19,13 +21,15 @@ class PagesModuleRouteProvider extends RouteServiceProvider
      *
      * @param Router $router
      */
-    public function map(Router $router)
+    public function map(Router $router, Request $request, PageRepositoryInterface $pages)
     {
-        $router->any(
-            '(.*)',
-            function ($page) {
-                dd($page);
-            }
-        );
+        if ($page = $pages->findByPath($request->path())) {
+            $router->any(
+                $page->getPath(),
+                function () use ($page) {
+                    var_dump($page);
+                }
+            );
+        }
     }
 }
