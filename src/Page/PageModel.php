@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 
 /**
  * Class PageModel
@@ -10,7 +11,7 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page
  */
-class PageModel implements PageInterface
+class PageModel extends PagesPagesEntryModel implements PageInterface
 {
 
 }

@@ -11,4 +11,11 @@
 interface PageRepositoryInterface
 {
 
+    /**
+     * Find a page by it's path.
+     *
+     * @param $path
+     * @return null|PageInterface
+     */
+    public function findByPath($path);
 }

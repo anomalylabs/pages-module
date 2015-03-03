@@ -26,12 +26,16 @@ class PagesModule extends Module
      * @var array
      */
     protected $sections = [
-        'pages' => [
-            'url' => 'admin/pages',
+        'pages'      => [
+            'buttons' => [
+                'create'
+            ]
         ],
-        'types' => [
-            'url' => 'admin/pages/types',
-        ],
+        'page_types' => [
+            'buttons' => [
+                'create'
+            ]
+        ]
     ];
 
 }

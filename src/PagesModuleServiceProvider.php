@@ -14,6 +14,13 @@ class PagesModuleServiceProvider extends ServiceProvider
 {
 
     /**
+     * Defer this service provider.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -21,5 +28,6 @@ class PagesModuleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register('Anomaly\PagesModule\Page\PageServiceProvider');
+        $this->app->register('Anomaly\PagesModule\PagesModuleServiceProvider');
     }
 }

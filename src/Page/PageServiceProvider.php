@@ -24,9 +24,12 @@ class PageServiceProvider extends ServiceProvider
             'Anomaly\PagesModule\Page\PageModel',
             'Anomaly\PagesModule\Page\PageModel'
         );
+
         $this->app->bind(
             'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface',
             'Anomaly\PagesModule\Page\PageRepository'
         );
+
+        $this->app->register('Anomaly\PagesModule\Page\PageRouteProvider');
     }
 }
