@@ -21,6 +21,9 @@ class PagesModuleServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register('Anomaly\PagesModule\Page\PageServiceProvider');
-        $this->app->register('Anomaly\PagesModule\PagesModuleRouteProvider');
+
+        if (env('INSTALLED')) {
+            $this->app->register('Anomaly\PagesModule\PagesModuleRouteProvider');
+        }
     }
 }
