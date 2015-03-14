@@ -23,6 +23,21 @@ class PagesModuleRouteProvider extends RouteServiceProvider
      */
     public function map(Router $router, Request $request, PageRepositoryInterface $pages)
     {
+        $router->any(
+            'admin/pages',
+            'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index'
+        );
+
+        $router->any(
+            'admin/pages/create',
+            'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create'
+        );
+
+        $router->any(
+            'admin/pages/edit/{id}',
+            'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit'
+        );
+
         if ($page = $pages->findByPath($request->path())) {
             $router->any(
                 $page->getPath(),
