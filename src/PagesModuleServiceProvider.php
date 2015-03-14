@@ -1,6 +1,6 @@
 <?php namespace Anomaly\PagesModule;
 
-use Illuminate\Support\ServiceProvider;
+use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 
 /**
  * Class PagesModuleServiceProvider
@@ -10,27 +10,36 @@ use Illuminate\Support\ServiceProvider;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule
  */
-class PagesModuleServiceProvider extends ServiceProvider
+class PagesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
-     * Register the service provider.
+     * The class bindings.
      *
-     * @return void
+     * @var array
      */
-    public function register()
-    {
-        // Page services.
-        $this->app->bind(
-            'Anomaly\PagesModule\Page\PageModel',
-            'Anomaly\PagesModule\Page\PageModel'
-        );
+    protected $bindings = [
+        'Anomaly\PagesModule\Page\PageModel' => 'Anomaly\PagesModule\Page\PageModel'
+    ];
 
-        $this->app->bind(
-            'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface',
-            'Anomaly\PagesModule\Page\PageRepository'
-        );
+    /**
+     * The singleton bindings.
+     *
+     * @var array
+     */
+    protected $singletons = [
+        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface' => 'Anomaly\PagesModule\Page\PageRepository'
+    ];
 
-        $this->app->register('Anomaly\PagesModule\PagesModuleRouteProvider');
-    }
+    /**
+     * The addon routes.
+     *
+     * @var array
+     */
+    protected $routes = [
+        'admin/pages'           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
+        'admin/pages/create'    => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
+        'admin/pages/edit/{id}' => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit'
+    ];
+
 }
