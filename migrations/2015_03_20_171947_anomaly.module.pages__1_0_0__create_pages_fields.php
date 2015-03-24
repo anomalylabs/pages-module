@@ -3,13 +3,13 @@
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class AnomalyModulePagesCreatePagesFields
+ * Class AnomalyModulePages_1_0_0_CreatePagesFields
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModulePagesCreatePagesFields extends Migration
+class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
 {
 
     /**

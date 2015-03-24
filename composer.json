@@ -2,6 +2,7 @@
     "name": "anomaly/pages-module",
     "type": "streams-addon",
     "description": "Pages management.",
+    "version": "1.0.0",
     "keywords": [
         "streams-addon",
         "pages",

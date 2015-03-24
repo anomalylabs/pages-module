@@ -26,7 +26,9 @@ class PageFormBuilder extends FormBuilder
      * @var array
      */
     protected $fields = [
-        'title',
+        'title' => [
+            'class' => 'massive'
+        ],
         'meta_title',
         'meta_description',
         'meta_keywords',
