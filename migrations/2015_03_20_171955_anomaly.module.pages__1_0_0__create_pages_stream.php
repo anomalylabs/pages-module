@@ -37,12 +37,14 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
         ],
         'parent',
         'status',
+        'home',
+        'slug',
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'allowed_roles',
         'css',
-        'js',
-        'allowed_roles'
+        'js'
     ];
 
 }

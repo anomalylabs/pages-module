@@ -39,6 +39,10 @@ class PageRepository implements PageRepositoryInterface
      */
     public function findByPath($path)
     {
-        return $this->model->where('path', $path)->first();
+        if ($path == '/') {
+            return $this->model->where('home', true)->first();
+        } else {
+            return $this->model->where('home', false)->where('path', $path)->first();
+        }
     }
 }

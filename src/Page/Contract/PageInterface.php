@@ -12,6 +12,13 @@ interface PageInterface
 {
 
     /**
+     * Get the ID.
+     *
+     * @return integer
+     */
+    public function getId();
+
+    /**
      * Get the path.
      *
      * @return string

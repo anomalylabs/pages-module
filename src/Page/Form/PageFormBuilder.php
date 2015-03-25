@@ -29,10 +29,11 @@ class PageFormBuilder extends FormBuilder
         'title' => [
             'class' => 'massive'
         ],
+        'slug',
+        'home',
         'meta_title',
         'meta_description',
         'meta_keywords',
-        'path',
         'parent',
         'css',
         'js'
