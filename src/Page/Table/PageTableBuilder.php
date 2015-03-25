@@ -27,7 +27,10 @@ class PageTableBuilder extends TableBuilder
      */
     protected $columns = [
         'title',
-        'path'
+        [
+            'heading' => 'path',
+            'value'   => '/{entry.path}'
+        ]
     ];
 
     /**
