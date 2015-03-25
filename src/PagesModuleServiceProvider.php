@@ -1,6 +1,9 @@
 <?php namespace Anomaly\PagesModule;
 
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 
 /**
  * Class PagesModuleServiceProvider
@@ -42,4 +45,20 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/edit/{id}' => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit'
     ];
 
+    /**
+     * Map additional routes.
+     *
+     * @param PageRepositoryInterface $pages
+     * @param Router                  $router
+     */
+    public function map(PageRepositoryInterface $pages, Router $router)
+    {
+        $router->before(
+            function (Request $request) use ($router, $pages) {
+                if ($page = $pages->findByPath($request->path())) {
+                    dd('Render: ' . $page->getTitle());
+                }
+            }
+        );
+    }
 }

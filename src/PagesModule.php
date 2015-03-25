@@ -28,7 +28,7 @@ class PagesModule extends Module
     protected $sections = [
         'pages'      => [
             'buttons' => [
-                'create'
+                'new_page'
             ]
         ],
         'page_types' => [

@@ -17,4 +17,11 @@ interface PageInterface
      * @return string
      */
     public function getPath();
+
+    /**
+     * Get the title.
+     *
+     * @return string
+     */
+    public function getTitle();
 }
