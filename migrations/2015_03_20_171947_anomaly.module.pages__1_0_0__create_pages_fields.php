@@ -26,6 +26,7 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
         'meta_title'       => 'anomaly.field_type.text',
         'meta_description' => 'anomaly.field_type.textarea',
         'meta_keywords'    => 'anomaly.field_type.tags',
+        'content'          => 'anomaly.field_type.wysiwyg',
         'css'              => [
             'type'   => 'anomaly.field_type.editor',
             'config' => [

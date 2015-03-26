@@ -56,7 +56,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         $router->before(
             function (Request $request) use ($router, $pages) {
                 if ($page = $pages->findByPath($request->path())) {
-                    dd('Render Page #' . $page->getId() . ': ' . $page->getTitle());
+                    return app()->call('Anomaly\PagesModule\Http\Controller\PagesController@handle', compact('page'));
                 }
             }
         );

@@ -23,4 +23,14 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     {
         return $this->path;
     }
+
+    /**
+     * Get the page content.
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

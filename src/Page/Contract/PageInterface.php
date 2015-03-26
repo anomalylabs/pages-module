@@ -31,4 +31,11 @@ interface PageInterface
      * @return string
      */
     public function getTitle();
+
+    /**
+     * Get the page content.
+     *
+     * @return string
+     */
+    public function getContent();
 }

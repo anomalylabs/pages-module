@@ -31,6 +31,7 @@ class PageFormBuilder extends FormBuilder
         ],
         'slug',
         'home',
+        'content',
         'meta_title',
         'meta_description',
         'meta_keywords',
