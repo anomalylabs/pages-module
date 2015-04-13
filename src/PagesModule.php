@@ -14,11 +14,11 @@ class PagesModule extends Module
 {
 
     /**
-     * The module navigation role.
+     * The module icon.
      *
      * @var string
      */
-    protected $navigation = 'streams::navigation.content';
+    protected $icon = 'laptop';
 
     /**
      * The module sections.
