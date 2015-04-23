@@ -28,6 +28,7 @@ class PageTypeTableBuilder extends TableBuilder
      * @var array
      */
     protected $buttons = [
+        'edit',
         'fields'
     ];
 

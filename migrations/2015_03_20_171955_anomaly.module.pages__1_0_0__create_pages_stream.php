@@ -35,6 +35,7 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
         'path'  => [
             'required' => true
         ],
+        'type',
         'parent',
         'status',
         'home',

@@ -3,7 +3,6 @@
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\PagesModule;
 use Anomaly\Streams\Platform\Application\Application;
-use Anomaly\Streams\Platform\Support\String;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
 
@@ -18,14 +17,30 @@ use Illuminate\Filesystem\Filesystem;
 class GenerateRoutesFile implements SelfHandling
 {
 
+    /**
+     * Handle the command.
+     *
+     * @param PageRepositoryInterface $pages
+     * @param Application             $application
+     * @param PagesModule             $module
+     * @param Filesystem              $files
+     */
     public function handle(
-        Application $application,
-        Filesystem $files,
         PageRepositoryInterface $pages,
-        PagesModule $module
+        Application $application,
+        PagesModule $module,
+        Filesystem $files
     ) {
-        $pages = $pages->all();
+        $files->makeDirectory($application->getStoragePath('pages'), 0777, true, true);
 
-        $files->put($application->getStoragePath('pages/routes.php'), app('Anomaly\Streams\Platform\Support\String')->render($files->get($module->getPath('resources/assets/routes.template')), compact('pages')));
+        $files->put(
+            $application->getStoragePath('pages/routes.php'),
+            app('Anomaly\Streams\Platform\Support\String')->render(
+                $files->get($module->getPath('resources/assets/routes.template')),
+                [
+                    'pages' => $pages->all()
+                ]
+            )
+        );
     }
 }

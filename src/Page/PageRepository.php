@@ -43,6 +43,17 @@ class PageRepository implements PageRepositoryInterface
     }
 
     /**
+     * Find a page by ID.
+     *
+     * @param $id
+     * @return null|PageInterface
+     */
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
+    /**
      * Find a page by it's path.
      *
      * @param $path
@@ -50,11 +61,7 @@ class PageRepository implements PageRepositoryInterface
      */
     public function findByPath($path)
     {
-        if ($path == '/') {
-            return $this->model->where('home', true)->first();
-        } else {
-            return $this->model->where('home', false)->where('path', $path)->first();
-        }
+        return $this->model->where('home', false)->where('path', $path)->first();
     }
 
     /**

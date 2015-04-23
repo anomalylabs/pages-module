@@ -1,7 +1,8 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
-use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\PagesModule\Page\Command\GetPageResponse;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
+use Illuminate\Http\Response;
 
 /**
  * Class PagesController
@@ -15,13 +16,14 @@ class PagesController extends PublicController
 {
 
     /**
-     * Handle the page.
+     * Map the matched route action to a page response.
      *
-     * @param PageInterface $page
-     * @return \Illuminate\View\View
+     * @param string $method
+     * @param array  $parameters
+     * @return Response
      */
-    public function handle(PageInterface $page)
+    public function __call($method, $parameters)
     {
-        return view('anomaly.module.pages::page', compact('page'));
+        return $this->dispatch(new GetPageResponse(substr($method, strpos($method, '_') + 1)));
     }
 }

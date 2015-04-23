@@ -1,7 +1,7 @@
-{% extends "theme::layouts/default" %}
+{% extends page.type.theme_layout ?: "theme::layouts/default" %}
 
 {% block content %}
 
-    {{ page.content|raw }}
+    {% include page.type.layout.path %}
 
 {% endblock %}

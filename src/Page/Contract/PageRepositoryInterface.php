@@ -21,6 +21,14 @@ interface PageRepositoryInterface
     public function all();
 
     /**
+     * Find a page by ID.
+     *
+     * @param $id
+     * @return null|PageInterface
+     */
+    public function find($id);
+
+    /**
      * Find a page by it's path.
      *
      * @param $path
