@@ -41,7 +41,6 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
         'status',
         'home',
         'slug',
-        'content',
         'meta_title',
         'meta_description',
         'meta_keywords',

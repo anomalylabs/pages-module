@@ -1,10 +1,46 @@
 <?php
 
 return [
-    'title' => [
-        'name' => 'Title'
+    'title'            => [
+        'name'         => 'Title',
+        'placeholder'  => 'Hello World!',
+        'instructions' => 'What is the title of the page?'
     ],
-    'path'  => [
-        'name' => 'Path'
+    'slug'             => [
+        'name'         => 'Slug',
+        'placeholder'  => 'hello-world',
+        'instructions' => 'The slug is used in building the page\'s URL.'
+    ],
+    'home'             => [
+        'name'         => 'Home Page',
+        'label'        => 'Use as home page?',
+        'instructions' => 'Is this the default landing page for your site?'
+    ],
+    'meta_title'       => [
+        'name'         => 'Meta Title',
+        'placeholder'  => 'Hello World!',
+        'instructions' => 'Enter the page\'s SEO title. The page\'s title will be used by default.'
+    ],
+    'meta_description' => [
+        'name'         => 'Meta Description',
+        'placeholder'  => 'Welcome to our new website!',
+        'instructions' => 'Enter the page\'s SEO description.'
+    ],
+    'meta_keywords'    => [
+        'name'         => 'Meta Keywords',
+        'instructions' => 'Enter the page\'s SEO keywords. Use ONLY as many as makes sense.'
+    ],
+    'ttl'              => [
+        'name'         => 'TTL',
+        'label'        => 'Time to live (TTL)',
+        'instructions' => 'How long (in seconds) do you want to cache the page for before serving fresh content. The settings value will be used by default.'
+    ],
+    'css'              => [
+        'name'         => 'CSS',
+        'instructions' => 'The CSS entered will ONLY be loaded for this page. CSS files are parsed when loading so feel free to use theme settings and other tags.'
+    ],
+    'js'              => [
+        'name'         => 'JS',
+        'instructions' => 'The JS entered will ONLY be loaded for this page. JS files are parsed when loading so feel free to use theme settings and other tags.'
     ]
 ];
