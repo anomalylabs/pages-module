@@ -1,8 +1,8 @@
 <?php namespace Anomaly\PagesModule;
 
-use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
-use Illuminate\Http\Request;
+use Anomaly\Streams\Platform\Application\Application;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Routing\Router;
 
 /**
@@ -22,7 +22,8 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $bindings = [
-        'Anomaly\PagesModule\Page\PageModel' => 'Anomaly\PagesModule\Page\PageModel'
+        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel'     => 'Anomaly\PagesModule\Page\PageModel',
+        'Anomaly\Streams\Platform\Model\Pages\PagesPageTypesEntryModel' => 'Anomaly\PagesModule\Type\TypeModel'
     ];
 
     /**
@@ -31,7 +32,8 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $singletons = [
-        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface' => 'Anomaly\PagesModule\Page\PageRepository'
+        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface'     => 'Anomaly\PagesModule\Page\PageRepository',
+        'Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface' => 'Anomaly\PagesModule\Type\PageTypeRepository'
     ];
 
     /**
@@ -40,25 +42,32 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        'admin/pages'           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
-        'admin/pages/create'    => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
-        'admin/pages/edit/{id}' => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit'
+        'admin/pages/create'            => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
+        'admin/pages/edit/{id}'         => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
+        'admin/pages/types'             => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@index',
+        'admin/pages/types/create'      => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@create',
+        'admin/pages/types/edit/{id}'   => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
+        'admin/pages/types/fields/{id}' => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@fields',
     ];
 
     /**
      * Map additional routes.
      *
-     * @param PageRepositoryInterface $pages
-     * @param Router                  $router
+     * @param Filesystem  $files
+     * @param Application $application
+     * @param Router      $router
      */
-    public function map(PageRepositoryInterface $pages, Router $router)
+    public function map(Filesystem $files, Application $application, Router $router)
     {
-        $router->before(
-            function (Request $request) use ($router, $pages) {
-                if ($page = $pages->findByPath($request->path())) {
-                    return app()->call('Anomaly\PagesModule\Http\Controller\PagesController@handle', compact('page'));
-                }
-            }
-        );
+        if ($files->exists($routes = $application->getStoragePath('pages/routes.php'))) {
+            $files->requireOnce($routes);
+        }
+
+        $router
+            ->any(
+                'admin/pages/{path?}',
+                'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index'
+            )
+            ->where('path', '(.*)');
     }
 }

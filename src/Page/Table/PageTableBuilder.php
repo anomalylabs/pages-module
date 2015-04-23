@@ -1,5 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Table;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\Streams\Platform\Model\EloquentQueryBuilder;
 use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 
 /**
@@ -14,11 +16,21 @@ class PageTableBuilder extends TableBuilder
 {
 
     /**
-     * The table model.
+     * The parent page.
      *
-     * @var string
+     * @var null|PageInterface
      */
-    protected $model = 'Anomaly\PagesModule\Page\PageModel';
+    protected $parent;
+
+    /**
+     * The filters array.
+     *
+     * @var array
+     */
+    protected $filters = [
+        'title',
+        'path'
+    ];
 
     /**
      * The table columns.
@@ -26,7 +38,10 @@ class PageTableBuilder extends TableBuilder
      * @var array
      */
     protected $columns = [
-        'title',
+        [
+            'heading' => 'title',
+            'value'   => 'entry.view_link'
+        ],
         [
             'heading' => 'path',
             'value'   => '/{entry.path}'
@@ -47,4 +62,26 @@ class PageTableBuilder extends TableBuilder
         ]
     ];
 
+    /**
+     * Fired just before querying.
+     *
+     * @param EloquentQueryBuilder $query
+     */
+    public function onQuerying(EloquentQueryBuilder $query)
+    {
+        $query->where('parent_id', $this->parent ? $this->parent->getId() : null);
+    }
+
+    /**
+     * Set the parent page.
+     *
+     * @param PageInterface $parent
+     * @return $this
+     */
+    public function setParent(PageInterface $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
 }

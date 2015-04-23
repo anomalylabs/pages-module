@@ -19,7 +19,12 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
      */
     protected $fields = [
         'title'            => 'anomaly.field_type.text',
-        'slug'             => 'anomaly.field_type.slug',
+        'slug'             => [
+            'type'   => 'anomaly.field_type.slug',
+            'config' => [
+                'slugify' => 'title'
+            ]
+        ],
         'path'             => 'anomaly.field_type.text',
         'home'             => 'anomaly.field_type.boolean',
         'enabled'          => 'anomaly.field_type.boolean',
@@ -39,6 +44,12 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
                 'mode' => 'javascript'
             ]
         ],
+        'layout'           => [
+            'type'   => 'anomaly.field_type.editor',
+            'config' => [
+                'mode' => 'twig'
+            ]
+        ],
         'allowed_roles'    => [
             'type'   => 'anomaly.field_type.multiple',
             'config' => [
@@ -56,7 +67,9 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
             'config' => [
                 'handler' => 'Anomaly\PagesModule\FieldType\ThemeLayout\ThemeLayoutOptions@handle'
             ]
-        ]
+        ],
+        'name'             => 'anomaly.field_type.text',
+        'description'      => 'anomaly.field_type.textarea'
     ];
 
 }

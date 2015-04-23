@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\Streams\Platform\Model\EloquentModel;
 
 /**
  * Class PageRepository
@@ -32,6 +33,16 @@ class PageRepository implements PageRepositoryInterface
     }
 
     /**
+     * Return all pages.
+     *
+     * @return PageCollection
+     */
+    public function all()
+    {
+        return $this->model->all();
+    }
+
+    /**
      * Find a page by it's path.
      *
      * @param $path
@@ -44,5 +55,16 @@ class PageRepository implements PageRepositoryInterface
         } else {
             return $this->model->where('home', false)->where('path', $path)->first();
         }
+    }
+
+    /**
+     * Save a page.
+     *
+     * @param PageInterface|EloquentModel $page
+     * @return PageInterface
+     */
+    public function save(PageInterface $page)
+    {
+        return $page->save();
     }
 }

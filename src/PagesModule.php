@@ -26,14 +26,14 @@ class PagesModule extends Module
      * @var array
      */
     protected $sections = [
-        'pages'      => [
+        'pages' => [
             'buttons' => [
                 'new_page'
             ]
         ],
-        'page_types' => [
+        'types' => [
             'buttons' => [
-                'create'
+                'new_type'
             ]
         ]
     ];

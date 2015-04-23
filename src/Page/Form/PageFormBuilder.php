@@ -14,28 +14,18 @@ class PageFormBuilder extends FormBuilder
 {
 
     /**
-     * The form model.
-     *
-     * @var string
-     */
-    protected $model = 'Anomaly\PagesModule\Page\PageModel';
-
-    /**
      * The form fields.
      *
      * @var array
      */
     protected $fields = [
-        'title' => [
-            'class' => 'massive'
-        ],
+        'title',
         'slug',
         'home',
         'content',
         'meta_title',
         'meta_description',
         'meta_keywords',
-        'parent',
         'css',
         'js'
     ];

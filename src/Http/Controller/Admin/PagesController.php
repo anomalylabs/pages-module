@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Table\PageTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
@@ -18,11 +19,17 @@ class PagesController extends AdminController
     /**
      * Return an index of existing pages.
      *
-     * @param PageTableBuilder $table
-     * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
+     * @param PageRepositoryInterface $pages
+     * @param PageTableBuilder        $table
+     * @param null                    $path
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(PageTableBuilder $table)
+    public function index(PageRepositoryInterface $pages, PageTableBuilder $table, $path = null)
     {
+        if ($page = $pages->findByPath($path)) {
+            $table->setParent($page);
+        }
+
         return $table->render();
     }
 

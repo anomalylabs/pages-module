@@ -1,5 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
+use Anomaly\PagesModule\Page\PageCollection;
+
 /**
  * Interface PageInterface
  *
@@ -17,6 +19,21 @@ interface PageInterface
      * @return integer
      */
     public function getId();
+
+    /**
+     * Get the slug.
+     *
+     * @return string
+     */
+    public function getSlug();
+
+    /**
+     * Set the path.
+     *
+     * @param $path
+     * @return $this
+     */
+    public function setPath($path);
 
     /**
      * Get the path.
@@ -38,4 +55,18 @@ interface PageInterface
      * @return string
      */
     public function getContent();
+
+    /**
+     * Return the related parent page.
+     *
+     * @return null|PageInterface
+     */
+    public function getParent();
+
+    /**
+     * Return the related children pages.
+     *
+     * @return PageCollection
+     */
+    public function getChildren();
 }
