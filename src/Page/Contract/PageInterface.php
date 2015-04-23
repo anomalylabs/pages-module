@@ -21,6 +21,13 @@ interface PageInterface
     public function getId();
 
     /**
+     * Get the TTL.
+     *
+     * @return null|int
+     */
+    public function getTtl();
+
+    /**
      * Get the slug.
      *
      * @return string

@@ -26,6 +26,7 @@ class PageFormBuilder extends FormBuilder
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'ttl',
         'css',
         'js'
     ];

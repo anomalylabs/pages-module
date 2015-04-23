@@ -25,6 +25,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Get the TTL.
+     *
+     * @return null|int
+     */
+    public function getTtl()
+    {
+        return $this->ttl;
+    }
+
+    /**
      * Get the slug.
      *
      * @return string

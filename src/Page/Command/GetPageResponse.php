@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Command;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\SettingsModule\Setting\Contract\SettingRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
@@ -35,14 +36,20 @@ class GetPageResponse implements SelfHandling
     /**
      * Handle the page response.
      *
-     * @param PageRepositoryInterface $pages
-     * @param ResponseFactory         $response
+     * @param PageRepositoryInterface    $pages
+     * @param SettingRepositoryInterface $settings
+     * @param ResponseFactory            $response
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handle(PageRepositoryInterface $pages, ResponseFactory $response)
-    {
+    public function handle(
+        PageRepositoryInterface $pages,
+        SettingRepositoryInterface $settings,
+        ResponseFactory $response
+    ) {
         $page = $pages->find($this->id);
 
-        return $response->view('anomaly.module.pages::page', compact('page'));
+        return $response
+            ->view('anomaly.module.pages::page', compact('page'))
+            ->setTtl($page->getTtl() ?: $settings->get('anomaly.module.pages::ttl'));
     }
 }
