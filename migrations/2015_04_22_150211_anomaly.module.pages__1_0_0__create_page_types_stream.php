@@ -33,6 +33,11 @@ class AnomalyModulePages_1_0_0_CreatePageTypesStream extends Migration
             'required' => true,
             'unique'   => true
         ],
+        'slug'   => [
+            'config' => [
+                'slugify' => 'name'
+            ]
+        ],
         'description',
         'layout' => [
             'required' => true

@@ -37,10 +37,14 @@ return [
     ],
     'css'              => [
         'name'         => 'CSS',
-        'instructions' => 'The CSS entered will ONLY be loaded for this page. CSS files are parsed when loading so feel free to use theme settings and other tags.'
+        'instructions' => 'CSS files are parsed when loading so feel free to use theme settings and other tags.'
     ],
-    'js'              => [
+    'js'               => [
         'name'         => 'JS',
-        'instructions' => 'The JS entered will ONLY be loaded for this page. JS files are parsed when loading so feel free to use theme settings and other tags.'
+        'instructions' => 'JS files are parsed when loading so feel free to use theme settings and other tags.'
+    ],
+    'name'             => [
+        'name'         => 'Name',
+        'instructions' => 'What is the name of this page type?'
     ]
 ];
