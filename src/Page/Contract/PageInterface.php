@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
 use Anomaly\PagesModule\Page\PageCollection;
+use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
 
 /**
  * Interface PageInterface
@@ -76,4 +77,25 @@ interface PageInterface
      * @return PageCollection
      */
     public function getChildren();
+
+    /**
+     * Get the CSS path.
+     *
+     * @return string
+     */
+    public function getCssPath();
+
+    /**
+     * Get the JS path.
+     *
+     * @return string
+     */
+    public function getJsPath();
+
+    /**
+     * Get the page type.
+     *
+     * @return null|PageTypeInterface
+     */
+    public function getType();
 }

@@ -31,4 +31,18 @@ interface PageTypeInterface
      * @return string
      */
     public function getSlug();
+
+    /**
+     * Get the CSS path.
+     *
+     * @return string
+     */
+    public function getCssPath();
+
+    /**
+     * Get the JS path.
+     *
+     * @return string
+     */
+    public function getJsPath();
 }

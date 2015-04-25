@@ -4,6 +4,7 @@ use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\SettingsModule\Setting\Contract\SettingRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
  * Class GetPageResponse
@@ -15,6 +16,8 @@ use Illuminate\Contracts\Routing\ResponseFactory;
  */
 class GetPageResponse implements SelfHandling
 {
+
+    use DispatchesCommands;
 
     /**
      * The page ID.
@@ -47,6 +50,8 @@ class GetPageResponse implements SelfHandling
         ResponseFactory $response
     ) {
         $page = $pages->find($this->id);
+
+        $this->dispatch(new AddPageAssets($page));
 
         return $response
             ->view('anomaly.module.pages::page', compact('page'))

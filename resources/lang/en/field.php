@@ -46,5 +46,13 @@ return [
     'name'             => [
         'name'         => 'Name',
         'instructions' => 'What is the name of this page type?'
+    ],
+    'description'      => [
+        'name'         => 'Description',
+        'instructions' => 'Briefly describe the page type.'
+    ],
+    'layout'           => [
+        'name'         => 'Layout',
+        'instructions' => 'The layout will be used to display the page content.'
     ]
 ];

@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Type;
 
+use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesPageTypesEntryModel;
 
@@ -52,5 +53,35 @@ class PageTypeModel extends PagesPageTypesEntryModel implements PageTypeInterfac
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Get the CSS path.
+     *
+     * @return string
+     */
+    public function getCssPath()
+    {
+        /* @var EditorFieldType $css */
+        $css = $this->getFieldType('css');
+
+        $css->setEntry($this);
+
+        return $css->getStoragePath();
+    }
+
+    /**
+     * Get the JS path.
+     *
+     * @return string
+     */
+    public function getJsPath()
+    {
+        /* @var EditorFieldType $js */
+        $js = $this->getFieldType('js');
+
+        $js->setEntry($this);
+
+        return $js->getStoragePath();
     }
 }

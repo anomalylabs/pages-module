@@ -54,7 +54,8 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
         'layout'           => [
             'type'   => 'anomaly.field_type.editor',
             'config' => [
-                'mode' => 'twig'
+                'default_value' => '<h1>{{ page.title }}</h1>',
+                'mode'          => 'twig'
             ]
         ],
         'allowed_roles'    => [
