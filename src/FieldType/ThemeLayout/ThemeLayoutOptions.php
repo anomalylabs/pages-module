@@ -1,6 +1,9 @@
 <?php namespace Anomaly\PagesModule\FieldType\ThemeLayout;
 
+use Anomaly\Streams\Platform\Addon\Theme\Theme;
 use Anomaly\Streams\Platform\Addon\Theme\ThemeCollection;
+use Illuminate\Config\Repository;
+use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 
 /**
@@ -21,15 +24,21 @@ class ThemeLayoutOptions
      * @param Filesystem      $files
      * @return array
      */
-    public function handle(ThemeCollection $themes, Filesystem $files)
+    public function handle(Container $container, Repository $config, Filesystem $files)
     {
-        $theme = $themes->active();
+        /* @var Theme $theme */
+        $theme = $container->make($config->get('streams.standard_theme'));
 
-        return array_map(
-            function ($file) {
-                return basename($file);
-            },
-            $files->files($theme->getPath('resources/views/layouts'))
+        $options = $files->files($theme->getPath('resources/views/layouts'));
+
+        return array_combine(
+            $options,
+            array_map(
+                function ($path) use ($theme) {
+                    return ltrim(str_replace($theme->getPath('resources/views/layouts'), null, $path), '/');
+                },
+                $options
+            )
         );
     }
 }

@@ -42,6 +42,7 @@ class AnomalyModulePages_1_0_0_CreatePageTypesStream extends Migration
         'layout' => [
             'required' => true
         ],
+        'theme_layout',
         'meta_title',
         'meta_description',
         'meta_keywords',
