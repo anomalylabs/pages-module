@@ -74,4 +74,15 @@ class PageRepository implements PageRepositoryInterface
     {
         return $page->save();
     }
+
+    /**
+     * Delete a page.
+     *
+     * @param PageInterface|EloquentModel $page
+     * @return bool
+     */
+    public function delete(PageInterface $page)
+    {
+        return $page->delete();
+    }
 }

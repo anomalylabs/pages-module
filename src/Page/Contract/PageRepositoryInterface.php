@@ -43,4 +43,12 @@ interface PageRepositoryInterface
      * @return PageInterface
      */
     public function save(PageInterface $page);
+
+    /**
+     * Delete a page.
+     *
+     * @param PageInterface $page
+     * @return bool
+     */
+    public function delete(PageInterface $page);
 }

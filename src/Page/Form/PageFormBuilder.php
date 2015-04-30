@@ -23,20 +23,15 @@ class PageFormBuilder extends FormBuilder
     protected $parent;
 
     /**
-     * The form fields.
+     * Skip these fields.
      *
      * @var array
      */
-    protected $fields = [
-        'title',
-        'slug',
-        'home',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
-        'ttl',
-        'css',
-        'js'
+    protected $skips = [
+        'type',
+        'path',
+        'parent',
+        'allowed_roles'
     ];
 
     /**

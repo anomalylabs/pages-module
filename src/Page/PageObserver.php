@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\PagesModule\Page\Command\DeleteChildren;
 use Anomaly\PagesModule\Page\Command\GenerateRoutesFile;
 use Anomaly\PagesModule\Page\Command\SetPagePath;
 use Anomaly\PagesModule\Page\Command\UpdateChildrenPaths;
@@ -60,6 +61,7 @@ class PageObserver extends EntryObserver
      */
     public function deleted(EntryInterface $entry)
     {
+        $this->commands->dispatch(new DeleteChildren($entry));
         $this->commands->dispatch(new GenerateRoutesFile());
 
         parent::deleted($entry);
