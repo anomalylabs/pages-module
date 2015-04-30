@@ -28,14 +28,17 @@ class PagesModule extends Module
     protected $sections = [
         'pages' => [
             'buttons' => [
-                'new_page'
+                'new_page' => [
+                    'href' => '{request_path}/create'
+                ]
             ]
         ],
         'types' => [
             'buttons' => [
                 'new_type'
             ]
-        ]
+        ],
+        'settings'
     ];
 
 }

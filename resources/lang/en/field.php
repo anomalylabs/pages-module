@@ -11,6 +11,9 @@ return [
         'placeholder'  => 'hello-world',
         'instructions' => 'The slug is used in building the page\'s URL.'
     ],
+    'path'             => [
+        'name' => 'Path'
+    ],
     'home'             => [
         'name'         => 'Home Page',
         'label'        => 'Use as home page?',
@@ -33,7 +36,7 @@ return [
     'ttl'              => [
         'name'         => 'TTL',
         'label'        => 'Time to live (TTL)',
-        'instructions' => 'How long (in seconds) do you want to cache the page for before serving fresh content. The settings value will be used by default.'
+        'instructions' => 'How long (in seconds) do you want to cache the page for before serving fresh content? The settings value will be used by default.'
     ],
     'css'              => [
         'name'         => 'CSS',

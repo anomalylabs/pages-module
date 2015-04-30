@@ -1,4 +1,4 @@
-<?php namespace Anomaly\PagesModule\Command;
+<?php namespace Anomaly\PagesModule\Page\Command;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\PagesModule;

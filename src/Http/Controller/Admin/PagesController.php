@@ -26,7 +26,8 @@ class PagesController extends AdminController
      */
     public function index(PageRepositoryInterface $pages, PageTableBuilder $table, $path = null)
     {
-        if ($page = $pages->findByPath($path)) {
+
+        if ($path && $page = $pages->findByPath($path)) {
             $table->setParent($page);
         }
 
@@ -39,8 +40,12 @@ class PagesController extends AdminController
      * @param PageFormBuilder $form
      * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
      */
-    public function create(PageFormBuilder $form)
+    public function create(PageRepositoryInterface $pages, PageFormBuilder $form, $path = null)
     {
+        if ($path && $page = $pages->findByPath($path)) {
+            $form->setParent($page);
+        }
+
         return $form->render();
     }
 

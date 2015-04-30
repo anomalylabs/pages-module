@@ -3,7 +3,6 @@
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Routing\Router;
 
 /**
  * Class PagesModuleServiceProvider
@@ -42,12 +41,29 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        'admin/pages/create'            => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
+        'admin/pages/settings'          => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
         'admin/pages/edit/{id}'         => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
         'admin/pages/types'             => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@index',
         'admin/pages/types/create'      => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@create',
         'admin/pages/types/edit/{id}'   => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
         'admin/pages/types/fields/{id}' => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@fields',
+        'admin/pages/create'            => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
+        'admin/pages/{path?}/create'    => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
+        'admin/pages/{path?}'           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
+    ];
+
+    /**
+     * The addon route constraints.
+     *
+     * @var array
+     */
+    protected $constraints = [
+        'admin/pages/{path?}'        => [
+            'path' => '(.*)'
+        ],
+        'admin/pages/{path?}/create' => [
+            'path' => '(.*)'
+        ]
     ];
 
     /**
@@ -55,19 +71,12 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      *
      * @param Filesystem  $files
      * @param Application $application
-     * @param Router      $router
      */
-    public function map(Filesystem $files, Application $application, Router $router)
+    public function map(Filesystem $files, Application $application)
     {
+        // Include public routes.
         if ($files->exists($routes = $application->getStoragePath('pages/routes.php'))) {
             $files->requireOnce($routes);
         }
-
-        $router
-            ->any(
-                'admin/pages/{path?}',
-                'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index'
-            )
-            ->where('path', '(.*)');
     }
 }

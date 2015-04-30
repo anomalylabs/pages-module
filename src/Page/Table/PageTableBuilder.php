@@ -20,10 +20,10 @@ class PageTableBuilder extends TableBuilder
      *
      * @var null|PageInterface
      */
-    protected $parent;
+    protected $parent = null;
 
     /**
-     * The filters array.
+     * The table filters.
      *
      * @var array
      */
@@ -60,6 +60,15 @@ class PageTableBuilder extends TableBuilder
             'target' => '_blank',
             'href'   => '/{entry.path}',
         ]
+    ];
+
+    /**
+     * The table options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'sortable' => true
     ];
 
     /**

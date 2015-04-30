@@ -1,6 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page;
 
-use Anomaly\PagesModule\Command\GenerateRoutesFile;
+use Anomaly\PagesModule\Page\Command\GenerateRoutesFile;
 use Anomaly\PagesModule\Page\Command\SetPagePath;
 use Anomaly\PagesModule\Page\Command\UpdateChildrenPaths;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
@@ -31,11 +31,11 @@ class PageObserver extends EntryObserver
     }
 
     /**
-     * Fired before updating a page.
+     * Fired before saving a page.
      *
      * @param EntryInterface|PageInterface $entry
      */
-    public function updating(EntryInterface $entry)
+    public function saving(EntryInterface $entry)
     {
         $this->commands->dispatch(new SetPagePath($entry));
     }
@@ -51,5 +51,17 @@ class PageObserver extends EntryObserver
         $this->commands->dispatch(new GenerateRoutesFile());
 
         parent::updated($entry);
+    }
+
+    /**
+     * Fired after a page is deleted.
+     *
+     * @param EntryInterface|PageInterface $entry
+     */
+    public function deleted(EntryInterface $entry)
+    {
+        $this->commands->dispatch(new GenerateRoutesFile());
+
+        parent::deleted($entry);
     }
 }

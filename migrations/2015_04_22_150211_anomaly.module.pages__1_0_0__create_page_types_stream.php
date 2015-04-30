@@ -20,6 +20,7 @@ class AnomalyModulePages_1_0_0_CreatePageTypesStream extends Migration
     protected $stream = [
         'slug'         => 'page_types',
         'title_column' => 'name',
+        'translatable' => true,
         'locked'       => true
     ];
 
@@ -29,23 +30,30 @@ class AnomalyModulePages_1_0_0_CreatePageTypesStream extends Migration
      * @var array
      */
     protected $assignments = [
-        'name'   => [
+        'name'             => [
             'required' => true,
             'unique'   => true
         ],
-        'slug'   => [
+        'slug'             => [
             'config' => [
-                'slugify' => 'name'
+                'slugify' => 'name',
+                'type'    => '_'
             ]
         ],
         'description',
-        'layout' => [
+        'layout'           => [
             'required' => true
         ],
         'theme_layout',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
+        'meta_title'       => [
+            'translatable' => true,
+        ],
+        'meta_description' => [
+            'translatable' => true,
+        ],
+        'meta_keywords'    => [
+            'translatable' => true,
+        ],
         'css',
         'js'
     ];
