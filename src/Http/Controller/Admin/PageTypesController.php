@@ -1,9 +1,9 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
-use Anomaly\PagesModule\Type\Command\GetPageTypeStream;
 use Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface;
 use Anomaly\PagesModule\Type\Form\PageTypeFormBuilder;
 use Anomaly\PagesModule\Type\Table\PageTypeTableBuilder;
+use Anomaly\Streams\Platform\Assignment\Form\AssignmentFormBuilder;
 use Anomaly\Streams\Platform\Assignment\Table\AssignmentTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 
@@ -52,16 +52,17 @@ class PageTypesController extends AdminController
         return $form->render($id);
     }
 
-    /**
-     * Return a table of assigned page type fields.
-     *
-     * @param AssignmentTableBuilder      $table
-     * @param PageTypeRepositoryInterface $pageTypes
-     * @param                             $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function fields(AssignmentTableBuilder $table, PageTypeRepositoryInterface $pageTypes, $id)
+    public function fields(AssignmentTableBuilder $table, PageTypeRepositoryInterface $types, $id)
     {
-        return $table->setStream($this->dispatch(new GetPageTypeStream($pageTypes->find($id))))->render();
+        $type = $types->find($id);
+
+        return $table->setStream($type->getStream())->render();
+    }
+
+    public function add(AssignmentFormBuilder $form, PageTypeRepositoryInterface $types, $id)
+    {
+        $type = $types->find($id);
+
+        return $form->setStream($type->getStream())->render();
     }
 }

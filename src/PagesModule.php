@@ -26,16 +26,24 @@ class PagesModule extends Module
      * @var array
      */
     protected $sections = [
-        'pages' => [
+        'pages'  => [
             'buttons' => [
                 'new_page' => [
-                    'href' => '{request_path}/create'
+                    'href'       => 'admin/pages/types/choose',
+                    'attributes' => [
+                        'modal' => 'modal',
+                    ]
                 ]
             ]
         ],
-        'types' => [
+        'types'  => [
             'buttons' => [
                 'new_type'
+            ]
+        ],
+        'fields' => [
+            'buttons' => [
+                'new_field'
             ]
         ],
         'settings'

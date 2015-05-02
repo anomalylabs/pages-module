@@ -1,5 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
+use Anomaly\Streams\Platform\Model\EloquentCollection;
+
 /**
  * Interface PageTypeRepositoryInterface
  *
@@ -10,6 +12,13 @@
  */
 interface PageTypeRepositoryInterface
 {
+
+    /**
+     * Return all available page types.
+     *
+     * @return EloquentCollection
+     */
+    public function all();
 
     /**
      * Find a page type by ID.

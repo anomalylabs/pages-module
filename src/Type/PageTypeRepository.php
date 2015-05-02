@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
 use Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface;
+use Anomaly\Streams\Platform\Model\EloquentCollection;
 
 /**
  * Class PageTypeRepository
@@ -29,6 +30,16 @@ class PageTypeRepository implements PageTypeRepositoryInterface
     public function __construct(PageTypeModel $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Return all available page types.
+     *
+     * @return EloquentCollection
+     */
+    public function all()
+    {
+        return $this->model->all();
     }
 
     /**
