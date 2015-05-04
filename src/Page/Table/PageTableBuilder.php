@@ -63,6 +63,15 @@ class PageTableBuilder extends TableBuilder
     ];
 
     /**
+     * The table actions.
+     *
+     * @var array
+     */
+    protected $actions = [
+        'delete'
+    ];
+
+    /**
      * The table options.
      *
      * @var array

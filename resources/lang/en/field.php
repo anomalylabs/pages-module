@@ -57,5 +57,18 @@ return [
     'layout'           => [
         'name'         => 'Layout',
         'instructions' => 'The layout will be used to display the page content.'
+    ],
+    'allowed_roles'    => [
+        'name'         => 'Allowed Roles',
+        'instructions' => 'Which user roles are allowed to view this page?'
+    ],
+    'enabled'          => [
+        'name'         => 'Enabled',
+        'label'        => 'Is this page enabled?',
+        'instructions' => 'Only enabled pages will be displayed.'
+    ],
+    'parent'           => [
+        'name'         => 'Parent',
+        'instructions' => 'Choose the parent page if any.'
     ]
 ];

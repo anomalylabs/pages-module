@@ -21,6 +21,9 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
+        'admin/pages'                       => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
+        'admin/pages/index/{path?}'         => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
+        'admin/pages/create/{path?}'        => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
         'admin/pages/fields'                => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@index',
         'admin/pages/fields/create'         => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@create',
         'admin/pages/fields/edit/{id}'      => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@edit',
@@ -31,10 +34,6 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/types/edit/{id}'       => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
         'admin/pages/types/fields/{id}'     => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@fields',
         'admin/pages/types/fields/add/{id}' => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@add',
-        'admin/pages/types/choose'          => 'Anomaly\PagesModule\Http\Controller\Ajax\TypesController@choose',
-        'admin/pages/create'                => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
-        'admin/pages/{path?}/create'        => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
-        'admin/pages/{path?}'               => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
     ];
 
     /**

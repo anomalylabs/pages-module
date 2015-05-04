@@ -29,10 +29,7 @@ class PagesModule extends Module
         'pages'  => [
             'buttons' => [
                 'new_page' => [
-                    'href'       => 'admin/pages/types/choose',
-                    'attributes' => [
-                        'modal' => 'modal',
-                    ]
+                    'href' => 'admin/pages/create/{route_parameters}'
                 ]
             ]
         ],

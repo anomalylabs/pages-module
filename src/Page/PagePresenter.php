@@ -36,6 +36,7 @@ class PagePresenter extends EntryPresenter
                     [
                         'admin',
                         'pages',
+                        'index',
                         $this->object->getPath()
                     ]
                 )
