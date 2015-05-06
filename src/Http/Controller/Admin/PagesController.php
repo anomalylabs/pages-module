@@ -2,7 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
-use Anomaly\PagesModule\Page\Table\PageTableBuilder;
+use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 
 /**
@@ -17,21 +17,14 @@ class PagesController extends AdminController
 {
 
     /**
-     * Return an index of existing pages.
+     * Return a tree of existing pages.
      *
-     * @param PageRepositoryInterface $pages
-     * @param PageTableBuilder        $table
-     * @param null                    $path
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param PageTreeBuilder $tree
+     * @return \Illuminate\Http\Response
      */
-    public function index(PageRepositoryInterface $pages, PageTableBuilder $table, $path = null)
+    public function index(PageTreeBuilder $tree)
     {
-
-        if ($path && $page = $pages->findByPath($path)) {
-            $table->setParent($page);
-        }
-
-        return $table->render();
+        return $tree->render();
     }
 
     /**
