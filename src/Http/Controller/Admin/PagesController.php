@@ -1,8 +1,10 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
+use Illuminate\Routing\Redirector;
 
 /**
  * Class PagesController
@@ -47,5 +49,20 @@ class PagesController extends AdminController
     public function edit(PageFormBuilder $form, $id)
     {
         return $form->render($id);
+    }
+
+    /**
+     * Redirect to a page's URL.
+     *
+     * @param PageRepositoryInterface $pages
+     * @param Redirector              $redirector
+     * @param                         $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function view(PageRepositoryInterface $pages, Redirector $redirector, $id)
+    {
+        $page = $pages->find($id);
+
+        return $redirector->to($page->path());
     }
 }

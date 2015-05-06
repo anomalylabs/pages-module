@@ -29,6 +29,10 @@ class PagePresenter extends EntryPresenter
      */
     public function viewLink()
     {
-        return app('html')->link($this->object->path(), $this->object->getTitle(), ['target' => '_blank']);
+        return app('html')->link(
+            'admin/pages/view/' . $this->object->getId(),
+            $this->object->getTitle(),
+            ['target' => '_blank']
+        );
     }
 }

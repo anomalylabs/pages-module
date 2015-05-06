@@ -24,6 +24,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages'                                     => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
         'admin/pages/create'                              => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
         'admin/pages/edit/{id}'                           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
+        'admin/pages/view/{id}'                           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@view',
         'admin/pages/types'                               => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@index',
         'admin/pages/types/create'                        => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@create',
         'admin/pages/types/edit/{id}'                     => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
