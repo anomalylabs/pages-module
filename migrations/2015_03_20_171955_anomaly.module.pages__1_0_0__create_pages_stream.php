@@ -34,14 +34,10 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
             'translatable' => true,
             'required'     => true
         ],
-        'path'             => [
-            'required' => true
-        ],
         'ttl',
         'type',
         'parent',
         'status',
-        'home',
         'slug',
         'meta_title'       => [
             'translatable' => true,

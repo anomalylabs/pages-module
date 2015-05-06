@@ -19,9 +19,17 @@ class PageTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $buttons = [
-        'view',
         'edit',
         'delete'
+    ];
+
+    /**
+     * The tree options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'item_value' => 'entry.view_link'
     ];
 
 }

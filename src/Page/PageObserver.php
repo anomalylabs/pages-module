@@ -2,8 +2,6 @@
 
 use Anomaly\PagesModule\Page\Command\DeleteChildren;
 use Anomaly\PagesModule\Page\Command\GenerateRoutesFile;
-use Anomaly\PagesModule\Page\Command\SetPagePath;
-use Anomaly\PagesModule\Page\Command\UpdateChildrenPaths;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
@@ -32,23 +30,12 @@ class PageObserver extends EntryObserver
     }
 
     /**
-     * Fired before saving a page.
-     *
-     * @param EntryInterface|PageInterface $entry
-     */
-    public function saving(EntryInterface $entry)
-    {
-        $this->commands->dispatch(new SetPagePath($entry));
-    }
-
-    /**
      * Fired after a page is updated.
      *
      * @param EntryInterface|PageInterface $entry
      */
     public function updated(EntryInterface $entry)
     {
-        $this->commands->dispatch(new UpdateChildrenPaths($entry));
         $this->commands->dispatch(new GenerateRoutesFile());
 
         parent::updated($entry);

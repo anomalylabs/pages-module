@@ -1,5 +1,0 @@
-<?php
-
-{% for page in pages %}
-Route::any('{{ page.path }}', 'Anomaly\PagesModule\Http\Controller\PagesController@handle_{{ page.id }}');
-{% endfor %}

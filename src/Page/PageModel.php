@@ -43,6 +43,23 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Return the path.
+     *
+     * @param null $path
+     * @return $this
+     */
+    public function path($path = null)
+    {
+        $path = $this->getSlug();
+
+        if ($parent = $this->getParent()) {
+            $path = $parent->path($path) . '/' . $path;
+        }
+
+        return $path;
+    }
+
+    /**
      * Get the TTL.
      *
      * @return null|int
@@ -60,29 +77,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Get the path.
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * Set the path.
-     *
-     * @param $path
-     * @return $this
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
     }
 
     /**

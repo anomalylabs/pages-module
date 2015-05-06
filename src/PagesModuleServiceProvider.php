@@ -22,15 +22,14 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      */
     protected $routes = [
         'admin/pages'                       => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
-        'admin/pages/index/{path?}'         => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
-        'admin/pages/create/{path?}'        => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
-        'admin/pages/settings'              => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
+        'admin/pages/create'                => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
         'admin/pages/edit/{id}'             => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
         'admin/pages/types'                 => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@index',
         'admin/pages/types/create'          => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@create',
         'admin/pages/types/edit/{id}'       => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
         'admin/pages/types/fields/{id}'     => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@fields',
         'admin/pages/types/fields/add/{id}' => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@add',
+        'admin/pages/settings'              => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index'
     ];
 
     /**
@@ -51,20 +50,6 @@ class PagesModuleServiceProvider extends AddonServiceProvider
     protected $singletons = [
         'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface'     => 'Anomaly\PagesModule\Page\PageRepository',
         'Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface' => 'Anomaly\PagesModule\Type\PageTypeRepository'
-    ];
-
-    /**
-     * The addon route constraints.
-     *
-     * @var array
-     */
-    protected $constraints = [
-        'admin/pages/{path?}'        => [
-            'path' => '(.*)'
-        ],
-        'admin/pages/{path?}/create' => [
-            'path' => '(.*)'
-        ]
     ];
 
     /**

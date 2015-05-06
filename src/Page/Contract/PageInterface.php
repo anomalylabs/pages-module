@@ -15,6 +15,14 @@ interface PageInterface
 {
 
     /**
+     * Return the path.
+     *
+     * @param null $path
+     * @return $this
+     */
+    public function path($path = null);
+
+    /**
      * Get the ID.
      *
      * @return integer
@@ -34,21 +42,6 @@ interface PageInterface
      * @return string
      */
     public function getSlug();
-
-    /**
-     * Set the path.
-     *
-     * @param $path
-     * @return $this
-     */
-    public function setPath($path);
-
-    /**
-     * Get the path.
-     *
-     * @return string
-     */
-    public function getPath();
 
     /**
      * Get the title.

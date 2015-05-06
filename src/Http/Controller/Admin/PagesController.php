@@ -1,6 +1,5 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
-use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
@@ -31,14 +30,10 @@ class PagesController extends AdminController
      * Return a form for a new page.
      *
      * @param PageFormBuilder $form
-     * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(PageRepositoryInterface $pages, PageFormBuilder $form, $path = null)
+    public function create(PageFormBuilder $form)
     {
-        if ($path && $page = $pages->findByPath($path)) {
-            $form->setParent($page);
-        }
-
         return $form->render();
     }
 
@@ -47,7 +42,7 @@ class PagesController extends AdminController
      *
      * @param PageFormBuilder $form
      * @param                 $id
-     * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(PageFormBuilder $form, $id)
     {

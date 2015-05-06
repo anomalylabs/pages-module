@@ -11,14 +11,6 @@ return [
         'placeholder'  => 'hello-world',
         'instructions' => 'The slug is used in building the page\'s URL.'
     ],
-    'path'             => [
-        'name' => 'Path'
-    ],
-    'home'             => [
-        'name'         => 'Home Page',
-        'label'        => 'Use as home page?',
-        'instructions' => 'Is this the default landing page for your site?'
-    ],
     'meta_title'       => [
         'name'         => 'Meta Title',
         'placeholder'  => 'Hello World!',

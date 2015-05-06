@@ -28,9 +28,7 @@ class PagesModule extends Module
     protected $sections = [
         'pages' => [
             'buttons' => [
-                'new_page' => [
-                    'href' => 'admin/pages/create/{route_parameters}'
-                ]
+                'new_page'
             ]
         ],
         'types' => [
