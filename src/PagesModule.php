@@ -33,7 +33,11 @@ class PagesModule extends Module
         ],
         'types' => [
             'buttons' => [
-                'new_type'
+                'new_type',
+                'new_field' => [
+                    'href'    => 'admin/pages/types/fields/{parameter.id}',
+                    'enabled' => 'admin/pages/types/fields/*'
+                ]
             ]
         ],
         'settings'
