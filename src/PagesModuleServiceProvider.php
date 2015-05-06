@@ -21,15 +21,16 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        'admin/pages'                          => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
-        'admin/pages/create'                   => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
-        'admin/pages/edit/{id}'                => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
-        'admin/pages/types'                    => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@index',
-        'admin/pages/types/create'             => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@create',
-        'admin/pages/types/edit/{id}'          => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
-        'admin/pages/types/fields/{id}'        => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@fields',
-        'admin/pages/types/fields/{id}/create' => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@createField',
-        'admin/pages/settings'                 => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index'
+        'admin/pages'                                     => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
+        'admin/pages/create'                              => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
+        'admin/pages/edit/{id}'                           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
+        'admin/pages/types'                               => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@index',
+        'admin/pages/types/create'                        => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@create',
+        'admin/pages/types/edit/{id}'                     => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
+        'admin/pages/types/fields/{id}'                   => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@fields',
+        'admin/pages/types/fields/{id}/create'            => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@createField',
+        'admin/pages/types/fields/{id}/edit/{assignment}' => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@editField',
+        'admin/pages/settings'                            => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index'
     ];
 
     /**
