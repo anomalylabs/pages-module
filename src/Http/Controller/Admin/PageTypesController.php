@@ -3,8 +3,8 @@
 use Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface;
 use Anomaly\PagesModule\Type\Form\PageTypeFormBuilder;
 use Anomaly\PagesModule\Type\Table\PageTypeTableBuilder;
-use Anomaly\Streams\Platform\Assignment\Form\AssignmentFormBuilder;
 use Anomaly\Streams\Platform\Assignment\Table\AssignmentTableBuilder;
+use Anomaly\Streams\Platform\Field\Form\FieldFormBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
@@ -81,10 +81,31 @@ class PageTypesController extends AdminController
         return $table->setStream($streams->findBySlugAndNamespace($type->getSlug(), 'pages'))->render();
     }
 
-    public function add(AssignmentFormBuilder $form, PageTypeRepositoryInterface $types, $id)
-    {
+    /**
+     * Return a form for a new page type field and assignment.
+     *
+     * @param FieldFormBuilder            $form
+     * @param StreamRepositoryInterface   $streams
+     * @param PageTypeRepositoryInterface $types
+     * @param BreadcrumbCollection        $breadcrumbs
+     * @param Request                     $request
+     * @param                             $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function createField(
+        FieldFormBuilder $form,
+        StreamRepositoryInterface $streams,
+        PageTypeRepositoryInterface $types,
+        BreadcrumbCollection $breadcrumbs,
+        Request $request,
+        $id
+    ) {
         $type = $types->find($id);
 
-        return $form->setStream($type->getStream())->render();
+        $breadcrumbs->put('module::breadcrumb.fields', $request->fullUrl());
+
+        return $form->setOption('auto_assign', true)->setStream(
+            $streams->findBySlugAndNamespace($type->getSlug(), 'pages')
+        )->render();
     }
 }
