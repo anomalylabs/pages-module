@@ -1,9 +1,12 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
+use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
+use Anomaly\Streams\Platform\Model\Pages\PagesMarkdownPageEntryModel;
 use Illuminate\Routing\Redirector;
 
 /**
@@ -34,9 +37,11 @@ class PagesController extends AdminController
      * @param PageFormBuilder $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(PageFormBuilder $form)
+    public function create(PageFormBuilder $page, EntryFormBuilder $entry, PageEntryFormBuilder $form)
     {
-        return $form->render();
+        $entry->setModel(new PagesMarkdownPageEntryModel());
+
+        return $form->addForm('page', $page)->addForm('entry', $entry)->render();
     }
 
     /**

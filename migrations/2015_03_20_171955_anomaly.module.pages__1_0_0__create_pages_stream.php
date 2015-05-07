@@ -36,6 +36,7 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
         ],
         'ttl',
         'type',
+        'entry',
         'parent',
         'status',
         'slug',

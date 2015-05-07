@@ -23,51 +23,6 @@ class PageFormBuilder extends FormBuilder
     protected $parent;
 
     /**
-     * The form sections.
-     *
-     * @var array
-     */
-    protected $sections = [
-        'page' => [
-            'tabs' => [
-                'general' => [
-                    'title'  => 'General',
-                    'fields' => [
-                        'title',
-                        'slug'
-                    ]
-                ],
-                'seo'     => [
-                    'title'  => 'SEO',
-                    'fields' => [
-                        'meta_title',
-                        'meta_keywords',
-                        'meta_description'
-                    ]
-                ],
-                'css'     => [
-                    'title'  => 'CSS',
-                    'fields' => [
-                        'css'
-                    ]
-                ],
-                'js'      => [
-                    'title'  => 'JS',
-                    'fields' => [
-                        'js'
-                    ]
-                ],
-                'extra'   => [
-                    'title'  => 'Extra',
-                    'fields' => [
-                        'ttl'
-                    ]
-                ]
-            ]
-        ]
-    ];
-
-    /**
      * Skip these fields.
      *
      * @var array
@@ -75,6 +30,7 @@ class PageFormBuilder extends FormBuilder
     protected $skips = [
         'type',
         'path',
+        'entry',
         'parent',
         'allowed_roles'
     ];
