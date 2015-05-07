@@ -4,10 +4,12 @@ use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PageModel
  *
+ * @method        Builder ordered()
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
@@ -40,6 +42,17 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
 
         parent::boot();
+    }
+
+    /**
+     * Order the pages.
+     *
+     * @param Builder $query
+     * @return $this
+     */
+    public function scopeOrdered(Builder $query)
+    {
+        return $query->orderBy('parent_id', 'ASC')->orderBy('sort_order', 'ASC');
     }
 
     /**

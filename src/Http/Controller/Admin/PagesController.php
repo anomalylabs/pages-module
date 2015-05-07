@@ -61,7 +61,12 @@ class PagesController extends AdminController
      */
     public function view(PageRepositoryInterface $pages, Redirector $redirector, $id)
     {
-        $page = $pages->find($id);
+        $first = $pages->first();
+        $page  = $pages->find($id);
+
+        if ($first && $first->getId() === $page->getId()) {
+            return $redirector->to('/');
+        }
 
         return $redirector->to($page->path());
     }

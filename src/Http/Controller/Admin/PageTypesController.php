@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Field\Form\FieldFormBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
-use Illuminate\Http\Request;
 
 /**
  * Class PageTypesController
@@ -63,7 +62,6 @@ class PageTypesController extends AdminController
      * @param StreamRepositoryInterface   $streams
      * @param PageTypeRepositoryInterface $types
      * @param BreadcrumbCollection        $breadcrumbs
-     * @param Request                     $request
      * @param                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -72,13 +70,11 @@ class PageTypesController extends AdminController
         StreamRepositoryInterface $streams,
         PageTypeRepositoryInterface $types,
         BreadcrumbCollection $breadcrumbs,
-        Request $request,
         $id
     ) {
         $type = $types->find($id);
 
-        $breadcrumbs->put($type->getName(), 'admin/pages/types/fields/'.$type->getId());
-        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/'.$type->getId());
+        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
 
         return $table->setButtons(
             [
@@ -96,7 +92,6 @@ class PageTypesController extends AdminController
      * @param StreamRepositoryInterface   $streams
      * @param PageTypeRepositoryInterface $types
      * @param BreadcrumbCollection        $breadcrumbs
-     * @param Request                     $request
      * @param                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -105,13 +100,11 @@ class PageTypesController extends AdminController
         StreamRepositoryInterface $streams,
         PageTypeRepositoryInterface $types,
         BreadcrumbCollection $breadcrumbs,
-        Request $request,
         $id
     ) {
         $type = $types->find($id);
 
-        $breadcrumbs->put($type->getName(), 'admin/pages/types/fields/'.$type->getId());
-        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/'.$type->getId());
+        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
 
         return $form->setOption('auto_assign', true)->setStream(
             $streams->findBySlugAndNamespace($type->getSlug(), 'pages')
@@ -125,7 +118,6 @@ class PageTypesController extends AdminController
      * @param StreamRepositoryInterface   $streams
      * @param PageTypeRepositoryInterface $types
      * @param BreadcrumbCollection        $breadcrumbs
-     * @param Request                     $request
      * @param                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -134,14 +126,12 @@ class PageTypesController extends AdminController
         StreamRepositoryInterface $streams,
         PageTypeRepositoryInterface $types,
         BreadcrumbCollection $breadcrumbs,
-        Request $request,
         $id,
         $assignment
     ) {
         $type = $types->find($id);
 
-        $breadcrumbs->put($type->getName(), 'admin/pages/types/fields/'.$type->getId());
-        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/'.$type->getId());
+        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
 
         return $form->setStream(
             $streams->findBySlugAndNamespace($type->getSlug(), 'pages')

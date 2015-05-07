@@ -21,6 +21,13 @@ interface PageRepositoryInterface
     public function all();
 
     /**
+     * Return the first page.
+     *
+     * @return PageInterface
+     */
+    public function first();
+
+    /**
      * Find a page by ID.
      *
      * @param $id

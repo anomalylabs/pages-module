@@ -39,10 +39,17 @@ class PageRepository implements PageRepositoryInterface
      */
     public function all()
     {
-        return $this->model
-            ->orderBy('parent_id', 'ASC')
-            ->orderBy('sort_order', 'ASC')
-            ->get();
+        return $this->model->ordered()->get();
+    }
+
+    /**
+     * Return the first page.
+     *
+     * @return PageInterface
+     */
+    public function first()
+    {
+        return $this->model->ordered()->first();
     }
 
     /**
