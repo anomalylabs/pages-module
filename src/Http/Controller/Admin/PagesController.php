@@ -6,7 +6,7 @@ use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Anomaly\Streams\Platform\Model\Pages\PagesMarkdownPageEntryModel;
+use Anomaly\Streams\Platform\Model\Pages\PagesTheBestKindEntryModel;
 use Illuminate\Routing\Redirector;
 
 /**
@@ -39,7 +39,7 @@ class PagesController extends AdminController
      */
     public function create(PageFormBuilder $page, EntryFormBuilder $entry, PageEntryFormBuilder $form)
     {
-        $entry->setModel(new PagesMarkdownPageEntryModel());
+        $entry->setModel(new PagesTheBestKindEntryModel());
 
         return $form->addForm('page', $page)->addForm('entry', $entry)->render();
     }
@@ -51,9 +51,13 @@ class PagesController extends AdminController
      * @param                 $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(PageFormBuilder $form, $id)
+    public function edit(PageFormBuilder $page, EntryFormBuilder $entry, PageEntryFormBuilder $form, $id)
     {
-        return $form->render($id);
+        $page->setEntry($id);
+        
+        $entry->setModel(new PagesTheBestKindEntryModel())->setEntry(1);
+
+        return $form->addForm('page', $page)->addForm('entry', $entry)->render();
     }
 
     /**
