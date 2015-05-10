@@ -28,7 +28,13 @@ class PagesModule extends Module
     protected $sections = [
         'pages' => [
             'buttons' => [
-                'new_page'
+                'new_page' => [
+                    'attributes' => [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#modal'
+                    ],
+                    'href'       => 'admin/pages/types/choose'
+                ]
             ]
         ],
         'types' => [

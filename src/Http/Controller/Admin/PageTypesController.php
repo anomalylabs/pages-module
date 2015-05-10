@@ -55,6 +55,11 @@ class PageTypesController extends AdminController
         return $form->render($id);
     }
 
+    public function choose()
+    {
+        return '<div class="modal-body">Test</div>';
+    }
+
     /**
      * Return a table of existing page type assignments.
      *
