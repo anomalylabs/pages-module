@@ -5,8 +5,11 @@ use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
+use Anomaly\PagesModule\Type\Command\GetPageTypeStream;
+use Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Anomaly\Streams\Platform\Model\Pages\PagesMarkdownPageEntryModel;
+use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 /**
@@ -34,14 +37,26 @@ class PagesController extends AdminController
     /**
      * Return a form for a new page.
      *
-     * @param PageFormBuilder $form
+     * @param PageFormBuilder             $page
+     * @param EntryFormBuilder            $entry
+     * @param PageEntryFormBuilder        $form
+     * @param PageTypeRepositoryInterface $types
+     * @param Request                     $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(PageFormBuilder $page, EntryFormBuilder $entry, PageEntryFormBuilder $form)
-    {
-        $entry->setModel(new PagesMarkdownPageEntryModel());
+    public function create(
+        PageFormBuilder $page,
+        EntryFormBuilder $entry,
+        PageEntryFormBuilder $form,
+        PageTypeRepositoryInterface $types,
+        Request $request
+    ) {
+        /* @var StreamInterface $stream */
+        $stream = $this->dispatch(new GetPageTypeStream($type = $types->find($request->get('page_type'))));
 
-        return $form->addForm('page', $page)->addForm('entry', $entry)->render();
+        $entry->setModel($stream->getEntryModelName());
+
+        return $form->setType($type)->addForm('entry', $entry)->addForm('page', $page)->render();
     }
 
     /**

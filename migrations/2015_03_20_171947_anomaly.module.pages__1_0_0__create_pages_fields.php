@@ -74,7 +74,12 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
                 'handler' => 'Anomaly\PagesModule\FieldType\ThemeLayout\ThemeLayoutOptions@handle'
             ]
         ],
-        'type'             => 'anomaly.field_type.polymorphic',
+        'type'             => [
+            'type'   => 'anomaly.field_type.relationship',
+            'config' => [
+                'related' => 'Anomaly\PagesModule\Type\PageTypeModel'
+            ]
+        ],
         'entry'            => 'anomaly.field_type.polymorphic',
         'name'             => 'anomaly.field_type.text',
         'description'      => 'anomaly.field_type.textarea'

@@ -68,7 +68,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         if ($parent = $this->getParent()) {
             $path = $parent->path($path) . '/' . $path;
         } elseif ($this->sort_order == 1) {
-            return null;
+            return $path;
         }
 
         return $path;
