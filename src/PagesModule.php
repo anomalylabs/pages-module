@@ -26,7 +26,7 @@ class PagesModule extends Module
      * @var array
      */
     protected $sections = [
-        'pages' => [
+        'pages'  => [
             'buttons' => [
                 'new_page' => [
                     'data-toggle' => 'modal',
@@ -35,14 +35,23 @@ class PagesModule extends Module
                 ]
             ]
         ],
-        'types' => [
+        'types'  => [
             'buttons' => [
                 'new_type',
-                'new_field' => [
+                'add_field' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
                     'enabled'     => 'admin/pages/types/fields/*',
                     'href'        => 'admin/pages/ajax/choose_field_type'
+                ]
+            ]
+        ],
+        'fields' => [
+            'buttons' => [
+                'new_field' => [
+                    'data-toggle' => 'modal',
+                    'data-target' => '#modal',
+                    'href'        => 'admin/pages/fields/choose'
                 ]
             ]
         ],

@@ -6,6 +6,7 @@ return [
     'section'     => [
         'pages'    => 'Pages',
         'types'    => 'Page Types',
+        'fields'   => 'Fields',
         'settings' => 'Settings'
     ]
 ];
