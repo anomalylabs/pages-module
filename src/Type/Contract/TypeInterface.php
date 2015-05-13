@@ -1,5 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
+use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
+
 /**
  * Interface TypeInterface
  *
@@ -52,4 +54,18 @@ interface TypeInterface
      * @return string
      */
     public function getJsPath();
+
+    /**
+     * Get the related entry stream.
+     *
+     * @return StreamInterface
+     */
+    public function getEntryStream();
+
+    /**
+     * Get the related entry model name.
+     *
+     * @return string
+     */
+    public function getEntryModelName();
 }

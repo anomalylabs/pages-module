@@ -40,6 +40,7 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
         ],
         'entry',
         'parent',
+        'enabled',
         'status',
         'slug',
         'meta_title'       => [

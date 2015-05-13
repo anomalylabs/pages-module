@@ -1,8 +1,10 @@
 <?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\EditorFieldType\EditorFieldType;
+use Anomaly\PagesModule\Type\Command\GetTypeStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
+use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
  * Class TypeModel
@@ -83,5 +85,27 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
         $js->setEntry($this);
 
         return $js->getStoragePath();
+    }
+
+    /**
+     * Get the related entry stream.
+     *
+     * @return StreamInterface
+     */
+    public function getEntryStream()
+    {
+        return $this->dispatch(new GetTypeStream($this));
+    }
+
+    /**
+     * Get the related entry model name.
+     *
+     * @return string
+     */
+    public function getEntryModelName()
+    {
+        $stream = $this->getEntryStream();
+
+        return $stream->getEntryModelName();
     }
 }
