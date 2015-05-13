@@ -7,7 +7,7 @@ return [
         'edit',
         'delete'
     ],
-    'page_types' => [
+    'types' => [
         'read',
         'create',
         'edit',

@@ -3,14 +3,14 @@
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 
 /**
- * Interface PageTypeRepositoryInterface
+ * Interface TypeRepositoryInterface
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type\Contract
  */
-interface PageTypeRepositoryInterface
+interface TypeRepositoryInterface
 {
 
     /**
@@ -24,7 +24,7 @@ interface PageTypeRepositoryInterface
      * Find a page type by ID.
      *
      * @param $id
-     * @return null|PageTypeInterface
+     * @return null|TypeInterface
      */
     public function find($id);
 }

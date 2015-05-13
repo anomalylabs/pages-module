@@ -2,7 +2,7 @@
 
 use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -167,7 +167,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     /**
      * Get the page type.
      *
-     * @return null|PageTypeInterface
+     * @return null|TypeInterface
      */
     public function getType()
     {

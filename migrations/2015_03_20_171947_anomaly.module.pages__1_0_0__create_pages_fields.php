@@ -77,7 +77,7 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
         'type'             => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
-                'related' => 'Anomaly\PagesModule\Type\PageTypeModel'
+                'related' => 'Anomaly\PagesModule\Type\TypeModel'
             ]
         ],
         'entry'            => 'anomaly.field_type.polymorphic',

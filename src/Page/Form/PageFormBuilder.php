@@ -28,6 +28,7 @@ class PageFormBuilder extends FormBuilder
      */
     protected $skips = [
         'path',
+        'type',
         'entry',
         'parent',
         'allowed_roles'

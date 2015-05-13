@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
 use Anomaly\PagesModule\Page\PageCollection;
-use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
 
 /**
  * Interface PageInterface
@@ -88,7 +88,7 @@ interface PageInterface
     /**
      * Get the page type.
      *
-     * @return null|PageTypeInterface
+     * @return null|TypeInterface
      */
     public function getType();
 }

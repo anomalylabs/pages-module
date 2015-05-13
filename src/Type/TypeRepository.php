@@ -1,33 +1,33 @@
 <?php namespace Anomaly\PagesModule\Type;
 
-use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
-use Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 
 /**
- * Class PageTypeRepository
+ * Class TypeRepository
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type
  */
-class PageTypeRepository implements PageTypeRepositoryInterface
+class TypeRepository implements TypeRepositoryInterface
 {
 
     /**
      * The page type model.
      *
-     * @var PageTypeModel
+     * @var TypeModel
      */
     protected $model;
 
     /**
-     * Create a new PageTypeRepository instance.
+     * Create a new TypeRepository instance.
      *
-     * @param PageTypeModel $model
+     * @param TypeModel $model
      */
-    public function __construct(PageTypeModel $model)
+    public function __construct(TypeModel $model)
     {
         $this->model = $model;
     }
@@ -46,7 +46,7 @@ class PageTypeRepository implements PageTypeRepositoryInterface
      * Find a page type by ID.
      *
      * @param $id
-     * @return null|PageTypeInterface
+     * @return null|TypeInterface
      */
     public function find($id)
     {

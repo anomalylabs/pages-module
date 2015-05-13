@@ -31,7 +31,7 @@ class PagesModule extends Module
                 'new_page' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
-                    'href'        => 'admin/pages/ajax/choose_page_type'
+                    'href'        => 'admin/pages/ajax/choose_type'
                 ]
             ]
         ],
@@ -42,7 +42,7 @@ class PagesModule extends Module
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
                     'enabled'     => 'admin/pages/types/fields/*',
-                    'href'        => 'admin/pages/ajax/choose_field_type'
+                    'href'        => 'admin/pages/ajax/choose_field/{route.parameters.id}'
                 ]
             ]
         ],

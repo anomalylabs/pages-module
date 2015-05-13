@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Form;
 
 use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
-use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Anomaly\Streams\Platform\Ui\Form\Multiple\MultipleFormBuilder;
 
@@ -19,17 +19,17 @@ class PageEntryFormBuilder extends MultipleFormBuilder
     /**
      * The page type.
      *
-     * @var PageTypeInterface
+     * @var TypeInterface
      */
     protected $type;
 
     /**
      * Set the page type.
      *
-     * @param PageTypeInterface $type
+     * @param TypeInterface $type
      * @return $this
      */
-    public function setType(PageTypeInterface $type)
+    public function setType(TypeInterface $type)
     {
         $this->type = $type;
 

@@ -1,30 +1,30 @@
 <?php namespace Anomaly\PagesModule\Type;
 
-use Anomaly\PagesModule\Type\Command\CreatePageTypeStream;
-use Anomaly\PagesModule\Type\Command\DeletePageTypeStream;
-use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
+use Anomaly\PagesModule\Type\Command\CreateTypeStream;
+use Anomaly\PagesModule\Type\Command\DeleteTypeStream;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
 
 /**
- * Class PageTypeObserver
+ * Class TypeObserver
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type
  */
-class PageTypeObserver extends EntryObserver
+class TypeObserver extends EntryObserver
 {
 
     /**
      * Fired after a page type is created.
      *
-     * @param EntryInterface|PageTypeInterface $entry
+     * @param EntryInterface|TypeInterface $entry
      */
     public function created(EntryInterface $entry)
     {
-        $this->commands->dispatch(new CreatePageTypeStream($entry));
+        $this->commands->dispatch(new CreateTypeStream($entry));
 
         parent::created($entry);
     }
@@ -32,11 +32,11 @@ class PageTypeObserver extends EntryObserver
     /**
      * Fired after a page type is deleted.
      *
-     * @param EntryInterface|PageTypeInterface $entry
+     * @param EntryInterface|TypeInterface $entry
      */
     public function deleted(EntryInterface $entry)
     {
-        $this->commands->dispatch(new DeletePageTypeStream($entry));
+        $this->commands->dispatch(new DeleteTypeStream($entry));
 
         parent::deleted($entry);
     }

@@ -5,8 +5,8 @@ use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
-use Anomaly\PagesModule\Type\Command\GetPageTypeStream;
-use Anomaly\PagesModule\Type\Contract\PageTypeRepositoryInterface;
+use Anomaly\PagesModule\Type\Command\GetTypeStream;
+use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class PagesController extends AdminController
      * @param PageFormBuilder             $page
      * @param EntryFormBuilder            $entry
      * @param PageEntryFormBuilder        $form
-     * @param PageTypeRepositoryInterface $types
+     * @param TypeRepositoryInterface $types
      * @param Request                     $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -48,11 +48,11 @@ class PagesController extends AdminController
         PageFormBuilder $page,
         EntryFormBuilder $entry,
         PageEntryFormBuilder $form,
-        PageTypeRepositoryInterface $types,
+        TypeRepositoryInterface $types,
         Request $request
     ) {
         /* @var StreamInterface $stream */
-        $stream = $this->dispatch(new GetPageTypeStream($type = $types->find($request->get('page_type'))));
+        $stream = $this->dispatch(new GetTypeStream($type = $types->find($request->get('type'))));
 
         $entry->setModel($stream->getEntryModelName());
 

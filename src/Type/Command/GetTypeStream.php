@@ -1,33 +1,33 @@
 <?php namespace Anomaly\PagesModule\Type\Command;
 
-use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class GetPageTypeStream
+ * Class GetTypeStream
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type\Command
  */
-class GetPageTypeStream implements SelfHandling
+class GetTypeStream implements SelfHandling
 {
 
     /**
      * The page type instance.
      *
-     * @var PageTypeInterface
+     * @var TypeInterface
      */
     protected $pageType;
 
     /**
-     * Create a new GetPageTypeStream instance.
+     * Create a new GetTypeStream instance.
      *
-     * @param PageTypeInterface $pageType
+     * @param TypeInterface $pageType
      */
-    public function __construct(PageTypeInterface $pageType)
+    public function __construct(TypeInterface $pageType)
     {
         $this->pageType = $pageType;
     }

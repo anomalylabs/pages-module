@@ -25,7 +25,14 @@ class PageEntryFormSections
                         'general' => [
                             'title'  => 'General',
                             'fields' => [
-                                'title'
+                                'title',
+                                'slug'
+                            ]
+                        ],
+                        'entry'   => [
+                            'title'  => 'Custom Fields',
+                            'fields' => [
+                                'markdown'
                             ]
                         ]
                     ]

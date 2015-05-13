@@ -1,18 +1,18 @@
 <?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\EditorFieldType\EditorFieldType;
-use Anomaly\PagesModule\Type\Contract\PageTypeInterface;
-use Anomaly\Streams\Platform\Model\Pages\PagesPageTypesEntryModel;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 
 /**
- * Class PageTypeModel
+ * Class TypeModel
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type
  */
-class PageTypeModel extends PagesPageTypesEntryModel implements PageTypeInterface
+class TypeModel extends PagesTypesEntryModel implements TypeInterface
 {
 
     /**

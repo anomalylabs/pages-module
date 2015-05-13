@@ -3,13 +3,13 @@
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class AnomalyModulePages_1_0_0_CreatePageTypesStream
+ * Class AnomalyModulePages_1_0_0_CreateTypesStream
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModulePages_1_0_0_CreatePageTypesStream extends Migration
+class AnomalyModulePages_1_0_0_CreateTypesStream extends Migration
 {
 
     /**
@@ -18,7 +18,7 @@ class AnomalyModulePages_1_0_0_CreatePageTypesStream extends Migration
      * @var array
      */
     protected $stream = [
-        'slug'         => 'page_types',
+        'slug'         => 'types',
         'title_column' => 'name',
         'translatable' => true,
         'locked'       => true
