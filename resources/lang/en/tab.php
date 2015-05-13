@@ -1,8 +1,10 @@
 <?php
 
 return [
-    'page' => 'Page',
-    'seo'  => 'SEO',
-    'css'  => 'CSS',
-    'js'   => 'JS'
+    'general' => 'General',
+    'layout'  => 'Layout',
+    'page'    => 'Page',
+    'seo'     => 'SEO',
+    'css'     => 'CSS',
+    'js'      => 'JS'
 ];

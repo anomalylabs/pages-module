@@ -5,7 +5,7 @@ return [
     'description' => 'Pages management.',
     'section'     => [
         'pages'    => 'Pages',
-        'types'    => 'Page Types',
+        'types'    => 'Types',
         'fields'   => 'Fields',
         'settings' => 'Settings'
     ]

@@ -1,14 +1,9 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
-use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
-use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
-use Anomaly\PagesModule\Type\Command\GetTypeStream;
-use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
@@ -35,38 +30,25 @@ class PagesController extends AdminController
     }
 
     /**
-     * Return a form for a new page.
+     * Return the form for a new page.
      *
-     * @param PageFormBuilder             $page
-     * @param EntryFormBuilder            $entry
-     * @param PageEntryFormBuilder        $form
-     * @param TypeRepositoryInterface $types
-     * @param Request                     $request
+     * @param PageEntryFormBuilder $form
+     * @param Request              $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(
-        PageFormBuilder $page,
-        EntryFormBuilder $entry,
-        PageEntryFormBuilder $form,
-        TypeRepositoryInterface $types,
-        Request $request
-    ) {
-        /* @var StreamInterface $stream */
-        $stream = $this->dispatch(new GetTypeStream($type = $types->find($request->get('type'))));
-
-        $entry->setModel($stream->getEntryModelName());
-
-        return $form->setType($type)->addForm('entry', $entry)->addForm('page', $page)->render();
+    public function create(PageEntryFormBuilder $form, Request $request)
+    {
+        return $form->setType($request->get('type'))->render();
     }
 
     /**
      * Return a form for an existing page.
      *
-     * @param PageFormBuilder $form
-     * @param                 $id
+     * @param PageEntryFormBuilder $form
+     * @param                      $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(PageFormBuilder $form, $id)
+    public function edit(PageEntryFormBuilder $form, $id)
     {
         return $form->render($id);
     }

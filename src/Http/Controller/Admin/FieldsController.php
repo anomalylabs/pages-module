@@ -4,7 +4,7 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
 use Anomaly\Streams\Platform\Field\Form\FieldFormBuilder;
 use Anomaly\Streams\Platform\Field\Table\FieldTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Illuminate\Http\Request;
+use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 
 /**
  * Class FieldsController
@@ -42,15 +42,16 @@ class FieldsController extends AdminController
     /**
      * Return the form for a new field.
      *
-     * @param FieldFormBuilder $form
-     * @param Request          $request
+     * @param FieldFormBuilder          $form
+     * @param StreamRepositoryInterface $streams
+     * @param FieldTypeCollection       $fieldTypes
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(FieldFormBuilder $form, $fieldType)
+    public function create(FieldFormBuilder $form, StreamRepositoryInterface $streams, FieldTypeCollection $fieldTypes)
     {
         $form
-            ->setNamespace('pages')
-            ->setFieldType($fieldType);
+            ->setStream($streams->findBySlugAndNamespace('pages', 'pages'))
+            ->setFieldType($fieldTypes->get($_GET['field_type']));
 
         return $form->render(null);
     }

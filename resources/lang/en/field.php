@@ -46,6 +46,10 @@ return [
         'name'         => 'Description',
         'instructions' => 'Briefly describe the page type.'
     ],
+    'theme_layout'     => [
+        'name'         => 'Theme Layout',
+        'instructions' => 'The theme layout will be used to wrap the page content.'
+    ],
     'layout'           => [
         'name'         => 'Layout',
         'instructions' => 'The layout will be used to display the page content.'

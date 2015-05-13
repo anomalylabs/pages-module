@@ -34,9 +34,9 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/types/fields/{id}/assignment/{assignment}' => 'Anomaly\PagesModule\Http\Controller\Admin\TypesController@assignment',
         'admin/pages/fields'                                    => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@index',
         'admin/pages/fields/choose'                             => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@choose',
-        'admin/pages/fields/create/{fieldType}'                 => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@create',
+        'admin/pages/fields/create'                             => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@create',
         'admin/pages/fields/edit/{id}'                          => 'Anomaly\PagesModule\Http\Controller\Admin\FieldsController@edit',
-        'admin/pages/ajax/choose_type'                     => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseType',
+        'admin/pages/ajax/choose_type'                          => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseType',
         'admin/pages/ajax/choose_field/{id}'                    => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseField',
         'admin/pages/settings'                                  => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
     ];
@@ -47,7 +47,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $bindings = [
-        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel'     => 'Anomaly\PagesModule\Page\PageModel',
+        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel' => 'Anomaly\PagesModule\Page\PageModel',
         'Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel' => 'Anomaly\PagesModule\Type\TypeModel'
     ];
 
@@ -57,7 +57,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $singletons = [
-        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface'     => 'Anomaly\PagesModule\Page\PageRepository',
+        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface' => 'Anomaly\PagesModule\Page\PageRepository',
         'Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface' => 'Anomaly\PagesModule\Type\TypeRepository'
     ];
 

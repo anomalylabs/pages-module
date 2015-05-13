@@ -5,6 +5,7 @@ use Anomaly\PagesModule\Type\Form\TypeFormBuilder;
 use Anomaly\PagesModule\Type\Table\TypeTableBuilder;
 use Anomaly\Streams\Platform\Assignment\Form\AssignmentFormBuilder;
 use Anomaly\Streams\Platform\Assignment\Table\AssignmentTableBuilder;
+use Anomaly\Streams\Platform\Field\Contract\FieldRepositoryInterface;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
@@ -45,7 +46,7 @@ class TypesController extends AdminController
     /**
      * Return a form for editing an existing page type.
      *
-     * @param TypeFormBuilder $form
+     * @param TypeFormBuilder     $form
      * @param                     $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -59,7 +60,7 @@ class TypesController extends AdminController
      *
      * @param AssignmentTableBuilder      $table
      * @param StreamRepositoryInterface   $streams
-     * @param TypeRepositoryInterface $types
+     * @param TypeRepositoryInterface     $types
      * @param BreadcrumbCollection        $breadcrumbs
      * @param                             $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -88,9 +89,14 @@ class TypesController extends AdminController
         AssignmentFormBuilder $form,
         TypeRepositoryInterface $types,
         StreamRepositoryInterface $streams,
-        $id
+        FieldRepositoryInterface $fields,
+        $id,
+        $field
     ) {
-        return $form->setStream($streams->findBySlugAndNamespace($types->find($id)->getSlug(), 'pages'))->render();
+        return $form
+            ->setStream($streams->findBySlugAndNamespace($types->find($id)->getSlug(), 'pages'))
+            ->setField($fields->find($field))
+            ->render();
     }
 
     /**
@@ -98,7 +104,7 @@ class TypesController extends AdminController
      *
      * @param AssignmentFormBuilder       $form
      * @param StreamRepositoryInterface   $streams
-     * @param TypeRepositoryInterface $types
+     * @param TypeRepositoryInterface     $types
      * @param BreadcrumbCollection        $breadcrumbs
      * @param                             $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -115,8 +121,6 @@ class TypesController extends AdminController
 
         $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
 
-        return $form->setStream(
-            $streams->findBySlugAndNamespace($type->getSlug(), 'pages')
-        )->render($assignment);
+        return $form->render($assignment);
     }
 }

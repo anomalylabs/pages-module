@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Command\GetPageResponse;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
@@ -16,14 +17,14 @@ class PagesController extends PublicController
 {
 
     /**
-     * Map the matched route action to a page response.
+     * View a page.
      *
-     * @param string $method
-     * @param array  $parameters
      * @return Response
      */
-    public function __call($method, $parameters)
+    public function view(Request $request)
     {
-        return $this->dispatch(new GetPageResponse(substr($method, strpos($method, '_') + 1)));
+        $action = $request->route()->getAction();
+
+        return $this->dispatch(new GetPageResponse($action['id']));
     }
 }
