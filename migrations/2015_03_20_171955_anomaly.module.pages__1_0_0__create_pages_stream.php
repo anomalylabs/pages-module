@@ -35,7 +35,9 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
             'required'     => true
         ],
         'ttl',
-        'type',
+        'type'             => [
+            'required' => true
+        ],
         'entry',
         'parent',
         'status',

@@ -27,11 +27,19 @@ class PageFormBuilder extends FormBuilder
      * @var array
      */
     protected $skips = [
-        'type',
         'path',
         'entry',
         'parent',
         'allowed_roles'
+    ];
+
+    /**
+     * The form actions.
+     *
+     * @var array
+     */
+    protected $actions = [
+        'save_and_continue'
     ];
 
     /**

@@ -29,11 +29,9 @@ class PagesModule extends Module
         'pages' => [
             'buttons' => [
                 'new_page' => [
-                    'attributes' => [
-                        'data-toggle' => 'modal',
-                        'data-target' => '#modal'
-                    ],
-                    'href'       => 'admin/pages/types/choose'
+                    'data-toggle' => 'modal',
+                    'data-target' => '#modal',
+                    'href'        => 'admin/pages/ajax/choose_page_type'
                 ]
             ]
         ],
@@ -41,8 +39,10 @@ class PagesModule extends Module
             'buttons' => [
                 'new_type',
                 'new_field' => [
-                    'href'    => 'admin/pages/types/fields/{route.parameters.id}/create',
-                    'enabled' => 'admin/pages/types/fields/*'
+                    'data-toggle' => 'modal',
+                    'data-target' => '#modal',
+                    'enabled'     => 'admin/pages/types/fields/*',
+                    'href'        => 'admin/pages/ajax/choose_field_type'
                 ]
             ]
         ],

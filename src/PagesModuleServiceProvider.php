@@ -28,11 +28,12 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/types'                               => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@index',
         'admin/pages/types/create'                        => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@create',
         'admin/pages/types/edit/{id}'                     => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@edit',
-        'admin/pages/types/choose'                        => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@choose',
         'admin/pages/types/fields/{id}'                   => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@fields',
         'admin/pages/types/fields/{id}/create'            => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@createField',
         'admin/pages/types/fields/{id}/edit/{assignment}' => 'Anomaly\PagesModule\Http\Controller\Admin\PageTypesController@editField',
-        'admin/pages/settings'                            => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index'
+        'admin/pages/settings'                            => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
+        'admin/pages/ajax/choose_page_type'               => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@choosePageType',
+        'admin/pages/ajax/choose_field_type'              => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseFieldType',
     ];
 
     /**
