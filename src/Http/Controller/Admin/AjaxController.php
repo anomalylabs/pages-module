@@ -46,11 +46,13 @@ class AjaxController extends AdminController
      * @param FieldRepositoryInterface $fields
      * @return \Illuminate\View\View
      */
-    public function chooseField(FieldRepositoryInterface $fields, $id)
+    public function chooseField(FieldRepositoryInterface $fields, TypeRepositoryInterface $types, $id)
     {
+        $type = $types->find($id);
+
         return view(
             'module::ajax/choose_field',
-            ['fields' => $fields->findByNamespace('pages')->unlocked(), 'id' => $id]
+            ['fields' => $fields->findByNamespace('pages')->notAssignedTo($type->getEntryStream())->unlocked(), 'id' => $id]
         );
     }
 }
