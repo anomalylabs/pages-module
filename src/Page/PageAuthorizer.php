@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Support\Authorizer;
+use Illuminate\Auth\Guard;
 
 /**
  * Class PageAuthorizer
@@ -15,6 +16,13 @@ class PageAuthorizer
 {
 
     /**
+     * The authorization utility.
+     *
+     * @var Guard
+     */
+    protected $guard;
+
+    /**
      * The authorizer utility.
      *
      * @var Authorizer
@@ -24,10 +32,12 @@ class PageAuthorizer
     /**
      * Create a new PageAuthorizer instance.
      *
+     * @param Guard      $guard
      * @param Authorizer $authorizer
      */
-    public function __construct(Authorizer $authorizer)
+    public function __construct(Guard $guard, Authorizer $authorizer)
     {
+        $this->guard      = $guard;
         $this->authorizer = $authorizer;
     }
 
@@ -38,8 +48,10 @@ class PageAuthorizer
      */
     public function authorize(PageInterface $page)
     {
-        if (!$page->isEnabled()) {
-            $this->authorizer->authorize('anomaly.module.pages::view_drafts');
+        if (!$page->isEnabled() && !$this->guard->user()) {
+            abort(404);
         }
+
+        $this->authorizer->authorize('anomaly.module.pages::view_drafts');
     }
 }
