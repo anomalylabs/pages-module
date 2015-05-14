@@ -1,10 +1,12 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\EditorFieldType\EditorFieldType;
+use Anomaly\PagesModule\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Response;
 
 /**
  * Class PageModel
@@ -33,6 +35,13 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     protected $with = [
         'type'
     ];
+
+    /**
+     * The page's response.
+     *
+     * @var null|Response
+     */
+    protected $response = null;
 
     /**
      * Boot the model.
@@ -75,6 +84,54 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Return the combined meta title.
+     *
+     * @return string
+     */
+    public function metaTitle()
+    {
+        $metaTitle = $this->getMetaTitle();
+
+        if (!$metaTitle && $type = $this->getType()) {
+            $metaTitle = $type->getMetaTitle();
+        }
+
+        return $metaTitle;
+    }
+
+    /**
+     * Return the combined meta keywords.
+     *
+     * @return string
+     */
+    public function metaKeywords()
+    {
+        $metaKeywords = $this->getMetaKeywords();
+
+        if (!$metaKeywords && $type = $this->getType()) {
+            $metaKeywords = $type->getMetaKeywords();
+        }
+
+        return $metaKeywords;
+    }
+
+    /**
+     * Return the combined meta description.
+     *
+     * @return string
+     */
+    public function metaDescription()
+    {
+        $metaDescription = $this->getMetaDescription();
+
+        if (!$metaDescription && $type = $this->getType()) {
+            $metaDescription = $type->getMetaDescription();
+        }
+
+        return $metaDescription;
+    }
+
+    /**
      * Get the TTL.
      *
      * @return null|int
@@ -95,13 +152,43 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Get the page content.
+     * Get the meta title.
      *
      * @return string
      */
-    public function getContent()
+    public function getMetaTitle()
     {
-        return $this->content;
+        return $this->meta_title;
+    }
+
+    /**
+     * Get the meta keywords.
+     *
+     * @return array
+     */
+    public function getMetaKeywords()
+    {
+        return $this->meta_keywords;
+    }
+
+    /**
+     * Get the meta description.
+     *
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->meta_description;
+    }
+
+    /**
+     * Get the enabled flag.
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
     }
 
     /**
@@ -172,5 +259,40 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Get the related type's page handler.
+     *
+     * @return PageHandlerExtension
+     */
+    public function getTypeHandler()
+    {
+        $type = $this->getType();
+
+        return $type->getHandler();
+    }
+
+    /**
+     * Get the response.
+     *
+     * @return Response|null
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * Set the response.
+     *
+     * @param $response
+     * @return $this
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+
+        return $this;
     }
 }

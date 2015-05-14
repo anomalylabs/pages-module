@@ -1,7 +1,9 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
+use Anomaly\PagesModule\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Illuminate\Http\Response;
 
 /**
  * Interface PageInterface
@@ -21,6 +23,27 @@ interface PageInterface
      * @return $this
      */
     public function path($path = null);
+
+    /**
+     * Return the combined meta title.
+     *
+     * @return string
+     */
+    public function metaTitle();
+
+    /**
+     * Return the combined meta keywords.
+     *
+     * @return string
+     */
+    public function metaKeywords();
+
+    /**
+     * Return the combined meta description.
+     *
+     * @return string
+     */
+    public function metaDescription();
 
     /**
      * Get the ID.
@@ -51,11 +74,32 @@ interface PageInterface
     public function getTitle();
 
     /**
-     * Get the page content.
+     * Get the meta title.
      *
      * @return string
      */
-    public function getContent();
+    public function getMetaTitle();
+
+    /**
+     * Get the meta keywords.
+     *
+     * @return array
+     */
+    public function getMetaKeywords();
+
+    /**
+     * Get the meta description.
+     *
+     * @return string
+     */
+    public function getMetaDescription();
+
+    /**
+     * Get the enabled flag.
+     *
+     * @return bool
+     */
+    public function isEnabled();
 
     /**
      * Return the related parent page.
@@ -86,9 +130,31 @@ interface PageInterface
     public function getJsPath();
 
     /**
-     * Get the page type.
+     * Get the related page type.
      *
      * @return null|TypeInterface
      */
     public function getType();
+
+    /**
+     * Get the related type's page handler.
+     *
+     * @return PageHandlerExtension
+     */
+    public function getTypeHandler();
+
+    /**
+     * Get the response.
+     *
+     * @return Response|null
+     */
+    public function getResponse();
+
+    /**
+     * Set the response.
+     *
+     * @param $response
+     * @return $this
+     */
+    public function setResponse(Response $response);
 }

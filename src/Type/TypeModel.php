@@ -49,6 +49,16 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
+     * Get the TTL.
+     *
+     * @return null|int
+     */
+    public function getTtl()
+    {
+        return $this->ttl;
+    }
+
+    /**
      * Get the handler.
      *
      * @return PageHandlerExtension
@@ -66,6 +76,36 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Get the meta title.
+     *
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        return $this->meta_title;
+    }
+
+    /**
+     * Get the meta keywords.
+     *
+     * @return array
+     */
+    public function getMetaKeywords()
+    {
+        return $this->meta_keywords;
+    }
+
+    /**
+     * Get the meta description.
+     *
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->meta_description;
     }
 
     /**

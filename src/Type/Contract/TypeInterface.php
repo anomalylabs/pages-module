@@ -22,6 +22,13 @@ interface TypeInterface
     public function getId();
 
     /**
+     * Get the TTL.
+     *
+     * @return null|int
+     */
+    public function getTtl();
+
+    /**
      * Get the name.
      *
      * @return string
@@ -48,6 +55,27 @@ interface TypeInterface
      * @return string
      */
     public function getDescription();
+
+    /**
+     * Get the meta title.
+     *
+     * @return string
+     */
+    public function getMetaTitle();
+
+    /**
+     * Get the meta keywords.
+     *
+     * @return array
+     */
+    public function getMetaKeywords();
+
+    /**
+     * Get the meta description.
+     *
+     * @return string
+     */
+    public function getMetaDescription();
 
     /**
      * Get the CSS path.
