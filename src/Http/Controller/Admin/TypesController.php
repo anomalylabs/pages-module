@@ -99,6 +99,13 @@ class TypesController extends AdminController
         $field
     ) {
         return $form
+            ->setActions(
+                [
+                    'save' => [
+                        'redirect' => 'admin/pages/types/fields/' . $id
+                    ]
+                ]
+            )
             ->setStream($streams->findBySlugAndNamespace($types->find($id)->getSlug(), 'pages'))
             ->setField($fields->find($field))
             ->render();
