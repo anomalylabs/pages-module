@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
+use Anomaly\PagesModule\Handler\PageHandlerExtension;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
@@ -28,18 +29,25 @@ interface TypeInterface
     public function getName();
 
     /**
-     * Get the description.
-     *
-     * @return string
-     */
-    public function getDescription();
-
-    /**
      * Get the slug.
      *
      * @return string
      */
     public function getSlug();
+
+    /**
+     * Get the handler.
+     *
+     * @return PageHandlerExtension
+     */
+    public function getHandler();
+
+    /**
+     * Get the description.
+     *
+     * @return string
+     */
+    public function getDescription();
 
     /**
      * Get the CSS path.

@@ -66,5 +66,9 @@ return [
     'parent'           => [
         'name'         => 'Parent',
         'instructions' => 'Choose the parent page if any.'
+    ],
+    'handler'          => [
+        'name'         => 'Page Handler',
+        'instructions' => 'Choose the page handler. In most cases this will be the Default Page Handler.'
     ]
 ];

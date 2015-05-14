@@ -76,13 +76,18 @@ class TypesController extends AdminController
 
         $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
 
-        return $table->setButtons(
-            [
-                'edit' => [
-                    'href' => '{request.path}/edit/{entry.id}'
+        return $table
+            ->setButtons(
+                [
+                    'edit' => [
+                        'href' => '{request.path}/assignment/{entry.id}'
+                    ]
                 ]
-            ]
-        )->setStream($streams->findBySlugAndNamespace($type->getSlug(), 'pages'))->render();
+            )
+            ->setOption('title', $type->getName() . ' fields')
+            ->setOption('description', 'This is a list of assigned fields for the "' . $type->getName() . '" page type')
+            ->setStream($streams->findBySlugAndNamespace($type->getSlug(), 'pages'))
+            ->render();
     }
 
     public function assign(
@@ -109,7 +114,7 @@ class TypesController extends AdminController
      * @param                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editField(
+    public function assignment(
         AssignmentFormBuilder $form,
         StreamRepositoryInterface $streams,
         TypeRepositoryInterface $types,

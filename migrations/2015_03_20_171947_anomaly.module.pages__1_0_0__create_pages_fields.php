@@ -25,7 +25,12 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
                 'slugify' => 'title'
             ]
         ],
-        'enabled'          => 'anomaly.field_type.boolean',
+        'enabled'          => [
+            'type'   => 'anomaly.field_type.boolean',
+            'config' => [
+                'default_value' => true,
+            ]
+        ],
         'meta_title'       => 'anomaly.field_type.text',
         'meta_description' => 'anomaly.field_type.textarea',
         'meta_keywords'    => 'anomaly.field_type.tags',
@@ -54,6 +59,14 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
             'config' => [
                 'default_value' => '<h1>{{ page.title }}</h1>',
                 'mode'          => 'twig'
+            ]
+        ],
+        'handler'          => [
+            'type'   => 'anomaly.field_type.addon',
+            'config' => [
+                'type'          => 'extensions',
+                'default_value' => 'anomaly.extension.default_page_handler',
+                'search'        => 'anomaly.module.pages::page_handler.*'
             ]
         ],
         'allowed_roles'    => [

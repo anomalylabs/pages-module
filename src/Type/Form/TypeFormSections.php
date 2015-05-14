@@ -14,7 +14,8 @@ class TypeFormSections
                             'fields' => [
                                 'name',
                                 'slug',
-                                'description'
+                                'description',
+                                'handler'
                             ]
                         ],
                         'layout'  => [

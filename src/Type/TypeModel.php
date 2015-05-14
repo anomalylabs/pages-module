@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\EditorFieldType\EditorFieldType;
+use Anomaly\PagesModule\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Type\Command\GetTypeStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
@@ -44,7 +45,17 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      */
     public function getSlug()
     {
-        return str_slug($this->getName(), '_');
+        return $this->slug;
+    }
+
+    /**
+     * Get the handler.
+     *
+     * @return PageHandlerExtension
+     */
+    public function getHandler()
+    {
+        return $this->handler;
     }
 
     /**
