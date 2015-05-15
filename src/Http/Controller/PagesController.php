@@ -6,10 +6,7 @@ use Anomaly\PagesModule\Page\PageLoader;
 use Anomaly\PagesModule\Page\PageResolver;
 use Anomaly\PagesModule\Page\PageResponse;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
-use Illuminate\Container\Container;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Route;
 
 /**
  * Class PagesController
