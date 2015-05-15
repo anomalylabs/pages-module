@@ -1,13 +1,14 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\PagesModule\Page\Form\Command\AddEntryForm;
-use Anomaly\PagesModule\Page\Form\Command\AddPageForm;
+use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromPage;
+use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromRequest;
+use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromPage;
+use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromRequest;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 /**
@@ -33,29 +34,34 @@ class PagesController extends AdminController
     }
 
     /**
-     * Return the form for a new page.
+     * Return the form for creating a new page.
      *
      * @param PageEntryFormBuilder $form
-     * @param Request              $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(PageEntryFormBuilder $form)
     {
-        $this->dispatch(new AddEntryForm($form));
-        $this->dispatch(new AddPageForm($form));
+        $this->dispatch(new AddEntryFormFromRequest($form));
+        $this->dispatch(new AddPageFormFromRequest($form));
 
         return $form->render();
     }
 
     /**
-     * Return a form for an existing page.
+     * Return the form for editing an existing page.
      *
-     * @param PageEntryFormBuilder $form
-     * @param                      $id
+     * @param PageRepositoryInterface $pages
+     * @param PageEntryFormBuilder    $form
+     * @param                         $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(PageEntryFormBuilder $form, $id)
+    public function edit(PageRepositoryInterface $pages, PageEntryFormBuilder $form, $id)
     {
+        $page = $pages->find($id);
+
+        $this->dispatch(new AddEntryFormFromPage($form, $page));
+        $this->dispatch(new AddPageFormFromPage($form, $page));
+
         return $form->render($id);
     }
 
@@ -91,7 +97,7 @@ class PagesController extends AdminController
     public function delete(PageRepositoryInterface $pages, Authorizer $authorizer, $id)
     {
         $authorizer->authorize('anomaly.module.pages::pages.delete');
-        
+
         $pages->delete($pages->find($id));
 
         return redirect()->back();

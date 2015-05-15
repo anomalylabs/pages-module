@@ -1,8 +1,8 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
-use Anomaly\PagesModule\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Illuminate\Http\Response;
 
 /**
@@ -135,6 +135,20 @@ interface PageInterface
      * @return null|TypeInterface
      */
     public function getType();
+
+    /**
+     * Get the related entry.
+     *
+     * @return null|EntryInterface
+     */
+    public function getEntry();
+
+    /**
+     * Get the related entry ID.
+     *
+     * @return null|int
+     */
+    public function getEntryId();
 
     /**
      * Get the response.

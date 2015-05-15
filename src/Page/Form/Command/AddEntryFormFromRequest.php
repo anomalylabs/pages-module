@@ -1,21 +1,24 @@
 <?php namespace Anomaly\PagesModule\Page\Form\Command;
 
+use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
-use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Http\Request;
 
 /**
- * Class AddPageForm
+ * Class AddEntryFormFromRequest
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page\Form\Command
  */
-class AddPageForm implements SelfHandling
+class AddEntryFormFromRequest implements SelfHandling
 {
+
+    use DispatchesCommands;
 
     /**
      * The multiple form builder.
@@ -25,7 +28,7 @@ class AddPageForm implements SelfHandling
     protected $builder;
 
     /**
-     * Create a new AddPageForm instance.
+     * Create a new AddEntryFormFromRequest instance.
      *
      * @param PageEntryFormBuilder $builder
      */
@@ -38,11 +41,13 @@ class AddPageForm implements SelfHandling
      * Handle the command.
      *
      * @param TypeRepositoryInterface $types
-     * @param PageFormBuilder         $builder
+     * @param EntryFormBuilder        $builder
      * @param Request                 $request
      */
-    public function handle(TypeRepositoryInterface $types, PageFormBuilder $builder, Request $request)
+    public function handle(TypeRepositoryInterface $types, EntryFormBuilder $builder, Request $request)
     {
-        $this->builder->addForm('page', $builder->setType($types->find($request->get('type'))));
+        $type = $types->find($request->get('type'));
+
+        $this->builder->addForm('entry', $builder->setModel($type->getEntryModelName()));
     }
 }

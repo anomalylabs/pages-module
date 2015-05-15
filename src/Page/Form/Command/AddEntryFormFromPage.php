@@ -1,21 +1,20 @@
 <?php namespace Anomaly\PagesModule\Page\Form\Command;
 
 use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
-use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use Illuminate\Http\Request;
 
 /**
- * Class AddEntryForm
+ * Class AddEntryFormFromPage
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page\Form\Command
  */
-class AddEntryForm implements SelfHandling
+class AddEntryFormFromPage implements SelfHandling
 {
 
     use DispatchesCommands;
@@ -28,26 +27,36 @@ class AddEntryForm implements SelfHandling
     protected $builder;
 
     /**
-     * Create a new AddEntryForm instance.
+     * The page instance.
+     *
+     * @var PageInterface
+     */
+    protected $page;
+
+    /**
+     * Create a new AddEntryFormFromPage instance.
      *
      * @param PageEntryFormBuilder $builder
+     * @param PageInterface        $page
      */
-    public function __construct(PageEntryFormBuilder $builder)
+    public function __construct(PageEntryFormBuilder $builder, PageInterface $page)
     {
         $this->builder = $builder;
+        $this->page    = $page;
     }
 
     /**
      * Handle the command.
      *
-     * @param TypeRepositoryInterface $types
-     * @param EntryFormBuilder        $builder
-     * @param Request                 $request
+     * @param EntryFormBuilder $builder
      */
-    public function handle(TypeRepositoryInterface $types, EntryFormBuilder $builder, Request $request)
+    public function handle(EntryFormBuilder $builder)
     {
-        $type = $types->find($request->get('type'));
+        $type = $this->page->getType();
 
-        $this->builder->addForm('entry', $builder->setModel($type->getEntryModelName()));
+        $builder->setModel($type->getEntryModelName());
+        $builder->setEntry($this->page->getEntryId());
+
+        $this->builder->addForm('entry', $builder);
     }
 }

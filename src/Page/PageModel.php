@@ -1,9 +1,9 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\EditorFieldType\EditorFieldType;
-use Anomaly\PagesModule\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
@@ -259,6 +259,26 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Get the related entry.
+     *
+     * @return null|EntryInterface
+     */
+    public function getEntry()
+    {
+        return $this->entry;
+    }
+
+    /**
+     * Get the related entry ID.
+     *
+     * @return null|int
+     */
+    public function getEntryId()
+    {
+        return $this->entry_id;
     }
 
     /**
