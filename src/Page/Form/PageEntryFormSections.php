@@ -35,7 +35,7 @@ class PageEntryFormSections
                             ]
                         ],
                         'entry'   => [
-                            'title'  => 'streams::tab.entry',
+                            'title'  => 'module::tab.entry',
                             'fields' => function (PageEntryFormBuilder $builder) {
                                 return array_map(
                                     function (FieldType $field) {

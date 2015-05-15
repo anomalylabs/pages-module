@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
+use Anomaly\PagesModule\Page\PageModel;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
 use Anomaly\Streams\Platform\Field\Form\FieldFormBuilder;
 use Anomaly\Streams\Platform\Field\Table\FieldTableBuilder;
@@ -23,9 +24,11 @@ class FieldsController extends AdminController
      * @param FieldTableBuilder $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(FieldTableBuilder $table)
+    public function index(FieldTableBuilder $table, PageModel $pages)
     {
-        return $table->render('pages');
+        $table->setStream($pages->getStream());
+
+        return $table->render();
     }
 
     /**
