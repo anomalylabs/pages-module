@@ -262,18 +262,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Get the related type's page handler.
-     *
-     * @return PageHandlerExtension
-     */
-    public function getTypeHandler()
-    {
-        $type = $this->getType();
-
-        return $type->getHandler();
-    }
-
-    /**
      * Get the response.
      *
      * @return Response|null

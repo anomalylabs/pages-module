@@ -43,13 +43,6 @@ interface TypeInterface
     public function getSlug();
 
     /**
-     * Get the handler.
-     *
-     * @return PageHandlerExtension
-     */
-    public function getHandler();
-
-    /**
      * Get the description.
      *
      * @return string

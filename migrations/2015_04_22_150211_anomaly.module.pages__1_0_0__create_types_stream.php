@@ -46,20 +46,17 @@ class AnomalyModulePages_1_0_0_CreateTypesStream extends Migration
         'layout'           => [
             'required' => true
         ],
-        'handler'          => [
-            'required' => true
-        ],
         'theme_layout'     => [
             'required' => true
         ],
         'meta_title'       => [
-            'translatable' => true,
+            'translatable' => true
         ],
         'meta_description' => [
-            'translatable' => true,
+            'translatable' => true
         ],
         'meta_keywords'    => [
-            'translatable' => true,
+            'translatable' => true
         ],
         'css',
         'js'

@@ -61,14 +61,6 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
                 'mode'          => 'twig'
             ]
         ],
-        'handler'          => [
-            'type'   => 'anomaly.field_type.addon',
-            'config' => [
-                'type'          => 'extensions',
-                'default_value' => 'anomaly.extension.default_page_handler',
-                'search'        => 'anomaly.module.pages::page_handler.*'
-            ]
-        ],
         'allowed_roles'    => [
             'type'   => 'anomaly.field_type.multiple',
             'config' => [

@@ -1,8 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Illuminate\Container\Container;
-use Illuminate\Http\Response;
+use Illuminate\Routing\ResponseFactory;
 
 /**
  * Class PageResponse
@@ -16,20 +15,20 @@ class PageResponse
 {
 
     /**
-     * The service container.
+     * The response factory.
      *
-     * @var Container
+     * @var ResponseFactory
      */
     protected $container;
 
     /**
      * Create a new PageResponse instance.
      *
-     * @param Container $container
+     * @param ResponseFactory $response
      */
-    function __construct(Container $container)
+    function __construct(ResponseFactory $response)
     {
-        $this->container = $container;
+        $this->response = $response;
     }
 
     /**
@@ -39,6 +38,6 @@ class PageResponse
      */
     public function make(PageInterface $page)
     {
-        $page->setResponse($this->container->call([$page->getTypeHandler(), 'response'], compact('page')));
+        $page->setResponse($this->response->view('anomaly.module.pages::page', compact('page')));
     }
 }

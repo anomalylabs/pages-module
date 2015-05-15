@@ -137,13 +137,6 @@ interface PageInterface
     public function getType();
 
     /**
-     * Get the related type's page handler.
-     *
-     * @return PageHandlerExtension
-     */
-    public function getTypeHandler();
-
-    /**
      * Get the response.
      *
      * @return Response|null

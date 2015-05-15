@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Illuminate\Container\Container;
+use Anomaly\Streams\Platform\View\ViewTemplate;
 
 /**
  * Class PageLoader
@@ -15,20 +15,20 @@ class PageLoader
 {
 
     /**
-     * The service container.
+     * The template data.
      *
-     * @var Container
+     * @var ViewTemplate
      */
-    protected $container;
+    protected $template;
 
     /**
      * Create a new PageLoader instance.
      *
-     * @param Container $container
+     * @param ViewTemplate $template
      */
-    public function __construct(Container $container)
+    public function __construct(ViewTemplate $template)
     {
-        $this->container = $container;
+        $this->template = $template;
     }
 
     /**
@@ -38,6 +38,9 @@ class PageLoader
      */
     public function load(PageInterface $page)
     {
-        $this->container->call([$page->getTypeHandler(), 'load'], compact('page'));
+        $this->template->set('title', $page->getTitle());
+        $this->template->set('meta_title', $page->metaTitle());
+        $this->template->set('meta_keywords', $page->metaKeywords());
+        $this->template->set('meta_description', $page->metaDescription());
     }
 }
