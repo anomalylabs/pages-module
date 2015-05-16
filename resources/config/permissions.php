@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'pages'      => [
+    'settings',
+    'pages' => [
         'read',
         'create',
         'edit',

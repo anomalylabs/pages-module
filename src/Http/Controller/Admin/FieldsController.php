@@ -56,7 +56,7 @@ class FieldsController extends AdminController
             ->setStream($streams->findBySlugAndNamespace('pages', 'pages'))
             ->setFieldType($fieldTypes->get($_GET['field_type']));
 
-        return $form->render(null);
+        return $form->render();
     }
 
     /**
@@ -68,6 +68,6 @@ class FieldsController extends AdminController
      */
     public function edit(FieldFormBuilder $form, $id)
     {
-        return $form->render($id, 'pages');
+        return $form->render($id);
     }
 }
