@@ -20,16 +20,16 @@ class CreateTypeStream implements SelfHandling
      *
      * @var TypeInterface
      */
-    protected $pageType;
+    protected $type;
 
     /**
      * Create a new CreateTypeStream instance.
      *
-     * @param TypeInterface $pageType
+     * @param TypeInterface $type
      */
-    public function __construct(TypeInterface $pageType)
+    public function __construct(TypeInterface $type)
     {
-        $this->pageType = $pageType;
+        $this->type = $type;
     }
 
     /**
@@ -42,8 +42,8 @@ class CreateTypeStream implements SelfHandling
         $streams->create(
             array(
                 'namespace'    => 'pages',
-                'slug'         => $this->pageType->getSlug(),
-                'description'  => $this->pageType->getDescription(),
+                'slug'         => $this->type->getSlug(),
+                'description'  => $this->type->getDescription(),
                 'translatable' => true,
                 'locked'       => false
             )

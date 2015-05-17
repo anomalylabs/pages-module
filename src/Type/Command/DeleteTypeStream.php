@@ -20,16 +20,16 @@ class DeleteTypeStream implements SelfHandling
      *
      * @var TypeInterface
      */
-    protected $pageType;
+    protected $type;
 
     /**
      * Create a new DeleteTypeStream instance.
      *
-     * @param TypeInterface $pageType
+     * @param TypeInterface $type
      */
-    public function __construct(TypeInterface $pageType)
+    public function __construct(TypeInterface $type)
     {
-        $this->pageType = $pageType;
+        $this->type = $type;
     }
 
     /**
@@ -39,6 +39,6 @@ class DeleteTypeStream implements SelfHandling
      */
     public function handle(StreamRepositoryInterface $streams)
     {
-        $streams->delete($streams->findBySlugAndNamespace($this->pageType->getSlug(), 'pages'));
+        $streams->delete($streams->findBySlugAndNamespace($this->type->getSlug(), 'pages'));
     }
 }

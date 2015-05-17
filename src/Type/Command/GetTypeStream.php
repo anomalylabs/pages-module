@@ -20,16 +20,16 @@ class GetTypeStream implements SelfHandling
      *
      * @var TypeInterface
      */
-    protected $pageType;
+    protected $type;
 
     /**
      * Create a new GetTypeStream instance.
      *
-     * @param TypeInterface $pageType
+     * @param TypeInterface $type
      */
-    public function __construct(TypeInterface $pageType)
+    public function __construct(TypeInterface $type)
     {
-        $this->pageType = $pageType;
+        $this->type = $type;
     }
 
     /**
@@ -40,6 +40,6 @@ class GetTypeStream implements SelfHandling
      */
     public function handle(StreamRepositoryInterface $streams)
     {
-        return $streams->findBySlugAndNamespace($this->pageType->getSlug(), 'pages');
+        return $streams->findBySlugAndNamespace($this->type->getSlug(), 'pages');
     }
 }
