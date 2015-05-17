@@ -15,6 +15,8 @@ class PageFormBuilder extends FormBuilder
 {
 
     /**
+     * The page type.
+     *
      * @var null|TypeInterface
      */
     protected $type = null;
