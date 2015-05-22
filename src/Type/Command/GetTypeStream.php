@@ -40,6 +40,6 @@ class GetTypeStream implements SelfHandling
      */
     public function handle(StreamRepositoryInterface $streams)
     {
-        return $streams->findBySlugAndNamespace($this->type->getSlug(), 'pages');
+        return $streams->findBySlugAndNamespace($this->type->getSlug() . '_pages', 'pages');
     }
 }

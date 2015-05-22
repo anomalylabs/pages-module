@@ -98,6 +98,8 @@ class TypesController extends AdminController
         $id,
         $field
     ) {
+        $type = $types->find($id);
+
         return $form
             ->setActions(
                 [
@@ -106,7 +108,7 @@ class TypesController extends AdminController
                     ]
                 ]
             )
-            ->setStream($streams->findBySlugAndNamespace($types->find($id)->getSlug(), 'pages'))
+            ->setStream($type->getEntryStream())
             ->setField($fields->find($field))
             ->render();
     }
