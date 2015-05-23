@@ -70,6 +70,8 @@ class PagesController extends PublicController
         PageResponse $response,
         PageAuthorizer $authorizer
     ) {
+        parent::__construct();
+
         $this->http       = $http;
         $this->loader     = $loader;
         $this->resolver   = $resolver;
