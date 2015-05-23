@@ -59,7 +59,6 @@ class TypesController extends AdminController
      * Return a table of existing page type assignments.
      *
      * @param AssignmentTableBuilder      $table
-     * @param StreamRepositoryInterface   $streams
      * @param TypeRepositoryInterface     $types
      * @param BreadcrumbCollection        $breadcrumbs
      * @param                             $id
@@ -67,7 +66,6 @@ class TypesController extends AdminController
      */
     public function fields(
         AssignmentTableBuilder $table,
-        StreamRepositoryInterface $streams,
         TypeRepositoryInterface $types,
         BreadcrumbCollection $breadcrumbs,
         $id
@@ -86,7 +84,7 @@ class TypesController extends AdminController
             )
             ->setOption('title', $type->getName() . ' fields')
             ->setOption('description', 'This is a list of assigned fields for the "' . $type->getName() . '" page type')
-            ->setStream($streams->findBySlugAndNamespace($type->getSlug(), 'pages'))
+            ->setStream($type->getEntryStream())
             ->render();
     }
 
