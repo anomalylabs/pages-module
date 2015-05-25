@@ -2,7 +2,10 @@
 
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
+use Anomaly\Streams\Platform\Stream\StreamManager;
+use Illuminate\Config\Repository;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
  * Class CreateTypeStream
@@ -14,6 +17,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  */
 class CreateTypeStream implements SelfHandling
 {
+
+    use DispatchesCommands;
 
     /**
      * The page type instance.
@@ -37,16 +42,19 @@ class CreateTypeStream implements SelfHandling
      *
      * @param StreamRepositoryInterface $streams
      */
-    public function handle(StreamRepositoryInterface $streams)
+    public function handle(StreamManager $manager, Repository $config)
     {
-        $streams->create(
-            array(
-                'namespace'    => 'pages',
-                'slug'         => $this->type->getSlug() . '_pages',
-                'description'  => $this->type->getDescription(),
-                'translatable' => true,
-                'locked'       => false
-            )
+        $manager->create(
+            [
+                $config->get('app.fallback_locale') => [
+                    'name'        => $this->type->getName(),
+                    'description' => $this->type->getDescription()
+                ],
+                'namespace'                         => 'pages',
+                'slug'                              => $this->type->getSlug() . '_pages',
+                'translatable'                      => true,
+                'locked'                            => false
+            ]
         );
     }
 }
