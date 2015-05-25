@@ -68,7 +68,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * Return the path.
      *
      * @param null $path
-     * @return $this
+     * @return string
      */
     public function path($path = null)
     {

@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
 use Anomaly\PagesModule\Page\PageAuthorizer;
+use Anomaly\PagesModule\Page\PageBreadcrumbs;
 use Anomaly\PagesModule\Page\PageHttp;
 use Anomaly\PagesModule\Page\PageLoader;
 use Anomaly\PagesModule\Page\PageResolver;
@@ -55,28 +56,38 @@ class PagesController extends PublicController
     protected $authorizer;
 
     /**
+     * The page breadcrumbs.
+     *
+     * @var PageBreadcrumbs
+     */
+    protected $breadcrumbs;
+
+    /**
      * Create a new PagesController instance.
      *
-     * @param PageHttp       $http
-     * @param PageLoader     $loader
-     * @param PageResolver   $resolver
-     * @param PageResponse   $response
-     * @param PageAuthorizer $authorizer
+     * @param PageHttp        $http
+     * @param PageLoader      $loader
+     * @param PageResolver    $resolver
+     * @param PageResponse    $response
+     * @param PageAuthorizer  $authorizer
+     * @param PageBreadcrumbs $breadcrumbs
      */
     public function __construct(
         PageHttp $http,
         PageLoader $loader,
         PageResolver $resolver,
         PageResponse $response,
-        PageAuthorizer $authorizer
+        PageAuthorizer $authorizer,
+        PageBreadcrumbs $breadcrumbs
     ) {
         parent::__construct();
 
-        $this->http       = $http;
-        $this->loader     = $loader;
-        $this->resolver   = $resolver;
-        $this->response   = $response;
-        $this->authorizer = $authorizer;
+        $this->http        = $http;
+        $this->loader      = $loader;
+        $this->resolver    = $resolver;
+        $this->response    = $response;
+        $this->authorizer  = $authorizer;
+        $this->breadcrumbs = $breadcrumbs;
     }
 
     /**
@@ -91,7 +102,9 @@ class PagesController extends PublicController
         }
 
         $this->authorizer->authorize($page);
+        $this->breadcrumbs->make($page);
         $this->loader->load($page);
+
         $this->response->make($page);
         $this->http->cache($page);
 
