@@ -92,6 +92,8 @@ class PagesController extends PublicController
 
     /**
      * The home page slug should redirect to the root /
+     *
+     * @return RedirectResponse
      */
     public function redirectHome()
     {
