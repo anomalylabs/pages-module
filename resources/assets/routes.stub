@@ -1,5 +1,8 @@
 <?php
 
 {% for page in pages %}
-Route::any('{{ loop.first ? '/' : page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'id' => {{ page.id }}]);
+Route::any('{{ loop.first ? '/' : page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'page' => {{ page.id }}]);
+{% if loop.first %}
+Route::any('{{ page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@redirect', 'to' => '/']);
+{% endif %}
 {% endfor %}

@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageAuthorizer;
 use Anomaly\PagesModule\Page\PageBreadcrumbs;
 use Anomaly\PagesModule\Page\PageHttp;
@@ -8,6 +9,8 @@ use Anomaly\PagesModule\Page\PageResolver;
 use Anomaly\PagesModule\Page\PageResponse;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\Routing\Route;
 
 /**
  * Class PagesController
@@ -21,49 +24,7 @@ class PagesController extends PublicController
 {
 
     /**
-     * The page HTTP modifier.
-     *
-     * @var PageHttp
-     */
-    protected $http;
-
-    /**
-     * The page loader.
-     *
-     * @var PageLoader
-     */
-    protected $loader;
-
-    /**
-     * The page resolver.
-     *
-     * @var PageResolver
-     */
-    protected $resolver;
-
-    /**
-     * The page responder.
-     *
-     * @var PageResponse
-     */
-    protected $response;
-
-    /**
-     * The page authorizer.
-     *
-     * @var PageAuthorizer
-     */
-    protected $authorizer;
-
-    /**
-     * The page breadcrumbs.
-     *
-     * @var PageBreadcrumbs
-     */
-    protected $breadcrumbs;
-
-    /**
-     * Create a new PagesController instance.
+     * View a page.
      *
      * @param PageHttp        $http
      * @param PageLoader      $loader
@@ -71,8 +32,9 @@ class PagesController extends PublicController
      * @param PageResponse    $response
      * @param PageAuthorizer  $authorizer
      * @param PageBreadcrumbs $breadcrumbs
+     * @return Response|null
      */
-    public function __construct(
+    public function view(
         PageHttp $http,
         PageLoader $loader,
         PageResolver $resolver,
@@ -80,34 +42,38 @@ class PagesController extends PublicController
         PageAuthorizer $authorizer,
         PageBreadcrumbs $breadcrumbs
     ) {
-        parent::__construct();
-
-        $this->http        = $http;
-        $this->loader      = $loader;
-        $this->resolver    = $resolver;
-        $this->response    = $response;
-        $this->authorizer  = $authorizer;
-        $this->breadcrumbs = $breadcrumbs;
-    }
-
-    /**
-     * View a page.
-     *
-     * @return Response
-     */
-    public function view()
-    {
-        if (!$page = $this->resolver->resolve()) {
+        if (!$page = $resolver->resolve()) {
             abort(404);
         }
 
-        $this->authorizer->authorize($page);
-        $this->breadcrumbs->make($page);
-        $this->loader->load($page);
+        $authorizer->authorize($page);
+        $breadcrumbs->make($page);
+        $loader->load($page);
 
-        $this->response->make($page);
-        $this->http->cache($page);
+        $response->make($page);
+        $http->cache($page);
 
         return $page->getResponse();
+    }
+
+    /**
+     * Redirect elsewhere.
+     *
+     * @param PageRepositoryInterface $pages
+     * @param Redirector              $redirector
+     * @param Route                   $route
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirect(PageRepositoryInterface $pages, Redirector $redirector, Route $route)
+    {
+        if ($to = array_get($route->getAction(), 'to')) {
+            return $redirector->to($to, array_get($route->getAction(), 'status', 302));
+        }
+
+        if ($page = $pages->find(array_get($route->getAction(), 'page', 0))) {
+            return $redirector->to($page->path(), array_get($route->getAction(), 'status', 302));
+        }
+
+        abort(404);
     }
 }

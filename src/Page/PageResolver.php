@@ -49,7 +49,7 @@ class PageResolver
     {
         $action = $this->route->getAction();
 
-        if ($id = array_get($action, 'id')) {
+        if ($id = array_get($action, 'page')) {
             return $this->pages->find($id);
         }
 
