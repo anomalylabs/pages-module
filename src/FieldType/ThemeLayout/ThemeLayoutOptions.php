@@ -27,7 +27,7 @@ class ThemeLayoutOptions
     public function handle(Container $container, Repository $config, Filesystem $files)
     {
         /* @var Theme $theme */
-        $theme = $container->make($config->get('streams.standard_theme'));
+        $theme = $container->make($config->get('streams::themes.active.standard'));
 
         $options = $files->files($theme->getPath('resources/views/layouts'));
 
