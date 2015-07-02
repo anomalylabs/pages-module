@@ -42,7 +42,7 @@ class PageEntryFormSections
                                         return $field->getField();
                                     },
                                     array_filter(
-                                        $builder->getFormFields()->all(),
+                                        $builder->getFormFields()->base()->all(),
                                         function (FieldType $field) {
                                             return (!$field->getEntry() instanceof PageModel);
                                         }
