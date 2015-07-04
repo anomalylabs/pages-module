@@ -2,7 +2,6 @@
 
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
-use Anomaly\Streams\Platform\Stream\StreamManager;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesCommands;
@@ -41,10 +40,11 @@ class CreateTypeStream implements SelfHandling
      * Handle the command.
      *
      * @param StreamRepositoryInterface $streams
+     * @param Repository                $config
      */
-    public function handle(StreamManager $manager, Repository $config)
+    public function handle(StreamRepositoryInterface $streams, Repository $config)
     {
-        $manager->create(
+        $streams->create(
             [
                 $config->get('app.fallback_locale') => [
                     'name'        => $this->type->getName(),
