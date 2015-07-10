@@ -12,7 +12,7 @@
                 <a href="{{ url_to('admin/pages/fields/create?field_type=' ~ field_type.namespace) }}">
                     <strong>{{ trans(field_type.getName()) }}</strong>
                     <br>
-                    <small>{{ trans(field_type.description) }}</small>
+                    <small>{{ trans(field_type.getDescription()) }}</small>
                 </a>
             </li>
         {% endfor %}
