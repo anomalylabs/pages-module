@@ -98,7 +98,8 @@ class PagesController extends AdminController
     {
         $authorizer->authorize('anomaly.module.pages::pages.delete');
 
-        $pages->delete($pages->find($id));
+        $pages->delete($page = $pages->find($id));
+        $page->entry->delete();
 
         return redirect()->back();
     }

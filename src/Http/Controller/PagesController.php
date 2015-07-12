@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
+use Anomaly\PagesModule\Page\Command\AddPageAssets;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageAuthorizer;
 use Anomaly\PagesModule\Page\PageBreadcrumbs;
@@ -45,6 +46,8 @@ class PagesController extends PublicController
         if (!$page = $resolver->resolve()) {
             abort(404);
         }
+
+        $this->dispatch(new AddPageAssets($page));
 
         $authorizer->authorize($page);
         $breadcrumbs->make($page);

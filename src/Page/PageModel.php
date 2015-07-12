@@ -233,7 +233,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
 
         $css->setEntry($this);
 
-        return $css->getStoragePath();
+        return $css->getAssetPath();
     }
 
     /**
@@ -248,7 +248,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
 
         $js->setEntry($this);
 
-        return $js->getStoragePath();
+        return $js->getAssetPath();
     }
 
     /**
