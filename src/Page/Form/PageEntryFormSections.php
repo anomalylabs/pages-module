@@ -28,10 +28,10 @@ class PageEntryFormSections
                         'general' => [
                             'title'  => 'module::tab.page',
                             'fields' => [
-                                'title',
-                                'slug',
-                                'enabled',
-                                'ttl'
+                                'page_title',
+                                'page_slug',
+                                'page_enabled',
+                                'page_ttl'
                             ]
                         ],
                         'entry'   => [
@@ -39,7 +39,7 @@ class PageEntryFormSections
                             'fields' => function (PageEntryFormBuilder $builder) {
                                 return array_map(
                                     function (FieldType $field) {
-                                        return $field->getField();
+                                        return 'entry_' . $field->getField();
                                     },
                                     array_filter(
                                         $builder->getFormFields()->base()->all(),
@@ -53,21 +53,21 @@ class PageEntryFormSections
                         'seo'     => [
                             'title'  => 'module::tab.seo',
                             'fields' => [
-                                'meta_title',
-                                'meta_keywords',
-                                'meta_description'
+                                'page_meta_title',
+                                'page_meta_keywords',
+                                'page_meta_description'
                             ]
                         ],
                         'css'     => [
                             'title'  => 'module::tab.css',
                             'fields' => [
-                                'css'
+                                'page_css'
                             ]
                         ],
                         'js'      => [
                             'title'  => 'module::tab.js',
                             'fields' => [
-                                'js'
+                                'page_js'
                             ]
                         ]
                     ]
