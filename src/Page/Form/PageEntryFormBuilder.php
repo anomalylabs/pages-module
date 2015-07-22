@@ -21,7 +21,6 @@ class PageEntryFormBuilder extends MultipleFormBuilder
      * @var array
      */
     protected $actions = [
-        'save_and_continue',
         'save'
     ];
 

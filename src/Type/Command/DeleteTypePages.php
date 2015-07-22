@@ -2,7 +2,6 @@
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
-use Anomaly\PartialsModule\Type\Contract\TypeRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
