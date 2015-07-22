@@ -3,7 +3,7 @@
 return [
     'title'       => 'Pages',
     'name'        => 'Pages Module',
-    'description' => 'Pages management.',
+    'description' => 'Public content and page management.',
     'section'     => [
         'pages'  => 'Pages',
         'types'  => 'Types',
