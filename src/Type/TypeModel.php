@@ -1,7 +1,6 @@
 <?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\EditorFieldType\EditorFieldType;
-use Anomaly\PagesModule\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Type\Command\GetTypeStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
@@ -24,7 +23,7 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      * @var int
      */
     protected $cacheMinutes = 99999;
-    
+
     /**
      * Boot the model.
      */

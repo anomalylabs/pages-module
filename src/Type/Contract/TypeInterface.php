@@ -1,6 +1,6 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
-use Anomaly\PagesModule\Handler\PageHandlerExtension;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
@@ -11,7 +11,7 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type\Contract
  */
-interface TypeInterface
+interface TypeInterface extends EntryInterface
 {
 
     /**

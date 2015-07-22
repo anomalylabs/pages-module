@@ -28,7 +28,7 @@ return [
     'ttl'              => [
         'name'         => 'TTL',
         'label'        => 'Time to live (TTL)',
-        'instructions' => 'How long (in seconds) do you want to cache the page for before serving fresh content? The settings value will be used by default.'
+        'instructions' => 'How long (in minutes) do you want to cache the page for before serving fresh content?'
     ],
     'css'              => [
         'name'         => 'CSS',

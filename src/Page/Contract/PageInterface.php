@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page\Contract
  */
-interface PageInterface
+interface PageInterface extends EntryInterface
 {
 
     /**
@@ -95,6 +95,13 @@ interface PageInterface
     public function getMetaDescription();
 
     /**
+     * Get the path to the page's type layout.
+     *
+     * @return string
+     */
+    public function getLayoutViewPath();
+
+    /**
      * Get the enabled flag.
      *
      * @return bool
@@ -149,6 +156,21 @@ interface PageInterface
      * @return null|int
      */
     public function getEntryId();
+
+    /**
+     * Get the content.
+     *
+     * @return null|string
+     */
+    public function getContent();
+
+    /**
+     * Set the content.
+     *
+     * @param $content
+     * @return $this
+     */
+    public function setContent($content);
 
     /**
      * Get the response.

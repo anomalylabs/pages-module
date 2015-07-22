@@ -38,8 +38,8 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
             'type'   => 'anomaly.field_type.integer',
             'config' => [
                 'min'  => 0,
-                'step' => 60,
-                'page' => 500
+                'step' => 1,
+                'page' => 5
             ]
         ],
         'css'              => [

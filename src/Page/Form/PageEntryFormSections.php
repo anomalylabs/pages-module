@@ -31,7 +31,8 @@ class PageEntryFormSections
                                 'page_title',
                                 'page_slug',
                                 'page_enabled',
-                                'page_ttl'
+                                'page_ttl',
+                                'page_allowed_roles'
                             ]
                         ],
                         'entry'   => [

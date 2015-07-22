@@ -37,6 +37,13 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     ];
 
     /**
+     * The page's content.
+     *
+     * @var null|string
+     */
+    protected $content = null;
+
+    /**
      * The page's response.
      *
      * @var null|Response
@@ -182,6 +189,21 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Get the path to the page's type layout.
+     *
+     * @return string
+     */
+    public function getLayoutViewPath()
+    {
+        $type   = $this->getType();
+
+        /* @var EditorFieldType $layout */
+        $layout = $type->getFieldType('layout');
+
+        return $layout->getViewPath();
+    }
+
+    /**
      * Get the enabled flag.
      *
      * @return bool
@@ -279,6 +301,29 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getEntryId()
     {
         return $this->entry_id;
+    }
+
+    /**
+     * Get the content.
+     *
+     * @return null|string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set the content.
+     *
+     * @param $content
+     * @return $this
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
     }
 
     /**

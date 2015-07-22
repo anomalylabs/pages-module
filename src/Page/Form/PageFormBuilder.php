@@ -30,8 +30,7 @@ class PageFormBuilder extends FormBuilder
         'path',
         'type',
         'entry',
-        'parent',
-        'allowed_roles'
+        'parent'
     ];
 
     /**

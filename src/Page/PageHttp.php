@@ -51,6 +51,6 @@ class PageHttp
             $ttl = $this->settings->get('anomaly.module.pages::ttl');
         }
 
-        $response->setTtl($ttl);
+        $response->setTtl($ttl * 60);
     }
 }

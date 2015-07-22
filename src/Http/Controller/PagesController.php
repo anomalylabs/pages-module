@@ -4,6 +4,7 @@ use Anomaly\PagesModule\Page\Command\AddPageAssets;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageAuthorizer;
 use Anomaly\PagesModule\Page\PageBreadcrumbs;
+use Anomaly\PagesModule\Page\PageContent;
 use Anomaly\PagesModule\Page\PageHttp;
 use Anomaly\PagesModule\Page\PageLoader;
 use Anomaly\PagesModule\Page\PageResolver;
@@ -29,6 +30,7 @@ class PagesController extends PublicController
      *
      * @param PageHttp        $http
      * @param PageLoader      $loader
+     * @param PageContent     $content
      * @param PageResolver    $resolver
      * @param PageResponse    $response
      * @param PageAuthorizer  $authorizer
@@ -38,6 +40,7 @@ class PagesController extends PublicController
     public function view(
         PageHttp $http,
         PageLoader $loader,
+        PageContent $content,
         PageResolver $resolver,
         PageResponse $response,
         PageAuthorizer $authorizer,
@@ -53,6 +56,7 @@ class PagesController extends PublicController
         $breadcrumbs->make($page);
         $loader->load($page);
 
+        $content->make($page);
         $response->make($page);
         $http->cache($page);
 

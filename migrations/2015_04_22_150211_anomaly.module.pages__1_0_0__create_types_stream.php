@@ -20,8 +20,7 @@ class AnomalyModulePages_1_0_0_CreateTypesStream extends Migration
     protected $stream = [
         'slug'         => 'types',
         'title_column' => 'name',
-        'translatable' => true,
-        'locked'       => true
+        'translatable' => true
     ];
 
     /**
