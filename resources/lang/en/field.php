@@ -28,11 +28,11 @@ return [
     ],
     'css'              => [
         'name'         => 'CSS',
-        'instructions' => 'CSS files are parsed when loading so feel free to use theme settings and other tags.'
+        'instructions' => 'This CSS will be added to the <strong>styles.css</strong> asset collection.'
     ],
     'js'               => [
         'name'         => 'JS',
-        'instructions' => 'JS files are parsed when loading so feel free to use theme settings and other tags.'
+        'instructions' => 'This script will be added to the <strong>scripts.js</strong> asset collection.'
     ],
     'name'             => [
         'name'         => 'Name',
