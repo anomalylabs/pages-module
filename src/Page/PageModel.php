@@ -4,6 +4,7 @@ use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
@@ -195,7 +196,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function getLayoutViewPath()
     {
-        $type   = $this->getType();
+        $type = $this->getType();
 
         /* @var EditorFieldType $layout */
         $layout = $type->getFieldType('layout');
@@ -214,7 +215,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Return the related parent page.
+     * Get the related parent page.
      *
      * @return null|PageInterface
      */
@@ -224,13 +225,23 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Return the related children pages.
+     * Get the related children pages.
      *
      * @return PageCollection
      */
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Get the related roles allowed.
+     *
+     * @return EloquentCollection
+     */
+    public function getAllowedRoles()
+    {
+        return $this->allowed_roles;
     }
 
     /**

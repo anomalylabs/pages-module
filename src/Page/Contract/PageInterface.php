@@ -3,6 +3,7 @@
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Illuminate\Http\Response;
 
 /**
@@ -109,18 +110,25 @@ interface PageInterface extends EntryInterface
     public function isEnabled();
 
     /**
-     * Return the related parent page.
+     * Get the related parent page.
      *
      * @return null|PageInterface
      */
     public function getParent();
 
     /**
-     * Return the related children pages.
+     * Get the related children pages.
      *
      * @return PageCollection
      */
     public function getChildren();
+
+    /**
+     * Get the related roles allowed.
+     *
+     * @return EloquentCollection
+     */
+    public function getAllowedRoles();
 
     /**
      * Get the CSS path.

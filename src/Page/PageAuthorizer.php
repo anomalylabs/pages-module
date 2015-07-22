@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Support\Authorizer;
+use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Auth\Guard;
 
 /**
@@ -48,10 +49,31 @@ class PageAuthorizer
      */
     public function authorize(PageInterface $page)
     {
-        if (!$page->isEnabled() && !$this->guard->user()) {
+        /* @var UserInterface $user */
+        $user = $this->guard->user();
+
+        /**
+         * If the page is not enabled and we
+         * are not logged in then 404.
+         */
+        if (!$page->isEnabled() && !$user) {
             abort(404);
         }
 
-        $this->authorizer->authorize('anomaly.module.pages::view_drafts');
+        /**
+         * If the page is not enabled and we are
+         * logged in then make sure we have permission.
+         */
+        if (!$page->isEnabled()) {
+            $this->authorizer->authorize('anomaly.module.pages::view_drafts');
+        }
+
+        /**
+         * If the page is restricted to specific
+         * roles then make sure our user is one of them.
+         */
+        /*if ((!$user && $page->getAllowedRoles()) || !$user->hasAnyRole($page->getAllowedRoles())) {
+            abort(403);
+        }*/
     }
 }
