@@ -47,13 +47,6 @@ interface PageInterface extends EntryInterface
     public function metaDescription();
 
     /**
-     * Get the ID.
-     *
-     * @return integer
-     */
-    public function getId();
-
-    /**
      * Get the TTL.
      *
      * @return null|int

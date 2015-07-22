@@ -1,6 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
-use Anomaly\PagesModule\Page\PageCollection;
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 /**
  * Interface PageRepositoryInterface
@@ -10,15 +10,8 @@ use Anomaly\PagesModule\Page\PageCollection;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page\Contract
  */
-interface PageRepositoryInterface
+interface PageRepositoryInterface extends EntryRepositoryInterface
 {
-
-    /**
-     * Return all pages.
-     *
-     * @return PageCollection
-     */
-    public function all();
 
     /**
      * Return the first page.
@@ -28,34 +21,10 @@ interface PageRepositoryInterface
     public function first();
 
     /**
-     * Find a page by ID.
-     *
-     * @param $id
-     * @return null|PageInterface
-     */
-    public function find($id);
-
-    /**
      * Find a page by it's path.
      *
      * @param $path
      * @return null|PageInterface
      */
     public function findByPath($path);
-
-    /**
-     * Save a page.
-     *
-     * @param PageInterface $page
-     * @return PageInterface
-     */
-    public function save(PageInterface $page);
-
-    /**
-     * Delete a page.
-     *
-     * @param PageInterface $page
-     * @return bool
-     */
-    public function delete(PageInterface $page);
 }

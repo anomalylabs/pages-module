@@ -5,8 +5,8 @@ return [
         'type'   => 'anomaly.field_type.integer',
         'config' => [
             'min'  => 0,
-            'step' => 60,
-            'page' => 500
+            'step' => 1,
+            'page' => 5
         ]
     ]
 ];

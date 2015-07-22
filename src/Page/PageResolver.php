@@ -49,11 +49,11 @@ class PageResolver
     {
         $action = $this->route->getAction();
 
-        if ($id = array_get($action, 'page')) {
+        if ($id = array_get($action, 'anomaly.module.pages::page')) {
             return $this->pages->find($id);
         }
 
-        if ($path = array_get($action, 'path')) {
+        if ($path = array_get($action, 'anomaly.module.pages::path')) {
             return $this->pages->findByPath($path);
         }
 

@@ -1,8 +1,8 @@
 <?php
 
 {% for page in pages %}
-Route::any('{{ loop.first ? '/' : page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'page' => {{ page.id }}, 'streams::addon' => 'anomaly.module.pages']);
 {% if loop.first %}
-Route::any('{{ page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@redirect', 'to' => '/', 'streams::addon' => 'anomaly.module.pages']);
+Route::any('{{ page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@redirect', 'anomaly.module.pages::redirect' => '/', 'streams::addon' => 'anomaly.module.pages']);
 {% endif %}
+Route::any('{{ loop.first ? '/' : page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'anomaly.module.pages::page' => {{ page.id }}, 'streams::addon' => 'anomaly.module.pages']);
 {% endfor %}

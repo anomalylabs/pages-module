@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
-use Anomaly\PagesModule\Page\Command\AddPageAssets;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\PagesModule\Page\PageAsset;
 use Anomaly\PagesModule\Page\PageAuthorizer;
 use Anomaly\PagesModule\Page\PageBreadcrumbs;
 use Anomaly\PagesModule\Page\PageContent;
@@ -39,6 +39,7 @@ class PagesController extends PublicController
      */
     public function view(
         PageHttp $http,
+        PageAsset $asset,
         PageLoader $loader,
         PageContent $content,
         PageResolver $resolver,
@@ -50,8 +51,7 @@ class PagesController extends PublicController
             abort(404);
         }
 
-        $this->dispatch(new AddPageAssets($page));
-
+        $asset->add($page);
         $authorizer->authorize($page);
         $breadcrumbs->make($page);
         $loader->load($page);
@@ -69,15 +69,15 @@ class PagesController extends PublicController
      * @param PageRepositoryInterface $pages
      * @param Redirector              $redirector
      * @param Route                   $route
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|void
      */
     public function redirect(PageRepositoryInterface $pages, Redirector $redirector, Route $route)
     {
-        if ($to = array_get($route->getAction(), 'to')) {
+        if ($to = array_get($route->getAction(), 'anomaly.module.pages::redirect')) {
             return $redirector->to($to, array_get($route->getAction(), 'status', 302));
         }
 
-        if ($page = $pages->find(array_get($route->getAction(), 'page', 0))) {
+        if ($page = $pages->find(array_get($route->getAction(), 'anomaly.module.pages::page', 0))) {
             return $redirector->to($page->path(), array_get($route->getAction(), 'status', 302));
         }
 

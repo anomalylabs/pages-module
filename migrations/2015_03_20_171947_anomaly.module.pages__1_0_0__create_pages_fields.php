@@ -13,7 +13,7 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
 {
 
     /**
-     * The module fields.
+     * The addon fields.
      *
      * @var array
      */

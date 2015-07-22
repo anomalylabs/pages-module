@@ -2,7 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\Streams\Platform\Model\EloquentModel;
+use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
  * Class PageRepository
@@ -12,7 +12,7 @@ use Anomaly\Streams\Platform\Model\EloquentModel;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page
  */
-class PageRepository implements PageRepositoryInterface
+class PageRepository extends EntryRepository implements PageRepositoryInterface
 {
 
     /**
@@ -33,16 +33,6 @@ class PageRepository implements PageRepositoryInterface
     }
 
     /**
-     * Return all pages.
-     *
-     * @return PageCollection
-     */
-    public function all()
-    {
-        return $this->model->ordered()->get();
-    }
-
-    /**
      * Return the first page.
      *
      * @return PageInterface
@@ -50,17 +40,6 @@ class PageRepository implements PageRepositoryInterface
     public function first()
     {
         return $this->model->ordered()->first();
-    }
-
-    /**
-     * Find a page by ID.
-     *
-     * @param $id
-     * @return null|PageInterface
-     */
-    public function find($id)
-    {
-        return $this->model->find($id);
     }
 
     /**
@@ -72,27 +51,5 @@ class PageRepository implements PageRepositoryInterface
     public function findByPath($path)
     {
         return $this->model->where('home', false)->where('path', $path)->first();
-    }
-
-    /**
-     * Save a page.
-     *
-     * @param PageInterface|EloquentModel $page
-     * @return PageInterface
-     */
-    public function save(PageInterface $page)
-    {
-        return $page->save();
-    }
-
-    /**
-     * Delete a page.
-     *
-     * @param PageInterface|EloquentModel $page
-     * @return bool
-     */
-    public function delete(PageInterface $page)
-    {
-        return $page->delete();
     }
 }
