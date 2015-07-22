@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
 use Anomaly\PagesModule\Page\Handler\PageHandlerExtension;
+use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
@@ -105,4 +106,11 @@ interface TypeInterface extends EntryInterface
      * @return PageHandlerExtension
      */
     public function getPageHandler();
+
+    /**
+     * Get the related pages.
+     *
+     * @return PageCollection
+     */
+    public function getPages();
 }

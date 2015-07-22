@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\PagesModule\Type\Command\CreateTypeStream;
+use Anomaly\PagesModule\Type\Command\DeleteTypePages;
 use Anomaly\PagesModule\Type\Command\DeleteTypeStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
@@ -36,6 +37,7 @@ class TypeObserver extends EntryObserver
      */
     public function deleted(EntryInterface $entry)
     {
+        $this->commands->dispatch(new DeleteTypePages($entry));
         $this->commands->dispatch(new DeleteTypeStream($entry));
 
         parent::deleted($entry);

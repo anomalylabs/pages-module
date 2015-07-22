@@ -2,6 +2,7 @@
 
 use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Handler\PageHandlerExtension;
+use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Command\GetTypeStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
@@ -165,5 +166,25 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     public function getPageHandler()
     {
         return $this->page_handler;
+    }
+
+    /**
+     * Get the related pages.
+     *
+     * @return PageCollection
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * Return the pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages()
+    {
+        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'type_id');
     }
 }
