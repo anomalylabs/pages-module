@@ -4,14 +4,14 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
 
 /**
- * Class PageBreadcrumbs
+ * Class PageBreadcrumb
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page
  */
-class PageBreadcrumbs
+class PageBreadcrumb
 {
 
     /**
@@ -22,7 +22,7 @@ class PageBreadcrumbs
     protected $breadcrumbs;
 
     /**
-     * Create a new PageBreadcrumbs instance.
+     * Create a new PageBreadcrumb instance.
      *
      * @param BreadcrumbCollection $breadcrumbs
      */

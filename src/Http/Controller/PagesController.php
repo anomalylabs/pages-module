@@ -1,16 +1,10 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\PagesModule\Page\PageAsset;
-use Anomaly\PagesModule\Page\PageAuthorizer;
-use Anomaly\PagesModule\Page\PageBreadcrumbs;
-use Anomaly\PagesModule\Page\PageContent;
-use Anomaly\PagesModule\Page\PageHttp;
-use Anomaly\PagesModule\Page\PageLoader;
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerResponseInterface;
 use Anomaly\PagesModule\Page\PageResolver;
-use Anomaly\PagesModule\Page\PageResponse;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
-use Illuminate\Http\Response;
+use Illuminate\Container\Container;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\Route;
 
@@ -26,41 +20,26 @@ class PagesController extends PublicController
 {
 
     /**
-     * View a page.
+     * Return a rendered page.
      *
-     * @param PageHttp        $http
-     * @param PageLoader      $loader
-     * @param PageContent     $content
-     * @param PageResolver    $resolver
-     * @param PageResponse    $response
-     * @param PageAuthorizer  $authorizer
-     * @param PageBreadcrumbs $breadcrumbs
-     * @return Response|null
+     * @param PageResolver $resolver
+     * @param Container    $container
      */
-    public function view(
-        PageHttp $http,
-        PageAsset $asset,
-        PageLoader $loader,
-        PageContent $content,
-        PageResolver $resolver,
-        PageResponse $response,
-        PageAuthorizer $authorizer,
-        PageBreadcrumbs $breadcrumbs
-    ) {
+    public function view(PageResolver $resolver, Container $container)
+    {
         if (!$page = $resolver->resolve()) {
             abort(404);
         }
 
-        $asset->add($page);
-        $authorizer->authorize($page);
-        $breadcrumbs->make($page);
-        $loader->load($page);
+        $handler  = $page->getPageHandler();
+        $response = $handler->getResponse();
+        $response = $container->make($response);
 
-        $content->make($page);
-        $response->make($page);
-        $http->cache($page);
+        if (!$response instanceof PageHandlerResponseInterface) {
+            throw new \Exception('Page handler response class must implement PageHandlerResponseInterface.');
+        }
 
-        return $page->getResponse();
+        return $response->make($page);
     }
 
     /**

@@ -25,17 +25,14 @@ class PageEntryFormSections
             [
                 'general' => [
                     'tabs' => [
-                        'general' => [
+                        'general'  => [
                             'title'  => 'module::tab.page',
                             'fields' => [
                                 'page_title',
-                                'page_slug',
-                                'page_enabled',
-                                'page_ttl',
-                                'page_allowed_roles'
+                                'page_slug'
                             ]
                         ],
-                        'entry'   => [
+                        'entry'    => [
                             'title'  => 'module::tab.entry',
                             'fields' => function (PageEntryFormBuilder $builder) {
                                 return array_map(
@@ -51,7 +48,7 @@ class PageEntryFormSections
                                 );
                             }
                         ],
-                        'seo'     => [
+                        'seo'      => [
                             'title'  => 'module::tab.seo',
                             'fields' => [
                                 'page_meta_title',
@@ -59,16 +56,24 @@ class PageEntryFormSections
                                 'page_meta_description'
                             ]
                         ],
-                        'css'     => [
+                        'css'      => [
                             'title'  => 'module::tab.css',
                             'fields' => [
                                 'page_css'
                             ]
                         ],
-                        'js'      => [
+                        'js'       => [
                             'title'  => 'module::tab.js',
                             'fields' => [
                                 'page_js'
+                            ]
+                        ],
+                        'advanced' => [
+                            'title'  => 'module::tab.advanced',
+                            'fields' => [
+                                'page_enabled',
+                                'page_ttl',
+                                'page_allowed_roles'
                             ]
                         ]
                     ]

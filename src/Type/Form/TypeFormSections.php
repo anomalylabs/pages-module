@@ -22,7 +22,7 @@ class TypeFormSections
             [
                 'general' => [
                     'tabs' => [
-                        'general' => [
+                        'general'  => [
                             'title'  => 'module::tab.general',
                             'fields' => [
                                 'name',
@@ -30,14 +30,14 @@ class TypeFormSections
                                 'description'
                             ]
                         ],
-                        'layout'  => [
+                        'layout'   => [
                             'title'  => 'module::tab.layout',
                             'fields' => [
                                 'theme_layout',
                                 'layout'
                             ]
                         ],
-                        'seo'     => [
+                        'seo'      => [
                             'title'  => 'module::tab.seo',
                             'fields' => [
                                 'meta_title',
@@ -45,16 +45,23 @@ class TypeFormSections
                                 'meta_description'
                             ]
                         ],
-                        'css'     => [
+                        'css'      => [
                             'title'  => 'module::tab.css',
                             'fields' => [
                                 'css'
                             ]
                         ],
-                        'js'      => [
+                        'js'       => [
                             'title'  => 'module::tab.js',
                             'fields' => [
                                 'js'
+                            ]
+                        ],
+                        'advanced' => [
+                            'title'  => 'module::tab.advanced',
+                            'fields' => [
+                                'ttl',
+                                'page_handler'
                             ]
                         ]
                     ]

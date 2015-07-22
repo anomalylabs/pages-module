@@ -85,6 +85,14 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
                 'related' => 'Anomaly\PagesModule\Type\TypeModel'
             ]
         ],
+        'page_handler'     => [
+            'type'   => 'anomaly.field_type.addon',
+            'config' => [
+                'type'          => 'extension',
+                'search'        => 'anomaly.module.pages::page_handler.*',
+                'default_value' => 'anomaly.extension.default_page_handler'
+            ]
+        ],
         'entry'            => 'anomaly.field_type.polymorphic',
         'name'             => 'anomaly.field_type.text',
         'description'      => 'anomaly.field_type.textarea'

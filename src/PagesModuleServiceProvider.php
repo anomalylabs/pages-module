@@ -16,6 +16,16 @@ class PagesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
+     * The singleton bindings.
+     *
+     * @var array
+     */
+    protected $singletons = [
+        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface' => 'Anomaly\PagesModule\Page\PageRepository',
+        'Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface' => 'Anomaly\PagesModule\Type\TypeRepository'
+    ];
+
+    /**
      * The addon routes.
      *
      * @var array
@@ -39,26 +49,6 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/ajax/choose_type'                          => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseType',
         'admin/pages/ajax/choose_field/{id}'                    => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseField',
         'admin/pages/settings'                                  => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
-    ];
-
-    /**
-     * The class bindings.
-     *
-     * @var array
-     */
-    protected $bindings = [
-        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel' => 'Anomaly\PagesModule\Page\PageModel',
-        'Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel' => 'Anomaly\PagesModule\Type\TypeModel'
-    ];
-
-    /**
-     * The singleton bindings.
-     *
-     * @var array
-     */
-    protected $singletons = [
-        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface' => 'Anomaly\PagesModule\Page\PageRepository',
-        'Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface' => 'Anomaly\PagesModule\Type\TypeRepository'
     ];
 
     /**

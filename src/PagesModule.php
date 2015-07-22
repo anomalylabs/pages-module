@@ -54,8 +54,7 @@ class PagesModule extends Module
                     'href'        => 'admin/pages/fields/choose'
                 ]
             ]
-        ],
-        'settings'
+        ]
     ];
 
 }

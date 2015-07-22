@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
+use Anomaly\PagesModule\Page\Handler\PageHandlerExtension;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
@@ -97,4 +98,11 @@ interface TypeInterface extends EntryInterface
      * @return string
      */
     public function getEntryModelName();
+
+    /**
+     * Get the page handler.
+     *
+     * @return PageHandlerExtension
+     */
+    public function getPageHandler();
 }

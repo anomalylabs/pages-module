@@ -3,22 +3,18 @@
 return [
     'title'            => [
         'name'         => 'Title',
-        'placeholder'  => 'Hello World!',
         'instructions' => 'What is the title of the page?'
     ],
     'slug'             => [
         'name'         => 'Slug',
-        'placeholder'  => 'hello-world',
         'instructions' => 'The slug is used in building the page\'s URL.'
     ],
     'meta_title'       => [
         'name'         => 'Meta Title',
-        'placeholder'  => 'Hello World!',
         'instructions' => 'Enter the page\'s SEO title. The page\'s title will be used by default.'
     ],
     'meta_description' => [
         'name'         => 'Meta Description',
-        'placeholder'  => 'Welcome to our new website!',
         'instructions' => 'Enter the page\'s SEO description.'
     ],
     'meta_keywords'    => [
@@ -66,5 +62,9 @@ return [
     'parent'           => [
         'name'         => 'Parent',
         'instructions' => 'Choose the parent page if any.'
+    ],
+    'page_handler'     => [
+        'name'         => 'Page Handler',
+        'instructions' => 'The page handler is responsible for building the HTTP response for a page.'
     ]
 ];

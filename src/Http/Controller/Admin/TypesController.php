@@ -72,6 +72,7 @@ class TypesController extends AdminController
     ) {
         $type = $types->find($id);
 
+        $breadcrumbs->put($type->getName(), 'admin/pages/types/edit/' . $type->getId());
         $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
 
         return $table
@@ -82,8 +83,6 @@ class TypesController extends AdminController
                     ]
                 ]
             )
-            ->setOption('title', $type->getName() . ' fields')
-            ->setOption('description', 'This is a list of assigned fields for the "' . $type->getName() . '" page type')
             ->setStream($type->getEntryStream())
             ->render();
     }
