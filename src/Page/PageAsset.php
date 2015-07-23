@@ -39,12 +39,12 @@ class PageAsset
      */
     public function add(PageInterface $page)
     {
-        $this->asset->add('styles.css', $page->getCssPath(), ['live']);
-        $this->asset->add('scripts.js', $page->getJsPath(), ['live']);
+        $this->asset->add('styles.css', $page->getCssPath());
+        $this->asset->add('scripts.js', $page->getJsPath());
 
         $type = $page->getType();
 
-        $this->asset->add('styles.css', $type->getCssPath(), ['live']);
-        $this->asset->add('scripts.js', $type->getJsPath(), ['live']);
+        $this->asset->add('styles.css', $type->getCssPath());
+        $this->asset->add('scripts.js', $type->getJsPath());
     }
 }
