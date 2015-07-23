@@ -53,18 +53,18 @@ class PageAuthorizer
         $user = $this->guard->user();
 
         /**
-         * If the page is not enabled and we
+         * If the page is not live and we
          * are not logged in then 404.
          */
-        if (!$page->isEnabled() && !$user) {
+        if (!$page->isLive() && !$user) {
             abort(404);
         }
 
         /**
-         * If the page is not enabled and we are
+         * If the page is not live and we are
          * logged in then make sure we have permission.
          */
-        if (!$page->isEnabled()) {
+        if (!$page->isLive()) {
             $this->authorizer->authorize('anomaly.module.pages::view_drafts');
         }
 

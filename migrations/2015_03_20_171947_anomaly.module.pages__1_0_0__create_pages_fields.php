@@ -25,10 +25,10 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
                 'slugify' => 'title'
             ]
         ],
-        'enabled'          => [
+        'live'          => [
             'type'   => 'anomaly.field_type.boolean',
             'config' => [
-                'default_value' => true,
+                'default_value' => false,
             ]
         ],
         'meta_title'       => 'anomaly.field_type.text',

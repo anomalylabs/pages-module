@@ -206,13 +206,13 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Get the enabled flag.
+     * Get the live flag.
      *
      * @return bool
      */
-    public function isEnabled()
+    public function isLive()
     {
-        return $this->enabled;
+        return $this->live;
     }
 
     /**

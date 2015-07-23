@@ -54,10 +54,10 @@ return [
         'name'         => 'Allowed Roles',
         'instructions' => 'Which user roles are allowed to view this page?'
     ],
-    'enabled'          => [
-        'name'         => 'Enabled',
-        'label'        => 'Is this page enabled?',
-        'instructions' => 'Only enabled pages will be displayed.'
+    'live'             => [
+        'name'         => 'Live',
+        'label'        => 'Is this post live?',
+        'instructions' => 'This page will not display on your website until made live.'
     ],
     'parent'           => [
         'name'         => 'Parent',
