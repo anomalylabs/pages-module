@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'pages' => [
+    'pages'  => [
         'read',
         'write',
         'delete',
         'write_live',
         'make_live'
     ],
-    'types'   => [
+    'types'  => [
         'read',
         'write',
         'delete',
         'fields'
     ],
-    'fields'   => [
+    'fields' => [
         'read',
         'write',
         'delete'
