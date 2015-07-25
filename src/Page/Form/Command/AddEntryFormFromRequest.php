@@ -4,7 +4,7 @@ use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 
 /**
@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class AddEntryFormFromRequest implements SelfHandling
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * The multiple form builder.

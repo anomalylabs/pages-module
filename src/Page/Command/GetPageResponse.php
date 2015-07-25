@@ -4,7 +4,7 @@ use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\SettingsModule\Setting\Contract\SettingRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class GetPageResponse
@@ -17,7 +17,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class GetPageResponse implements SelfHandling
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * The page ID.

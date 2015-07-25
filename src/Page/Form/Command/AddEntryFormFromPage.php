@@ -4,7 +4,7 @@ use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class AddEntryFormFromPage
@@ -17,7 +17,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class AddEntryFormFromPage implements SelfHandling
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * The multiple form builder.
