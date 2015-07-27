@@ -105,6 +105,10 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
             $metaTitle = $type->getMetaTitle();
         }
 
+        if (!$metaTitle) {
+            $metaTitle = $this->getTitle();
+        }
+
         return $metaTitle;
     }
 
@@ -213,6 +217,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function isLive()
     {
         return $this->live;
+    }
+
+    /**
+     * Get the home flag.
+     *
+     * @return bool
+     */
+    public function isHome()
+    {
+        return $this->home;
     }
 
     /**

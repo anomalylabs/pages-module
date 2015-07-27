@@ -104,6 +104,13 @@ interface PageInterface extends EntryInterface
     public function isLive();
 
     /**
+     * Get the home flag.
+     *
+     * @return bool
+     */
+    public function isHome();
+
+    /**
      * Get the related parent page.
      *
      * @return null|PageInterface

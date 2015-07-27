@@ -56,8 +56,13 @@ return [
     ],
     'live'             => [
         'name'         => 'Live',
-        'label'        => 'Is this post live?',
+        'label'        => 'Is this page live?',
         'instructions' => 'This page will not display on your website until made live.'
+    ],
+    'home'             => [
+        'name'         => 'Home Page',
+        'label'        => 'Is this the home page?',
+        'instructions' => 'The home page is the default landing page.'
     ],
     'parent'           => [
         'name'         => 'Parent',

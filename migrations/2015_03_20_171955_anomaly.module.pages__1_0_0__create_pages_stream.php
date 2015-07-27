@@ -41,6 +41,7 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
         'entry',
         'parent',
         'live',
+        'home',
         'status',
         'meta_title'       => [
             'translatable' => true

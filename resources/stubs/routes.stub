@@ -1,8 +1,5 @@
 <?php
 
 {% for page in pages %}
-{% if loop.first %}
-Route::any('{{ page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@redirect', 'anomaly.module.pages::redirect' => '/', 'streams::addon' => 'anomaly.module.pages']);
-{% endif %}
-Route::any('{{ loop.first ? '/' : page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'anomaly.module.pages::page' => {{ page.id }}, 'streams::addon' => 'anomaly.module.pages']);
+Route::any('{{ page.home ? '/' : page.path() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'anomaly.module.pages::page' => {{ page.id }}, 'streams::addon' => 'anomaly.module.pages']);
 {% endfor %}

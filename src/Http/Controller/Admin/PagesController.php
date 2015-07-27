@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromPage;
 use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromRequest;
@@ -75,11 +76,10 @@ class PagesController extends AdminController
      */
     public function view(PageRepositoryInterface $pages, Redirector $redirector, $id)
     {
-        $first = $pages->first();
-        $page  = $pages->find($id);
+        /* @var PageInterface $page */
+        $page = $pages->find($id);
 
-        // Redirect to home if this is the first page.
-        if ($first && $first->getId() === $page->getId()) {
+        if ($page->isHome()) {
             return $redirector->to('/');
         }
 

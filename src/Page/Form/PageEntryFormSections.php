@@ -72,6 +72,7 @@ class PageEntryFormSections
                             'title'  => 'module::tab.advanced',
                             'fields' => [
                                 'page_live',
+                                'page_home',
                                 'page_ttl',
                                 'page_allowed_roles'
                             ]
