@@ -18,6 +18,20 @@ class PageObserver extends EntryObserver
 {
 
     /**
+     * Fired just before saving the page.
+     *
+     * @param EntryInterface|PageInterface $entry
+     */
+    public function saving(EntryInterface $entry)
+    {
+        if ($entry->isHome()) {
+            $entry->newQuery()->update(['home' => false]);
+        }
+
+        parent::saving($entry);
+    }
+
+    /**
      * Fired after a page is created.
      *
      * @param EntryInterface|PageInterface $entry
