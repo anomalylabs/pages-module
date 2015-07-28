@@ -4,9 +4,7 @@ return [
     'pages'  => [
         'read',
         'write',
-        'delete',
-        'write_live',
-        'make_live'
+        'delete'
     ],
     'types'  => [
         'read',

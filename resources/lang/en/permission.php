@@ -2,12 +2,10 @@
 
 return [
     'pages'  => [
-        'title'      => 'Pages',
-        'read'       => 'Can read pages?',
-        'write'      => 'Can write pages?',
-        'delete'     => 'Can delete pages?',
-        'write_live' => 'Can write live pages?',
-        'make_live'  => 'Can make draft page live?'
+        'title'  => 'Pages',
+        'read'   => 'Can read pages?',
+        'write'  => 'Can write pages?',
+        'delete' => 'Can delete pages?'
     ],
     'types'  => [
         'title'  => 'Types',
