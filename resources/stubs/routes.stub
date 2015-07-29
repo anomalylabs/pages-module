@@ -1,5 +1,5 @@
 <?php
 
 {% for page in pages %}
-Route::any('{{ page.home ? '/' : page.route() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'anomaly.module.pages::page' => {{ page.id }}, 'streams::addon' => 'anomaly.module.pages']);
+Route::any('{{ page.home ? '/' : page.route() }}', ['uses' => 'Anomaly\PagesModule\Http\Controller\PagesController@view', 'anomaly.module.pages::page' => {{ page.id }}, 'streams::addon' => 'anomaly.module.pages'])->where({{ var_export(page.constraints()) }});
 {% endfor %}

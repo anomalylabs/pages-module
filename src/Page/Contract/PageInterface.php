@@ -34,6 +34,13 @@ interface PageInterface extends EntryInterface
     public function route();
 
     /**
+     * Return the route constraints.
+     *
+     * @return array
+     */
+    public function constraints();
+
+    /**
      * Return the combined meta title.
      *
      * @return string
@@ -145,6 +152,13 @@ interface PageInterface extends EntryInterface
      * @return null|string
      */
     public function getRouteSuffix($prefix = null);
+
+    /**
+     * Get the route constraints.
+     *
+     * @return null|string
+     */
+    public function getRouteConstraints();
 
     /**
      * Get the CSS path.

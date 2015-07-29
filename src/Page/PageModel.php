@@ -9,6 +9,7 @@ use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class PageModel
@@ -100,6 +101,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function route()
     {
         return $this->path() . $this->getRouteSuffix('/');
+    }
+
+    /**
+     * Return the route constraints.
+     *
+     * @return array
+     */
+    public function constraints()
+    {
+        return (array)(new Yaml())->parse($this->getRouteConstraints());
     }
 
     /**
@@ -278,6 +289,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getRouteSuffix($prefix = null)
     {
         return $this->route_suffix ? $prefix . $this->route_suffix : null;
+    }
+
+    /**
+     * Get the route constraints.
+     *
+     * @return null|string
+     */
+    public function getRouteConstraints()
+    {
+        return $this->route_constraints;
     }
 
     /**
