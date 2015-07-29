@@ -71,5 +71,9 @@ return [
     'page_handler'     => [
         'name'         => 'Page Handler',
         'instructions' => 'The page handler is responsible for building the HTTP response for a page.'
+    ],
+    'route_suffix'     => [
+        'name'         => 'Route Suffix',
+        'instructions' => 'This will be appended to the route when compiling the routes file.'
     ]
 ];

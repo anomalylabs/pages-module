@@ -74,7 +74,8 @@ class PageEntryFormSections
                                 'page_live',
                                 'page_home',
                                 'page_ttl',
-                                'page_allowed_roles'
+                                'page_allowed_roles',
+                                'page_route_suffix'
                             ]
                         ]
                     ]

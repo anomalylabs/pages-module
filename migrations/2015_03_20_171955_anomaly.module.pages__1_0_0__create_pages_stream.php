@@ -52,6 +52,7 @@ class AnomalyModulePages_1_0_0_CreatePagesStream extends Migration
         'meta_keywords'    => [
             'translatable' => true
         ],
+        'route_suffix',
         'allowed_roles',
         'css',
         'js'

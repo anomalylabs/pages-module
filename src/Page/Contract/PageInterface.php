@@ -27,6 +27,13 @@ interface PageInterface extends EntryInterface
     public function path($path = null);
 
     /**
+     * Return the route.
+     *
+     * @return string
+     */
+    public function route();
+
+    /**
      * Return the combined meta title.
      *
      * @return string
@@ -130,6 +137,14 @@ interface PageInterface extends EntryInterface
      * @return EloquentCollection
      */
     public function getAllowedRoles();
+
+    /**
+     * Get the route suffix.
+     *
+     * @param null $prefix
+     * @return null|string
+     */
+    public function getRouteSuffix($prefix = null);
 
     /**
      * Get the CSS path.

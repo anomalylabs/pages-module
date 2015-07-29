@@ -93,6 +93,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Return the route.
+     *
+     * @return string
+     */
+    public function route()
+    {
+        return $this->path() . $this->getRouteSuffix('/');
+    }
+
+    /**
      * Return the combined meta title.
      *
      * @return string
@@ -257,6 +267,17 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getAllowedRoles()
     {
         return $this->allowed_roles;
+    }
+
+    /**
+     * Get the route suffix.
+     *
+     * @param null $prefix
+     * @return null|string
+     */
+    public function getRouteSuffix($prefix = null)
+    {
+        return $this->route_suffix ? $prefix . $this->route_suffix : null;
     }
 
     /**

@@ -101,7 +101,8 @@ class AnomalyModulePages_1_0_0_CreatePagesFields extends Migration
         ],
         'entry'            => 'anomaly.field_type.polymorphic',
         'name'             => 'anomaly.field_type.text',
-        'description'      => 'anomaly.field_type.textarea'
+        'description'      => 'anomaly.field_type.textarea',
+        'route_suffix'     => 'anomaly.field_type.text'
     ];
 
 }
