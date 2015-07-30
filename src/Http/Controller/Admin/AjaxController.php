@@ -53,7 +53,7 @@ class AjaxController extends AdminController
         return view(
             'module::ajax/choose_field',
             [
-                'fields' => $fields->findByNamespace('pages')->notAssignedTo($type->getEntryStream())->unlocked(),
+                'fields' => $fields->findAllByNamespace('pages')->notAssignedTo($type->getEntryStream())->unlocked(),
                 'id'     => $id
             ]
         );
