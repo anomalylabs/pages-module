@@ -9,7 +9,7 @@ use Anomaly\Streams\Platform\Database\Migration\Migration;
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModulePages_1_0_0_CreateTypesStream extends Migration
+class AnomalyModulePages__CreateTypesStream extends Migration
 {
 
     /**
