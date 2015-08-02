@@ -19,26 +19,11 @@ interface PageInterface extends EntryInterface
 {
 
     /**
-     * Return the path.
-     *
-     * @param null $path
-     * @return string
-     */
-    public function path($path = null);
-
-    /**
-     * Return the route.
+     * Return the static prefix.
      *
      * @return string
      */
-    public function route();
-
-    /**
-     * Return the route constraints.
-     *
-     * @return array
-     */
-    public function constraints();
+    public function staticPrefix();
 
     /**
      * Return the combined meta title.
@@ -161,18 +146,11 @@ interface PageInterface extends EntryInterface
     public function getRouteConstraints();
 
     /**
-     * Get the CSS path.
+     * Get the additional parameters.
      *
-     * @return string
+     * @return null|string
      */
-    public function getCssPath();
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath();
+    public function getAdditionalParameters();
 
     /**
      * Get the related page type.

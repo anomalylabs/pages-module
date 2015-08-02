@@ -39,7 +39,7 @@ class PageBreadcrumb
     public function make(PageInterface $page)
     {
         $breadcrumbs = [
-            $page->getTitle() => $page->path()
+            $page->getTitle() => $page->staticPrefix()
         ];
 
         $this->loadParent($page, $breadcrumbs);

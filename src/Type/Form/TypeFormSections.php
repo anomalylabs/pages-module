@@ -61,7 +61,8 @@ class TypeFormSections
                             'title'  => 'module::tab.advanced',
                             'fields' => [
                                 'ttl',
-                                'page_handler'
+                                'page_handler',
+                                'additional_parameters'
                             ]
                         ]
                     ]

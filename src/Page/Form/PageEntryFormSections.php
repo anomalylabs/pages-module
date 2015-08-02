@@ -76,7 +76,8 @@ class PageEntryFormSections
                                 'page_ttl',
                                 'page_allowed_roles',
                                 'page_route_suffix',
-                                'page_route_constraints'
+                                'page_route_constraints',
+                                'page_additional_parameters'
                             ]
                         ]
                     ]

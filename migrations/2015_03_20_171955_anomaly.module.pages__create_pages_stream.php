@@ -54,6 +54,7 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         ],
         'route_suffix',
         'route_constraints',
+        'additional_parameters',
         'allowed_roles',
         'css',
         'js'

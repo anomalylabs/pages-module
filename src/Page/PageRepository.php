@@ -31,25 +31,4 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     {
         $this->model = $model;
     }
-
-    /**
-     * Return the first page.
-     *
-     * @return PageInterface
-     */
-    public function first()
-    {
-        return $this->model->ordered()->first();
-    }
-
-    /**
-     * Find a page by it's path.
-     *
-     * @param $path
-     * @return null|PageInterface
-     */
-    public function findByPath($path)
-    {
-        return $this->model->where('home', false)->where('path', $path)->first();
-    }
 }

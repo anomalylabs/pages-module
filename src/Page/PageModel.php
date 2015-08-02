@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class PageModel
@@ -64,53 +63,21 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Order the pages.
+     * Return the static prefix.
      *
-     * @param Builder $query
-     * @return $this
-     */
-    public function scopeOrdered(Builder $query)
-    {
-        return $query->orderBy('parent_id', 'ASC')->orderBy('sort_order', 'ASC');
-    }
-
-    /**
-     * Return the path.
-     *
-     * @param null $path
      * @return string
      */
-    public function path($path = null)
+    public function staticPrefix()
     {
         $path = $this->getSlug();
 
         if ($parent = $this->getParent()) {
-            $path = $parent->path($path) . '/' . $path;
-        } elseif ($this->sort_order == 1) {
-            return $path;
+            $path = $parent->staticPrefix() . '/' . $path;
+        } elseif ($this->isHome()) {
+            return '/';
         }
 
         return $path;
-    }
-
-    /**
-     * Return the route.
-     *
-     * @return string
-     */
-    public function route()
-    {
-        return $this->path() . $this->getRouteSuffix('/');
-    }
-
-    /**
-     * Return the route constraints.
-     *
-     * @return array
-     */
-    public function constraints()
-    {
-        return (array)(new Yaml())->parse($this->getRouteConstraints());
     }
 
     /**
@@ -302,43 +269,13 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Return the children pages relationship.
+     * Get the additional parameters.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return null|string
      */
-    public function children()
+    public function getAdditionalParameters()
     {
-        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id');
-    }
-
-    /**
-     * Get the CSS path.
-     *
-     * @return string
-     */
-    public function getCssPath()
-    {
-        /* @var EditorFieldType $css */
-        $css = $this->getFieldType('css');
-
-        $css->setEntry($this);
-
-        return $css->getAssetPath();
-    }
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath()
-    {
-        /* @var EditorFieldType $js */
-        $js = $this->getFieldType('js');
-
-        $js->setEntry($this);
-
-        return $js->getAssetPath();
+        return $this->additional_parameters;
     }
 
     /**
@@ -427,5 +364,15 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         $this->response = $response;
 
         return $this;
+    }
+
+    /**
+     * Return the children pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id');
     }
 }

@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\EditorFieldType\EditorFieldTypePresenter;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Asset\Asset;
 
@@ -39,12 +40,20 @@ class PageAsset
      */
     public function add(PageInterface $page)
     {
-        $this->asset->add('styles.css', $page->getCssPath());
-        $this->asset->add('scripts.js', $page->getJsPath());
+        /* @var EditorFieldTypePresenter $js */
+        /* @var EditorFieldTypePresenter $css */
+        $js  = $page->getFieldTypePresenter('js');
+        $css = $page->getFieldTypePresenter('css');
+
+        $this->asset->add('styles.css', $css->path());
+        $this->asset->add('scripts.js', $js->path());
 
         $type = $page->getType();
 
-        $this->asset->add('styles.css', $type->getCssPath());
-        $this->asset->add('scripts.js', $type->getJsPath());
+        $js  = $type->getFieldTypePresenter('js');
+        $css = $type->getFieldTypePresenter('css');
+
+        $this->asset->add('styles.css', $css->path());
+        $this->asset->add('scripts.js', $js->path());
     }
 }
