@@ -34,7 +34,6 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages'                                           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@index',
         'admin/pages/create'                                    => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
         'admin/pages/edit/{id}'                                 => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
-        'admin/pages/view/{id}'                                 => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@view',
         'admin/pages/delete/{id}'                               => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@delete',
         'admin/pages/types'                                     => 'Anomaly\PagesModule\Http\Controller\Admin\TypesController@index',
         'admin/pages/types/create'                              => 'Anomaly\PagesModule\Http\Controller\Admin\TypesController@create',

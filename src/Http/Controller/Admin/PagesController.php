@@ -1,6 +1,5 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
-use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromPage;
 use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromRequest;
@@ -10,7 +9,6 @@ use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
-use Illuminate\Routing\Redirector;
 
 /**
  * Class PagesController
@@ -64,26 +62,6 @@ class PagesController extends AdminController
         $this->dispatch(new AddPageFormFromPage($form, $page));
 
         return $form->render($id);
-    }
-
-    /**
-     * Redirect to a page's URL.
-     *
-     * @param PageRepositoryInterface $pages
-     * @param Redirector              $redirector
-     * @param                         $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function view(PageRepositoryInterface $pages, Redirector $redirector, $id)
-    {
-        /* @var PageInterface $page */
-        $page = $pages->find($id);
-
-        if ($page->isHome()) {
-            return $redirector->to('/');
-        }
-
-        return $redirector->to($page->path());
     }
 
     /**
