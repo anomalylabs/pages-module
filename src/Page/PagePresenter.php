@@ -40,16 +40,13 @@ class PagePresenter extends EntryPresenter
      */
     public function action()
     {
-        /* @var TextareaFieldTypePresenter $parameters */
-        $parameters = $this->object->getFieldTypePresenter('additional_parameters');
-
         return array_merge(
             [
                 'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
                 'streams::addon'             => 'anomaly.module.pages',
                 'anomaly.module.pages::page' => $this->object->getId()
             ],
-            (array)$parameters->yaml()
+            $this->parameters()
         );
     }
 
@@ -64,6 +61,23 @@ class PagePresenter extends EntryPresenter
         $constraints = $this->object->getFieldTypePresenter('route_constraints');
 
         return (array)$constraints->yaml();
+    }
+
+    /**
+     * Return the parameters.
+     *
+     * @return array
+     */
+    public function parameters()
+    {
+        $type = $this->object->getType();
+
+        /* @var TextareaFieldTypePresenter $pageParameters */
+        /* @var TextareaFieldTypePresenter $typeParameters */
+        $pageParameters = $this->object->getFieldTypePresenter('additional_parameters');
+        $typeParameters = $type->getFieldTypePresenter('additional_parameters');
+
+        return array_merge((array)$typeParameters->yaml(), (array)$pageParameters->yaml());
     }
 
     /**
