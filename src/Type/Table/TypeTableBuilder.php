@@ -19,7 +19,9 @@ class TypeTableBuilder extends TableBuilder
      * @var array
      */
     protected $columns = [
-        'name'
+        'name',
+        'description',
+        'type'
     ];
 
     /**
