@@ -20,7 +20,7 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $filters = [
         'name',
-        'type'
+        'description'
     ];
 
     /**
@@ -30,8 +30,7 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $columns = [
         'name',
-        'description',
-        'type'
+        'description'
     ];
 
     /**
