@@ -30,7 +30,8 @@ class PageFormBuilder extends FormBuilder
         'path',
         'type',
         'entry',
-        'parent'
+        'parent',
+        'str_id'
     ];
 
     /**
@@ -42,6 +43,23 @@ class PageFormBuilder extends FormBuilder
     {
         if (!$this->getType() && !$this->getEntry()) {
             throw new \Exception('The $type parameter is required when creating a page.');
+        }
+    }
+
+    /**
+     * Fired just before saving the form.
+     */
+    public function onSaving()
+    {
+        $entry = $this->getFormEntry();
+        $type  = $this->getType();
+
+        if (!$entry->type_id) {
+            $entry->type_id = $type->getId();
+        }
+
+        if (!$entry->str_id) {
+            $entry->str_id = str_random();
         }
     }
 
@@ -66,18 +84,5 @@ class PageFormBuilder extends FormBuilder
         $this->type = $type;
 
         return $this;
-    }
-
-    /**
-     * Fired just before saving the form.
-     */
-    public function onSaving()
-    {
-        $entry = $this->getFormEntry();
-        $type  = $this->getType();
-
-        if (!$entry->type_id) {
-            $entry->type_id = $type->getId();
-        }
     }
 }

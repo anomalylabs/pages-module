@@ -54,6 +54,13 @@ interface PageInterface extends EntryInterface
     public function getTtl();
 
     /**
+     * Get the string ID.
+     *
+     * @return string
+     */
+    public function getStrId();
+
+    /**
      * Get the slug.
      *
      * @return string

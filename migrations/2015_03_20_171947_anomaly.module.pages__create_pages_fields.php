@@ -18,6 +18,7 @@ class AnomalyModulePagesCreatePagesFields extends Migration
      * @var array
      */
     protected $fields = [
+        'str_id'                => 'anomaly.field_type.text',
         'title'                 => 'anomaly.field_type.text',
         'slug'                  => [
             'type'   => 'anomaly.field_type.slug',
