@@ -14,6 +14,16 @@ class TypeTableBuilder extends TableBuilder
 {
 
     /**
+     * The table filters.
+     *
+     * @var array
+     */
+    protected $filters = [
+        'name',
+        'type'
+    ];
+
+    /**
      * The table columns.
      *
      * @var array
