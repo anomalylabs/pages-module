@@ -30,7 +30,8 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $columns = [
         'name',
-        'description'
+        'description',
+        'entry.page_handler.title'
     ];
 
     /**
