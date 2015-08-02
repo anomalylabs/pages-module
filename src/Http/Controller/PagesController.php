@@ -31,15 +31,7 @@ class PagesController extends PublicController
             abort(404);
         }
 
-        $handler  = $page->getPageHandler();
-        $response = $handler->getResponse();
-        $response = $container->make($response);
-
-        if (!$response instanceof PageHandlerResponseInterface) {
-            throw new \Exception('Page handler response class must implement PageHandlerResponseInterface.');
-        }
-
-        return $response->make($page);
+        return $container->call(substr(get_class($page->getPageHandler()), 0, -9) . 'Response@make', compact('page'));
     }
 
     /**
