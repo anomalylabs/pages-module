@@ -1,7 +1,6 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerResponseInterface;
 use Anomaly\PagesModule\Page\PageResolver;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Illuminate\Container\Container;
@@ -31,15 +30,9 @@ class PagesController extends PublicController
             abort(404);
         }
 
-        $handler  = $page->getPageHandler();
-        $response = $handler->getResponse();
-        $response = $container->make($response);
+        $handler = $page->getPageHandler();
 
-        if (!$response instanceof PageHandlerResponseInterface) {
-            throw new \Exception('Page handler response class must implement PageHandlerResponseInterface.');
-        }
-
-        return $response->make($page);
+        return $container->call(substr(get_class($handler), 0, -9) . 'Response@make', compact('page'));
     }
 
     /**

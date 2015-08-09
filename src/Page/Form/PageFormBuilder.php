@@ -27,6 +27,7 @@ class PageFormBuilder extends FormBuilder
      * @var array
      */
     protected $skips = [
+        'str_id',
         'path',
         'type',
         'entry',
