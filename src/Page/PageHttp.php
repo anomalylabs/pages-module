@@ -51,6 +51,18 @@ class PageHttp
             $ttl = $this->settings->get('anomaly.module.pages::ttl');
         }
 
-        $response->setTtl($ttl * 60);
+        if ($ttl && $seconds = $ttl * 60) {
+
+            $response->headers->set('Pragma', 'public');
+            $response->headers->set('Content-Type', 'text/html');
+            $response->headers->set('Etag', md5(json_encode($page->toArray())));
+            $response->headers->set('Cache-Control', 'public,max-age=' . $seconds . ',s-maxage=' . $seconds);
+            $response->headers->set(
+                'Last-Modified',
+                $page->lastModified()->setTimezone('GMT')->format('D, d M Y H:i:s')
+            );
+
+            $response->setTtl($seconds);
+        }
     }
 }
