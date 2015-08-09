@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\SettingsModule\Setting\Contract\SettingRepositoryInterface;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * Class PageHttp
@@ -34,10 +35,14 @@ class PageHttp
     /**
      * Cache the page's HTTP response.
      *
-     * @param PageInterface $page
+     * @param PageInterface|Arrayable $page
      */
     public function cache(PageInterface $page)
     {
+        if (!$page->isLive()) {
+            return;
+        }
+
         $ttl      = $page->getTtl();
         $response = $page->getResponse();
 
