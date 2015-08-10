@@ -59,7 +59,7 @@ class PageBreadcrumb
     {
         if ($parent = $page->getParent()) {
 
-            $breadcrumbs[$parent->getTitle()] = $parent->path();
+            $breadcrumbs[$parent->getTitle()] = $parent->staticPrefix();
 
             $this->loadParent($parent, $breadcrumbs);
         }
