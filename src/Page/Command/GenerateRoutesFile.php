@@ -1,10 +1,11 @@
 <?php namespace Anomaly\PagesModule\Page\Command;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\PagesModule\PagesModule;
 use Anomaly\Streams\Platform\Application\Application;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\View\Factory;
+use Robbo\Presenter\Decorator;
 
 /**
  * Class GenerateRoutesFile
@@ -22,25 +23,27 @@ class GenerateRoutesFile implements SelfHandling
      *
      * @param PageRepositoryInterface $pages
      * @param Application             $application
-     * @param PagesModule             $module
+     * @param Decorator               $decorator
      * @param Filesystem              $files
+     * @param Factory                 $view
      */
     public function handle(
         PageRepositoryInterface $pages,
         Application $application,
-        PagesModule $module,
-        Filesystem $files
+        Decorator $decorator,
+        Filesystem $files,
+        Factory $view
     ) {
         $files->makeDirectory($application->getStoragePath('pages'), 0777, true, true);
 
         $files->put(
             $application->getStoragePath('pages/routes.php'),
-            app('Anomaly\Streams\Platform\Support\String')->render(
-                $files->get($module->getPath('resources/stubs/routes.stub')),
+            $view->make(
+                'anomaly.module.pages::stubs/routes',
                 [
-                    'pages' => $pages->all()
+                    'pages' => $decorator->decorate($pages->all())
                 ]
-            )
+            )->render()
         );
     }
 }

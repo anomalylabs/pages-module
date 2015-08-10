@@ -13,18 +13,4 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 interface PageRepositoryInterface extends EntryRepositoryInterface
 {
 
-    /**
-     * Return the first page.
-     *
-     * @return PageInterface
-     */
-    public function first();
-
-    /**
-     * Find a page by it's path.
-     *
-     * @param $path
-     * @return null|PageInterface
-     */
-    public function findByPath($path);
 }

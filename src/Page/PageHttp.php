@@ -58,13 +58,12 @@ class PageHttp
 
         if ($ttl && $seconds = $ttl * 60) {
 
-            $response->headers->set('Pragma', 'public');
             $response->headers->set('Content-Type', 'text/html');
-            $response->headers->set('Etag', md5(json_encode($page->toArray())));
-            $response->headers->set('Cache-Control', 'public,max-age=' . $seconds . ',s-maxage=' . $seconds);
+            $response->headers->set('Cache-Controle', 'must-revalidate');
+            $response->headers->set('Etag', $page->etag());
             $response->headers->set(
                 'Last-Modified',
-                $page->lastModified()->setTimezone('GMT')->format('D, d M Y H:i:s')
+                $page->lastModified()->setTimezone('GMT')->format('D, d M Y H:i:s T')
             );
 
             $response->setTtl($seconds);

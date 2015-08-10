@@ -73,20 +73,6 @@ interface TypeInterface extends EntryInterface
     public function getMetaDescription();
 
     /**
-     * Get the CSS path.
-     *
-     * @return string
-     */
-    public function getCssPath();
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath();
-
-    /**
      * Get the related entry stream.
      *
      * @return StreamInterface
@@ -99,6 +85,13 @@ interface TypeInterface extends EntryInterface
      * @return string
      */
     public function getEntryModelName();
+
+    /**
+     * Get the additional parameters.
+     *
+     * @return null|string
+     */
+    public function getAdditionalParameters();
 
     /**
      * Get the page handler.

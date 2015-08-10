@@ -1,6 +1,5 @@
 <?php namespace Anomaly\PagesModule\Type;
 
-use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Command\GetTypeStream;
@@ -107,36 +106,6 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
-     * Get the CSS path.
-     *
-     * @return string
-     */
-    public function getCssPath()
-    {
-        /* @var EditorFieldType $css */
-        $css = $this->getFieldType('css');
-
-        $css->setEntry($this);
-
-        return $css->getStoragePath();
-    }
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath()
-    {
-        /* @var EditorFieldType $js */
-        $js = $this->getFieldType('js');
-
-        $js->setEntry($this);
-
-        return $js->getStoragePath();
-    }
-
-    /**
      * Get the related entry stream.
      *
      * @return StreamInterface
@@ -156,6 +125,16 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
         $stream = $this->getEntryStream();
 
         return $stream->getEntryModelName();
+    }
+
+    /**
+     * Get the additional parameters.
+     *
+     * @return null|string
+     */
+    public function getAdditionalParameters()
+    {
+        return $this->additional_parameters;
     }
 
     /**
