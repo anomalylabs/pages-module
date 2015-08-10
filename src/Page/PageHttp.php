@@ -59,7 +59,7 @@ class PageHttp
         if ($ttl && $seconds = $ttl * 60) {
 
             $response->headers->set('Content-Type', 'text/html');
-            $response->headers->set('Cache-Controle', 'must-revalidate');
+            $response->headers->set('Cache-Control', 'must-revalidate');
             $response->headers->set('Etag', $page->etag());
             $response->headers->set(
                 'Last-Modified',
