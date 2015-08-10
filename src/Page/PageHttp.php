@@ -51,11 +51,6 @@ class PageHttp
             $ttl = $type->getTtl();
         }
 
-        // Default to settings.
-        if ($ttl === null) {
-            $ttl = $this->settings->get('anomaly.module.pages::ttl');
-        }
-
         if ($ttl && $seconds = $ttl * 60) {
 
             $response->headers->set('Content-Type', 'text/html');
