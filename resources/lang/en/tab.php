@@ -3,6 +3,7 @@
 return [
     'advanced' => 'Advanced',
     'general'  => 'General',
+    'options'  => 'Options',
     'layout'   => 'Layout',
     'entry'    => 'Entry',
     'page'     => 'Page',

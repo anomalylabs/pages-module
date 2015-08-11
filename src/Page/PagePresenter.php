@@ -88,7 +88,7 @@ class PagePresenter extends EntryPresenter
     public function viewLink()
     {
         return app('html')->link(
-            $this->object->staticPrefix(),
+            $this->object->isLive() ? $this->object->staticPrefix() : 'pages/preview/'.$this->object->getStrId(),
             $this->object->getTitle(),
             ['target' => '_blank']
         );

@@ -29,6 +29,9 @@ class AnomalyModulePagesCreatePagesStream extends Migration
      * @var array
      */
     protected $assignments = [
+        'str_id'           => [
+            'required' => true
+        ],
         'title'            => [
             'translatable' => true,
             'required'     => true

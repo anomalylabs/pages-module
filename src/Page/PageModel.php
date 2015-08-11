@@ -2,7 +2,6 @@
 
 use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Anomaly\PagesModule\Page\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
@@ -130,6 +129,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         }
 
         return $metaDescription;
+    }
+
+    /**
+     * Get the string ID.
+     *
+     * @return string
+     */
+    public function getStrId()
+    {
+        return $this->str_id;
     }
 
     /**

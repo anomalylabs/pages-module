@@ -68,13 +68,18 @@ class PageEntryFormSections
                                 'page_js'
                             ]
                         ],
-                        'advanced' => [
-                            'title'  => 'module::tab.advanced',
+                        'options'  => [
+                            'title'  => 'module::tab.options',
                             'fields' => [
                                 'page_live',
                                 'page_home',
+                                'page_allowed_roles'
+                            ]
+                        ],
+                        'advanced' => [
+                            'title'  => 'module::tab.advanced',
+                            'fields' => [
                                 'page_ttl',
-                                'page_allowed_roles',
                                 'page_route_suffix',
                                 'page_route_constraints',
                                 'page_additional_parameters'
