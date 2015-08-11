@@ -102,6 +102,14 @@ interface PageInterface extends EntryInterface
     public function getLayoutViewPath();
 
     /**
+     * Set the live flag.
+     *
+     * @param $live
+     * @return $this
+     */
+    public function setLive($live);
+
+    /**
      * Get the live flag.
      *
      * @return bool

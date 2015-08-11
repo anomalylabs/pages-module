@@ -31,4 +31,15 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     {
         $this->model = $model;
     }
+
+    /**
+     * Find a page by it's string ID.
+     *
+     * @param $id
+     * @return null|PageInterface
+     */
+    public function findByStrId($id)
+    {
+        return $this->model->where('str_id', $id)->first();
+    }
 }

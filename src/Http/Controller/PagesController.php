@@ -34,6 +34,25 @@ class PagesController extends PublicController
     }
 
     /**
+     * Preview a page.
+     *
+     * @param PageResolver            $resolver
+     * @param PageRepositoryInterface $pages
+     * @param                         $id
+     * @return mixed
+     */
+    public function preview(Container $container, PageRepositoryInterface $pages, $id)
+    {
+        if (!$page = $pages->findByStrId($id)) {
+            abort(404);
+        }
+
+        $page->setLive(true);
+
+        return $container->call(substr(get_class($page->getPageHandler()), 0, -9) . 'Response@make', compact('page'));
+    }
+
+    /**
      * Redirect elsewhere.
      *
      * @param PageRepositoryInterface $pages

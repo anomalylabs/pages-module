@@ -49,6 +49,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/ajax/choose_type'                          => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseType',
         'admin/pages/ajax/choose_field/{id}'                    => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseField',
         'admin/pages/settings'                                  => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
+        'pages/preview/{id}'                                    => 'Anomaly\PagesModule\Http\Controller\PagesController@preview'
     ];
 
     /**

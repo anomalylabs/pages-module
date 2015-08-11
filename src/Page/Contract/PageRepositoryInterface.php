@@ -13,4 +13,11 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 interface PageRepositoryInterface extends EntryRepositoryInterface
 {
 
+    /**
+     * Find a page by it's string ID.
+     *
+     * @param $id
+     * @return null|PageInterface
+     */
+    public function findByStrId($id);
 }

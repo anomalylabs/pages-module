@@ -207,6 +207,19 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Set the live flag.
+     *
+     * @param $live
+     * @return $this
+     */
+    public function setLive($live)
+    {
+        $this->live = $live;
+
+        return $this;
+    }
+
+    /**
      * Get the live flag.
      *
      * @return bool
