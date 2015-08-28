@@ -71,7 +71,9 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         $path = $this->getSlug();
 
         if ($parent = $this->getParent()) {
-            $path = $parent->staticPrefix() . '/' . $path;
+            if (!$parent->isHome()) {
+                $path = $parent->staticPrefix() . '/' . $path;
+            }
         } elseif ($this->isHome()) {
             return '/';
         }

@@ -16,6 +16,26 @@ class PagesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
+     * The addon commands.
+     *
+     * @var array
+     */
+    protected $commands = [
+        'Anomaly\PagesModule\Page\Console\Generate'
+    ];
+
+    /**
+     * The addon listeners.
+     *
+     * @var array
+     */
+    protected $listeners = [
+        'Anomaly\Streams\Platform\Stream\Console\Event\StreamsIsRefreshing' => [
+            'Anomaly\PagesModule\Page\Listener\RefreshPagesModule'
+        ]
+    ];
+
+    /**
      * The singleton bindings.
      *
      * @var array
