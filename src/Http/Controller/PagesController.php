@@ -3,6 +3,7 @@
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageResolver;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
+use Anomaly\Streams\Platform\View\ViewTemplate;
 use Illuminate\Container\Container;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\Route;
@@ -22,13 +23,17 @@ class PagesController extends PublicController
      * Return a rendered page.
      *
      * @param PageResolver $resolver
+     * @param ViewTemplate $template
      * @param Container    $container
+     * @return mixed
      */
-    public function view(PageResolver $resolver, Container $container)
+    public function view(PageResolver $resolver, ViewTemplate $template, Container $container)
     {
         if (!$page = $resolver->resolve()) {
             abort(404);
         }
+
+        $template->set('page', $page);
 
         return $container->call(substr(get_class($page->getPageHandler()), 0, -9) . 'Response@make', compact('page'));
     }
