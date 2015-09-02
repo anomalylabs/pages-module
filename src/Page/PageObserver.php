@@ -28,9 +28,7 @@ class PageObserver extends EntryObserver
     {
         /* @var Builder $query */
         if ($entry->isHome() && $query = $entry->newQuery()) {
-            if ($page = $query->where('home', true)->first()) {
-                $page->save(['home' => false]);
-            }
+            $query->update(['home' => false]);
         }
 
         if (!$entry->getStrId()) {
