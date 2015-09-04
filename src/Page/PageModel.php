@@ -395,6 +395,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function children()
     {
-        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id');
+        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id')
+            ->orderBy('sort_order', 'ASC');
     }
 }
