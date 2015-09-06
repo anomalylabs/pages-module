@@ -19,8 +19,19 @@ class PageTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $buttons = [
-        'edit',
+        'view' => [
+            'target' => '_blank'
+        ],
         'delete'
+    ];
+
+    /**
+     * The item configuration.
+     *
+     * @var array
+     */
+    protected $item = [
+        'value' => 'entry.edit_link'
     ];
 
     /**
@@ -29,7 +40,7 @@ class PageTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $options = [
-        'item_value' => 'entry.view_link'
+        'item_value' => 'entry.edit_link'
     ];
 
 }

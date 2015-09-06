@@ -83,7 +83,7 @@ class PagesController extends AdminController
             return $redirector->to('/');
         }
 
-        return $redirector->to($page->path());
+        return $redirector->to($page->staticPrefix());
     }
 
     /**
