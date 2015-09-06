@@ -16,15 +16,6 @@ class PageEntryFormBuilder extends MultipleFormBuilder
 {
 
     /**
-     * The form actions.
-     *
-     * @var array
-     */
-    protected $actions = [
-        'save'
-    ];
-
-    /**
      * Fired after the entry form is saved.
      *
      * After the entry form is saved take the
