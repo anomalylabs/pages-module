@@ -5,7 +5,7 @@ return [
     'general'  => 'General',
     'options'  => 'Options',
     'layout'   => 'Layout',
-    'entry'    => 'Entry',
+    'fields'   => 'Fields',
     'page'     => 'Page',
     'seo'      => 'SEO',
     'css'      => 'CSS',
