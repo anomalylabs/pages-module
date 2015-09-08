@@ -32,8 +32,8 @@ class PageEntryFormSections
                                 'page_slug'
                             ]
                         ],
-                        'entry'    => [
-                            'title'  => 'module::tab.entry',
+                        'fields'   => [
+                            'title'  => 'module::tab.fields',
                             'fields' => function (PageEntryFormBuilder $builder) {
                                 return array_map(
                                     function (FieldType $field) {
@@ -56,18 +56,6 @@ class PageEntryFormSections
                                 'page_meta_description'
                             ]
                         ],
-                        'css'      => [
-                            'title'  => 'module::tab.css',
-                            'fields' => [
-                                'page_css'
-                            ]
-                        ],
-                        'js'       => [
-                            'title'  => 'module::tab.js',
-                            'fields' => [
-                                'page_js'
-                            ]
-                        ],
                         'options'  => [
                             'title'  => 'module::tab.options',
                             'fields' => [
@@ -83,6 +71,18 @@ class PageEntryFormSections
                                 'page_route_suffix',
                                 'page_route_constraints',
                                 'page_additional_parameters'
+                            ]
+                        ],
+                        'css'      => [
+                            'title'  => 'module::tab.css',
+                            'fields' => [
+                                'page_css'
+                            ]
+                        ],
+                        'js'       => [
+                            'title'  => 'module::tab.js',
+                            'fields' => [
+                                'page_js'
                             ]
                         ]
                     ]

@@ -79,18 +79,4 @@ class PagePresenter extends EntryPresenter
 
         return array_merge((array)$typeParameters->yaml(), (array)$pageParameters->yaml());
     }
-
-    /**
-     * Return the view link.
-     *
-     * @return string
-     */
-    public function viewLink()
-    {
-        return app('html')->link(
-            $this->object->isLive() ? $this->object->staticPrefix() : 'pages/preview/'.$this->object->getStrId(),
-            $this->object->getTitle(),
-            ['target' => '_blank']
-        );
-    }
 }
