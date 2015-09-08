@@ -72,8 +72,8 @@ class PageAuthorizer
          * If the page is restricted to specific
          * roles then make sure our user is one of them.
          */
-        /*if ((!$user && $page->getAllowedRoles()) || !$user->hasAnyRole($page->getAllowedRoles())) {
+        if ((!$user && $page->getAllowedRoles()) || !$user->hasAnyRole($page->getAllowedRoles()->all())) {
             abort(403);
-        }*/
+        }
     }
 }
