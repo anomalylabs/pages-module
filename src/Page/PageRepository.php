@@ -38,7 +38,7 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     {
         $this->model = $model;
 
-        $this->pages = $this->model->ordered()->get();
+        $this->pages = $this->model->sorted()->get();
     }
 
     /**
