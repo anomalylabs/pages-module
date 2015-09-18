@@ -18,6 +18,21 @@ interface PageInterface extends EntryInterface
 {
 
     /**
+     * Return the page URL.
+     *
+     * @return string
+     */
+    public function url();
+
+    /**
+     * Return whether this is
+     * a top level page or not.
+     *
+     * @return bool
+     */
+    public function isTop();
+
+    /**
      * Return the static prefix.
      *
      * @return string
@@ -129,6 +144,13 @@ interface PageInterface extends EntryInterface
      * @return null|PageInterface
      */
     public function getParent();
+
+    /**
+     * Get the parent ID.
+     *
+     * @return null|int
+     */
+    public function getParentId();
 
     /**
      * Get the related children pages.

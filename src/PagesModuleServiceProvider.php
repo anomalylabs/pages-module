@@ -16,6 +16,15 @@ class PagesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
+     * The addon plugins.
+     *
+     * @var array
+     */
+    protected $plugins = [
+        'Anomaly\PagesModule\PagesModulePlugin'
+    ];
+
+    /**
      * The addon commands.
      *
      * @var array

@@ -62,6 +62,27 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Return the page URL.
+     *
+     * @return string
+     */
+    public function url()
+    {
+        return url($this->staticPrefix());
+    }
+
+    /**
+     * Return whether this is
+     * a top level page or not.
+     *
+     * @return bool
+     */
+    public function isTop()
+    {
+        return !($this->parent_id);
+    }
+
+    /**
      * Return the static prefix.
      *
      * @return string
@@ -249,6 +270,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Get the parent ID.
+     *
+     * @return int|null
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
     }
 
     /**
