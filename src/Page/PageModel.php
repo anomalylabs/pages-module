@@ -12,7 +12,6 @@ use Illuminate\Http\Response;
 /**
  * Class PageModel
  *
- * @method        Builder ordered()
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
@@ -59,6 +58,27 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
 
         parent::boot();
+    }
+
+    /**
+     * Return the page URL.
+     *
+     * @return string
+     */
+    public function url()
+    {
+        return url($this->staticPrefix());
+    }
+
+    /**
+     * Return whether this is
+     * a top level page or not.
+     *
+     * @return bool
+     */
+    public function isTop()
+    {
+        return !($this->parent_id);
     }
 
     /**
@@ -249,6 +269,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Get the parent ID.
+     *
+     * @return int|null
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
     }
 
     /**

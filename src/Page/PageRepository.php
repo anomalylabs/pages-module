@@ -23,6 +23,13 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     protected $model;
 
     /**
+     * The page collection.
+     *
+     * @var PageCollection
+     */
+    protected $pages;
+
+    /**
      * Create a new PageRepositoryInterface instance.
      *
      * @param PageModel $model
@@ -30,6 +37,18 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     public function __construct(PageModel $model)
     {
         $this->model = $model;
+
+        $this->pages = $this->model->sorted()->get();
+    }
+
+    /**
+     * Return all pages.
+     *
+     * @return PageCollection
+     */
+    public function all()
+    {
+        return $this->pages;
     }
 
     /**
