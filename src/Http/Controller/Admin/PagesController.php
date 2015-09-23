@@ -70,20 +70,24 @@ class PagesController extends AdminController
      * Redirect to a page's URL.
      *
      * @param PageRepositoryInterface $pages
-     * @param Redirector              $redirector
+     * @param Redirector              $redirect
      * @param                         $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function view(PageRepositoryInterface $pages, Redirector $redirector, $id)
+    public function view(PageRepositoryInterface $pages, Redirector $redirect, $id)
     {
         /* @var PageInterface $page */
         $page = $pages->find($id);
 
         if ($page->isHome()) {
-            return $redirector->to('/');
+            return $redirect->to('/');
         }
 
-        return $redirector->to($page->staticPrefix());
+        if (!$page->isLive()) {
+            return $redirect->to('pages/preview/' . $page->getStrId());
+        }
+
+        return $redirect->to($page->staticPrefix());
     }
 
     /**
