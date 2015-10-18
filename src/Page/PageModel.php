@@ -239,19 +239,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Set the hidden flag.
-     *
-     * @param $hidden
-     * @return $this
-     */
-    public function setHidden($hidden)
-    {
-        $this->hidden = $hidden;
-
-        return $this;
-    }
-
-    /**
      * Get the hidden flag.
      *
      * @return bool

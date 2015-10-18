@@ -125,14 +125,6 @@ interface PageInterface extends EntryInterface
     public function isEnabled();
 
     /**
-     * Set the hidden flag.
-     *
-     * @param $hidden
-     * @return $this
-     */
-    public function setHidden($hidden);
-
-    /**
      * Get the hidden flag.
      *
      * @return bool
