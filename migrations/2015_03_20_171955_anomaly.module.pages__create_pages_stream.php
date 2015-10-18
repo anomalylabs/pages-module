@@ -43,7 +43,8 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'ttl',
         'entry',
         'parent',
-        'live',
+        'hidden',
+        'enabled',
         'home',
         'status',
         'meta_title'       => [
@@ -54,6 +55,9 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         ],
         'meta_keywords'    => [
             'translatable' => true
+        ],
+        'theme_layout'     => [
+            'required' => true
         ],
         'route_suffix',
         'route_constraints',

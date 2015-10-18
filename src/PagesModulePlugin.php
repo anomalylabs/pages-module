@@ -52,5 +52,4 @@ class PagesModulePlugin extends Plugin
             new \Twig_SimpleFunction('pages_all', [$this->pages, 'all'])
         ];
     }
-
 }

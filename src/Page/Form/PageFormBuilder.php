@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page\Form;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
@@ -20,6 +21,13 @@ class PageFormBuilder extends FormBuilder
      * @var null|TypeInterface
      */
     protected $type = null;
+
+    /**
+     * The parent page.
+     *
+     * @var null|PageInterface
+     */
+    protected $parent = null;
 
     /**
      * Skip these fields.
@@ -47,6 +55,24 @@ class PageFormBuilder extends FormBuilder
     }
 
     /**
+     * Fired just before saving the form.
+     */
+    public function onSaving()
+    {
+        $entry  = $this->getFormEntry();
+        $parent = $this->getParent();
+        $type   = $this->getType();
+
+        if (!$entry->type_id) {
+            $entry->type_id = $type->getId();
+        }
+
+        if ($parent) {
+            $entry->parent_id = $parent->getId();
+        }
+    }
+
+    /**
      * Get the type.
      *
      * @return TypeInterface|null
@@ -70,15 +96,25 @@ class PageFormBuilder extends FormBuilder
     }
 
     /**
-     * Fired just before saving the form.
+     * Get the parent page.
+     *
+     * @return null|PageInterface
      */
-    public function onSaving()
+    public function getParent()
     {
-        $entry = $this->getFormEntry();
-        $type  = $this->getType();
+        return $this->parent;
+    }
 
-        if (!$entry->type_id) {
-            $entry->type_id = $type->getId();
-        }
+    /**
+     * Set the parent page.
+     *
+     * @param PageInterface $parent
+     * @return $this
+     */
+    public function setParent(PageInterface $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
     }
 }

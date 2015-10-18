@@ -54,7 +54,7 @@ return [
         'name'         => 'Tillåtna Roller',
         'instructions' => 'Vilka användarroller har tillåtelse att läsa denna sidan?'
     ],
-    'live'                  => [
+    'enabled'               => [
         'name'         => 'Offentlig',
         'label'        => 'Är sidan offentlig?',
         'instructions' => 'Sidan kommer inte vara synlig tills den är markerad som offentlig.'

@@ -1,9 +1,9 @@
 <?php namespace Anomaly\PagesModule\Type;
 
-use Anomaly\PagesModule\Page\Handler\PageHandlerExtension;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Command\GetTypeStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
@@ -140,7 +140,7 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     /**
      * Get the page handler.
      *
-     * @return PageHandlerExtension
+     * @return Extension
      */
     public function getPageHandler()
     {

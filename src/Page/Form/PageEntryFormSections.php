@@ -59,8 +59,10 @@ class PageEntryFormSections
                         'options'  => [
                             'title'  => 'module::tab.options',
                             'fields' => [
-                                'page_live',
+                                'page_enabled',
                                 'page_home',
+                                'page_hidden',
+                                'page_theme_layout',
                                 'page_allowed_roles'
                             ]
                         ],

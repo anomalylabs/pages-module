@@ -110,26 +110,34 @@ interface PageInterface extends EntryInterface
     public function getMetaDescription();
 
     /**
-     * Get the path to the page's type layout.
+     * Set the enabled flag.
      *
-     * @return string
-     */
-    public function getLayoutViewPath();
-
-    /**
-     * Set the live flag.
-     *
-     * @param $live
+     * @param $enabled
      * @return $this
      */
-    public function setLive($live);
+    public function setEnabled($enabled);
 
     /**
-     * Get the live flag.
+     * Get the enabled flag.
      *
      * @return bool
      */
-    public function isLive();
+    public function isEnabled();
+
+    /**
+     * Set the hidden flag.
+     *
+     * @param $hidden
+     * @return $this
+     */
+    public function setHidden($hidden);
+
+    /**
+     * Get the hidden flag.
+     *
+     * @return bool
+     */
+    public function isHidden();
 
     /**
      * Get the home flag.
@@ -201,6 +209,13 @@ interface PageInterface extends EntryInterface
      * @return PageHandlerExtension
      */
     public function getPageHandler();
+
+    /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout();
 
     /**
      * Get the related entry.

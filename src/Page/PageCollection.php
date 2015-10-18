@@ -15,17 +15,17 @@ class PageCollection extends EntryCollection
 {
 
     /**
-     * Return only live pages.
+     * Return only enabled pages.
      *
      * @return PageCollection
      */
-    public function live()
+    public function enabled()
     {
         return self::make(
             array_filter(
                 $this->items,
                 function (PageInterface $page) {
-                    return $page->isLive();
+                    return $page->isEnabled();
                 }
             )
         );

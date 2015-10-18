@@ -3,7 +3,7 @@
 return [
     'Anomaly\PagesModule\Page\PageModel' => [
         'default' => [
-            'enabled' => 'live',
+            'enabled' => 'enabled',
             'fields'  => [
                 'title'            => 'title',
                 'meta_title'       => 'meta_title',

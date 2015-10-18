@@ -24,33 +24,6 @@ class PagePresenter extends EntryPresenter
     protected $object;
 
     /**
-     * Return the route.
-     *
-     * @return string
-     */
-    public function route()
-    {
-        return $this->object->staticPrefix() . $this->object->getRouteSuffix('/');
-    }
-
-    /**
-     * Return the action array.
-     *
-     * @return array
-     */
-    public function action()
-    {
-        return array_merge(
-            [
-                'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
-                'streams::addon'             => 'anomaly.module.pages',
-                'anomaly.module.pages::page' => $this->object->getId()
-            ],
-            $this->parameters()
-        );
-    }
-
-    /**
      * Return the route constraints.
      *
      * @return array

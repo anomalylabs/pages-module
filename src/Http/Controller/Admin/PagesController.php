@@ -7,6 +7,7 @@ use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromRequest;
 use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromPage;
 use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromRequest;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
+use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
@@ -40,10 +41,18 @@ class PagesController extends AdminController
      * @param PageEntryFormBuilder $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(PageEntryFormBuilder $form)
+    public function create(PageEntryFormBuilder $form, PageRepositoryInterface $pages)
     {
         $this->dispatch(new AddEntryFormFromRequest($form));
         $this->dispatch(new AddPageFormFromRequest($form));
+
+        if ($parent = $this->request->get('parent')) {
+
+            /* @var PageFormBuilder $pageForm */
+            $pageForm = $form->getChildForm('page');
+
+            $pageForm->setParent($pages->find($parent));
+        }
 
         return $form->render();
     }
@@ -79,12 +88,12 @@ class PagesController extends AdminController
         /* @var PageInterface $page */
         $page = $pages->find($id);
 
-        if ($page->isHome()) {
-            return $redirect->to('/');
+        if (!$page->isEnabled()) {
+            return $redirect->to('pages/preview/' . $page->getStrId());
         }
 
-        if (!$page->isLive()) {
-            return $redirect->to('pages/preview/' . $page->getStrId());
+        if ($page->isHome()) {
+            return $redirect->to('/');
         }
 
         return $redirect->to($page->staticPrefix());

@@ -19,6 +19,12 @@ class PageTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $buttons = [
+        'add'  => [
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'text'        => 'anomaly.module.pages::button.create_child_page',
+            'href'        => 'admin/pages/ajax/choose_type?parent={entry.id}'
+        ],
         'view' => [
             'target' => '_blank'
         ],
@@ -26,21 +32,16 @@ class PageTreeBuilder extends TreeBuilder
     ];
 
     /**
-     * The item configuration.
+     * The item column values.
      *
      * @var array
      */
-    protected $item = [
-        'value' => 'entry.edit_link'
-    ];
-
-    /**
-     * The tree options.
-     *
-     * @var array
-     */
-    protected $options = [
-        'item_value' => 'entry.edit_link'
+    protected $columns = [
+        'entry.edit_link',
+        [
+            'value'   => '(hidden)',
+            'enabled' => 'hidden'
+        ]
     ];
 
 }

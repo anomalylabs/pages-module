@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
+use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 /**
@@ -12,6 +13,13 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
  */
 interface PageRepositoryInterface extends EntryRepositoryInterface
 {
+
+    /**
+     * Return only enabled pages.
+     *
+     * @return PageCollection
+     */
+    public function enabled();
 
     /**
      * Find a page by it's string ID.

@@ -1,8 +1,9 @@
 <?php namespace Anomaly\PagesModule;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
-use Anomaly\Streams\Platform\Application\Application;
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Routing\Router;
 
 /**
  * Class PagesModuleServiceProvider
@@ -84,14 +85,20 @@ class PagesModuleServiceProvider extends AddonServiceProvider
     /**
      * Map additional routes.
      *
-     * @param Filesystem  $files
-     * @param Application $application
+     * @param PageRepositoryInterface $pages
      */
-    public function map(Filesystem $files, Application $application)
+    public function map(PageRepositoryInterface $pages, Router $router)
     {
-        // Include public routes.
-        if ($files->exists($routes = $application->getStoragePath('pages/routes.php'))) {
-            $files->requireOnce($routes);
+        /* @var PageInterface $page */
+        foreach ($pages->enabled() as $page) {
+            $router->any(
+                $page->staticPrefix(),
+                [
+                    'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
+                    'streams::addon'             => 'anomaly.module.pages',
+                    'anomaly.module.pages::page' => $page->getId()
+                ]
+            );
         }
     }
 }

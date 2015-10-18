@@ -58,7 +58,7 @@ return [
         'name'         => 'Rôles autorisés',
         'instructions' => 'Quels rôles utilisateur est autorisé à afficher cette page ?'
     ],
-    'live'          => [
+    'enabled'          => [
         'name'         => 'Activé',
         'label'        => 'Est-ce que cette page est active ?',
         'instructions' => 'Seules les pages actives sont affichées sur le site.'

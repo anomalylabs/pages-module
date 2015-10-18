@@ -52,7 +52,7 @@ class PagesController extends PublicController
             abort(404);
         }
 
-        $page->setLive(true);
+        $page->setEnabled(true);
 
         return $container->call(substr(get_class($page->getPageHandler()), 0, -9) . 'Response@make', compact('page'));
     }

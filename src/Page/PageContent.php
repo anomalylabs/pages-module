@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Illuminate\View\Factory;
 use Robbo\Presenter\Decorator;
@@ -48,6 +49,11 @@ class PageContent
      */
     public function make(PageInterface $page)
     {
-        $page->setContent($this->view->make($page->getLayoutViewPath(), compact('page'))->render());
+        $type = $page->getType();
+
+        /* @var EditorFieldType $layout */
+        $layout = $type->getFieldType('layout');
+
+        $page->setContent($this->view->make($layout->getViewPath(), compact('page'))->render());
     }
 }

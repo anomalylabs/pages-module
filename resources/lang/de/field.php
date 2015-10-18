@@ -54,10 +54,10 @@ return [
         'name'         => 'Erlaubte Rollen',
         'instructions' => 'Welche Benutzerrollen dürfen diese Seite sehen?'
     ],
-    'live'                  => [
-        'name'         => 'Live',
-        'label'        => 'Ist diese Seite &laquo;live&raquo;?',
-        'instructions' => 'Die Seite wird nur angezeigt, wenn sie &laquo;live&raquo; ist.'
+    'enabled'               => [
+        'name'         => 'Enabled',
+        'label'        => 'Ist diese Seite &laquo;enabled&raquo;?',
+        'instructions' => 'Die Seite wird nur angezeigt, wenn sie &laquo;enabled&raquo; ist.'
     ],
     'home'                  => [
         'name'         => 'Homepage',

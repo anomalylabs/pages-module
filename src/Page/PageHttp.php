@@ -39,7 +39,7 @@ class PageHttp
      */
     public function cache(PageInterface $page)
     {
-        if (!$page->isLive()) {
+        if (!$page->isEnabled()) {
             return;
         }
 

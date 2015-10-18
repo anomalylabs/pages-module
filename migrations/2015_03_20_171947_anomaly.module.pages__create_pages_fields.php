@@ -27,7 +27,7 @@ class AnomalyModulePagesCreatePagesFields extends Migration
                 'type'    => '-'
             ]
         ],
-        'live'                  => [
+        'enabled'               => [
             'type'   => 'anomaly.field_type.boolean',
             'config' => [
                 'default_value' => false,
@@ -99,6 +99,12 @@ class AnomalyModulePagesCreatePagesFields extends Migration
                 'type'          => 'extension',
                 'search'        => 'anomaly.module.pages::page_handler.*',
                 'default_value' => 'anomaly.extension.default_page_handler'
+            ]
+        ],
+        'hidden'                => [
+            'type'   => 'anomaly.field_type.boolean',
+            'config' => [
+                'default_value' => false
             ]
         ],
         'entry'                 => 'anomaly.field_type.polymorphic',

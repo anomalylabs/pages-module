@@ -54,10 +54,15 @@ return [
         'name'         => 'Allowed Roles',
         'instructions' => 'Which user roles are allowed to view this page?'
     ],
-    'live'                  => [
-        'name'         => 'Live',
-        'label'        => 'Is this page live?',
-        'instructions' => 'This page will not display on your website until made live.'
+    'hidden'                => [
+        'name'         => 'Hidden',
+        'label'        => 'Is this hidden from navigation?',
+        'instructions' => 'Hidden pages will not display in navigation built with pages.'
+    ],
+    'enabled'               => [
+        'name'         => 'Enabled',
+        'label'        => 'Is this page enabled?',
+        'instructions' => 'If disabled, this page will have a secure URL you can share with others.'
     ],
     'home'                  => [
         'name'         => 'Home Page',

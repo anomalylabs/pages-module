@@ -1,12 +1,10 @@
 <?php namespace Anomaly\PagesModule\Page;
 
-use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
 
 /**
@@ -89,6 +87,10 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function staticPrefix()
     {
         $path = $this->getSlug();
+
+        if (!$this->isEnabled()) {
+            return 'pages/preview/' . $this->getStrId();
+        }
 
         if ($parent = $this->getParent()) {
             if (!$parent->isHome()) {
@@ -214,41 +216,49 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Get the path to the page's type layout.
+     * Set the enabled flag.
      *
-     * @return string
-     */
-    public function getLayoutViewPath()
-    {
-        $type = $this->getType();
-
-        /* @var EditorFieldType $layout */
-        $layout = $type->getFieldType('layout');
-
-        return $layout->getViewPath();
-    }
-
-    /**
-     * Set the live flag.
-     *
-     * @param $live
+     * @param $enabled
      * @return $this
      */
-    public function setLive($live)
+    public function setEnabled($enabled)
     {
-        $this->live = $live;
+        $this->enabled = $enabled;
 
         return $this;
     }
 
     /**
-     * Get the live flag.
+     * Get the enabled flag.
      *
      * @return bool
      */
-    public function isLive()
+    public function isEnabled()
     {
-        return $this->live;
+        return $this->enabled;
+    }
+
+    /**
+     * Set the hidden flag.
+     *
+     * @param $hidden
+     * @return $this
+     */
+    public function setHidden($hidden)
+    {
+        $this->hidden = $hidden;
+
+        return $this;
+    }
+
+    /**
+     * Get the hidden flag.
+     *
+     * @return bool
+     */
+    public function isHidden()
+    {
+        return $this->hidden;
     }
 
     /**
@@ -352,6 +362,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         $type = $this->getType();
 
         return $type->getPageHandler();
+    }
+
+    /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout()
+    {
+        return $this->theme_layout;
     }
 
     /**

@@ -61,4 +61,14 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     {
         return $this->model->where('str_id', $id)->first();
     }
+
+    /**
+     * Return only enabled pages.
+     *
+     * @return PageCollection
+     */
+    public function enabled()
+    {
+        return $this->pages->enabled();
+    }
 }
