@@ -1,11 +1,12 @@
 <?php namespace Anomaly\PagesModule\Page;
 
-use Anomaly\PagesModule\Page\Command\DeleteChildren;
-use Anomaly\PagesModule\Page\Command\GenerateRoutesFile;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
+use Illuminate\Contracts\Bus\Dispatcher as CommandDispatcher;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -18,6 +19,25 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class PageObserver extends EntryObserver
 {
+
+    /**
+     * The page repository.
+     *
+     * @var PageRepositoryInterface
+     */
+    protected $pages;
+
+    /**
+     * @param EventDispatcher         $events
+     * @param CommandDispatcher       $commands
+     * @param PageRepositoryInterface $pages
+     */
+    public function __construct(EventDispatcher $events, CommandDispatcher $commands, PageRepositoryInterface $pages)
+    {
+        $this->pages = $pages;
+
+        parent::__construct($events, $commands);
+    }
 
     /**
      * Fired just before saving the page.
@@ -39,38 +59,15 @@ class PageObserver extends EntryObserver
     }
 
     /**
-     * Fired after a page is created.
-     *
-     * @param EntryInterface|PageInterface $entry
-     */
-    public function created(EntryInterface $entry)
-    {
-        $this->commands->dispatch(new GenerateRoutesFile());
-
-        parent::created($entry);
-    }
-
-    /**
-     * Fired after a page is updated.
-     *
-     * @param EntryInterface|PageInterface $entry
-     */
-    public function updated(EntryInterface $entry)
-    {
-        $this->commands->dispatch(new GenerateRoutesFile());
-
-        parent::updated($entry);
-    }
-
-    /**
      * Fired after a page is deleted.
      *
      * @param EntryInterface|PageInterface $entry
      */
     public function deleted(EntryInterface $entry)
     {
-        $this->commands->dispatch(new DeleteChildren($entry));
-        $this->commands->dispatch(new GenerateRoutesFile());
+        foreach ($entry->getChildren() as $page) {
+            $this->pages->delete($page);
+        }
 
         parent::deleted($entry);
     }

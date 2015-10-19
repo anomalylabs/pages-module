@@ -275,7 +275,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function getChildren()
     {
-        return self::$pages->children($this);
+        return $this->children;
     }
 
     /**
@@ -395,5 +395,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         $this->response = $response;
 
         return $this;
+    }
+
+    /**
+     * Return the children pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id')
+            ->orderBy('sort_order', 'ASC');
     }
 }

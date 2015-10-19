@@ -102,7 +102,7 @@ class AnomalyModulePagesCreatePagesFields extends Migration
         'exact'            => [
             'type'   => 'anomaly.field_type.boolean',
             'config' => [
-                'default_value' => false
+                'default_value' => true
             ]
         ],
         'entry'            => 'anomaly.field_type.polymorphic',
