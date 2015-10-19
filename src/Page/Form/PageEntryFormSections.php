@@ -25,14 +25,14 @@ class PageEntryFormSections
             [
                 'general' => [
                     'tabs' => [
-                        'general'  => [
+                        'general' => [
                             'title'  => 'module::tab.page',
                             'fields' => [
                                 'page_title',
                                 'page_slug'
                             ]
                         ],
-                        'fields'   => [
+                        'fields'  => [
                             'title'  => 'module::tab.fields',
                             'fields' => function (PageEntryFormBuilder $builder) {
                                 return array_map(
@@ -48,7 +48,7 @@ class PageEntryFormSections
                                 );
                             }
                         ],
-                        'seo'      => [
+                        'seo'     => [
                             'title'  => 'module::tab.seo',
                             'fields' => [
                                 'page_meta_title',
@@ -56,7 +56,7 @@ class PageEntryFormSections
                                 'page_meta_description'
                             ]
                         ],
-                        'options'  => [
+                        'options' => [
                             'title'  => 'module::tab.options',
                             'fields' => [
                                 'page_theme_layout',
@@ -67,13 +67,13 @@ class PageEntryFormSections
                                 'page_allowed_roles'
                             ]
                         ],
-                        'css'      => [
+                        'css'     => [
                             'title'  => 'module::tab.css',
                             'fields' => [
                                 'page_css'
                             ]
                         ],
-                        'js'       => [
+                        'js'      => [
                             'title'  => 'module::tab.js',
                             'fields' => [
                                 'page_js'
