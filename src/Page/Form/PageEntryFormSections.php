@@ -59,20 +59,12 @@ class PageEntryFormSections
                         'options'  => [
                             'title'  => 'module::tab.options',
                             'fields' => [
+                                'page_theme_layout',
                                 'page_enabled',
                                 'page_home',
                                 'page_hidden',
-                                'page_theme_layout',
+                                'page_exact',
                                 'page_allowed_roles'
-                            ]
-                        ],
-                        'advanced' => [
-                            'title'  => 'module::tab.advanced',
-                            'fields' => [
-                                'page_ttl',
-                                'page_route_suffix',
-                                'page_route_constraints',
-                                'page_additional_parameters'
                             ]
                         ],
                         'css'      => [

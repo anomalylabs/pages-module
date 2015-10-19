@@ -57,8 +57,6 @@ class AnomalyModulePagesCreateTypesStream extends Migration
         'meta_keywords'    => [
             'translatable' => true
         ],
-        'additional_parameters',
-        'ttl',
         'css',
         'js'
     ];

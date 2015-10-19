@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
-use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
@@ -15,20 +15,6 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
  */
 interface TypeInterface extends EntryInterface
 {
-
-    /**
-     * Get the ID.
-     *
-     * @return int
-     */
-    public function getId();
-
-    /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl();
 
     /**
      * Get the name.
@@ -87,16 +73,9 @@ interface TypeInterface extends EntryInterface
     public function getEntryModelName();
 
     /**
-     * Get the additional parameters.
-     *
-     * @return null|string
-     */
-    public function getAdditionalParameters();
-
-    /**
      * Get the page handler.
      *
-     * @return Extension
+     * @return PageHandlerInterface
      */
     public function getPageHandler();
 

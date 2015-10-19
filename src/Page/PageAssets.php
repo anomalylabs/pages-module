@@ -5,14 +5,14 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Asset\Asset;
 
 /**
- * Class PageAsset
+ * Class PageAssets
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page
  */
-class PageAsset
+class PageAssets
 {
 
     /**
@@ -23,7 +23,7 @@ class PageAsset
     protected $asset;
 
     /**
-     * Create a new PageAsset instance.
+     * Create a new PageAssets instance.
      *
      * @param Asset $asset
      */

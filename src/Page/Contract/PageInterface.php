@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
@@ -16,21 +17,6 @@ use Illuminate\Http\Response;
  */
 interface PageInterface extends EntryInterface
 {
-
-    /**
-     * Return the page URL.
-     *
-     * @return string
-     */
-    public function url();
-
-    /**
-     * Return whether this is
-     * a top level page or not.
-     *
-     * @return bool
-     */
-    public function isTop();
 
     /**
      * Return the static prefix.
@@ -66,13 +52,6 @@ interface PageInterface extends EntryInterface
      * @return string
      */
     public function getStrId();
-
-    /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl();
 
     /**
      * Get the slug.
@@ -167,28 +146,6 @@ interface PageInterface extends EntryInterface
     public function getAllowedRoles();
 
     /**
-     * Get the route suffix.
-     *
-     * @param null $prefix
-     * @return null|string
-     */
-    public function getRouteSuffix($prefix = null);
-
-    /**
-     * Get the route constraints.
-     *
-     * @return null|string
-     */
-    public function getRouteConstraints();
-
-    /**
-     * Get the additional parameters.
-     *
-     * @return null|string
-     */
-    public function getAdditionalParameters();
-
-    /**
      * Get the related page type.
      *
      * @return null|TypeInterface
@@ -198,7 +155,7 @@ interface PageInterface extends EntryInterface
     /**
      * Get the page handler.
      *
-     * @return PageHandlerExtension
+     * @return PageHandlerInterface
      */
     public function getPageHandler();
 

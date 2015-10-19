@@ -33,9 +33,14 @@ class PagesController extends PublicController
             abort(404);
         }
 
+        $type    = $page->getType();
+        $handler = $type->getPageHandler();
+
         $template->set('page', $page);
 
-        return $container->call(substr(get_class($page->getPageHandler()), 0, -9) . 'Response@make', compact('page'));
+        $handler->make($page);
+
+        return $page->getResponse();
     }
 
     /**

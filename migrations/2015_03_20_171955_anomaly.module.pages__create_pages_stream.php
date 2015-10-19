@@ -45,6 +45,7 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'parent',
         'hidden',
         'enabled',
+        'exact',
         'home',
         'status',
         'meta_title'       => [
@@ -59,9 +60,6 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'theme_layout'     => [
             'required' => true
         ],
-        'route_suffix',
-        'route_constraints',
-        'additional_parameters',
         'allowed_roles',
         'css',
         'js'

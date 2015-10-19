@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
@@ -49,23 +50,22 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     protected $response = null;
 
     /**
+     * The page collection.
+     *
+     * @var PageCollection
+     */
+    protected static $pages;
+
+    /**
      * Boot the model.
      */
     protected static function boot()
     {
         self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
 
-        parent::boot();
-    }
+        self::$pages = app(PageCollection::class);
 
-    /**
-     * Return the page URL.
-     *
-     * @return string
-     */
-    public function url()
-    {
-        return url($this->staticPrefix());
+        parent::boot();
     }
 
     /**
@@ -163,16 +163,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getStrId()
     {
         return $this->str_id;
-    }
-
-    /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl()
-    {
-        return $this->ttl;
     }
 
     /**
@@ -285,7 +275,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function getChildren()
     {
-        return $this->children;
+        return self::$pages->children($this);
     }
 
     /**
@@ -310,26 +300,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Get the route constraints.
-     *
-     * @return null|string
-     */
-    public function getRouteConstraints()
-    {
-        return $this->route_constraints;
-    }
-
-    /**
-     * Get the additional parameters.
-     *
-     * @return null|string
-     */
-    public function getAdditionalParameters()
-    {
-        return $this->additional_parameters;
-    }
-
-    /**
      * Get the page type.
      *
      * @return null|TypeInterface
@@ -342,7 +312,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     /**
      * Get the page handler.
      *
-     * @return PageHandlerExtension
+     * @return PageHandlerInterface
      */
     public function getPageHandler()
     {
@@ -425,16 +395,5 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         $this->response = $response;
 
         return $this;
-    }
-
-    /**
-     * Return the children pages relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function children()
-    {
-        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id')
-            ->orderBy('sort_order', 'ASC');
     }
 }

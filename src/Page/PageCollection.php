@@ -42,7 +42,7 @@ class PageCollection extends EntryCollection
             array_filter(
                 $this->items,
                 function (PageInterface $page) {
-                    return $page->isTop();
+                    return !$page->getParentId();
                 }
             )
         );

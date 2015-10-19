@@ -1,9 +1,9 @@
 <?php namespace Anomaly\PagesModule\Type;
 
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Command\GetTypeStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
-use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
@@ -53,16 +53,6 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl()
-    {
-        return $this->ttl;
     }
 
     /**
@@ -128,19 +118,9 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
-     * Get the additional parameters.
-     *
-     * @return null|string
-     */
-    public function getAdditionalParameters()
-    {
-        return $this->additional_parameters;
-    }
-
-    /**
      * Get the page handler.
      *
-     * @return Extension
+     * @return PageHandlerInterface
      */
     public function getPageHandler()
     {
