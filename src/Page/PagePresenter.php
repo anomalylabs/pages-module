@@ -3,7 +3,6 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Entry\EntryPresenter;
 use Anomaly\Streams\Platform\Support\Decorator;
-use Anomaly\TextareaFieldType\TextareaFieldTypePresenter;
 
 /**
  * Class PagePresenter
@@ -25,33 +24,13 @@ class PagePresenter extends EntryPresenter
     protected $object;
 
     /**
-     * Return the route constraints.
+     * Create a new PagePresenter instance.
      *
-     * @return array
+     * @param mixed $object
      */
-    public function constraints()
+    public function __construct($object)
     {
-        /* @var TextareaFieldTypePresenter $constraints */
-        $constraints = $this->object->getFieldTypePresenter('route_constraints');
-
-        return (array)$constraints->yaml();
-    }
-
-    /**
-     * Return the parameters.
-     *
-     * @return array
-     */
-    public function parameters()
-    {
-        $type = $this->object->getType();
-
-        /* @var TextareaFieldTypePresenter $pageParameters */
-        /* @var TextareaFieldTypePresenter $typeParameters */
-        $pageParameters = $this->object->getFieldTypePresenter('additional_parameters');
-        $typeParameters = $type->getFieldTypePresenter('additional_parameters');
-
-        return array_merge((array)$typeParameters->yaml(), (array)$pageParameters->yaml());
+        $this->object = $object;
     }
 
     /**

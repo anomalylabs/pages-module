@@ -50,109 +50,23 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     protected $response = null;
 
     /**
-     * The page collection.
-     *
-     * @var PageCollection
-     */
-    protected static $pages;
-
-    /**
      * Boot the model.
      */
     protected static function boot()
     {
         self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
 
-        self::$pages = app(PageCollection::class);
-
         parent::boot();
     }
 
     /**
-     * Return whether this is
-     * a top level page or not.
-     *
-     * @return bool
-     */
-    public function isTop()
-    {
-        return !($this->parent_id);
-    }
-
-    /**
-     * Return the static prefix.
+     * Get the path.
      *
      * @return string
      */
-    public function staticPrefix()
+    public function getPath()
     {
-        $path = $this->getSlug();
-
-        if (!$this->isEnabled()) {
-            return 'pages/preview/' . $this->getStrId();
-        }
-
-        if ($parent = $this->getParent()) {
-            if (!$parent->isHome()) {
-                $path = $parent->staticPrefix() . '/' . $path;
-            }
-        } elseif ($this->isHome()) {
-            return '/';
-        }
-
-        return $path;
-    }
-
-    /**
-     * Return the combined meta title.
-     *
-     * @return string
-     */
-    public function metaTitle()
-    {
-        $metaTitle = $this->getMetaTitle();
-
-        if (!$metaTitle && $type = $this->getType()) {
-            $metaTitle = $type->getMetaTitle();
-        }
-
-        if (!$metaTitle) {
-            $metaTitle = $this->getTitle();
-        }
-
-        return $metaTitle;
-    }
-
-    /**
-     * Return the combined meta keywords.
-     *
-     * @return string
-     */
-    public function metaKeywords()
-    {
-        $metaKeywords = $this->getMetaKeywords();
-
-        if (!$metaKeywords && $type = $this->getType()) {
-            $metaKeywords = $type->getMetaKeywords();
-        }
-
-        return $metaKeywords;
-    }
-
-    /**
-     * Return the combined meta description.
-     *
-     * @return string
-     */
-    public function metaDescription()
-    {
-        $metaDescription = $this->getMetaDescription();
-
-        if (!$metaDescription && $type = $this->getType()) {
-            $metaDescription = $type->getMetaDescription();
-        }
-
-        return $metaDescription;
+        return $this->path;
     }
 
     /**
@@ -182,6 +96,10 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function getMetaTitle()
     {
+        if (!$this->meta_title) {
+            return $this->getTitle();
+        }
+
         return $this->meta_title;
     }
 
@@ -229,13 +147,13 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Get the hidden flag.
+     * Get the visible flag.
      *
      * @return bool
      */
-    public function isHidden()
+    public function isVisible()
     {
-        return $this->getFieldValue('hidden');
+        return $this->getFieldValue('visible');
     }
 
     /**

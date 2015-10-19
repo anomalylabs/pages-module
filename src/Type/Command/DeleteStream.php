@@ -1,18 +1,18 @@
 <?php namespace Anomaly\PagesModule\Type\Command;
 
-use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class DeleteTypePages
+ * Class DeleteStream
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type\Command
  */
-class DeleteTypePages implements SelfHandling
+class DeleteStream implements SelfHandling
 {
 
     /**
@@ -23,7 +23,7 @@ class DeleteTypePages implements SelfHandling
     protected $type;
 
     /**
-     * Create a new DeleteTypePages instance.
+     * Create a new DeleteStream instance.
      *
      * @param TypeInterface $type
      */
@@ -35,12 +35,10 @@ class DeleteTypePages implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param PageRepositoryInterface $pages
+     * @param StreamRepositoryInterface $streams
      */
-    public function handle(PageRepositoryInterface $pages)
+    public function handle(StreamRepositoryInterface $streams)
     {
-        foreach ($this->type->getPages() as $page) {
-            $pages->delete($page);
-        }
+        $streams->delete($streams->findBySlugAndNamespace($this->type->getSlug() . '_pages', 'pages'));
     }
 }

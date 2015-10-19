@@ -38,6 +38,8 @@ class PageResponse
      */
     public function make(PageInterface $page)
     {
-        $page->setResponse($this->response->view('anomaly.module.pages::page', compact('page')));
+        $page->setResponse(
+            $this->response->view('anomaly.module.pages::page', ['page' => $page, 'content' => $page->getContent()])
+        );
     }
 }

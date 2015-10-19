@@ -62,7 +62,7 @@ class PageEntryFormSections
                                 'page_theme_layout',
                                 'page_enabled',
                                 'page_home',
-                                'page_hidden',
+                                'page_visible',
                                 'page_exact',
                                 'page_allowed_roles'
                             ]

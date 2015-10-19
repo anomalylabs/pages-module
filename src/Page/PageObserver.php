@@ -1,13 +1,15 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\PagesModule\Page\Command\DeleteChildren;
+use Anomaly\PagesModule\Page\Command\ResetHome;
+use Anomaly\PagesModule\Page\Command\SetPath;
+use Anomaly\PagesModule\Page\Command\SetStrId;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
 use Illuminate\Contracts\Bus\Dispatcher as CommandDispatcher;
 use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PageObserver
@@ -21,39 +23,15 @@ class PageObserver extends EntryObserver
 {
 
     /**
-     * The page repository.
-     *
-     * @var PageRepositoryInterface
-     */
-    protected $pages;
-
-    /**
-     * @param EventDispatcher         $events
-     * @param CommandDispatcher       $commands
-     * @param PageRepositoryInterface $pages
-     */
-    public function __construct(EventDispatcher $events, CommandDispatcher $commands, PageRepositoryInterface $pages)
-    {
-        $this->pages = $pages;
-
-        parent::__construct($events, $commands);
-    }
-
-    /**
-     * Fired just before saving the page.
+     * Fired before saving the page.
      *
      * @param EntryInterface|PageInterface|EntryModel $entry
      */
     public function saving(EntryInterface $entry)
     {
-        /* @var Builder $query */
-        if ($entry->isHome() && $query = $entry->newQuery()) {
-            $query->update(['home' => false]);
-        }
-
-        if (!$entry->getStrId()) {
-            $entry->str_id = str_random();
-        }
+        $this->dispatch(new ResetHome($entry));
+        $this->dispatch(new SetStrid($entry));
+        $this->dispatch(new SetPath($entry));
 
         parent::saving($entry);
     }
@@ -65,9 +43,7 @@ class PageObserver extends EntryObserver
      */
     public function deleted(EntryInterface $entry)
     {
-        foreach ($entry->getChildren() as $page) {
-            $this->pages->delete($page);
-        }
+        $this->dispatch(new DeleteChildren($entry));
 
         parent::deleted($entry);
     }

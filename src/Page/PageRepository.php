@@ -23,13 +23,6 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     protected $model;
 
     /**
-     * The page collection.
-     *
-     * @var PageCollection
-     */
-    protected $pages;
-
-    /**
      * Create a new PageRepositoryInterface instance.
      *
      * @param PageModel $model
@@ -37,18 +30,30 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     public function __construct(PageModel $model)
     {
         $this->model = $model;
-
-        $this->pages = $this->model->sorted()->get();
     }
 
     /**
-     * Return all pages.
+     * Return only enabled pages.
      *
      * @return PageCollection
      */
-    public function all()
+    public function enabled()
     {
-        return $this->pages;
+        return $this->model->where('enabled', true)->get();
+    }
+
+    /**
+     * Return only nav-enabled pages.
+     *
+     * @return PageCollection
+     */
+    public function navigation()
+    {
+        return $this->model
+            ->orderBy('sort_order', 'ASC')
+            ->where('enabled', true)
+            ->where('visible', true)
+            ->get();
     }
 
     /**
@@ -63,12 +68,13 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     }
 
     /**
-     * Return only enabled pages.
+     * Find a page by it's path.
      *
-     * @return PageCollection
+     * @param $path
+     * @return PageInterface|null
      */
-    public function enabled()
+    public function findByPath($path)
     {
-        return $this->pages->enabled();
+        return $this->model->where('path', $path)->first();
     }
 }

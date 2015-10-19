@@ -7,14 +7,14 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
- * Class CreateTypeStream
+ * Class CreateStream
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type\Command
  */
-class CreateTypeStream implements SelfHandling
+class CreateStream implements SelfHandling
 {
 
     use DispatchesJobs;
@@ -27,7 +27,7 @@ class CreateTypeStream implements SelfHandling
     protected $type;
 
     /**
-     * Create a new CreateTypeStream instance.
+     * Create a new CreateStream instance.
      *
      * @param TypeInterface $type
      */

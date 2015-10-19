@@ -2,7 +2,7 @@
 
 use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
-use Anomaly\PagesModule\Type\Command\GetTypeStream;
+use Anomaly\PagesModule\Type\Command\GetStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
@@ -66,43 +66,13 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
-     * Get the meta title.
-     *
-     * @return string
-     */
-    public function getMetaTitle()
-    {
-        return $this->meta_title;
-    }
-
-    /**
-     * Get the meta keywords.
-     *
-     * @return array
-     */
-    public function getMetaKeywords()
-    {
-        return $this->meta_keywords;
-    }
-
-    /**
-     * Get the meta description.
-     *
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->meta_description;
-    }
-
-    /**
      * Get the related entry stream.
      *
      * @return StreamInterface
      */
     public function getEntryStream()
     {
-        return $this->dispatch(new GetTypeStream($this));
+        return $this->dispatch(new GetStream($this));
     }
 
     /**

@@ -96,7 +96,7 @@ class PagesController extends AdminController
             return $redirect->to('/');
         }
 
-        return $redirect->to($page->staticPrefix());
+        return $redirect->to($page->getPath());
     }
 
     /**
@@ -112,6 +112,7 @@ class PagesController extends AdminController
         $authorizer->authorize('anomaly.module.pages::pages.delete');
 
         $pages->delete($page = $pages->find($id));
+
         $page->entry->delete();
 
         return redirect()->back();

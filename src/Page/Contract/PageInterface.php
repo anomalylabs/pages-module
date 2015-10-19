@@ -19,32 +19,11 @@ interface PageInterface extends EntryInterface
 {
 
     /**
-     * Return the static prefix.
+     * Get the path.
      *
      * @return string
      */
-    public function staticPrefix();
-
-    /**
-     * Return the combined meta title.
-     *
-     * @return string
-     */
-    public function metaTitle();
-
-    /**
-     * Return the combined meta keywords.
-     *
-     * @return string
-     */
-    public function metaKeywords();
-
-    /**
-     * Return the combined meta description.
-     *
-     * @return string
-     */
-    public function metaDescription();
+    public function getPath();
 
     /**
      * Get the string ID.
@@ -104,11 +83,11 @@ interface PageInterface extends EntryInterface
     public function isEnabled();
 
     /**
-     * Get the hidden flag.
+     * Get the visible flag.
      *
      * @return bool
      */
-    public function isHidden();
+    public function isVisible();
 
     /**
      * Get the home flag.

@@ -38,27 +38,6 @@ interface TypeInterface extends EntryInterface
     public function getDescription();
 
     /**
-     * Get the meta title.
-     *
-     * @return string
-     */
-    public function getMetaTitle();
-
-    /**
-     * Get the meta keywords.
-     *
-     * @return array
-     */
-    public function getMetaKeywords();
-
-    /**
-     * Get the meta description.
-     *
-     * @return string
-     */
-    public function getMetaDescription();
-
-    /**
      * Get the related entry stream.
      *
      * @return StreamInterface

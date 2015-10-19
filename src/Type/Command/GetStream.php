@@ -5,14 +5,14 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class DeleteTypeStream
+ * Class GetStream
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Type\Command
  */
-class DeleteTypeStream implements SelfHandling
+class GetStream implements SelfHandling
 {
 
     /**
@@ -23,7 +23,7 @@ class DeleteTypeStream implements SelfHandling
     protected $type;
 
     /**
-     * Create a new DeleteTypeStream instance.
+     * Create a new GetStream instance.
      *
      * @param TypeInterface $type
      */
@@ -36,9 +36,10 @@ class DeleteTypeStream implements SelfHandling
      * Handle the command.
      *
      * @param StreamRepositoryInterface $streams
+     * @return \Anomaly\Streams\Platform\Stream\Contract\StreamInterface|null
      */
     public function handle(StreamRepositoryInterface $streams)
     {
-        $streams->delete($streams->findBySlugAndNamespace($this->type->getSlug() . '_pages', 'pages'));
+        return $streams->findBySlugAndNamespace($this->type->getSlug() . '_pages', 'pages');
     }
 }

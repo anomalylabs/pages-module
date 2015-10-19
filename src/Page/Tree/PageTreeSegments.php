@@ -42,7 +42,7 @@ class PageTreeSegments
                         'title' => 'module::message.hidden'
                     ],
                     'enabled'     => function (PageInterface $entry) {
-                        return $entry->isHidden();
+                        return !$entry->isVisible();
                     }
                 ],
                 [

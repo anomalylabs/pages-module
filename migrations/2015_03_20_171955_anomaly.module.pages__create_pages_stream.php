@@ -20,7 +20,8 @@ class AnomalyModulePagesCreatePagesStream extends Migration
     protected $stream = [
         'slug'         => 'pages',
         'title_column' => 'title',
-        'translatable' => true
+        'translatable' => true,
+        'sortable'     => true
     ];
 
     /**
@@ -37,13 +38,16 @@ class AnomalyModulePagesCreatePagesStream extends Migration
             'required'     => true
         ],
         'slug',
+        'path'             => [
+            'required' => true
+        ],
         'type'             => [
             'required' => true
         ],
         'ttl',
         'entry',
         'parent',
-        'hidden',
+        'visible',
         'enabled',
         'exact',
         'home',

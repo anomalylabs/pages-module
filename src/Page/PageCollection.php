@@ -24,7 +24,9 @@ class PageCollection extends EntryCollection
         return self::make(
             array_filter(
                 $this->items,
-                function (PageInterface $page) {
+                function ($page) {
+
+                    /* @var PageInterface $page */
                     return $page->isEnabled();
                 }
             )
@@ -36,12 +38,14 @@ class PageCollection extends EntryCollection
      *
      * @return PageCollection
      */
-    public function top()
+    public function topLevel()
     {
         return self::make(
             array_filter(
                 $this->items,
-                function (PageInterface $page) {
+                function ($page) {
+
+                    /* @var PageInterface $page */
                     return !$page->getParentId();
                 }
             )
@@ -60,7 +64,9 @@ class PageCollection extends EntryCollection
         return self::make(
             array_filter(
                 $this->items,
-                function (PageInterface $page) use ($parent) {
+                function ($page) use ($parent) {
+
+                    /* @var PageInterface $page */
                     return $page->getParentId() == $parent->getId();
                 }
             )

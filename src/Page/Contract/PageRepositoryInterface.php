@@ -22,10 +22,25 @@ interface PageRepositoryInterface extends EntryRepositoryInterface
     public function enabled();
 
     /**
+     * Return only nav-enabled pages.
+     *
+     * @return PageCollection
+     */
+    public function navigation();
+
+    /**
      * Find a page by it's string ID.
      *
      * @param $id
      * @return null|PageInterface
      */
     public function findByStrId($id);
+
+    /**
+     * Find a page by it's path.
+     *
+     * @param $path
+     * @return PageInterface|null
+     */
+    public function findByPath($path);
 }

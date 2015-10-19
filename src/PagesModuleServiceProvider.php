@@ -22,7 +22,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PagesModule\PagesModulePlugin'
+        'Anomaly\PagesModule\Page\Plugin\PagePlugin'
     ];
 
     /**
@@ -72,7 +72,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         /* @var PageInterface $page */
         foreach ($pages->enabled() as $page) {
             $router->any(
-                $page->staticPrefix(),
+                $page->getPath(),
                 [
                     'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
                     'streams::addon'             => 'anomaly.module.pages',

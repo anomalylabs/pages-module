@@ -49,10 +49,10 @@ return [
         'name'         => 'Allowed Roles',
         'instructions' => 'Which user roles are allowed to view this page?'
     ],
-    'hidden'           => [
-        'name'         => 'Hidden',
-        'label'        => 'Hide this page from navigation?',
-        'instructions' => 'Hidden pages will not display in navigation built with pages.'
+    'visible'          => [
+        'name'         => 'Visible',
+        'label'        => 'Display this page in navigation?',
+        'instructions' => 'Disable to hide this page from page generated navigation.'
     ],
     'exact'            => [
         'name'         => 'Exact URI',
