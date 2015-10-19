@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Entry\EntryPresenter;
+use Anomaly\Streams\Platform\Support\Decorator;
 use Anomaly\TextareaFieldType\TextareaFieldTypePresenter;
 
 /**
@@ -51,5 +52,23 @@ class PagePresenter extends EntryPresenter
         $typeParameters = $type->getFieldTypePresenter('additional_parameters');
 
         return array_merge((array)$typeParameters->yaml(), (array)$pageParameters->yaml());
+    }
+
+    /**
+     * Catch calls to fields on
+     * the page's related entry.
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        $entry = $this->object->getEntry();
+
+        if ($entry->hasField($key)) {
+            return (New Decorator())->decorate($entry)->{$key};
+        }
+
+        return parent::__get($key);
     }
 }

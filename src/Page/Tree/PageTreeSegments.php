@@ -25,10 +25,21 @@ class PageTreeSegments
                 'entry.edit_link',
                 [
                     'data-toggle' => 'tooltip',
+                    'class'       => 'text-success',
+                    'value'       => '<i class="fa fa-home"></i>',
+                    'attributes'  => [
+                        'title' => 'module::message.home'
+                    ],
+                    'enabled'     => function (PageInterface $entry) {
+                        return $entry->isHome();
+                    }
+                ],
+                [
+                    'data-toggle' => 'tooltip',
                     'class'       => 'text-muted',
                     'value'       => '<i class="fa fa-chain-broken"></i>',
                     'attributes'  => [
-                        'title' => 'Hidden'
+                        'title' => 'module::message.hidden'
                     ],
                     'enabled'     => function (PageInterface $entry) {
                         return $entry->isHidden();
@@ -39,7 +50,7 @@ class PageTreeSegments
                     'class'       => 'text-danger',
                     'value'       => '<i class="fa fa-ban"></i>',
                     'attributes'  => [
-                        'title' => 'Disabled'
+                        'title' => 'module::message.disabled'
                     ],
                     'enabled'     => function (PageInterface $entry) {
                         return !$entry->isEnabled();
