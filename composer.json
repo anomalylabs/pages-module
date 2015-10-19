@@ -24,10 +24,5 @@
         "psr-4": {
             "Anomaly\\PagesModule\\": "src/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.1.x-dev"
-        }
     }
 }
