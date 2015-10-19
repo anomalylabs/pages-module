@@ -245,7 +245,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function isHidden()
     {
-        return $this->hidden;
+        return $this->getFieldValue('hidden');
     }
 
     /**

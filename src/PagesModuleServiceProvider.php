@@ -87,7 +87,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      *
      * @param PageRepositoryInterface $pages
      */
-    public function map()
+    public function map(PageRepositoryInterface $pages, Router $router)
     {
         /* @var PageInterface $page */
         foreach ($pages->enabled() as $page) {

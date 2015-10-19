@@ -31,17 +31,4 @@ class PageTreeBuilder extends TreeBuilder
         'delete'
     ];
 
-    /**
-     * The item column values.
-     *
-     * @var array
-     */
-    protected $columns = [
-        'entry.edit_link',
-        [
-            'value'   => '(hidden)',
-            'enabled' => 'hidden'
-        ]
-    ];
-
 }
