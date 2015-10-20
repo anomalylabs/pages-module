@@ -70,6 +70,19 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Set the path.
+     *
+     * @param $path
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
      * Get the string ID.
      *
      * @return string

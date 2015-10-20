@@ -26,6 +26,14 @@ interface PageInterface extends EntryInterface
     public function getPath();
 
     /**
+     * Set the path.
+     *
+     * @param $string
+     * @return $this
+     */
+    public function setPath($string);
+
+    /**
      * Get the string ID.
      *
      * @return string
