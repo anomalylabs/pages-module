@@ -4,6 +4,7 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Auth\Guard;
+use Illuminate\Routing\ResponseFactory;
 
 /**
  * Class PageAuthorizer
@@ -24,6 +25,13 @@ class PageAuthorizer
     protected $guard;
 
     /**
+     * The response factory.
+     *
+     * @var ResponseFactory
+     */
+    protected $response;
+
+    /**
      * The authorizer utility.
      *
      * @var Authorizer
@@ -33,12 +41,14 @@ class PageAuthorizer
     /**
      * Create a new PageAuthorizer instance.
      *
-     * @param Guard      $guard
-     * @param Authorizer $authorizer
+     * @param Guard           $guard
+     * @param Authorizer      $authorizer
+     * @param ResponseFactory $response
      */
-    public function __construct(Guard $guard, Authorizer $authorizer)
+    public function __construct(Guard $guard, Authorizer $authorizer, ResponseFactory $response)
     {
         $this->guard      = $guard;
+        $this->response   = $response;
         $this->authorizer = $authorizer;
     }
 
@@ -75,7 +85,7 @@ class PageAuthorizer
         $allowed = $page->getAllowedRoles();
 
         if (!$allowed->isEmpty() && (!$user || !$user->hasAnyRole($allowed))) {
-            abort(403);
+            $page->setResponse($this->response->redirectTo('login'));
         }
     }
 }
