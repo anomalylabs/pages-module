@@ -42,9 +42,6 @@ class AnomalyModulePagesCreateTypesStream extends Migration
             ]
         ],
         'description',
-        'theme_layout'       => [
-            'required' => true
-        ],
         'layout'       => [
             'required' => true
         ],
