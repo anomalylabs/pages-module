@@ -34,7 +34,6 @@ class TypeFormSections
                         'layout'  => [
                             'title'  => 'module::tab.layout',
                             'fields' => [
-                                'theme_layout',
                                 'layout'
                             ]
                         ],
