@@ -38,14 +38,6 @@ class TypeFormSections
                                 'layout'
                             ]
                         ],
-                        'seo'     => [
-                            'title'  => 'module::tab.seo',
-                            'fields' => [
-                                'meta_title',
-                                'meta_keywords',
-                                'meta_description'
-                            ]
-                        ],
                         'css'     => [
                             'title'  => 'module::tab.css',
                             'fields' => [
