@@ -52,6 +52,18 @@ class PageFormBuilder extends FormBuilder
         if (!$this->getType() && !$this->getEntry()) {
             throw new \Exception('The $type parameter is required when creating a page.');
         }
+
+        if (($type = $this->getType()) && !$this->getEntry()) {
+
+            $this->fields = [
+                '*',
+                'theme_layout' => [
+                    'config' => [
+                        'default_value' => $type->getThemeLayout()
+                    ]
+                ]
+            ];
+        }
     }
 
     /**

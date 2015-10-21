@@ -59,6 +59,13 @@ interface TypeInterface extends EntryInterface
     public function getPageHandler();
 
     /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout();
+
+    /**
      * Get the related pages.
      *
      * @return PageCollection

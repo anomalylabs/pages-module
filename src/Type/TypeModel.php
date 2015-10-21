@@ -98,6 +98,16 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout()
+    {
+        return $this->theme_layout;
+    }
+
+    /**
      * Get the related pages.
      *
      * @return PageCollection
