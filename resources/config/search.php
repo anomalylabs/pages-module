@@ -6,8 +6,8 @@ return [
         'keywords'    => 'meta_keywords',
         'description' => 'meta_description',
         'enabled'     => 'enabled',
-        'view'        => 'entry.path',
-        'edit'        => 'admin/pages/edit/{entry.id}',
+        'view_path'   => 'entry.path',
+        'edit_path'   => 'admin/pages/edit/{entry.id}',
         'fields'      => [
             'path' => 'path'
         ]
