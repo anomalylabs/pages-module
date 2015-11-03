@@ -46,7 +46,7 @@ class PageObserver extends EntryObserver
     {
         $this->dispatch(new UpdatePaths($entry));
 
-        parent::saving($entry);
+        parent::saved($entry);
     }
 
     /**

@@ -1,10 +1,14 @@
 <?php
 
 return [
-    \Anomaly\PagesModule\Page\PageModel::class => [
-        'fields' => [
-            'title'
-        ],
-        'url'    => 'entry.page.path'
+    'pages' => [
+        'pages' => [
+            'fields'  => [
+                'title'
+            ],
+            'title'   => 'title',
+            'enabled' => 'entry.enabled',
+            'url'     => 'entry.page.path'
+        ]
     ]
 ];
