@@ -7,9 +7,6 @@ return [
         'description' => 'meta_description',
         'enabled'     => 'enabled',
         'view_path'   => 'entry.path',
-        'edit_path'   => 'admin/pages/edit/{entry.id}',
-        'fields'      => [
-            'path' => 'path'
-        ]
+        'edit_path'   => 'admin/pages/edit/{entry.id}'
     ]
 ];
