@@ -13,8 +13,6 @@ return [
         'fields'
     ],
     'fields' => [
-        'read',
-        'write',
-        'delete'
+        'manage'
     ]
 ];
