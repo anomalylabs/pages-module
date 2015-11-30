@@ -41,10 +41,15 @@ class GetNav implements SelfHandling
      */
     public function handle(PageRepositoryInterface $pages, Factory $view)
     {
+        $pages = $pages->navigation();
+
+        $parent = array_get($this->options, 'parent');
+
         return $view->make(
             array_get($this->options, 'view', 'anomaly.module.pages::nav'),
             [
-                'pages'   => $pages->navigation(),
+                'pages'   => $pages,
+                'parent'  => $parent,
                 'options' => $this->options
             ]
         )->render();
