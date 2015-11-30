@@ -1,9 +1,9 @@
 {% macro links(pages, collection, active, options) %}
     {% for page in pages %}
         <li class="
-            {{ collection.children(page.getObject()).isEmpty() ? '' : 'has-children' }}
-            {{ collection.children(page.getObject()).find(active.id) ? (options.has_active_class ?: 'has-active') }}
-            {{ page.id == active.id ? (options.active_class ?: 'active') }}
+            {{ collection.children(page.getObject()).isEmpty() ?: (options.active_class ?: 'dropdown') }}
+            {{ collection.children(page.getObject()).find(active.id) ? (options.active_class ?: 'active') }}
+            {{ page.id == active.id ? (options.current_class ?: 'active') }}
             {{ options.item_class }}
             ">
             <a href="{{ url(page.path) }}">
