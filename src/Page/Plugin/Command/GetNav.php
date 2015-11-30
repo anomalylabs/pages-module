@@ -43,13 +43,10 @@ class GetNav implements SelfHandling
     {
         $pages = $pages->navigation();
 
-        $parent = array_get($this->options, 'parent');
-
         return $view->make(
             array_get($this->options, 'view', 'anomaly.module.pages::nav'),
             [
                 'pages'   => $pages,
-                'parent'  => $parent,
                 'options' => $this->options
             ]
         )->render();
