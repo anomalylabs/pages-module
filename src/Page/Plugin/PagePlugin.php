@@ -1,8 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page\Plugin;
 
-use Anomaly\PagesModule\Page\Plugin\Command\FindPage;
 use Anomaly\PagesModule\Page\Plugin\Command\GetNav;
-use Anomaly\PagesModule\Page\Plugin\Command\GetPages;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
 /**
@@ -22,18 +20,6 @@ class PagePlugin extends Plugin
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction(
-                'pages',
-                function (array $parameters = []) {
-                    return $this->dispatch(new GetPages($parameters));
-                }
-            ),
-            new \Twig_SimpleFunction(
-                'page',
-                function ($identifier = null) {
-                    return $this->dispatch(new FindPage($identifier));
-                }
-            ),
             new \Twig_SimpleFunction(
                 'page_nav',
                 function (array $options = []) {

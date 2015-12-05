@@ -26,6 +26,15 @@ class PagesModuleServiceProvider extends AddonServiceProvider
     ];
 
     /**
+     * The class bindings.
+     *
+     * @var array
+     */
+    protected $bindings = [
+        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel' => 'Anomaly\PagesModule\Page\PageModel'
+    ];
+
+    /**
      * The singleton bindings.
      *
      * @var array
