@@ -22,7 +22,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PagesModule\Page\Plugin\PagePlugin'
+        'Anomaly\PagesModule\PagesModulePlugin'
     ];
 
     /**
