@@ -1,8 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page\Command;
 
-use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\Streams\Platform\Model\EloquentModel;
 use Anomaly\Streams\Platform\View\ViewTemplate;
 use Illuminate\Contracts\Bus\SelfHandling;
 
@@ -39,7 +37,7 @@ class GetPage implements SelfHandling
      *
      * @param PageRepositoryInterface $pages
      * @param ViewTemplate            $template
-     * @return PageInterface|EloquentModel|null
+     * @return \Anomaly\PagesModule\Page\Contract\PageInterface|\Anomaly\Streams\Platform\Model\EloquentModel|mixed|null
      */
     public function handle(PageRepositoryInterface $pages, ViewTemplate $template)
     {
