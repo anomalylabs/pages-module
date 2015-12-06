@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule;
 
+use Anomaly\PagesModule\Page\Command\GetPage;
 use Anomaly\PagesModule\Page\Command\RenderNav;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
@@ -30,6 +31,12 @@ class PagesModulePlugin extends Plugin
                 [
                     'is_safe' => ['html']
                 ]
+            ),
+            new \Twig_SimpleFunction(
+                'page',
+                function ($identifier = null) {
+                    return $this->dispatch(new GetPage($identifier));
+                }
             )
         ];
     }
