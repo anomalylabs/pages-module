@@ -3,6 +3,7 @@
 use Anomaly\PagesModule\Page\Command\GetPage;
 use Anomaly\PagesModule\Page\Command\RenderNav;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
+use Anomaly\Streams\Platform\Support\Decorator;
 
 /**
  * Class PagesModulePlugin
@@ -35,7 +36,7 @@ class PagesModulePlugin extends Plugin
             new \Twig_SimpleFunction(
                 'page',
                 function ($identifier = null) {
-                    return $this->dispatch(new GetPage($identifier));
+                    return (new Decorator())->decorate($this->dispatch(new GetPage($identifier)));
                 }
             )
         ];
