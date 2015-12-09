@@ -1,7 +1,9 @@
 <?php namespace Anomaly\PagesModule;
 
+use Anomaly\PagesModule\Page\Command\GetPage;
 use Anomaly\PagesModule\Page\Command\RenderNav;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
+use Anomaly\Streams\Platform\Support\Decorator;
 
 /**
  * Class PagesModulePlugin
@@ -30,6 +32,12 @@ class PagesModulePlugin extends Plugin
                 [
                     'is_safe' => ['html']
                 ]
+            ),
+            new \Twig_SimpleFunction(
+                'page',
+                function ($identifier = null) {
+                    return (new Decorator())->decorate($this->dispatch(new GetPage($identifier)));
+                }
             )
         ];
     }
