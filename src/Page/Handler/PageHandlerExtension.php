@@ -22,6 +22,6 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
      */
     public function make(PageInterface $page)
     {
-        throw new \Exception('Implement ' . __METHOD__ . ' method.');
+        throw new \Exception('Implement make() method.');
     }
 }
