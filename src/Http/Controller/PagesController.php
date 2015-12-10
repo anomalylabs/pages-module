@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageResolver;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
@@ -21,13 +22,12 @@ class PagesController extends PublicController
 
     /**
      * Return a rendered page.
-     *
+     * 
      * @param PageResolver $resolver
      * @param ViewTemplate $template
-     * @param Container    $container
-     * @return mixed
+     * @return null|\Symfony\Component\HttpFoundation\Response
      */
-    public function view(PageResolver $resolver, ViewTemplate $template, Container $container)
+    public function view(PageResolver $resolver, ViewTemplate $template)
     {
         if (!$page = $resolver->resolve()) {
             abort(404);
@@ -46,12 +46,12 @@ class PagesController extends PublicController
     /**
      * Preview a page.
      *
-     * @param PageResolver            $resolver
+     * @param ViewTemplate            $template
      * @param PageRepositoryInterface $pages
      * @param                         $id
-     * @return mixed
+     * @return null|\Symfony\Component\HttpFoundation\Response
      */
-    public function preview(Container $container, PageRepositoryInterface $pages, $id)
+    public function preview(ViewTemplate $template, PageRepositoryInterface $pages, $id)
     {
         if (!$page = $pages->findByStrId($id)) {
             abort(404);
@@ -59,7 +59,14 @@ class PagesController extends PublicController
 
         $page->setEnabled(true);
 
-        return $container->call(substr(get_class($page->getPageHandler()), 0, -9) . 'Response@make', compact('page'));
+        $type    = $page->getType();
+        $handler = $type->getPageHandler();
+
+        $template->set('page', $page);
+
+        $handler->make($page);
+
+        return $page->getResponse();
     }
 
     /**
@@ -76,8 +83,9 @@ class PagesController extends PublicController
             return $redirector->to($to, array_get($route->getAction(), 'status', 302));
         }
 
+        /* @var PageInterface $page */
         if ($page = $pages->find(array_get($route->getAction(), 'anomaly.module.pages::page', 0))) {
-            return $redirector->to($page->path(), array_get($route->getAction(), 'status', 302));
+            return $redirector->to($page->getPath(), array_get($route->getAction(), 'status', 302));
         }
 
         abort(404);
