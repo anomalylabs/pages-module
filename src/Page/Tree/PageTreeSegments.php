@@ -47,6 +47,20 @@ class PageTreeSegments
                 ],
                 [
                     'data-toggle' => 'tooltip',
+                    'class'       => 'text-muted',
+                    'value'       => '<i class="fa fa-lock"></i>',
+                    'attributes'  => [
+                        'title' => 'module::message.restricted'
+                    ],
+                    'enabled'     => function (PageInterface $entry) {
+
+                        $roles = $entry->getAllowedRoles();
+
+                        return !$roles->isEmpty();
+                    }
+                ],
+                [
+                    'data-toggle' => 'tooltip',
                     'class'       => 'text-danger',
                     'value'       => '<i class="fa fa-ban"></i>',
                     'attributes'  => [
