@@ -43,8 +43,8 @@ class PagesController extends AdminController
      */
     public function create(PageEntryFormBuilder $form, PageRepositoryInterface $pages)
     {
-        $this->dispatch(new AddEntryFormFromRequest($form));
         $this->dispatch(new AddPageFormFromRequest($form));
+        $this->dispatch(new AddEntryFormFromRequest($form));
 
         if ($parent = $this->request->get('parent')) {
 
