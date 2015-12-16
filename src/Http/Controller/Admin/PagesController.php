@@ -69,8 +69,8 @@ class PagesController extends AdminController
     {
         $page = $pages->find($id);
 
-        $this->dispatch(new AddEntryFormFromPage($form, $page));
         $this->dispatch(new AddPageFormFromPage($form, $page));
+        $this->dispatch(new AddEntryFormFromPage($form, $page));
 
         return $form->render($id);
     }
