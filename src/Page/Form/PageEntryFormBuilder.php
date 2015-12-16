@@ -36,4 +36,17 @@ class PageEntryFormBuilder extends MultipleFormBuilder
         $page->entry_id   = $entry->getId();
         $page->entry_type = get_class($entry);
     }
+
+    /**
+     * Get the contextual entry ID.
+     *
+     * @return int|mixed|null
+     */
+    public function getContextualId()
+    {
+        /* @var FormBuilder $form */
+        $form = $this->forms->get('page');
+
+        return $form->getContextualId();
+    }
 }
