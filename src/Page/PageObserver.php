@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Command\DeleteChildren;
+use Anomaly\PagesModule\Page\Command\DeleteEntry;
 use Anomaly\PagesModule\Page\Command\ResetHome;
 use Anomaly\PagesModule\Page\Command\SetPath;
 use Anomaly\PagesModule\Page\Command\SetStrId;
@@ -57,6 +58,7 @@ class PageObserver extends EntryObserver
     public function deleted(EntryInterface $entry)
     {
         $this->dispatch(new DeleteChildren($entry));
+        $this->dispatch(new DeleteEntry($entry));
 
         parent::deleted($entry);
     }
