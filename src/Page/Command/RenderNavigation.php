@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -47,7 +48,9 @@ class RenderNavigation implements SelfHandling
     {
         $options = $this->options;
 
-        $pages = $pages->navigation();
+        /* @var PageCollection $pages */
+        $pages = $pages->sorted();
+        $pages = $pages->visible();
 
         if ($root = $options->get('root')) {
             if ($page = $this->dispatch(new GetParentPage($root, $pages))) {
