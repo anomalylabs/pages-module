@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
 /**
  * Class PageCollection
  *
- * @link          http://anomaly.is/streams-platform
+ * @page          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page
@@ -34,42 +34,78 @@ class PageCollection extends EntryCollection
     }
 
     /**
+     * Alias for $this->top()
+     *
+     * @return PageCollection
+     */
+    public function root()
+    {
+        return $this->top();
+    }
+
+    /**
      * Return only top level pages.
      *
      * @return PageCollection
      */
-    public function topLevel()
+    public function top()
     {
-        return self::make(
-            array_filter(
-                $this->items,
-                function ($page) {
+        return $this->filter(
+            function ($item) {
 
-                    /* @var PageInterface $page */
-                    return !$page->getParentId();
-                }
-            )
+                /* @var PageInterface $item */
+                return !$item->getParentId();
+            }
         );
     }
 
     /**
-     * Return only children of
-     * the provided parent.
+     * Return only children of the provided item.
      *
-     * @param PageInterface $parent
+     * @param $parent
      * @return PageCollection
      */
-    public function children(PageInterface $parent)
+    public function children($parent)
     {
-        return self::make(
-            array_filter(
-                $this->items,
-                function ($page) use ($parent) {
+        /* @var PageInterface $parent */
+        return $this->filter(
+            function ($item) use ($parent) {
 
-                    /* @var PageInterface $page */
-                    return $page->getParentId() == $parent->getId();
-                }
-            )
+                /* @var PageInterface $item */
+                return $item->getParentId() == $parent->getId();
+            }
         );
+    }
+
+    /**
+     * Return whether the provided
+     * page has an active child.
+     *
+     * @param $parent
+     * @return bool
+     */
+    public function hasActive($parent, $active)
+    {
+        /* @var PageInterface $parent */
+        /* @var PageInterface $active */
+        if ($active->getId() == $parent->getId()) {
+            return false;
+        }
+
+        if ($active->getParentId() == $parent->getId()) {
+            return true;
+        }
+
+        $children = $this->children($parent);
+
+        if (!$children->isEmpty()) {
+            foreach ($children as $child) {
+                if ($children->hasActive($child, $active)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
