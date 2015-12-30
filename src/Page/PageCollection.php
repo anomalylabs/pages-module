@@ -6,7 +6,7 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
 /**
  * Class PageCollection
  *
- * @link          http://anomaly.is/streams-platform
+ * @page          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PagesModule\Page
@@ -15,22 +15,70 @@ class PageCollection extends EntryCollection
 {
 
     /**
+     * Return only exact pages.
+     *
+     * @param bool $exact
+     * @return PageCollection
+     */
+    public function exact($exact = true)
+    {
+        $enabled = $this->enabled();
+
+        return $enabled->filter(
+            function ($page) use ($exact) {
+
+                /* @var PageInterface $page */
+                return $page->isExact() == $exact;
+            }
+        );
+    }
+
+    /**
      * Return only enabled pages.
      *
      * @return PageCollection
      */
-    public function enabled()
+    public function enabled($enabled = true)
     {
         return self::make(
             array_filter(
                 $this->items,
-                function ($page) {
+                function ($page) use ($enabled) {
 
                     /* @var PageInterface $page */
-                    return $page->isEnabled();
+                    return $page->isEnabled() == $enabled;
                 }
             )
         );
+    }
+
+    /**
+     * Return only visible pages.
+     *
+     * @param bool $visible
+     * @return PageCollection
+     */
+    public function visible($visible = true)
+    {
+        $enabled = $this->enabled();
+
+        return $enabled->filter(
+            function ($page) use ($visible) {
+
+                /* @var PageInterface $page */
+                return $page->isVisible() == $visible;
+            }
+        );
+    }
+
+    /**
+     * Alias for $this->top()
+     *
+     * @return PageCollection
+     */
+    public function root()
+    {
+        return $this->top();
     }
 
     /**
@@ -38,38 +86,64 @@ class PageCollection extends EntryCollection
      *
      * @return PageCollection
      */
-    public function topLevel()
+    public function top()
     {
-        return self::make(
-            array_filter(
-                $this->items,
-                function ($page) {
+        return $this->filter(
+            function ($item) {
 
-                    /* @var PageInterface $page */
-                    return !$page->getParentId();
-                }
-            )
+                /* @var PageInterface $item */
+                return !$item->getParentId();
+            }
         );
     }
 
     /**
-     * Return only children of
-     * the provided parent.
+     * Return only children of the provided item.
      *
-     * @param PageInterface $parent
+     * @param $parent
      * @return PageCollection
      */
-    public function children(PageInterface $parent)
+    public function children($parent)
     {
-        return self::make(
-            array_filter(
-                $this->items,
-                function ($page) use ($parent) {
+        /* @var PageInterface $parent */
+        return $this->filter(
+            function ($item) use ($parent) {
 
-                    /* @var PageInterface $page */
-                    return $page->getParentId() == $parent->getId();
-                }
-            )
+                /* @var PageInterface $item */
+                return $item->getParentId() == $parent->getId();
+            }
         );
+    }
+
+    /**
+     * Return whether the provided
+     * page has an active child.
+     *
+     * @param $parent
+     * @return bool
+     */
+    public function hasActive($parent, $active)
+    {
+        /* @var PageInterface $parent */
+        /* @var PageInterface $active */
+        if ($active->getId() == $parent->getId()) {
+            return false;
+        }
+
+        if ($active->getParentId() == $parent->getId()) {
+            return true;
+        }
+
+        $children = $this->children($parent);
+
+        if (!$children->isEmpty()) {
+            foreach ($children as $child) {
+                if ($children->hasActive($child, $active)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

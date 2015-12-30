@@ -15,20 +15,6 @@ interface PageRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
-     * Return only enabled pages.
-     *
-     * @return PageCollection
-     */
-    public function enabled();
-
-    /**
-     * Return only nav-enabled pages.
-     *
-     * @return PageCollection
-     */
-    public function navigation();
-
-    /**
      * Find a page by it's string ID.
      *
      * @param $id

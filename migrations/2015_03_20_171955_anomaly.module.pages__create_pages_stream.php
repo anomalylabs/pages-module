@@ -37,7 +37,9 @@ class AnomalyModulePagesCreatePagesStream extends Migration
             'translatable' => true,
             'required'     => true
         ],
-        'slug',
+        'slug'             => [
+            'required' => true
+        ],
         'path'             => [
             'required' => true
         ],

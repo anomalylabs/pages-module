@@ -33,30 +33,6 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     }
 
     /**
-     * Return only enabled pages.
-     *
-     * @return PageCollection
-     */
-    public function enabled()
-    {
-        return $this->model->where('enabled', true)->get();
-    }
-
-    /**
-     * Return only nav-enabled pages.
-     *
-     * @return PageCollection
-     */
-    public function navigation()
-    {
-        return $this->model
-            ->orderBy('sort_order', 'ASC')
-            ->where('enabled', true)
-            ->where('visible', true)
-            ->get();
-    }
-
-    /**
      * Find a page by it's string ID.
      *
      * @param $id

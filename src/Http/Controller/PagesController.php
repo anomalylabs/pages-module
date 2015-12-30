@@ -5,7 +5,6 @@ use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageResolver;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Anomaly\Streams\Platform\View\ViewTemplate;
-use Illuminate\Container\Container;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\Route;
 
@@ -22,7 +21,7 @@ class PagesController extends PublicController
 
     /**
      * Return a rendered page.
-     * 
+     *
      * @param PageResolver $resolver
      * @param ViewTemplate $template
      * @return null|\Symfony\Component\HttpFoundation\Response

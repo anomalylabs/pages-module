@@ -84,6 +84,13 @@ interface PageInterface extends EntryInterface
     public function setEnabled($enabled);
 
     /**
+     * Get the exact flag.
+     *
+     * @return bool
+     */
+    public function isExact();
+
+    /**
      * Get the enabled flag.
      *
      * @return bool

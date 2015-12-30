@@ -6,6 +6,7 @@ use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
+use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -48,6 +49,17 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var null|Response
      */
     protected $response = null;
+
+    /**
+     * Sort the query.
+     *
+     * @param Builder $builder
+     * @param string  $direction
+     */
+    public function scopeSorted(Builder $builder, $direction = 'asc')
+    {
+        $builder->orderBy('parent_id', $direction)->orderBy('sort_order', $direction);
+    }
 
     /**
      * Get the path.
@@ -137,6 +149,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         $this->enabled = $enabled;
 
         return $this;
+    }
+
+    /**
+     * Get the exact flag.
+     *
+     * @return bool
+     */
+    public function isExact()
+    {
+        return $this->exact;
     }
 
     /**

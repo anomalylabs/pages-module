@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Illuminate\Routing\Router;
 
@@ -78,14 +79,32 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      */
     public function map(PageRepositoryInterface $pages, Router $router)
     {
+        /* @var PageCollection $pages */
+        $pages = $pages->sorted();
+
         /* @var PageInterface $page */
-        foreach ($pages->enabled() as $page) {
+        foreach ($pages->exact(true) as $page) {
             $router->any(
                 $page->getPath(),
                 [
                     'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
                     'streams::addon'             => 'anomaly.module.pages',
                     'anomaly.module.pages::page' => $page->getId()
+                ]
+            );
+        }
+
+        /* @var PageInterface $page */
+        foreach ($pages->exact(false) as $page) {
+            $router->any(
+                $page->getPath() . '/{any?}',
+                [
+                    'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
+                    'streams::addon'             => 'anomaly.module.pages',
+                    'anomaly.module.pages::page' => $page->getId(),
+                    'where'                      => [
+                        'any' => '(.*)'
+                    ]
                 ]
             );
         }
