@@ -44,7 +44,7 @@ class PageBreadcrumb
 
         $this->loadParent($page, $breadcrumbs);
 
-        foreach ($breadcrumbs as $key => $url) {
+        foreach (array_reverse($breadcrumbs) as $key => $url) {
             $this->breadcrumbs->add($key, $url);
         }
     }
