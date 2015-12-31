@@ -124,6 +124,10 @@ class PageCollection extends EntryCollection
      */
     public function hasActive($parent, $active)
     {
+        if (!$active) {
+            return false;
+        }
+
         /* @var PageInterface $parent */
         /* @var PageInterface $active */
         if ($active->getId() == $parent->getId()) {
