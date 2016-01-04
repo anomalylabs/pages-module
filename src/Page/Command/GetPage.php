@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\PagesModule\Page\PagePresenter;
 use Anomaly\Streams\Platform\Model\EloquentModel;
 use Anomaly\Streams\Platform\View\ViewTemplate;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -51,8 +52,16 @@ class GetPage implements SelfHandling
             return $pages->find($this->identifier);
         }
 
-        if (!is_numeric($this->identifier)) {
+        if (is_string($this->identifier)) {
             return $pages->findByPath($this->identifier);
+        }
+
+        if ($this->identifier instanceof PageInterface) {
+            return $this->identifier;
+        }
+
+        if ($this->identifier instanceof PagePresenter) {
+            return $this->identifier->getObject();
         }
 
         return null;

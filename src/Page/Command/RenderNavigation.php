@@ -53,7 +53,7 @@ class RenderNavigation implements SelfHandling
         $pages = $pages->visible();
 
         if ($root = $options->get('root')) {
-            if ($page = $this->dispatch(new GetParentPage($root, $pages))) {
+            if ($page = $this->dispatch(new GetPage($root))) {
                 $options->put('parent', $page);
             }
         }
