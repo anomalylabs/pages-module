@@ -98,24 +98,6 @@ class PageCollection extends EntryCollection
     }
 
     /**
-     * Return only children of the provided item.
-     *
-     * @param $parent
-     * @return PageCollection
-     */
-    public function children($parent)
-    {
-        /* @var PageInterface $parent */
-        return $this->filter(
-            function ($item) use ($parent) {
-
-                /* @var PageInterface $item */
-                return $item->getParentId() == $parent->getId();
-            }
-        );
-    }
-
-    /**
      * Return whether the provided
      * page has an active child.
      *
@@ -149,5 +131,23 @@ class PageCollection extends EntryCollection
         }
 
         return false;
+    }
+
+    /**
+     * Return only children of the provided item.
+     *
+     * @param $parent
+     * @return PageCollection
+     */
+    public function children($parent)
+    {
+        /* @var PageInterface $parent */
+        return $this->filter(
+            function ($item) use ($parent) {
+
+                /* @var PageInterface $item */
+                return $item->getParentId() == $parent->getId();
+            }
+        );
     }
 }

@@ -2,7 +2,7 @@
 
 return [
     'pages'  => [
-        'name'  => 'Pages',
+        'name'   => 'Pages',
         'option' => [
             'read'   => 'Can read pages?',
             'write'  => 'Can write pages?',
@@ -10,7 +10,7 @@ return [
         ]
     ],
     'types'  => [
-        'name'  => 'Types',
+        'name'   => 'Types',
         'option' => [
             'read'   => 'Can read types?',
             'write'  => 'Can write types?',
@@ -19,7 +19,7 @@ return [
         ]
     ],
     'fields' => [
-        'name'  => 'Fields',
+        'name'   => 'Fields',
         'option' => [
             'manage' => 'Can manage fields?',
         ]

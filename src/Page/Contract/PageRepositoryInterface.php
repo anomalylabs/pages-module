@@ -1,6 +1,5 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
-use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 /**

@@ -24,9 +24,9 @@ class PageTreeSegments
             [
                 'entry.edit_link',
                 [
-                    'class'       => 'text-muted',
-                    'value'       => function (PageInterface $entry) {
-                        return '<span class="small" style="padding-right:10px;">'.$entry->type->name.'</span>';
+                    'class' => 'text-muted',
+                    'value' => function (PageInterface $entry) {
+                        return '<span class="small" style="padding-right:10px;">' . $entry->type->name . '</span>';
                     },
                 ],
                 [
