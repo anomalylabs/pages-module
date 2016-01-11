@@ -24,6 +24,12 @@ class PageTreeSegments
             [
                 'entry.edit_link',
                 [
+                    'class'       => 'text-muted',
+                    'value'       => function (PageInterface $entry) {
+                        return '<span class="small" style="padding-right:10px;">'.$entry->type->name.'</span>';
+                    },
+                ],
+                [
                     'data-toggle' => 'tooltip',
                     'class'       => 'text-success',
                     'value'       => '<i class="fa fa-home"></i>',
