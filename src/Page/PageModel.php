@@ -33,7 +33,9 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var array
      */
     protected $with = [
-        'type'
+        'type',
+        'translations',
+        'allowedRoles'
     ];
 
     /**
