@@ -25,7 +25,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      *
      * @var int
      */
-    protected $ttl = 60 * 24; // 1 day
+    protected $ttl = 99999;
 
     /**
      * Always eager load these.
