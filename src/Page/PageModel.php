@@ -25,7 +25,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      *
      * @var int
      */
-    protected $cacheMinutes = 99999;
+    protected $ttl = 99999;
 
     /**
      * Always eager load these.
@@ -34,6 +34,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     protected $with = [
         'type',
+        'entry',
         'translations',
         'allowedRoles'
     ];
