@@ -230,7 +230,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function getAllowedRoles()
     {
-        return $this->allowedRoles()->get();
+        return $this->allowed_roles;
     }
 
     /**
