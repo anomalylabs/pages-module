@@ -4,7 +4,7 @@ return [
     'pages'      => [
         'name' => 'Pages'
     ],
-    'page_types' => [
+    'types' => [
         'name' => 'Page Types'
     ]
 ];
