@@ -33,7 +33,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var array
      */
     protected $with = [
-        'entry'
+        'translations'
     ];
 
     /**
