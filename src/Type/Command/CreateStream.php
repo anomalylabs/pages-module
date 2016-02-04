@@ -53,7 +53,8 @@ class CreateStream implements SelfHandling
                 'namespace'                         => 'pages',
                 'slug'                              => $this->type->getSlug() . '_pages',
                 'translatable'                      => true,
-                'locked'                            => false
+                'locked'                            => false,
+                'hidden'                            => true
             ]
         );
     }
