@@ -73,7 +73,7 @@ class TypesController extends AdminController
         $type = $types->find($id);
 
         $breadcrumbs->put($type->getName(), 'admin/pages/types/edit/' . $type->getId());
-        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/assignments/' . $type->getId());
+        $breadcrumbs->put('streams::breadcrumbs.assignments', 'admin/pages/types/assignments/' . $type->getId());
 
         return $table
             ->setButtons(
@@ -130,7 +130,7 @@ class TypesController extends AdminController
     ) {
         $type = $types->find($id);
 
-        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/assignments/' . $type->getId());
+        $breadcrumbs->put('streams::breadcrumbs.assignments', 'admin/pages/types/assignments/' . $type->getId());
 
         return $form->render($assignment);
     }
