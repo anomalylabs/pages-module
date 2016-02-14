@@ -38,10 +38,10 @@ class PagesModule extends Module
         'types'  => [
             'buttons' => [
                 'new_type',
-                'add_field' => [
+                'assign_fields' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
-                    'enabled'     => 'admin/pages/types/fields/*',
+                    'enabled'     => 'admin/pages/types/assignments/*',
                     'href'        => 'admin/pages/ajax/choose_field/{request.route.parameters.id}'
                 ]
             ]

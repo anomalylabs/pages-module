@@ -41,7 +41,7 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $buttons = [
         'edit',
-        'fields'
+        'assignments'
     ];
 
     /**

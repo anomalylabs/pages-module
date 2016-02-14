@@ -7,10 +7,10 @@
 
 <div class="modal-body">
     {% if not types.isEmpty() %}
-        <ul class="nav nav-stacked">
+        <ul class="nav nav-pills nav-stacked">
             {% for type in types %}
-                <li>
-                    <a href="{{ url_to('admin/pages/create?type=' ~ type.id ~ '&parent=' ~ request_get('parent')) }}">
+                <li class="nav-item">
+                    <a href="{{ url_to('admin/pages/create?type=' ~ type.id ~ '&parent=' ~ request_get('parent')) }}" class="nav-link">
                         <strong>{{ type.name }}</strong>
                         <br>
                         <small>{{ type.description }}</small>

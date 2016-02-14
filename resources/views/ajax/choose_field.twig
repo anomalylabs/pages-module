@@ -10,7 +10,7 @@
         <ul class="nav nav-stacked">
             {% for field in fields %}
                 <li>
-                    <a href="{{ url_to('admin/pages/types/fields/' ~ id ~ '/assign/' ~ field.id) }}">
+                    <a href="{{ url_to('admin/pages/types/assignments/' ~ id ~ '/assign/' ~ field.id) }}">
                         <strong>{{ trans(field.name) }}</strong>
                     </a>
                 </li>
