@@ -50,9 +50,7 @@ class AnomalyModulePagesCreateTypesStream extends Migration
         ],
         'page_handler' => [
             'required' => true
-        ],
-        'css',
-        'js'
+        ]
     ];
 
 }

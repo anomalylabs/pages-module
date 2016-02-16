@@ -66,9 +66,7 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'theme_layout'     => [
             'required' => true
         ],
-        'allowed_roles',
-        'css',
-        'js'
+        'allowed_roles'
     ];
 
 }

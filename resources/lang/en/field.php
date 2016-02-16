@@ -21,14 +21,6 @@ return [
         'name'         => 'Meta Keywords',
         'instructions' => 'Enter the page\'s SEO keywords. Use ONLY as many as makes sense.'
     ],
-    'css'              => [
-        'name'         => 'CSS',
-        'instructions' => 'This CSS will be added to the <strong>styles.css</strong> asset collection.'
-    ],
-    'js'               => [
-        'name'         => 'JS',
-        'instructions' => 'This script will be added to the <strong>scripts.js</strong> asset collection.'
-    ],
     'name'             => [
         'name'         => 'Name',
         'instructions' => 'What is the name of this page type?'
