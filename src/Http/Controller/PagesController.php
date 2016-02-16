@@ -56,7 +56,7 @@ class PagesController extends PublicController
             abort(404);
         }
 
-        $page->setEnabled(true);
+        $page->setAttribute('enabled', true);
 
         $type    = $page->getType();
         $handler = $type->getPageHandler();

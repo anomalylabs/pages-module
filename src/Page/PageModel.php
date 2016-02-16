@@ -72,19 +72,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Set the path.
-     *
-     * @param $path
-     * @return $this
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
      * Get the string ID.
      *
      * @return string
@@ -136,19 +123,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getMetaDescription()
     {
         return $this->meta_description;
-    }
-
-    /**
-     * Set the enabled flag.
-     *
-     * @param $enabled
-     * @return $this
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-
-        return $this;
     }
 
     /**

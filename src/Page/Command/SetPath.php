@@ -37,19 +37,21 @@ class SetPath implements SelfHandling
     public function handle()
     {
         if (!$this->page->isEnabled()) {
-            $this->page->path = 'pages/preview/' . $this->page->getStrId();
+            $path = 'pages/preview/' . $this->page->getStrId();
         } else {
             if ($parent = $this->page->getParent()) {
                 if ($parent->isHome()) {
-                    $this->page->path = $parent->getSlug() . '/' . $this->page->getSlug();
+                    $path = $parent->getSlug() . '/' . $this->page->getSlug();
                 } else {
-                    $this->page->path = $parent->getPath() . '/' . $this->page->getSlug();
+                    $path = $parent->getPath() . '/' . $this->page->getSlug();
                 }
             } elseif ($this->page->isHome()) {
-                $this->page->path = '/';
+                $path = '/';
             } else {
-                $this->page->path = $this->page->getSlug();
+                $path = $this->page->getSlug();
             }
         }
+
+        $this->page->setAttribute('path', $path);
     }
 }

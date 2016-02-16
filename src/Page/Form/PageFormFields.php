@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Form;
 
 use Anomaly\PagesModule\Page\Command\GetRealPath;
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -22,6 +23,11 @@ class PageFormFields implements SelfHandling
         $type   = $builder->getType();
         $parent = $builder->getParent();
 
+        /* @var PageInterface $entry */
+        if ($entry = $builder->getFormEntry()) {
+            $parent = $entry->getParent();
+        }
+
         $builder->setFields(
             [
                 '*',
@@ -32,7 +38,7 @@ class PageFormFields implements SelfHandling
                 ],
                 'theme_layout' => [
                     'config' => [
-                        'default_value' => $type->getThemeLayout()
+                        'default_value' => $type ? $type->getThemeLayout() : null
                     ]
                 ]
             ]

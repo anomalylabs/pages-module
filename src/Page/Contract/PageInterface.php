@@ -26,14 +26,6 @@ interface PageInterface extends EntryInterface
     public function getPath();
 
     /**
-     * Set the path.
-     *
-     * @param $string
-     * @return $this
-     */
-    public function setPath($string);
-
-    /**
      * Get the string ID.
      *
      * @return string
@@ -74,14 +66,6 @@ interface PageInterface extends EntryInterface
      * @return string
      */
     public function getMetaDescription();
-
-    /**
-     * Set the enabled flag.
-     *
-     * @param $enabled
-     * @return $this
-     */
-    public function setEnabled($enabled);
 
     /**
      * Get the exact flag.
