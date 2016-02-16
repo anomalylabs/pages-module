@@ -66,18 +66,6 @@ class PageEntryFormSections
                                 'page_exact',
                                 'page_allowed_roles'
                             ]
-                        ],
-                        'css'     => [
-                            'title'  => 'module::tab.css',
-                            'fields' => [
-                                'page_css'
-                            ]
-                        ],
-                        'js'      => [
-                            'title'  => 'module::tab.js',
-                            'fields' => [
-                                'page_js'
-                            ]
                         ]
                     ]
                 ]

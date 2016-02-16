@@ -43,18 +43,6 @@ class AnomalyModulePagesCreatePagesFields extends Migration
         'meta_title'       => 'anomaly.field_type.text',
         'meta_description' => 'anomaly.field_type.textarea',
         'meta_keywords'    => 'anomaly.field_type.tags',
-        'css'              => [
-            'type'   => 'anomaly.field_type.editor',
-            'config' => [
-                'mode' => 'css'
-            ]
-        ],
-        'js'               => [
-            'type'   => 'anomaly.field_type.editor',
-            'config' => [
-                'mode' => 'javascript'
-            ]
-        ],
         'layout'           => [
             'type'   => 'anomaly.field_type.editor',
             'config' => [
