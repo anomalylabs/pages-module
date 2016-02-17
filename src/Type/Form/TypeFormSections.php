@@ -21,23 +21,17 @@ class TypeFormSections
         $builder->setSections(
             [
                 'general' => [
-                    'tabs' => [
-                        'general' => [
-                            'title'  => 'module::tab.general',
-                            'fields' => [
-                                'name',
-                                'slug',
-                                'description',
-                                'page_handler'
-                            ]
-                        ],
-                        'layout'  => [
-                            'title'  => 'module::tab.layout',
-                            'fields' => [
-                                'theme_layout',
-                                'layout'
-                            ]
-                        ]
+                    'fields' => [
+                        'name',
+                        'slug',
+                        'description',
+                        'page_handler'
+                    ]
+                ],
+                'layout'  => [
+                    'fields' => [
+                        'theme_layout',
+                        'layout'
                     ]
                 ]
             ]

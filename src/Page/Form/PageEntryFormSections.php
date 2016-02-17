@@ -24,49 +24,41 @@ class PageEntryFormSections
         $builder->setSections(
             [
                 'general' => [
-                    'tabs' => [
-                        'general' => [
-                            'title'  => 'module::tab.page',
-                            'fields' => [
-                                'page_title',
-                                'page_slug'
-                            ]
-                        ],
-                        'fields'  => [
-                            'title'  => 'module::tab.fields',
-                            'fields' => function (PageEntryFormBuilder $builder) {
-                                return array_map(
-                                    function (FieldType $field) {
-                                        return 'entry_' . $field->getField();
-                                    },
-                                    array_filter(
-                                        $builder->getFormFields()->base()->all(),
-                                        function (FieldType $field) {
-                                            return (!$field->getEntry() instanceof PageModel);
-                                        }
-                                    )
-                                );
-                            }
-                        ],
-                        'seo'     => [
-                            'title'  => 'module::tab.seo',
-                            'fields' => [
-                                'page_meta_title',
-                                'page_meta_keywords',
-                                'page_meta_description'
-                            ]
-                        ],
-                        'options' => [
-                            'title'  => 'module::tab.options',
-                            'fields' => [
-                                'page_theme_layout',
-                                'page_enabled',
-                                'page_home',
-                                'page_visible',
-                                'page_exact',
-                                'page_allowed_roles'
-                            ]
-                        ]
+                    'fields' => [
+                        'page_title',
+                        'page_slug'
+                    ]
+                ],
+                'fields'  => [
+                    'fields' => function (PageEntryFormBuilder $builder) {
+                        return array_map(
+                            function (FieldType $field) {
+                                return 'entry_' . $field->getField();
+                            },
+                            array_filter(
+                                $builder->getFormFields()->base()->all(),
+                                function (FieldType $field) {
+                                    return (!$field->getEntry() instanceof PageModel);
+                                }
+                            )
+                        );
+                    }
+                ],
+                'seo'     => [
+                    'fields' => [
+                        'page_meta_title',
+                        'page_meta_keywords',
+                        'page_meta_description'
+                    ]
+                ],
+                'options' => [
+                    'fields' => [
+                        'page_theme_layout',
+                        'page_enabled',
+                        'page_home',
+                        'page_visible',
+                        'page_exact',
+                        'page_allowed_roles'
                     ]
                 ]
             ]
