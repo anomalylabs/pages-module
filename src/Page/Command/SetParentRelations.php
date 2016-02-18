@@ -8,9 +8,9 @@ use Illuminate\Contracts\Bus\SelfHandling;
 /**
  * Class SetParentRelations
  *
- * @page          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @page          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Command
  */
 class SetParentRelations implements SelfHandling
