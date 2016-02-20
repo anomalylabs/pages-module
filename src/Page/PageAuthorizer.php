@@ -95,7 +95,9 @@ class PageAuthorizer
         $allowed = $page->getAllowedRoles();
 
         if (!$allowed->isEmpty() && (!$user || !$user->hasAnyRole($allowed))) {
-            $page->setResponse($this->response->redirectGuest($this->config->get('streams::access.login', 'login')));
+            $page->setResponse(
+                $this->response->redirectGuest($this->config->get('anomaly.module.users::paths.login', 'login'))
+            );
         }
     }
 }
