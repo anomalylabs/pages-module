@@ -18,7 +18,7 @@
         }
     ],
     "support": {
-        "email": "support@anomaly.is"
+        "email": "support@pyrocms.com"
     },
     "autoload": {
         "psr-4": {
