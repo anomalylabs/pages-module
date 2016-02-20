@@ -27,6 +27,10 @@ class AnomalyModulePagesCreatePagesFields extends Migration
                 'type'    => '-'
             ]
         ],
+        'content'          => [
+            'type'   => 'anomaly.field_type.wysiwyg',
+            'locked' => 0 // Used with seeded pages.
+        ],
         'path'             => 'anomaly.field_type.text',
         'enabled'          => [
             'type'   => 'anomaly.field_type.boolean',

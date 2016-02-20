@@ -68,5 +68,8 @@ return [
     'handler'          => [
         'name'         => 'Handler',
         'instructions' => 'The page handler is responsible for building the HTTP response for a page.'
+    ],
+    'content'          => [
+        'name' => 'Content'
     ]
 ];

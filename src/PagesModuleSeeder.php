@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule;
 
+use Anomaly\PagesModule\Seeder\PageSeeder;
 use Anomaly\PagesModule\Seeder\TypeSeeder;
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 
@@ -20,5 +21,6 @@ class PagesModuleSeeder extends Seeder
     public function run()
     {
         $this->call(TypeSeeder::class);
+        $this->call(PageSeeder::class);
     }
 }
