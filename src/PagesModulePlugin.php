@@ -27,7 +27,7 @@ class PagesModulePlugin extends Plugin
     {
         return [
             new \Twig_SimpleFunction(
-                'page_nav',
+                'structure',
                 function ($root = null) {
                     return new PluginCriteria(
                         'render',
