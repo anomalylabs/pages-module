@@ -57,6 +57,12 @@ class PageSeeder extends Seeder
             ]
         );
 
+        $login = (new PagesDefaultPagesEntryModel())->create(
+            [
+                'content' => '{{ form(\'login\') }}'
+            ]
+        );
+
         $this->pages->create(
             [
                 'en'           => [
@@ -69,6 +75,19 @@ class PageSeeder extends Seeder
                 'home'         => true,
                 'theme_layout' => 'theme::layouts/default.twig'
             ]
-        );
+        )->allowedRoles()->sync([]);
+
+        $this->pages->create(
+            [
+                'en'           => [
+                    'title' => 'Login'
+                ],
+                'slug'         => 'login',
+                'entry'        => $login,
+                'type'         => $type,
+                'enabled'      => true,
+                'theme_layout' => 'theme::layouts/default.twig'
+            ]
+        )->allowedRoles()->sync([]);
     }
 }
