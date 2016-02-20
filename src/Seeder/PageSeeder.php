@@ -59,7 +59,7 @@ class PageSeeder extends Seeder
 
         $login = (new PagesDefaultPagesEntryModel())->create(
             [
-                'content' => '{{ form(\'login\') }}'
+                'content' => '{{ form(\'login\').successMessage(\'You are now logged in.\')|raw }}'
             ]
         );
 
