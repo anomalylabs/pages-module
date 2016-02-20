@@ -30,8 +30,9 @@ class AnomalyModulePagesCreateTypesStream extends Migration
      */
     protected $assignments = [
         'name'         => [
-            'required' => true,
-            'unique'   => true
+            'translatable' => true,
+            'required'     => true,
+            'unique'       => true
         ],
         'slug'         => [
             'required' => true,
@@ -41,14 +42,16 @@ class AnomalyModulePagesCreateTypesStream extends Migration
                 'type'    => '_'
             ]
         ],
-        'description',
+        'description'  => [
+            'translatable' => true
+        ],
         'theme_layout' => [
             'required' => true
         ],
         'layout'       => [
             'required' => true
         ],
-        'page_handler' => [
+        'handler'      => [
             'required' => true
         ]
     ];

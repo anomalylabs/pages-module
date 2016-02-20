@@ -74,11 +74,11 @@ class AnomalyModulePagesCreatePagesFields extends Migration
                 'related' => 'Anomaly\PagesModule\Type\TypeModel'
             ]
         ],
-        'page_handler'     => [
+        'handler'          => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
                 'type'          => 'extension',
-                'search'        => 'anomaly.module.pages::page_handler.*',
+                'search'        => 'anomaly.module.pages::handler.*',
                 'default_value' => 'anomaly.extension.default_page_handler'
             ]
         ],

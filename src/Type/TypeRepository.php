@@ -1,8 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type;
 
-use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
-use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
  * Class TypeRepository
@@ -12,7 +11,7 @@ use Anomaly\Streams\Platform\Model\EloquentCollection;
  * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type
  */
-class TypeRepository implements TypeRepositoryInterface
+class TypeRepository extends EntryRepository implements TypeRepositoryInterface
 {
 
     /**
@@ -30,26 +29,5 @@ class TypeRepository implements TypeRepositoryInterface
     public function __construct(TypeModel $model)
     {
         $this->model = $model;
-    }
-
-    /**
-     * Return all available page types.
-     *
-     * @return EloquentCollection
-     */
-    public function all()
-    {
-        return $this->model->all();
-    }
-
-    /**
-     * Find a page type by ID.
-     *
-     * @param $id
-     * @return null|TypeInterface
-     */
-    public function find($id)
-    {
-        return $this->model->find($id);
     }
 }

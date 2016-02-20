@@ -33,7 +33,7 @@ class PagesController extends PublicController
         }
 
         $type    = $page->getType();
-        $handler = $type->getPageHandler();
+        $handler = $type->getHandler();
 
         $template->set('page', $page);
 
@@ -59,7 +59,7 @@ class PagesController extends PublicController
         $page->setAttribute('enabled', true);
 
         $type    = $page->getType();
-        $handler = $type->getPageHandler();
+        $handler = $type->getHandler();
 
         $template->set('page', $page);
 

@@ -25,7 +25,7 @@ class TypeFormSections
                         'name',
                         'slug',
                         'description',
-                        'page_handler'
+                        'handler'
                     ]
                 ],
                 'layout'  => [

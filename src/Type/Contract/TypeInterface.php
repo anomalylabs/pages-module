@@ -56,7 +56,7 @@ interface TypeInterface extends EntryInterface
      *
      * @return PageHandlerInterface
      */
-    public function getPageHandler();
+    public function getHandler();
 
     /**
      * Get the theme layout.

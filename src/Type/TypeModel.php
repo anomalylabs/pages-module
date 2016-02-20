@@ -82,9 +82,9 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      *
      * @return PageHandlerInterface
      */
-    public function getPageHandler()
+    public function getHandler()
     {
-        return $this->page_handler;
+        return $this->handler;
     }
 
     /**
