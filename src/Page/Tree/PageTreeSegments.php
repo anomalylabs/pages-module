@@ -22,9 +22,9 @@ class PageTreeSegments
     {
         $builder->setSegments(
             [
-                'entry.edit_link',
+                'title',
                 [
-                    'class' => 'text-muted',
+                    'class' => 'text-faded',
                     'value' => function (PageInterface $entry) {
                         return '<span class="small" style="padding-right:10px;">' . $entry->type->name . '</span>';
                     },

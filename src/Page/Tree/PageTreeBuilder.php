@@ -25,6 +25,7 @@ class PageTreeBuilder extends TreeBuilder
             'text'        => 'anomaly.module.pages::button.create_child_page',
             'href'        => 'admin/pages/ajax/choose_type?parent={entry.id}'
         ],
+        'edit',
         'view' => [
             'target' => '_blank'
         ],
