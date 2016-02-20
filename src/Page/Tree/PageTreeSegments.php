@@ -22,7 +22,7 @@ class PageTreeSegments
     {
         $builder->setSegments(
             [
-                'title',
+                'entry.edit_link',
                 [
                     'class' => 'text-faded',
                     'value' => function (PageInterface $entry) {
