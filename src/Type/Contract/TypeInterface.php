@@ -71,4 +71,11 @@ interface TypeInterface extends EntryInterface
      * @return PageCollection
      */
     public function getPages();
+
+    /**
+     * Return the pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages();
 }

@@ -32,7 +32,8 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $bindings = [
-        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel' => 'Anomaly\PagesModule\Page\PageModel'
+        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel' => 'Anomaly\PagesModule\Page\PageModel',
+        'Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel' => 'Anomaly\PagesModule\Type\TypeModel'
     ];
 
     /**

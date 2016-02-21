@@ -1,18 +1,18 @@
 <?php namespace Anomaly\PagesModule\Type\Command;
 
+use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
-use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class DeleteStream
+ * Class RestorePages
  *
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Command
  */
-class DeleteStream implements SelfHandling
+class RestorePages implements SelfHandling
 {
 
     /**
@@ -23,7 +23,7 @@ class DeleteStream implements SelfHandling
     protected $type;
 
     /**
-     * Create a new DeleteStream instance.
+     * Create a new RestorePages instance.
      *
      * @param TypeInterface $type
      */
@@ -35,14 +35,12 @@ class DeleteStream implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param StreamRepositoryInterface $streams
+     * @param PageRepositoryInterface $pages
      */
-    public function handle(StreamRepositoryInterface $streams)
+    public function handle(PageRepositoryInterface $pages)
     {
-        if (!$this->type->isForceDeleting()) {
-            return;
+        foreach ($this->type->pages()->onlyTrashed()->get() as $page) {
+            $pages->restore($page);
         }
-        
-        $streams->delete($streams->findBySlugAndNamespace($this->type->getSlug() . '_pages', 'pages'));
     }
 }
