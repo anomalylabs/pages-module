@@ -62,7 +62,7 @@ class RenderNavigation implements SelfHandling
         }
 
         return $view->make(
-            $options->get('view', 'anomaly.module.pages::nav'),
+            $options->get('view', 'anomaly.module.pages::structure'),
             compact('pages', 'options')
         )->render();
     }
