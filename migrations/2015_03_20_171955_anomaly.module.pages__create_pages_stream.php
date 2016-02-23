@@ -64,9 +64,7 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'meta_keywords'    => [
             'translatable' => true
         ],
-        'theme_layout'     => [
-            'required' => true
-        ],
+        'theme_layout',
         'allowed_roles'
     ];
 
