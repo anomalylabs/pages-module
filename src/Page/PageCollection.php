@@ -98,42 +98,6 @@ class PageCollection extends EntryCollection
     }
 
     /**
-     * Return whether the provided
-     * page has an active child.
-     *
-     * @param $parent
-     * @return bool
-     */
-    public function hasActive($parent, $active)
-    {
-        if (!$active) {
-            return false;
-        }
-
-        /* @var PageInterface $parent */
-        /* @var PageInterface $active */
-        if ($active->getId() == $parent->getId()) {
-            return false;
-        }
-
-        if ($active->getParentId() == $parent->getId()) {
-            return true;
-        }
-
-        $children = $this->children($parent);
-
-        if (!$children->isEmpty()) {
-            foreach ($children as $child) {
-                if ($children->hasActive($child, $active)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Return only children of the provided item.
      *
      * @param $parent
@@ -147,6 +111,41 @@ class PageCollection extends EntryCollection
 
                 /* @var PageInterface $item */
                 return $item->getParentId() == $parent->getId();
+            }
+        );
+    }
+
+    /**
+     * Return the current page.
+     *
+     * @return PageInterface|null
+     */
+    public function current()
+    {
+        /* @var PageInterface $item */
+        foreach ($this->items as $item) {
+
+            if ($item->isCurrent()) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Return only active pages.
+     *
+     * @param bool $active
+     * @return PageCollection
+     */
+    public function active($active = true)
+    {
+        return $this->filter(
+            function ($item) use ($active) {
+
+                /* @var PageInterface $item */
+                return $item->isActive() == $active;
             }
         );
     }

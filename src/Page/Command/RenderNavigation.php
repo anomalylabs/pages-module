@@ -52,7 +52,10 @@ class RenderNavigation implements SelfHandling
         $pages = $pages->sorted();
         $pages = $pages->visible();
 
+        $this->dispatch(new SetCurrentPage($pages));
+        $this->dispatch(new SetActivePages($pages));
         $this->dispatch(new SetParentRelations($pages));
+        $this->dispatch(new SetChildrenRelations($pages));
         $this->dispatch(new RemoveRestrictedPages($pages));
 
         if ($root = $options->get('root')) {
