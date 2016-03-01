@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'general' => 'General',
-    'layout'  => 'Layout',
-    'entry'   => 'Entry',
-    'page'    => 'Page',
-    'seo'     => 'SEO',
-    'css'     => 'CSS',
-    'js'      => 'JS'
+    'advanced' => 'Advanced',
+    'general'  => 'General',
+    'options'  => 'Options',
+    'layout'   => 'Layout',
+    'fields'   => 'Fields',
+    'page'     => 'Page',
+    'seo'      => 'SEO'
 ];

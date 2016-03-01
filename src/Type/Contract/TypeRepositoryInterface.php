@@ -1,30 +1,23 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
-use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 /**
  * Interface TypeRepositoryInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Contract
  */
-interface TypeRepositoryInterface
+interface TypeRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
-     * Return all available page types.
+     * Find a type by it's slug.
      *
-     * @return EloquentCollection
+     * @param $slug
+     * @return TypeInterface
      */
-    public function all();
-
-    /**
-     * Find a page type by ID.
-     *
-     * @param $id
-     * @return null|TypeInterface
-     */
-    public function find($id);
+    public function findBySlug($slug);
 }

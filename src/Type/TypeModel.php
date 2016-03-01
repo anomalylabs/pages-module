@@ -1,8 +1,8 @@
 <?php namespace Anomaly\PagesModule\Type;
 
-use Anomaly\EditorFieldType\EditorFieldType;
-use Anomaly\PagesModule\Handler\PageHandlerExtension;
-use Anomaly\PagesModule\Type\Command\GetTypeStream;
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
+use Anomaly\PagesModule\Page\PageCollection;
+use Anomaly\PagesModule\Type\Command\GetStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
@@ -10,23 +10,20 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 /**
  * Class TypeModel
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type
  */
 class TypeModel extends PagesTypesEntryModel implements TypeInterface
 {
 
     /**
-     * Boot the model.
+     * The cache minutes.
+     *
+     * @var int
      */
-    protected static function boot()
-    {
-        self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
-
-        parent::boot();
-    }
+    protected $cacheMinutes = 99999;
 
     /**
      * Get the name.
@@ -49,16 +46,6 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl()
-    {
-        return $this->ttl;
-    }
-
-    /**
      * Get the description.
      *
      * @return string
@@ -69,73 +56,13 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
-     * Get the meta title.
-     *
-     * @return string
-     */
-    public function getMetaTitle()
-    {
-        return $this->meta_title;
-    }
-
-    /**
-     * Get the meta keywords.
-     *
-     * @return array
-     */
-    public function getMetaKeywords()
-    {
-        return $this->meta_keywords;
-    }
-
-    /**
-     * Get the meta description.
-     *
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->meta_description;
-    }
-
-    /**
-     * Get the CSS path.
-     *
-     * @return string
-     */
-    public function getCssPath()
-    {
-        /* @var EditorFieldType $css */
-        $css = $this->getFieldType('css');
-
-        $css->setEntry($this);
-
-        return $css->getStoragePath();
-    }
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath()
-    {
-        /* @var EditorFieldType $js */
-        $js = $this->getFieldType('js');
-
-        $js->setEntry($this);
-
-        return $js->getStoragePath();
-    }
-
-    /**
      * Get the related entry stream.
      *
      * @return StreamInterface
      */
     public function getEntryStream()
     {
-        return $this->dispatch(new GetTypeStream($this));
+        return $this->dispatch(new GetStream($this));
     }
 
     /**
@@ -148,5 +75,45 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
         $stream = $this->getEntryStream();
 
         return $stream->getEntryModelName();
+    }
+
+    /**
+     * Get the page handler.
+     *
+     * @return PageHandlerInterface
+     */
+    public function getHandler()
+    {
+        return $this->handler;
+    }
+
+    /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout()
+    {
+        return $this->theme_layout;
+    }
+
+    /**
+     * Get the related pages.
+     *
+     * @return PageCollection
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * Return the pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages()
+    {
+        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'type_id');
     }
 }

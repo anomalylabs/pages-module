@@ -1,3 +1,3 @@
 # Pages Module
 
-Pages management. 
+Public content and page management. 

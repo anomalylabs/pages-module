@@ -1,63 +1,36 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
-use Illuminate\Http\Response;
+use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Interface PageInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Contract
  */
-interface PageInterface
+interface PageInterface extends EntryInterface
 {
 
     /**
-     * Return the path.
-     *
-     * @param null $path
-     * @return string
-     */
-    public function path($path = null);
-
-    /**
-     * Return the combined meta title.
+     * Get the path.
      *
      * @return string
      */
-    public function metaTitle();
+    public function getPath();
 
     /**
-     * Return the combined meta keywords.
+     * Get the string ID.
      *
      * @return string
      */
-    public function metaKeywords();
-
-    /**
-     * Return the combined meta description.
-     *
-     * @return string
-     */
-    public function metaDescription();
-
-    /**
-     * Get the ID.
-     *
-     * @return integer
-     */
-    public function getId();
-
-    /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl();
+    public function getStrId();
 
     /**
      * Get the slug.
@@ -72,6 +45,36 @@ interface PageInterface
      * @return string
      */
     public function getTitle();
+
+    /**
+     * Get the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent();
+
+    /**
+     * Set the current flag.
+     *
+     * @param $current
+     * @return $this
+     */
+    public function setCurrent($current);
+
+    /**
+     * Get the active flag.
+     *
+     * @return bool
+     */
+    public function isActive();
+
+    /**
+     * Set the active flag.
+     *
+     * @param $active
+     * @return $this
+     */
+    public function setActive($active);
 
     /**
      * Get the meta title.
@@ -95,6 +98,13 @@ interface PageInterface
     public function getMetaDescription();
 
     /**
+     * Get the exact flag.
+     *
+     * @return bool
+     */
+    public function isExact();
+
+    /**
      * Get the enabled flag.
      *
      * @return bool
@@ -102,32 +112,46 @@ interface PageInterface
     public function isEnabled();
 
     /**
-     * Return the related parent page.
+     * Get the visible flag.
+     *
+     * @return bool
+     */
+    public function isVisible();
+
+    /**
+     * Get the home flag.
+     *
+     * @return bool
+     */
+    public function isHome();
+
+    /**
+     * Get the related parent page.
      *
      * @return null|PageInterface
      */
     public function getParent();
 
     /**
-     * Return the related children pages.
+     * Get the parent ID.
+     *
+     * @return null|int
+     */
+    public function getParentId();
+
+    /**
+     * Get the related children pages.
      *
      * @return PageCollection
      */
     public function getChildren();
 
     /**
-     * Get the CSS path.
+     * Get the related roles allowed.
      *
-     * @return string
+     * @return EloquentCollection
      */
-    public function getCssPath();
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath();
+    public function getAllowedRoles();
 
     /**
      * Get the related page type.
@@ -135,6 +159,20 @@ interface PageInterface
      * @return null|TypeInterface
      */
     public function getType();
+
+    /**
+     * Get the page handler.
+     *
+     * @return PageHandlerInterface
+     */
+    public function getHandler();
+
+    /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout();
 
     /**
      * Get the related entry.
@@ -149,6 +187,21 @@ interface PageInterface
      * @return null|int
      */
     public function getEntryId();
+
+    /**
+     * Get the content.
+     *
+     * @return null|string
+     */
+    public function getContent();
+
+    /**
+     * Set the content.
+     *
+     * @param $content
+     * @return $this
+     */
+    public function setContent($content);
 
     /**
      * Get the response.

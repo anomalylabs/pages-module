@@ -13,9 +13,9 @@ use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
 /**
  * Class TypesController
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class TypesController extends AdminController
@@ -72,7 +72,8 @@ class TypesController extends AdminController
     ) {
         $type = $types->find($id);
 
-        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
+        $breadcrumbs->put($type->getName(), 'admin/pages/types/edit/' . $type->getId());
+        $breadcrumbs->put('streams::breadcrumb.assignments', 'admin/pages/types/assignments/' . $type->getId());
 
         return $table
             ->setButtons(
@@ -82,8 +83,6 @@ class TypesController extends AdminController
                     ]
                 ]
             )
-            ->setOption('title', $type->getName() . ' fields')
-            ->setOption('description', 'This is a list of assigned fields for the "' . $type->getName() . '" page type')
             ->setStream($type->getEntryStream())
             ->render();
     }
@@ -102,7 +101,7 @@ class TypesController extends AdminController
             ->setActions(
                 [
                     'save' => [
-                        'redirect' => 'admin/pages/types/fields/' . $id
+                        'redirect' => 'admin/pages/types/assignments/' . $id
                     ]
                 ]
             )
@@ -131,7 +130,7 @@ class TypesController extends AdminController
     ) {
         $type = $types->find($id);
 
-        $breadcrumbs->put('module::breadcrumb.fields', 'admin/pages/types/fields/' . $type->getId());
+        $breadcrumbs->put('streams::breadcrumb.assignments', 'admin/pages/types/assignments/' . $type->getId());
 
         return $form->render($assignment);
     }

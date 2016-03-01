@@ -7,9 +7,9 @@ use Anomaly\Streams\Platform\Ui\Form\Multiple\MultipleFormBuilder;
 /**
  * Class PageEntryFormBuilder
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Form
  */
 class PageEntryFormBuilder extends MultipleFormBuilder
@@ -35,5 +35,18 @@ class PageEntryFormBuilder extends MultipleFormBuilder
 
         $page->entry_id   = $entry->getId();
         $page->entry_type = get_class($entry);
+    }
+
+    /**
+     * Get the contextual entry ID.
+     *
+     * @return int|mixed|null
+     */
+    public function getContextualId()
+    {
+        /* @var FormBuilder $form */
+        $form = $this->forms->get('page');
+
+        return $form->getContextualId();
     }
 }

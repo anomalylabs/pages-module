@@ -3,68 +3,79 @@
 return [
     'title'            => [
         'name'         => 'Title',
-        'placeholder'  => 'Hello World!',
-        'instructions' => 'What is the title of the page?'
+        'instructions' => 'Specify a short descriptive name for this page.'
     ],
     'slug'             => [
         'name'         => 'Slug',
-        'placeholder'  => 'hello-world',
-        'instructions' => 'The slug is used in building the page\'s URL.'
+        'instructions' => [
+            'types' => 'The slug is used in making the database table for pages of this type.',
+            'pages' => 'The slug is used in building the page\'s URL.'
+        ]
     ],
     'meta_title'       => [
         'name'         => 'Meta Title',
-        'placeholder'  => 'Hello World!',
-        'instructions' => 'Enter the page\'s SEO title. The page\'s title will be used by default.'
+        'instructions' => 'Specify the SEO title.',
+        'warning'      => 'The page title will be used by default.'
     ],
     'meta_description' => [
         'name'         => 'Meta Description',
-        'placeholder'  => 'Welcome to our new website!',
-        'instructions' => 'Enter the page\'s SEO description.'
+        'instructions' => 'Specify the SEO description.'
     ],
     'meta_keywords'    => [
         'name'         => 'Meta Keywords',
-        'instructions' => 'Enter the page\'s SEO keywords. Use ONLY as many as makes sense.'
-    ],
-    'ttl'              => [
-        'name'         => 'TTL',
-        'label'        => 'Time to live (TTL)',
-        'instructions' => 'How long (in seconds) do you want to cache the page for before serving fresh content? The settings value will be used by default.'
-    ],
-    'css'              => [
-        'name'         => 'CSS',
-        'instructions' => 'CSS files are parsed when loading so feel free to use theme settings and other tags.'
-    ],
-    'js'               => [
-        'name'         => 'JS',
-        'instructions' => 'JS files are parsed when loading so feel free to use theme settings and other tags.'
+        'instructions' => 'Specify the SEO keywords.'
     ],
     'name'             => [
         'name'         => 'Name',
-        'instructions' => 'What is the name of this page type?'
+        'instructions' => 'Specify a short descriptive name for this page type.'
     ],
     'description'      => [
         'name'         => 'Description',
-        'instructions' => 'Briefly describe the page type.'
+        'instructions' => 'Briefly describe this page type.'
     ],
     'theme_layout'     => [
         'name'         => 'Theme Layout',
-        'instructions' => 'The theme layout will be used to wrap the page content.'
+        'instructions' => 'Specify the theme layout to wrap the <strong>page layout</strong> with.'
     ],
     'layout'           => [
-        'name'         => 'Layout',
-        'instructions' => 'The layout will be used to display the page content.'
+        'name'         => 'Page Layout',
+        'instructions' => 'The layout is used for displaying the page\'s content.'
     ],
     'allowed_roles'    => [
         'name'         => 'Allowed Roles',
-        'instructions' => 'Which user roles are allowed to view this page?'
+        'instructions' => 'Specify which user roles can access this page.',
+        'warning'      => 'If no roles are specified then everyone can access this page.'
+    ],
+    'visible'          => [
+        'name'         => 'Visible',
+        'label'        => 'Display this page in navigation?',
+        'instructions' => 'Disable to hide this page from page based navigation <strong>structure</strong>.',
+        'warning'      => 'This may or may not have an effect depending on how your website was built.'
+    ],
+    'exact'            => [
+        'name'         => 'Exact URI',
+        'label'        => 'Require an exact URI match?',
+        'instructions' => 'Disable to allow custom parameters following the URI for this page.'
     ],
     'enabled'          => [
         'name'         => 'Enabled',
         'label'        => 'Is this page enabled?',
-        'instructions' => 'Only enabled pages will be displayed.'
+        'instructions' => 'If disabled, you can still access a secure preview link in the control panel.',
+        'warning'      => 'This page must be enabled before it can be viewed <strong>publicly</strong>.'
+    ],
+    'home'             => [
+        'name'         => 'Home Page',
+        'label'        => 'Is this the home page?',
+        'instructions' => 'The home page is the default landing page for your website.'
     ],
     'parent'           => [
-        'name'         => 'Parent',
-        'instructions' => 'Choose the parent page if any.'
+        'name' => 'Parent'
+    ],
+    'handler'          => [
+        'name'         => 'Handler',
+        'instructions' => 'The page handler is responsible for building the entire HTTP response for a page.'
+    ],
+    'content'          => [
+        'name' => 'Content'
     ]
 ];

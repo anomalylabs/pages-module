@@ -1,57 +1,69 @@
 <?php namespace Anomaly\PagesModule\Http\Controller;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\PagesModule\Page\PageAuthorizer;
-use Anomaly\PagesModule\Page\PageBreadcrumbs;
-use Anomaly\PagesModule\Page\PageHttp;
-use Anomaly\PagesModule\Page\PageLoader;
 use Anomaly\PagesModule\Page\PageResolver;
-use Anomaly\PagesModule\Page\PageResponse;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
-use Illuminate\Http\Response;
+use Anomaly\Streams\Platform\View\ViewTemplate;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\Route;
 
 /**
  * Class PagesController
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Http\Controller
  */
 class PagesController extends PublicController
 {
 
     /**
-     * View a page.
+     * Return a rendered page.
      *
-     * @param PageHttp        $http
-     * @param PageLoader      $loader
-     * @param PageResolver    $resolver
-     * @param PageResponse    $response
-     * @param PageAuthorizer  $authorizer
-     * @param PageBreadcrumbs $breadcrumbs
-     * @return Response|null
+     * @param PageResolver $resolver
+     * @param ViewTemplate $template
+     * @return null|\Symfony\Component\HttpFoundation\Response
      */
-    public function view(
-        PageHttp $http,
-        PageLoader $loader,
-        PageResolver $resolver,
-        PageResponse $response,
-        PageAuthorizer $authorizer,
-        PageBreadcrumbs $breadcrumbs
-    ) {
+    public function view(PageResolver $resolver, ViewTemplate $template)
+    {
         if (!$page = $resolver->resolve()) {
             abort(404);
         }
 
-        $authorizer->authorize($page);
-        $breadcrumbs->make($page);
-        $loader->load($page);
+        $type    = $page->getType();
+        $handler = $type->getHandler();
 
-        $response->make($page);
-        $http->cache($page);
+        $template->set('page', $page);
+
+        $handler->make($page);
+
+        return $page->getResponse();
+    }
+
+    /**
+     * Preview a page.
+     *
+     * @param ViewTemplate            $template
+     * @param PageRepositoryInterface $pages
+     * @param                         $id
+     * @return null|\Symfony\Component\HttpFoundation\Response
+     */
+    public function preview(ViewTemplate $template, PageRepositoryInterface $pages, $id)
+    {
+        if (!$page = $pages->findByStrId($id)) {
+            abort(404);
+        }
+
+        $page->setAttribute('enabled', true);
+
+        $type    = $page->getType();
+        $handler = $type->getHandler();
+
+        $template->set('page', $page);
+
+        $handler->make($page);
 
         return $page->getResponse();
     }
@@ -62,16 +74,17 @@ class PagesController extends PublicController
      * @param PageRepositoryInterface $pages
      * @param Redirector              $redirector
      * @param Route                   $route
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|void
      */
     public function redirect(PageRepositoryInterface $pages, Redirector $redirector, Route $route)
     {
-        if ($to = array_get($route->getAction(), 'to')) {
+        if ($to = array_get($route->getAction(), 'anomaly.module.pages::redirect')) {
             return $redirector->to($to, array_get($route->getAction(), 'status', 302));
         }
 
-        if ($page = $pages->find(array_get($route->getAction(), 'page', 0))) {
-            return $redirector->to($page->path(), array_get($route->getAction(), 'status', 302));
+        /* @var PageInterface $page */
+        if ($page = $pages->find(array_get($route->getAction(), 'anomaly.module.pages::page', 0))) {
+            return $redirector->to($page->getPath(), array_get($route->getAction(), 'status', 302));
         }
 
         abort(404);

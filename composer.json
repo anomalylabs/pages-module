@@ -1,36 +1,28 @@
 {
     "name": "anomaly/pages-module",
     "type": "streams-addon",
-    "description": "Pages management.",
-    "version": "1.0.0",
+    "description": "A powerful module for the Streams Platform that lets you create pages, generate navigation, manage content, and build websites faster than ever.",
     "keywords": [
-        "streams-addon",
         "pages",
-        "pyrocms",
-        "laravel"
+        "module",
+        "streams platform"
     ],
-    "homepage": "http://anomaly.is/",
+    "homepage": "http://pyrocms.com/",
     "license": "MIT",
     "authors": [
         {
-            "name": "AnomalyLabs, Inc.",
-            "email": "hello@anomaly.is",
-            "homepage": "http://anomaly.is/",
+            "name": "PyroCMS, Inc.",
+            "email": "support@pyrocms.com",
+            "homepage": "http://pyrocms.com/",
             "role": "Owner"
         }
     ],
     "support": {
-        "email": "support@anomaly.is"
+        "email": "support@pyrocms.com"
     },
     "autoload": {
         "psr-4": {
             "Anomaly\\PagesModule\\": "src/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    },
-    "minimum-stability": "dev"
+    }
 }

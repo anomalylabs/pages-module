@@ -2,15 +2,15 @@
     <button class="close" data-dismiss="modal">
         <span>&times;</span>
     </button>
-    <h4 class="modal-title">{{ trans('module::admin.choose_type') }}</h4>
+    <h4 class="modal-title">{{ trans('module::message.choose_type') }}</h4>
 </div>
 
 <div class="modal-body">
     {% if not types.isEmpty() %}
-        <ul class="nav nav-stacked">
+        <ul class="nav nav-pills nav-stacked">
             {% for type in types %}
-                <li>
-                    <a href="{{ url_to('admin/pages/create?type=' ~ type.id) }}">
+                <li class="nav-item">
+                    <a href="{{ url_to('admin/pages/create?type=' ~ type.id ~ '&parent=' ~ request_get('parent')) }}" class="nav-link">
                         <strong>{{ type.name }}</strong>
                         <br>
                         <small>{{ type.description }}</small>

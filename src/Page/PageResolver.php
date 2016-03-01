@@ -6,9 +6,9 @@ use Illuminate\Routing\Route;
 /**
  * Class PageResolver
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageResolver
@@ -49,11 +49,11 @@ class PageResolver
     {
         $action = $this->route->getAction();
 
-        if ($id = array_get($action, 'page')) {
+        if ($id = array_get($action, 'anomaly.module.pages::page')) {
             return $this->pages->find($id);
         }
 
-        if ($path = array_get($action, 'path')) {
+        if ($path = array_get($action, 'anomaly.module.pages::path')) {
             return $this->pages->findByPath($path);
         }
 

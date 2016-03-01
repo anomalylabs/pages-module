@@ -1,20 +1,20 @@
 <?php namespace Anomaly\PagesModule\Page;
 
-use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PageModel
  *
- * @method        Builder ordered()
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageModel extends PagesPagesEntryModel implements PageInterface
@@ -25,7 +25,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      *
      * @var int
      */
-    protected $cacheMinutes = 99999;
+    protected $ttl = 99999;
 
     /**
      * Always eager load these.
@@ -33,8 +33,29 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var array
      */
     protected $with = [
-        'type'
+        'translations'
     ];
+
+    /**
+     * The active flag.
+     *
+     * @var bool
+     */
+    protected $active = false;
+
+    /**
+     * The current flag.
+     *
+     * @var bool
+     */
+    protected $current = false;
+
+    /**
+     * The page's content.
+     *
+     * @var null|string
+     */
+    protected $content = null;
 
     /**
      * The page's response.
@@ -44,101 +65,34 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     protected $response = null;
 
     /**
-     * Boot the model.
-     */
-    protected static function boot()
-    {
-        self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
-
-        parent::boot();
-    }
-
-    /**
-     * Order the pages.
+     * Sort the query.
      *
-     * @param Builder $query
-     * @return $this
+     * @param Builder $builder
+     * @param string  $direction
      */
-    public function scopeOrdered(Builder $query)
+    public function scopeSorted(Builder $builder, $direction = 'asc')
     {
-        return $query->orderBy('parent_id', 'ASC')->orderBy('sort_order', 'ASC');
+        $builder->orderBy('parent_id', $direction)->orderBy('sort_order', $direction);
     }
 
     /**
-     * Return the path.
-     *
-     * @param null $path
-     * @return string
-     */
-    public function path($path = null)
-    {
-        $path = $this->getSlug();
-
-        if ($parent = $this->getParent()) {
-            $path = $parent->path($path) . '/' . $path;
-        } elseif ($this->sort_order == 1) {
-            return $path;
-        }
-
-        return $path;
-    }
-
-    /**
-     * Return the combined meta title.
+     * Get the path.
      *
      * @return string
      */
-    public function metaTitle()
+    public function getPath()
     {
-        $metaTitle = $this->getMetaTitle();
-
-        if (!$metaTitle && $type = $this->getType()) {
-            $metaTitle = $type->getMetaTitle();
-        }
-
-        return $metaTitle;
+        return $this->path;
     }
 
     /**
-     * Return the combined meta keywords.
+     * Get the string ID.
      *
      * @return string
      */
-    public function metaKeywords()
+    public function getStrId()
     {
-        $metaKeywords = $this->getMetaKeywords();
-
-        if (!$metaKeywords && $type = $this->getType()) {
-            $metaKeywords = $type->getMetaKeywords();
-        }
-
-        return $metaKeywords;
-    }
-
-    /**
-     * Return the combined meta description.
-     *
-     * @return string
-     */
-    public function metaDescription()
-    {
-        $metaDescription = $this->getMetaDescription();
-
-        if (!$metaDescription && $type = $this->getType()) {
-            $metaDescription = $type->getMetaDescription();
-        }
-
-        return $metaDescription;
-    }
-
-    /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl()
-    {
-        return $this->ttl;
+        return $this->str_id;
     }
 
     /**
@@ -158,6 +112,10 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function getMetaTitle()
     {
+        if (!$this->meta_title) {
+            return $this->getTitle();
+        }
+
         return $this->meta_title;
     }
 
@@ -182,6 +140,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Get the exact flag.
+     *
+     * @return bool
+     */
+    public function isExact()
+    {
+        return $this->exact;
+    }
+
+    /**
      * Get the enabled flag.
      *
      * @return bool
@@ -192,7 +160,27 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Return the related parent page.
+     * Get the visible flag.
+     *
+     * @return bool
+     */
+    public function isVisible()
+    {
+        return $this->getFieldValue('visible');
+    }
+
+    /**
+     * Get the home flag.
+     *
+     * @return bool
+     */
+    public function isHome()
+    {
+        return $this->home;
+    }
+
+    /**
+     * Get the related parent page.
      *
      * @return null|PageInterface
      */
@@ -202,7 +190,17 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Return the related children pages.
+     * Get the parent ID.
+     *
+     * @return int|null
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
+    }
+
+    /**
+     * Get the related children pages.
      *
      * @return PageCollection
      */
@@ -212,43 +210,24 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Return the children pages relationship.
+     * Get the related roles allowed.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return EloquentCollection
      */
-    public function children()
+    public function getAllowedRoles()
     {
-        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id');
+        return $this->allowed_roles;
     }
 
     /**
-     * Get the CSS path.
+     * Get the route suffix.
      *
-     * @return string
+     * @param null $prefix
+     * @return null|string
      */
-    public function getCssPath()
+    public function getRouteSuffix($prefix = null)
     {
-        /* @var EditorFieldType $css */
-        $css = $this->getFieldType('css');
-
-        $css->setEntry($this);
-
-        return $css->getStoragePath();
-    }
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath()
-    {
-        /* @var EditorFieldType $js */
-        $js = $this->getFieldType('js');
-
-        $js->setEntry($this);
-
-        return $js->getStoragePath();
+        return $this->route_suffix ? $prefix . $this->route_suffix : null;
     }
 
     /**
@@ -259,6 +238,28 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Get the page handler.
+     *
+     * @return PageHandlerInterface
+     */
+    public function getHandler()
+    {
+        $type = $this->getType();
+
+        return $type->getHandler();
+    }
+
+    /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout()
+    {
+        return $this->theme_layout;
     }
 
     /**
@@ -282,6 +283,29 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Get the content.
+     *
+     * @return null|string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set the content.
+     *
+     * @param $content
+     * @return $this
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
      * Get the response.
      *
      * @return Response|null
@@ -302,5 +326,62 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         $this->response = $response;
 
         return $this;
+    }
+
+    /**
+     * Get the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent()
+    {
+        return $this->current;
+    }
+
+    /**
+     * Set the current flag.
+     *
+     * @param $current
+     * @return $this
+     */
+    public function setCurrent($current)
+    {
+        $this->current = $current;
+
+        return $this;
+    }
+
+    /**
+     * Get the active flag.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the active flag.
+     *
+     * @param $active
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Return the children pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id')
+            ->orderBy('sort_order', 'ASC');
     }
 }

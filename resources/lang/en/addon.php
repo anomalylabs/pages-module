@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'name'        => 'Pages',
-    'description' => 'Pages management.',
+    'title'       => 'Pages',
+    'name'        => 'Pages Module',
+    'description' => 'Create pages, generate navigation, manage content, and build websites faster than ever.',
     'section'     => [
-        'pages'    => 'Pages',
-        'types'    => 'Types',
-        'fields'   => 'Fields',
-        'settings' => 'Settings'
+        'pages'  => 'Pages',
+        'types'  => 'Types',
+        'fields' => 'Fields'
     ]
 ];

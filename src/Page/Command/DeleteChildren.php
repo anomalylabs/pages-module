@@ -7,9 +7,9 @@ use Illuminate\Contracts\Bus\SelfHandling;
 /**
  * Class DeleteChildren
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Command
  */
 class DeleteChildren implements SelfHandling
@@ -39,7 +39,6 @@ class DeleteChildren implements SelfHandling
      */
     public function handle(PageRepositoryInterface $pages)
     {
-        /* @var PageInterface $page */
         foreach ($this->page->getChildren() as $page) {
             $pages->delete($page);
         }

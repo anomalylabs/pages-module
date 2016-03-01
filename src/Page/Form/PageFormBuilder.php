@@ -1,14 +1,15 @@
 <?php namespace Anomaly\PagesModule\Page\Form;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
  * Class PageFormBuilder
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Form
  */
 class PageFormBuilder extends FormBuilder
@@ -22,16 +23,23 @@ class PageFormBuilder extends FormBuilder
     protected $type = null;
 
     /**
+     * The parent page.
+     *
+     * @var null|PageInterface
+     */
+    protected $parent = null;
+
+    /**
      * Skip these fields.
      *
      * @var array
      */
     protected $skips = [
+        'str_id',
         'path',
         'type',
         'entry',
-        'parent',
-        'allowed_roles'
+        'parent'
     ];
 
     /**
@@ -51,11 +59,16 @@ class PageFormBuilder extends FormBuilder
      */
     public function onSaving()
     {
-        $entry = $this->getFormEntry();
-        $type  = $this->getType();
+        $entry  = $this->getFormEntry();
+        $parent = $this->getParent();
+        $type   = $this->getType();
 
         if (!$entry->type_id) {
             $entry->type_id = $type->getId();
+        }
+
+        if ($parent) {
+            $entry->parent_id = $parent->getId();
         }
     }
 
@@ -78,6 +91,29 @@ class PageFormBuilder extends FormBuilder
     public function setType(TypeInterface $type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get the parent page.
+     *
+     * @return null|PageInterface
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set the parent page.
+     *
+     * @param PageInterface $parent
+     * @return $this
+     */
+    public function setParent(PageInterface $parent)
+    {
+        $this->parent = $parent;
 
         return $this;
     }

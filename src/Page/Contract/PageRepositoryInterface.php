@@ -1,61 +1,31 @@
 <?php namespace Anomaly\PagesModule\Page\Contract;
 
-use Anomaly\PagesModule\Page\PageCollection;
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 /**
  * Interface PageRepositoryInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Contract
  */
-interface PageRepositoryInterface
+interface PageRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
-     * Return all pages.
-     *
-     * @return PageCollection
-     */
-    public function all();
-
-    /**
-     * Return the first page.
-     *
-     * @return PageInterface
-     */
-    public function first();
-
-    /**
-     * Find a page by ID.
+     * Find a page by it's string ID.
      *
      * @param $id
      * @return null|PageInterface
      */
-    public function find($id);
+    public function findByStrId($id);
 
     /**
      * Find a page by it's path.
      *
      * @param $path
-     * @return null|PageInterface
+     * @return PageInterface|null
      */
     public function findByPath($path);
-
-    /**
-     * Save a page.
-     *
-     * @param PageInterface $page
-     * @return PageInterface
-     */
-    public function save(PageInterface $page);
-
-    /**
-     * Delete a page.
-     *
-     * @param PageInterface $page
-     * @return bool
-     */
-    public function delete(PageInterface $page);
 }

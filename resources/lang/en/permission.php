@@ -1,11 +1,27 @@
 <?php
 
 return [
-    'settings' => 'Module Settings',
-    'pages'    => [
-        'label' => 'Page Management'
+    'pages'  => [
+        'name'   => 'Pages',
+        'option' => [
+            'read'   => 'Can read pages?',
+            'write'  => 'Can write pages?',
+            'delete' => 'Can delete pages?'
+        ]
     ],
-    'types'    => [
-        'label' => 'Page Type Management'
+    'types'  => [
+        'name'   => 'Types',
+        'option' => [
+            'read'   => 'Can read types?',
+            'write'  => 'Can write types?',
+            'delete' => 'Can delete types?',
+            'fields' => 'Can modify fields of types?'
+        ]
+    ],
+    'fields' => [
+        'name'   => 'Fields',
+        'option' => [
+            'manage' => 'Can manage fields?',
+        ]
     ]
 ];

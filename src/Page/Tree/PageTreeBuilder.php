@@ -5,9 +5,9 @@ use Anomaly\Streams\Platform\Ui\Tree\TreeBuilder;
 /**
  * Class PageTreeBuilder
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Tree
  */
 class PageTreeBuilder extends TreeBuilder
@@ -19,17 +19,16 @@ class PageTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $buttons = [
-        'edit',
+        'add'  => [
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'text'        => 'anomaly.module.pages::button.create_child_page',
+            'href'        => 'admin/pages/ajax/choose_type?parent={entry.id}'
+        ],
+        'view' => [
+            'target' => '_blank'
+        ],
         'delete'
-    ];
-
-    /**
-     * The tree options.
-     *
-     * @var array
-     */
-    protected $options = [
-        'item_value' => 'entry.view_link'
     ];
 
 }

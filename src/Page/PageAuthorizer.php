@@ -2,14 +2,17 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Support\Authorizer;
+use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Routing\ResponseFactory;
 
 /**
  * Class PageAuthorizer
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageAuthorizer
@@ -23,6 +26,20 @@ class PageAuthorizer
     protected $guard;
 
     /**
+     * The config repository.
+     *
+     * @var Repository
+     */
+    protected $config;
+
+    /**
+     * The response factory.
+     *
+     * @var ResponseFactory
+     */
+    protected $response;
+
+    /**
      * The authorizer utility.
      *
      * @var Authorizer
@@ -32,12 +49,16 @@ class PageAuthorizer
     /**
      * Create a new PageAuthorizer instance.
      *
-     * @param Guard      $guard
-     * @param Authorizer $authorizer
+     * @param Guard           $guard
+     * @param Repository      $config
+     * @param Authorizer      $authorizer
+     * @param ResponseFactory $response
      */
-    public function __construct(Guard $guard, Authorizer $authorizer)
+    public function __construct(Guard $guard, Repository $config, Authorizer $authorizer, ResponseFactory $response)
     {
         $this->guard      = $guard;
+        $this->config     = $config;
+        $this->response   = $response;
         $this->authorizer = $authorizer;
     }
 
@@ -48,10 +69,35 @@ class PageAuthorizer
      */
     public function authorize(PageInterface $page)
     {
-        if (!$page->isEnabled() && !$this->guard->user()) {
+        /* @var UserInterface $user */
+        $user = $this->guard->user();
+
+        /**
+         * If the page is not enabled and we
+         * are not logged in then 404.
+         */
+        if (!$page->isEnabled() && !$user) {
             abort(404);
         }
 
-        $this->authorizer->authorize('anomaly.module.pages::view_drafts');
+        /**
+         * If the page is not enabled and we are
+         * logged in then make sure we have permission.
+         */
+        if (!$page->isEnabled()) {
+            $this->authorizer->authorize('anomaly.module.pages::view_drafts');
+        }
+
+        /**
+         * If the page is restricted to specific
+         * roles then make sure our user is one of them.
+         */
+        $allowed = $page->getAllowedRoles();
+
+        if (!$allowed->isEmpty() && (!$user || !$user->hasAnyRole($allowed))) {
+            $page->setResponse(
+                $this->response->redirectGuest($this->config->get('anomaly.module.users::paths.login', 'login'))
+            );
+        }
     }
 }

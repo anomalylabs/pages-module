@@ -8,9 +8,9 @@ use Anomaly\Streams\Platform\Http\Controller\AdminController;
 /**
  * Class AjaxController
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class AjaxController extends AdminController
@@ -53,7 +53,7 @@ class AjaxController extends AdminController
         return view(
             'module::ajax/choose_field',
             [
-                'fields' => $fields->findByNamespace('pages')->notAssignedTo($type->getEntryStream())->unlocked(),
+                'fields' => $fields->findAllByNamespace('pages')->notAssignedTo($type->getEntryStream())->unlocked(),
                 'id'     => $id
             ]
         );

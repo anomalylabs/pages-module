@@ -6,9 +6,9 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 /**
  * Class PageEntryFormSections
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Form
  */
 class PageEntryFormSections
@@ -24,52 +24,41 @@ class PageEntryFormSections
         $builder->setSections(
             [
                 'general' => [
-                    'tabs' => [
-                        'general' => [
-                            'title'  => 'module::tab.page',
-                            'fields' => [
-                                'title',
-                                'slug',
-                                'enabled',
-                                'ttl'
-                            ]
-                        ],
-                        'entry'   => [
-                            'title'  => 'module::tab.entry',
-                            'fields' => function (PageEntryFormBuilder $builder) {
-                                return array_map(
-                                    function (FieldType $field) {
-                                        return $field->getField();
-                                    },
-                                    array_filter(
-                                        $builder->getFormFields()->all(),
-                                        function (FieldType $field) {
-                                            return (!$field->getEntry() instanceof PageModel);
-                                        }
-                                    )
-                                );
-                            }
-                        ],
-                        'seo'     => [
-                            'title'  => 'module::tab.seo',
-                            'fields' => [
-                                'meta_title',
-                                'meta_keywords',
-                                'meta_description'
-                            ]
-                        ],
-                        'css'     => [
-                            'title'  => 'module::tab.css',
-                            'fields' => [
-                                'css'
-                            ]
-                        ],
-                        'js'      => [
-                            'title'  => 'module::tab.js',
-                            'fields' => [
-                                'js'
-                            ]
-                        ]
+                    'fields' => [
+                        'page_title',
+                        'page_slug'
+                    ]
+                ],
+                'fields'  => [
+                    'fields' => function (PageEntryFormBuilder $builder) {
+                        return array_map(
+                            function (FieldType $field) {
+                                return 'entry_' . $field->getField();
+                            },
+                            array_filter(
+                                $builder->getFormFields()->base()->all(),
+                                function (FieldType $field) {
+                                    return (!$field->getEntry() instanceof PageModel);
+                                }
+                            )
+                        );
+                    }
+                ],
+                'seo'     => [
+                    'fields' => [
+                        'page_meta_title',
+                        'page_meta_keywords',
+                        'page_meta_description'
+                    ]
+                ],
+                'options' => [
+                    'fields' => [
+                        'page_theme_layout',
+                        'page_enabled',
+                        'page_home',
+                        'page_visible',
+                        'page_exact',
+                        'page_allowed_roles'
                     ]
                 ]
             ]

@@ -1,11 +1,13 @@
 <?php namespace Anomaly\PagesModule\Http\Controller\Admin;
 
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromPage;
 use Anomaly\PagesModule\Page\Form\Command\AddEntryFormFromRequest;
 use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromPage;
 use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromRequest;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
+use Anomaly\PagesModule\Page\Form\PageFormBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
@@ -14,9 +16,9 @@ use Illuminate\Routing\Redirector;
 /**
  * Class PagesController
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class PagesController extends AdminController
@@ -39,10 +41,18 @@ class PagesController extends AdminController
      * @param PageEntryFormBuilder $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(PageEntryFormBuilder $form)
+    public function create(PageEntryFormBuilder $form, PageRepositoryInterface $pages)
     {
         $this->dispatch(new AddEntryFormFromRequest($form));
         $this->dispatch(new AddPageFormFromRequest($form));
+
+        if ($parent = $this->request->get('parent')) {
+
+            /* @var PageFormBuilder $pageForm */
+            $pageForm = $form->getChildForm('page');
+
+            $pageForm->setParent($pages->find($parent));
+        }
 
         return $form->render();
     }
@@ -69,21 +79,24 @@ class PagesController extends AdminController
      * Redirect to a page's URL.
      *
      * @param PageRepositoryInterface $pages
-     * @param Redirector              $redirector
+     * @param Redirector              $redirect
      * @param                         $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function view(PageRepositoryInterface $pages, Redirector $redirector, $id)
+    public function view(PageRepositoryInterface $pages, Redirector $redirect, $id)
     {
-        $first = $pages->first();
-        $page  = $pages->find($id);
+        /* @var PageInterface $page */
+        $page = $pages->find($id);
 
-        // Redirect to home if this is the first page.
-        if ($first && $first->getId() === $page->getId()) {
-            return $redirector->to('/');
+        if (!$page->isEnabled()) {
+            return $redirect->to('pages/preview/' . $page->getStrId());
         }
 
-        return $redirector->to($page->path());
+        if ($page->isHome()) {
+            return $redirect->to('/');
+        }
+
+        return $redirect->to($page->getPath());
     }
 
     /**
@@ -98,7 +111,9 @@ class PagesController extends AdminController
     {
         $authorizer->authorize('anomaly.module.pages::pages.delete');
 
-        $pages->delete($pages->find($id));
+        $pages->delete($page = $pages->find($id));
+
+        $page->entry->delete();
 
         return redirect()->back();
     }

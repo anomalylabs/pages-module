@@ -2,17 +2,17 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\Streams\Platform\Model\EloquentModel;
+use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
  * Class PageRepository
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
-class PageRepository implements PageRepositoryInterface
+class PageRepository extends EntryRepository implements PageRepositoryInterface
 {
 
     /**
@@ -33,66 +33,24 @@ class PageRepository implements PageRepositoryInterface
     }
 
     /**
-     * Return all pages.
-     *
-     * @return PageCollection
-     */
-    public function all()
-    {
-        return $this->model->ordered()->get();
-    }
-
-    /**
-     * Return the first page.
-     *
-     * @return PageInterface
-     */
-    public function first()
-    {
-        return $this->model->ordered()->first();
-    }
-
-    /**
-     * Find a page by ID.
+     * Find a page by it's string ID.
      *
      * @param $id
      * @return null|PageInterface
      */
-    public function find($id)
+    public function findByStrId($id)
     {
-        return $this->model->find($id);
+        return $this->model->where('str_id', $id)->first();
     }
 
     /**
      * Find a page by it's path.
      *
      * @param $path
-     * @return null|PageInterface
+     * @return PageInterface|null
      */
     public function findByPath($path)
     {
-        return $this->model->where('home', false)->where('path', $path)->first();
-    }
-
-    /**
-     * Save a page.
-     *
-     * @param PageInterface|EloquentModel $page
-     * @return PageInterface
-     */
-    public function save(PageInterface $page)
-    {
-        return $page->save();
-    }
-
-    /**
-     * Delete a page.
-     *
-     * @param PageInterface|EloquentModel $page
-     * @return bool
-     */
-    public function delete(PageInterface $page)
-    {
-        return $page->delete();
+        return $this->model->where('path', $path)->first();
     }
 }

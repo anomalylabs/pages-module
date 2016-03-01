@@ -1,32 +1,20 @@
 <?php namespace Anomaly\PagesModule\Type\Contract;
 
-use Anomaly\PagesModule\Handler\PageHandlerExtension;
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
+use Anomaly\PagesModule\Page\PageCollection;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
  * Interface TypeInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Contract
  */
-interface TypeInterface
+interface TypeInterface extends EntryInterface
 {
-
-    /**
-     * Get the ID.
-     *
-     * @return int
-     */
-    public function getId();
-
-    /**
-     * Get the TTL.
-     *
-     * @return null|int
-     */
-    public function getTtl();
 
     /**
      * Get the name.
@@ -50,41 +38,6 @@ interface TypeInterface
     public function getDescription();
 
     /**
-     * Get the meta title.
-     *
-     * @return string
-     */
-    public function getMetaTitle();
-
-    /**
-     * Get the meta keywords.
-     *
-     * @return array
-     */
-    public function getMetaKeywords();
-
-    /**
-     * Get the meta description.
-     *
-     * @return string
-     */
-    public function getMetaDescription();
-
-    /**
-     * Get the CSS path.
-     *
-     * @return string
-     */
-    public function getCssPath();
-
-    /**
-     * Get the JS path.
-     *
-     * @return string
-     */
-    public function getJsPath();
-
-    /**
      * Get the related entry stream.
      *
      * @return StreamInterface
@@ -97,4 +50,32 @@ interface TypeInterface
      * @return string
      */
     public function getEntryModelName();
+
+    /**
+     * Get the page handler.
+     *
+     * @return PageHandlerInterface
+     */
+    public function getHandler();
+
+    /**
+     * Get the theme layout.
+     *
+     * @return string
+     */
+    public function getThemeLayout();
+
+    /**
+     * Get the related pages.
+     *
+     * @return PageCollection
+     */
+    public function getPages();
+
+    /**
+     * Return the pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages();
 }

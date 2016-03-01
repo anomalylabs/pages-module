@@ -1,0 +1,5 @@
+<?php
+
+{% for page in pages %}
+Route::any('{{ page.route }}', {{ var_export(page.action) }})->where({{ var_export(page.constraints) }});
+{% endfor %}

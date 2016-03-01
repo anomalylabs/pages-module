@@ -1,17 +1,18 @@
 <?php
 
 return [
-    'settings',
-    'pages' => [
+    'pages'  => [
         'read',
-        'create',
-        'edit',
+        'write',
         'delete'
     ],
-    'types' => [
+    'types'  => [
         'read',
-        'create',
-        'edit',
-        'delete'
+        'write',
+        'delete',
+        'fields'
+    ],
+    'fields' => [
+        'manage'
     ]
 ];

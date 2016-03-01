@@ -5,9 +5,9 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
 /**
  * Class PagesModule
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule
  */
 class PagesModule extends Module
@@ -38,11 +38,11 @@ class PagesModule extends Module
         'types'  => [
             'buttons' => [
                 'new_type',
-                'add_field' => [
+                'assign_fields' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
-                    'enabled'     => 'admin/pages/types/fields/*',
-                    'href'        => 'admin/pages/ajax/choose_field/{route.parameters.id}'
+                    'enabled'     => 'admin/pages/types/assignments/*',
+                    'href'        => 'admin/pages/ajax/choose_field/{request.route.parameters.id}'
                 ]
             ]
         ],
@@ -54,8 +54,7 @@ class PagesModule extends Module
                     'href'        => 'admin/pages/fields/choose'
                 ]
             ]
-        ],
-        'settings'
+        ]
     ];
 
 }
