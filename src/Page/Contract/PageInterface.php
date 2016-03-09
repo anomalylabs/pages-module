@@ -47,6 +47,36 @@ interface PageInterface extends EntryInterface
     public function getTitle();
 
     /**
+     * Get the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent();
+
+    /**
+     * Set the current flag.
+     *
+     * @param $current
+     * @return $this
+     */
+    public function setCurrent($current);
+
+    /**
+     * Get the active flag.
+     *
+     * @return bool
+     */
+    public function isActive();
+
+    /**
+     * Set the active flag.
+     *
+     * @param $active
+     * @return $this
+     */
+    public function setActive($active);
+
+    /**
      * Get the meta title.
      *
      * @return string

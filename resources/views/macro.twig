@@ -1,22 +1,19 @@
-{% macro links(pages, collection, active, options, depth) %}
+{% macro links(pages, collection, options, depth) %}
     {% for page in pages %}
-
-        {% set children = collection.children(page) %}
-
         <{{ options.link_tag ?: 'li' }} class="
-            {{ children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
-            {{ collection.hasActive(page, active) ? options.get('has_active_class', 'active') }}
-            {{ page.id == active.id ? options.get('active_class', 'active') }}
+            {{ page.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
+            {{ page.active ? options.get('active_class', 'active') }}
+            {{ page.current ? options.get('current_class', 'current') }}
             {{ options.item_class }}">
 
             <a href="{{ url(page.path) }}" class="{{ options.link_class }}">
                 {{ page.title }}
             </a>
 
-            {% if not children.isEmpty() %}
+            {% if not page.children.isEmpty() %}
                 {% if depth+1 <= options.get('depth', 999) %}
                     <{{ options.child_list_tag ?: options.list_tag ?: 'ul' }} class="{{ options.child_list_class }}">
-                        {{ _self.links(children, collection, options, depth+1) }}
+                        {{ _self.links(page.children, collection, options, depth+1) }}
                     </{{ options.child_list_tag ?: options.list_tag ?: 'ul' }}>
                 {% endif %}
             {% endif %}

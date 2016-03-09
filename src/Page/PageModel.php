@@ -37,6 +37,20 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     ];
 
     /**
+     * The active flag.
+     *
+     * @var bool
+     */
+    protected $active = false;
+
+    /**
+     * The current flag.
+     *
+     * @var bool
+     */
+    protected $current = false;
+
+    /**
      * The page's content.
      *
      * @var null|string
@@ -310,6 +324,52 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function setResponse(Response $response)
     {
         $this->response = $response;
+
+        return $this;
+    }
+
+    /**
+     * Get the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent()
+    {
+        return $this->current;
+    }
+
+    /**
+     * Set the current flag.
+     *
+     * @param $current
+     * @return $this
+     */
+    public function setCurrent($current)
+    {
+        $this->current = $current;
+
+        return $this;
+    }
+
+    /**
+     * Get the active flag.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the active flag.
+     *
+     * @param $active
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
 
         return $this;
     }

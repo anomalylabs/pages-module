@@ -18,13 +18,18 @@ class PageFormFields implements SelfHandling
 
     use DispatchesJobs;
 
+    /**
+     * Handle the page fields.
+     *
+     * @param PageFormBuilder $builder
+     */
     public function handle(PageFormBuilder $builder)
     {
         $type   = $builder->getType();
         $parent = $builder->getParent();
 
         /* @var PageInterface $entry */
-        if ($entry = $builder->getFormEntry()) {
+        if (!$parent && $entry = $builder->getFormEntry()) {
             $parent = $entry->getParent();
         }
 
