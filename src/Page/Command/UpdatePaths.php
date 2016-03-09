@@ -41,12 +41,7 @@ class UpdatePaths implements SelfHandling
     {
         foreach ($this->page->getChildren() as $page) {
             if ($page instanceof PageInterface && $page->isEnabled()) {
-                $pages->save(
-                    $page->setAttribute(
-                        'path',
-                        $this->page->isHome() ? $page->getSlug() : $this->page->getPath() . '/' . $page->getSlug()
-                    )
-                );
+                $pages->save($page->setAttribute('path', $this->page->getPath() . '/' . $page->getSlug()));
             }
         }
     }

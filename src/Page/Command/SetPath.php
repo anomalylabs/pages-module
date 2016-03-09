@@ -40,11 +40,7 @@ class SetPath implements SelfHandling
             $path = 'pages/preview/' . $this->page->getStrId();
         } else {
             if ($parent = $this->page->getParent()) {
-                if ($parent->isHome()) {
-                    $path = $this->page->getSlug();
-                } else {
-                    $path = $parent->getPath() . '/' . $this->page->getSlug();
-                }
+                $path = $parent->getPath() . '/' . $this->page->getSlug();
             } elseif ($this->page->isHome()) {
                 $path = '/';
             } else {
