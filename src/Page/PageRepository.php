@@ -1,8 +1,10 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\PagesModule\Page\Command\RemoveRestrictedPages;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class PageRepository
@@ -14,6 +16,8 @@ use Anomaly\Streams\Platform\Entry\EntryRepository;
  */
 class PageRepository extends EntryRepository implements PageRepositoryInterface
 {
+
+    use DispatchesJobs;
 
     /**
      * The page model.
@@ -30,6 +34,16 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     public function __construct(PageModel $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Return only accessible pages.
+     *
+     * @return PageCollection
+     */
+    public function accessible()
+    {
+        return $this->dispatch(new RemoveRestrictedPages($this->all()));
     }
 
     /**

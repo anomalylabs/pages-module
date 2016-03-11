@@ -38,6 +38,7 @@ class RemoveRestrictedPages implements SelfHandling
      * Handle the command.
      *
      * @param Guard $auth
+     * @return PageCollection
      */
     public function handle(Guard $auth)
     {
@@ -73,5 +74,7 @@ class RemoveRestrictedPages implements SelfHandling
                 continue;
             }
         }
+
+        return $this->pages;
     }
 }
