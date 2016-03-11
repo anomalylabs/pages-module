@@ -84,8 +84,8 @@ class PageAuthorizer
          * If the page is not enabled and we are
          * logged in then make sure we have permission.
          */
-        if (!$page->isEnabled()) {
-            $this->authorizer->authorize('anomaly.module.pages::view_drafts');
+        if (!$page->isEnabled() && !$this->authorizer->authorize('anomaly.module.pages::view_drafts')) {
+            abort(403);
         }
 
         /**
@@ -94,6 +94,22 @@ class PageAuthorizer
          */
         $allowed = $page->getAllowedRoles();
 
+        /**
+         * If there is a guest role and
+         * there IS a user then this
+         * page can NOT display.
+         */
+        if ($allowed->has('guest') && $user && !$user->isAdmin()) {
+            abort(403);
+        }
+
+        // No longer needed.
+        $allowed->forget('guest');
+
+        /**
+         * Check the roles against the
+         * user if there are any.
+         */
         if (!$allowed->isEmpty() && (!$user || !$user->hasAnyRole($allowed))) {
             $page->setResponse(
                 $this->response->redirectGuest($this->config->get('anomaly.module.users::paths.login', 'login'))
