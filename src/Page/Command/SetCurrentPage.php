@@ -44,8 +44,8 @@ class SetCurrentPage implements SelfHandling
         }
 
         /* @var PageInterface $current */
-        $current = $this->pages->find($page->getId());
-
-        $current->setCurrent(true);
+        if ($current = $this->pages->find($page->getId())) {
+            $current->setCurrent(true);
+        }
     }
 }
