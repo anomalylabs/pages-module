@@ -2,7 +2,6 @@
 
 use Anomaly\PagesModule\Page\Command\DeleteChildren;
 use Anomaly\PagesModule\Page\Command\DeleteEntry;
-use Anomaly\PagesModule\Page\Command\ResetHome;
 use Anomaly\PagesModule\Page\Command\SetPath;
 use Anomaly\PagesModule\Page\Command\SetStrId;
 use Anomaly\PagesModule\Page\Command\UpdatePaths;
@@ -31,7 +30,6 @@ class PageObserver extends EntryObserver
      */
     public function saving(EntryInterface $entry)
     {
-        $this->dispatch(new ResetHome($entry));
         $this->dispatch(new SetStrid($entry));
         $this->dispatch(new SetPath($entry));
 

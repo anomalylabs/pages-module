@@ -33,14 +33,18 @@ class AnomalyModulePagesCreateTypesStream extends Migration
         'name'         => [
             'translatable' => true,
             'required'     => true,
-            'unique'       => true
+            'unique'       => true,
+            'config'       => [
+                'max' => 50
+            ]
         ],
         'slug'         => [
             'required' => true,
             'unique'   => true,
             'config'   => [
                 'slugify' => 'name',
-                'type'    => '_'
+                'type'    => '_',
+                'max'     => 50
             ]
         ],
         'description'  => [
