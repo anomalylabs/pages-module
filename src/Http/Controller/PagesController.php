@@ -32,6 +32,9 @@ class PagesController extends PublicController
             abort(404);
         }
 
+        $page->setCurrent(true);
+        $page->setActive(true);
+
         $type    = $page->getType();
         $handler = $type->getHandler();
 

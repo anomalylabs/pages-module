@@ -42,6 +42,7 @@ class SetActivePages implements SelfHandling
     public function handle(ViewTemplate $template)
     {
         if (!$current = $this->pages->current()) {
+
             return;
         }
 

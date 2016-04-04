@@ -1,5 +1,8 @@
 {% macro links(pages, collection, options, depth) %}
     {% for page in pages %}
+        {% if page.id == 6 %}
+            {{ dump(page) }}
+{% endif %}
         <{{ options.link_tag ?: 'li' }} class="
             {{ page.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
             {{ page.active ? options.get('active_class', 'active') }}
