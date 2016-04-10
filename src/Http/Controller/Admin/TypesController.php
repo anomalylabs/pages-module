@@ -98,13 +98,6 @@ class TypesController extends AdminController
         $type = $types->find($id);
 
         return $form
-            ->setActions(
-                [
-                    'save' => [
-                        'redirect' => 'admin/pages/types/assignments/' . $id
-                    ]
-                ]
-            )
             ->setStream($type->getEntryStream())
             ->setField($fields->find($field))
             ->render();
