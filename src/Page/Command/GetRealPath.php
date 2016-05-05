@@ -45,7 +45,7 @@ class GetRealPath implements SelfHandling
         } elseif ($this->page->isHome()) {
             return '/';
         } else {
-            return $this->page->getSlug();
+            return '/' . $this->page->getSlug();
         }
     }
 }
