@@ -4,6 +4,8 @@ use Anomaly\PagesModule\Type\Command\CreateStream;
 use Anomaly\PagesModule\Type\Command\DeletePages;
 use Anomaly\PagesModule\Type\Command\DeleteStream;
 use Anomaly\PagesModule\Type\Command\RestorePages;
+use Anomaly\PagesModule\Type\Command\UpdatePages;
+use Anomaly\PagesModule\Type\Command\UpdateStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
@@ -29,6 +31,19 @@ class TypeObserver extends EntryObserver
         $this->commands->dispatch(new CreateStream($entry));
 
         parent::created($entry);
+    }
+
+    /**
+     * Fired before a page type is updated.
+     *
+     * @param EntryInterface|TypeInterface $entry
+     */
+    public function updating(EntryInterface $entry)
+    {
+        $this->commands->dispatch(new UpdateStream($entry));
+        $this->commands->dispatch(new UpdatePages($entry));
+
+        parent::updating($entry);
     }
 
     /**

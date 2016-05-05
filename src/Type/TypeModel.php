@@ -23,7 +23,7 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      *
      * @var int
      */
-    protected $cacheMinutes = 99999;
+    protected $ttl = 99999;
 
     /**
      * Get the name.
