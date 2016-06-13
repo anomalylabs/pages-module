@@ -5,6 +5,7 @@ use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -187,6 +188,13 @@ interface PageInterface extends EntryInterface
      * @return null|int
      */
     public function getEntryId();
+
+    /**
+     * Return the entry relationship.
+     *
+     * @return MorphTo
+     */
+    public function entry();
 
     /**
      * Get the content.

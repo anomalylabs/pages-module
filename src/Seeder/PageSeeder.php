@@ -3,7 +3,6 @@
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
-use Anomaly\Streams\Platform\Model\Pages\PagesDefaultPagesEntryModel;
 
 /**
  * Class PageSeeder
@@ -51,41 +50,20 @@ class PageSeeder extends Seeder
 
         $type = $this->types->findBySlug('default');
 
-        $welcome = (new PagesDefaultPagesEntryModel())->create(
-            [
-                'content' => '<p>Welcome to PyroCMS!</p>'
-            ]
-        );
-
-        $login = (new PagesDefaultPagesEntryModel())->create(
-            [
-                'content' => '{{ form(\'login\').successMessage(\'You are now logged in.\')|raw }}'
-            ]
-        );
-
         $this->pages->create(
             [
                 'en'           => [
                     'title' => 'Welcome'
                 ],
                 'slug'         => 'welcome',
-                'entry'        => $welcome,
+                'entry'        => $type->getEntryModel()->create(
+                    [
+                        'content' => '<p>Welcome to PyroCMS!</p>'
+                    ]
+                ),
                 'type'         => $type,
                 'enabled'      => true,
                 'home'         => true,
-                'theme_layout' => 'theme::layouts/default.twig'
-            ]
-        )->allowedRoles()->sync([]);
-
-        $this->pages->create(
-            [
-                'en'           => [
-                    'title' => 'Login'
-                ],
-                'slug'         => 'login',
-                'entry'        => $login,
-                'type'         => $type,
-                'enabled'      => true,
                 'theme_layout' => 'theme::layouts/default.twig'
             ]
         )->allowedRoles()->sync([]);

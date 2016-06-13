@@ -4,6 +4,7 @@ use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Command\GetStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
@@ -63,6 +64,18 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     public function getEntryStream()
     {
         return $this->dispatch(new GetStream($this));
+    }
+
+    /**
+     * Get the related entry model.
+     *
+     * @return EntryModel
+     */
+    public function getEntryModel()
+    {
+        $stream = $this->getEntryStream();
+
+        return $stream->getEntryModel();
     }
 
     /**

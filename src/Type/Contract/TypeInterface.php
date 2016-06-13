@@ -3,6 +3,7 @@
 use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
@@ -43,6 +44,13 @@ interface TypeInterface extends EntryInterface
      * @return StreamInterface
      */
     public function getEntryStream();
+
+    /**
+     * Get the related entry model.
+     *
+     * @return EntryModel
+     */
+    public function getEntryModel();
 
     /**
      * Get the related entry model name.
