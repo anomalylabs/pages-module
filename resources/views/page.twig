@@ -1,4 +1,4 @@
-{% extends page.theme_layout ?: "theme::layouts/default" %}
+{% extends page.theme_layout.value ?: "theme::layouts/default" %}
 
 {% block content %}
     {{ content|raw }}
