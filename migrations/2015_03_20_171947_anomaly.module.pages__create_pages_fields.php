@@ -35,7 +35,7 @@ class AnomalyModulePagesCreatePagesFields extends Migration
         'enabled'          => [
             'type'   => 'anomaly.field_type.boolean',
             'config' => [
-                'default_value' => false,
+                'default_value' => true,
             ]
         ],
         'home'             => [
