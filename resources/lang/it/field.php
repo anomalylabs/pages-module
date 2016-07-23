@@ -9,7 +9,7 @@ return [
         'name' => 'Slug',
     'instructions' => [
         'types' => 'Lo slug è utilizzato per la creazione della tabella per questo tipo di pagine nel database.',
-    'pages' => 'Lo slug è utilizzato per creare l&amp;#039;URL della pagina.',
+    'pages' => 'Lo slug è utilizzato per creare l\'URL della pagina.',
     ],
     ],
     'meta_title' => [
@@ -54,7 +54,7 @@ return [
     ],
     'exact' => [
         'name' => 'Corrispondenza esatta URI',
-    'label' => 'Richiede una corrispondenza esatta con l&amp;#039;URI',
+    'label' => 'Richiede una corrispondenza esatta con l\'URI',
     'instructions' => 'Disabilita per consentire parametri personalizzati.',
     ],
     'enabled' => [
