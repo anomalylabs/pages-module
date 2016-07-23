@@ -6,7 +6,7 @@ return [
     'description' => 'Crea pagina, genera menu, gestisci i contenuti e crea il sito più veloce che mai.',
     'section' => [
         'pages' => 'Pagine',
-    'types' => 'Types',
+    'types' => 'Tipi di Pagina',
     'fields' => 'Campi',
     ],
 ];
