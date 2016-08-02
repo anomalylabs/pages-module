@@ -110,10 +110,8 @@ class PageAuthorizer
          * Check the roles against the
          * user if there are any.
          */
-        if (!$allowed->isEmpty() && (!$user || !$user->hasAnyRole($allowed))) {
-            $page->setResponse(
-                $this->response->redirectGuest($this->config->get('anomaly.module.users::paths.login', 'login'))
-            );
+        if (!$allowed->isEmpty() && (!$user || (!$user->hasAnyRole($allowed) && !$user->isAdmin()))) {
+            $page->setResponse($this->response->redirectGuest('login'));
         }
     }
 }
