@@ -1,14 +1,14 @@
 <?php namespace Anomaly\PagesModule\Page\Support\MultipleFieldType;
 
 /**
- * Class LookupTableBuilder
+ * Class ValueTableBuilder
  *
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Support\MultipleFieldType
  */
-class LookupTableBuilder extends \Anomaly\MultipleFieldType\Table\LookupTableBuilder
+class ValueTableBuilder extends \Anomaly\MultipleFieldType\Table\ValueTableBuilder
 {
 
     /**
