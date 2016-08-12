@@ -77,5 +77,8 @@ return [
     ],
     'content'          => [
         'name' => 'Content'
+    ],
+    'path'             => [
+        'name' => 'Path'
     ]
 ];
