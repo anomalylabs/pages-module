@@ -45,7 +45,7 @@ class GetPage implements SelfHandling
     public function handle(PageRepositoryInterface $pages, ViewTemplate $template)
     {
         if (is_null($this->identifier)) {
-            return $template->get('page');
+            $this->identifier = $template->get('page');
         }
 
         if (is_numeric($this->identifier)) {

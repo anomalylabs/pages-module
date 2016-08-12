@@ -32,7 +32,12 @@ class PagesModulePlugin extends Plugin
                     return new PluginCriteria(
                         'render',
                         function (Collection $options) use ($root) {
-                            return $this->dispatch(new RenderNavigation($options->put('root', $root)));
+
+                            if ($root) {
+                                $options->put('root', $root);
+                            }
+
+                            return $this->dispatch(new RenderNavigation($options));
                         }
                     );
                 }
