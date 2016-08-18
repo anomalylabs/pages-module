@@ -36,13 +36,19 @@ class PagesModule extends Module
             ]
         ],
         'types'  => [
-            'buttons' => [
-                'new_type',
-                'assign_fields' => [
-                    'data-toggle' => 'modal',
-                    'data-target' => '#modal',
-                    'enabled'     => 'admin/pages/types/assignments/*',
-                    'href'        => 'admin/pages/ajax/choose_field/{request.route.parameters.id}'
+            'buttons'  => [
+                'new_type'
+            ],
+            'sections' => [
+                'assignments' => [
+                    'href'    => 'admin/pages/types/assignments/{request.route.parameters.type}',
+                    'buttons' => [
+                        'assign_fields' => [
+                            'data-toggle' => 'modal',
+                            'data-target' => '#modal',
+                            'href'        => 'admin/pages/types/assignments/{request.route.parameters.type}/choose'
+                        ]
+                    ]
                 ]
             ]
         ],

@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type\Command;
 
-use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\DocumentationModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\DocumentationModule\Type\Contract\TypeInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**

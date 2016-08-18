@@ -5,8 +5,9 @@ return [
     'name'        => 'Pages Module',
     'description' => 'Create pages, generate navigation, manage content, and build websites faster than ever.',
     'section'     => [
-        'pages'  => 'Pages',
-        'types'  => 'Types',
-        'fields' => 'Fields'
+        'pages'       => 'Pages',
+        'types'       => 'Types',
+        'fields'      => 'Fields',
+        'assignments' => 'Assignments',
     ]
 ];
