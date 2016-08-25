@@ -4,7 +4,7 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Auth\Guard;
 
 /**
  * Class RemoveRestrictedPages
@@ -12,9 +12,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @page          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Command
  */
-class RemoveRestrictedPages implements SelfHandling
+class RemoveRestrictedPages
 {
 
     /**
@@ -37,7 +36,7 @@ class RemoveRestrictedPages implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Guard $auth
+     * @param  Guard          $auth
      * @return PageCollection
      */
     public function handle(Guard $auth)
@@ -50,7 +49,7 @@ class RemoveRestrictedPages implements SelfHandling
 
             $roles = $page->getAllowedRoles();
 
-            /**
+            /*
              * If there are role restrictions
              * but no user is signed in then
              * we can't authorize anything!
@@ -62,7 +61,7 @@ class RemoveRestrictedPages implements SelfHandling
                 continue;
             }
 
-            /**
+            /*
              * If there are role restrictions
              * and the user does not belong to
              * any of them then don't show it.

@@ -6,7 +6,6 @@
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Support\RelationshipFieldType
  */
 class LookupTableBuilder extends \Anomaly\RelationshipFieldType\Table\LookupTableBuilder
 {
@@ -18,6 +17,6 @@ class LookupTableBuilder extends \Anomaly\RelationshipFieldType\Table\LookupTabl
      */
     protected $columns = [
         'title',
-        'path'
+        'path',
     ];
 }

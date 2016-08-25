@@ -7,6 +7,6 @@ return [
         'pages'    => 'Páginas',
         'types'    => 'Tipos',
         'fields'   => 'Campos',
-        'settings' => 'Configuración'
-    ]
+        'settings' => 'Configuración',
+    ],
 ];

@@ -12,7 +12,6 @@ use Illuminate\Routing\Router;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule
  */
 class PagesModuleServiceProvider extends AddonServiceProvider
 {
@@ -23,7 +22,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PagesModule\PagesModulePlugin'
+        'Anomaly\PagesModule\PagesModulePlugin',
     ];
 
     /**
@@ -33,7 +32,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      */
     protected $bindings = [
         'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel' => 'Anomaly\PagesModule\Page\PageModel',
-        'Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel' => 'Anomaly\PagesModule\Type\TypeModel'
+        'Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel' => 'Anomaly\PagesModule\Type\TypeModel',
     ];
 
     /**
@@ -43,7 +42,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      */
     protected $singletons = [
         'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface' => 'Anomaly\PagesModule\Page\PageRepository',
-        'Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface' => 'Anomaly\PagesModule\Type\TypeRepository'
+        'Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface' => 'Anomaly\PagesModule\Type\TypeRepository',
     ];
 
     /**
@@ -71,7 +70,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/ajax/choose_type'                   => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseType',
         'admin/pages/ajax/choose_field/{id}'             => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseField',
         'admin/pages/settings'                           => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
-        'pages/preview/{id}'                             => 'Anomaly\PagesModule\Http\Controller\PagesController@preview'
+        'pages/preview/{id}'                             => 'Anomaly\PagesModule\Http\Controller\PagesController@preview',
     ];
 
     /**
@@ -91,7 +90,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
                 [
                     'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
                     'streams::addon'             => 'anomaly.module.pages',
-                    'anomaly.module.pages::page' => $page->getId()
+                    'anomaly.module.pages::page' => $page->getId(),
                 ]
             );
         }
@@ -105,8 +104,8 @@ class PagesModuleServiceProvider extends AddonServiceProvider
                     'streams::addon'             => 'anomaly.module.pages',
                     'anomaly.module.pages::page' => $page->getId(),
                     'where'                      => [
-                        'any' => '(.*)'
-                    ]
+                        'any' => '(.*)',
+                    ],
                 ]
             );
         }

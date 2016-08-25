@@ -6,5 +6,5 @@ return [
     'choose_field'      => '您想要增加什麼欄位？',
     'disabled'          => '禁用',
     'hidden'            => '隱藏',
-    'home'              => '首頁'
+    'home'              => '首頁',
 ];

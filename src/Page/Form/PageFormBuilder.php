@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Form
  */
 class PageFormBuilder extends FormBuilder
 {
@@ -39,7 +38,7 @@ class PageFormBuilder extends FormBuilder
         'path',
         'type',
         'entry',
-        'parent'
+        'parent',
     ];
 
     /**
@@ -85,7 +84,7 @@ class PageFormBuilder extends FormBuilder
     /**
      * Set the type.
      *
-     * @param TypeInterface $type
+     * @param  TypeInterface $type
      * @return $this
      */
     public function setType(TypeInterface $type)
@@ -108,7 +107,7 @@ class PageFormBuilder extends FormBuilder
     /**
      * Set the parent page.
      *
-     * @param PageInterface $parent
+     * @param  PageInterface $parent
      * @return $this
      */
     public function setParent(PageInterface $parent)

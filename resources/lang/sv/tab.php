@@ -9,5 +9,5 @@ return [
     'page'     => 'Sida',
     'seo'      => 'SEO',
     'css'      => 'CSS',
-    'js'       => 'JS'
+    'js'       => 'JS',
 ];

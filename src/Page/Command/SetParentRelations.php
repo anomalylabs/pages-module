@@ -3,7 +3,7 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Model\EloquentModel;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class SetParentRelations
@@ -11,9 +11,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @page          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Command
  */
-class SetParentRelations implements SelfHandling
+class SetParentRelations
 {
 
     /**

@@ -4,15 +4,15 @@ return [
     'pages'  => [
         'read',
         'write',
-        'delete'
+        'delete',
     ],
     'types'  => [
         'read',
         'write',
         'delete',
-        'fields'
+        'fields',
     ],
     'fields' => [
-        'manage'
-    ]
+        'manage',
+    ],
 ];

@@ -2,9 +2,9 @@
 
 return [
     'pages'      => [
-        'name' => 'Pages'
+        'name' => 'Pages',
     ],
     'types' => [
-        'name' => 'Page Types'
-    ]
+        'name' => 'Page Types',
+    ],
 ];

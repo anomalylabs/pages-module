@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Support\Decorator;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page
  */
 class PagePresenter extends EntryPresenter
 {
@@ -37,7 +36,7 @@ class PagePresenter extends EntryPresenter
      * Catch calls to fields on
      * the page's related entry.
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function __get($key)

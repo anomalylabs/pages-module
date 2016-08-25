@@ -19,7 +19,6 @@ use Illuminate\Routing\Redirector;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class PagesController extends AdminController
 {
@@ -27,7 +26,7 @@ class PagesController extends AdminController
     /**
      * Return a tree of existing pages.
      *
-     * @param PageTreeBuilder $tree
+     * @param  PageTreeBuilder           $tree
      * @return \Illuminate\Http\Response
      */
     public function index(PageTreeBuilder $tree)
@@ -38,7 +37,7 @@ class PagesController extends AdminController
     /**
      * Return the form for creating a new page.
      *
-     * @param PageEntryFormBuilder $form
+     * @param  PageEntryFormBuilder                       $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(PageEntryFormBuilder $form, PageRepositoryInterface $pages)
@@ -60,9 +59,9 @@ class PagesController extends AdminController
     /**
      * Return the form for editing an existing page.
      *
-     * @param PageRepositoryInterface $pages
-     * @param PageEntryFormBuilder    $form
-     * @param                         $id
+     * @param  PageRepositoryInterface                    $pages
+     * @param  PageEntryFormBuilder                       $form
+     * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(PageRepositoryInterface $pages, PageEntryFormBuilder $form, $id)
@@ -78,9 +77,9 @@ class PagesController extends AdminController
     /**
      * Redirect to a page's URL.
      *
-     * @param PageRepositoryInterface $pages
-     * @param Redirector              $redirect
-     * @param                         $id
+     * @param  PageRepositoryInterface           $pages
+     * @param  Redirector                        $redirect
+     * @param                                    $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function view(PageRepositoryInterface $pages, Redirector $redirect, $id)
@@ -102,9 +101,9 @@ class PagesController extends AdminController
     /**
      * Delete a page and go back.
      *
-     * @param PageRepositoryInterface $pages
-     * @param Authorizer              $authorizer
-     * @param                         $id
+     * @param  PageRepositoryInterface           $pages
+     * @param  Authorizer                        $authorizer
+     * @param                                    $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(PageRepositoryInterface $pages, Authorizer $authorizer, $id)

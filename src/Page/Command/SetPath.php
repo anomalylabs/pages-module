@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page\Command;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class SetPath
@@ -9,9 +9,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Command
  */
-class SetPath implements SelfHandling
+class SetPath
 {
 
     /**

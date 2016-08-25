@@ -7,5 +7,5 @@ return [
     'restricted'        => 'Restricted',
     'disabled'          => 'Disabled',
     'hidden'            => 'Hidden',
-    'home'              => 'Home'
+    'home'              => 'Home',
 ];

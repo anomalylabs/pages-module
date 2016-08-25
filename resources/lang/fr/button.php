@@ -5,5 +5,5 @@ return [
     'new_field'         => 'Nouveau champs',
     'add_field'         => 'Ajouter champs',
     'new_type'          => 'Nouveau type de page',
-    'create_child_page' => 'Créer une page enfant'
+    'create_child_page' => 'Créer une page enfant',
 ];

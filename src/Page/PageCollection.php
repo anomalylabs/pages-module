@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
  * @page          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page
  */
 class PageCollection extends EntryCollection
 {
@@ -17,7 +16,7 @@ class PageCollection extends EntryCollection
     /**
      * Return only exact pages.
      *
-     * @param bool $exact
+     * @param  bool           $exact
      * @return PageCollection
      */
     public function exact($exact = true)
@@ -55,7 +54,7 @@ class PageCollection extends EntryCollection
     /**
      * Return only visible pages.
      *
-     * @param bool $visible
+     * @param  bool           $visible
      * @return PageCollection
      */
     public function visible($visible = true)
@@ -136,7 +135,7 @@ class PageCollection extends EntryCollection
     /**
      * Return only active pages.
      *
-     * @param bool $active
+     * @param  bool           $active
      * @return PageCollection
      */
     public function active($active = true)

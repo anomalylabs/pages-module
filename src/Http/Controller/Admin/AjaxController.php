@@ -11,7 +11,6 @@ use Anomaly\Streams\Platform\Http\Controller\AdminController;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class AjaxController extends AdminController
 {
@@ -19,7 +18,7 @@ class AjaxController extends AdminController
     /**
      * Return the modal for choosing a page type.
      *
-     * @param TypeRepositoryInterface $types
+     * @param  TypeRepositoryInterface $types
      * @return \Illuminate\View\View
      */
     public function chooseType(TypeRepositoryInterface $types)
@@ -30,7 +29,7 @@ class AjaxController extends AdminController
     /**
      * Return the modal for choosing a field type.
      *
-     * @param FieldTypeCollection $fieldTypes
+     * @param  FieldTypeCollection   $fieldTypes
      * @return \Illuminate\View\View
      */
     public function chooseFieldType(FieldTypeCollection $fieldTypes)
@@ -43,7 +42,7 @@ class AjaxController extends AdminController
     /**
      * Return the modal for choosing a field to assign.
      *
-     * @param FieldRepositoryInterface $fields
+     * @param  FieldRepositoryInterface $fields
      * @return \Illuminate\View\View
      */
     public function chooseField(FieldRepositoryInterface $fields, TypeRepositoryInterface $types, $id)
@@ -54,7 +53,7 @@ class AjaxController extends AdminController
             'module::ajax/choose_field',
             [
                 'fields' => $fields->findAllByNamespace('pages')->notAssignedTo($type->getEntryStream())->unlocked(),
-                'id'     => $id
+                'id'     => $id,
             ]
         );
     }

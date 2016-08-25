@@ -13,7 +13,6 @@ use Illuminate\Routing\ResponseFactory;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page
  */
 class PageAuthorizer
 {
@@ -72,7 +71,7 @@ class PageAuthorizer
         /* @var UserInterface $user */
         $user = $this->guard->user();
 
-        /**
+        /*
          * If the page is not enabled and we
          * are not logged in then 404.
          */
@@ -80,7 +79,7 @@ class PageAuthorizer
             abort(404);
         }
 
-        /**
+        /*
          * If the page is not enabled and we are
          * logged in then make sure we have permission.
          */
@@ -88,13 +87,13 @@ class PageAuthorizer
             abort(403);
         }
 
-        /**
+        /*
          * If the page is restricted to specific
          * roles then make sure our user is one of them.
          */
         $allowed = $page->getAllowedRoles();
 
-        /**
+        /*
          * If there is a guest role and
          * there IS a user then this
          * page can NOT display.
@@ -106,7 +105,7 @@ class PageAuthorizer
         // No longer needed.
         $allowed->forget('guest');
 
-        /**
+        /*
          * Check the roles against the
          * user if there are any.
          */

@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Type\Table
  */
 class TypeTableBuilder extends TableBuilder
 {
@@ -23,9 +22,9 @@ class TypeTableBuilder extends TableBuilder
             'fields' => [
                 'name',
                 'slug',
-                'description'
-            ]
-        ]
+                'description',
+            ],
+        ],
     ];
 
     /**
@@ -35,7 +34,7 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $columns = [
         'name',
-        'description'
+        'description',
     ];
 
     /**
@@ -45,7 +44,7 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $buttons = [
         'edit',
-        'assignments'
+        'assignments',
     ];
 
     /**
@@ -54,7 +53,7 @@ class TypeTableBuilder extends TableBuilder
      * @var array
      */
     protected $actions = [
-        'delete'
+        'delete',
     ];
 
     /**
@@ -63,7 +62,7 @@ class TypeTableBuilder extends TableBuilder
      * @var array
      */
     protected $options = [
-        'sortable' => true
+        'sortable' => true,
     ];
 
 }

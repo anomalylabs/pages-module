@@ -6,7 +6,6 @@
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Type\Form
  */
 class TypeFormSections
 {
@@ -25,15 +24,15 @@ class TypeFormSections
                         'name',
                         'slug',
                         'description',
-                        'handler'
-                    ]
+                        'handler',
+                    ],
                 ],
                 'layout'  => [
                     'fields' => [
                         'theme_layout',
-                        'layout'
-                    ]
-                ]
+                        'layout',
+                    ],
+                ],
             ]
         );
     }

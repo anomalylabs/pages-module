@@ -5,7 +5,6 @@ use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 use Illuminate\Config\Repository;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -14,9 +13,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Type\Command
  */
-class UpdateStream implements SelfHandling
+class UpdateStream
 {
 
     use DispatchesJobs;
@@ -55,11 +53,11 @@ class UpdateStream implements SelfHandling
 
         $stream->fill(
             [
-                $config->get('app.fallback_locale') =>  [
+                $config->get('app.fallback_locale') => [
                     'name'        => $this->type->getName(),
-                    'description' => $this->type->getDescription()
+                    'description' => $this->type->getDescription(),
                 ],
-                'slug' => $this->type->getSlug() . '_pages'
+                'slug' => $this->type->getSlug() . '_pages',
             ]
         );
 

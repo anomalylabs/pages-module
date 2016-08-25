@@ -14,7 +14,6 @@ use Illuminate\Routing\Route;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Http\Controller
  */
 class PagesController extends PublicController
 {
@@ -22,8 +21,8 @@ class PagesController extends PublicController
     /**
      * Return a rendered page.
      *
-     * @param PageResolver $resolver
-     * @param ViewTemplate $template
+     * @param  PageResolver                                    $resolver
+     * @param  ViewTemplate                                    $template
      * @return null|\Symfony\Component\HttpFoundation\Response
      */
     public function view(PageResolver $resolver, ViewTemplate $template)
@@ -48,9 +47,9 @@ class PagesController extends PublicController
     /**
      * Preview a page.
      *
-     * @param ViewTemplate            $template
-     * @param PageRepositoryInterface $pages
-     * @param                         $id
+     * @param  ViewTemplate                                    $template
+     * @param  PageRepositoryInterface                         $pages
+     * @param                                                  $id
      * @return null|\Symfony\Component\HttpFoundation\Response
      */
     public function preview(ViewTemplate $template, PageRepositoryInterface $pages, $id)
@@ -74,9 +73,9 @@ class PagesController extends PublicController
     /**
      * Redirect elsewhere.
      *
-     * @param PageRepositoryInterface $pages
-     * @param Redirector              $redirector
-     * @param Route                   $route
+     * @param  PageRepositoryInterface                $pages
+     * @param  Redirector                             $redirector
+     * @param  Route                                  $route
      * @return \Illuminate\Http\RedirectResponse|void
      */
     public function redirect(PageRepositoryInterface $pages, Redirector $redirector, Route $route)

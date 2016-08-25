@@ -2,9 +2,9 @@
 
 return [
     'pages'      => [
-        'name' => '頁面'
+        'name' => '頁面',
     ],
     'page_types' => [
-        'name' => '頁面型別'
-    ]
+        'name' => '頁面型別',
+    ],
 ];

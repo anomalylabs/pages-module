@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page
  */
 class PageModel extends PagesPagesEntryModel implements PageInterface
 {
@@ -33,7 +32,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var array
      */
     protected $with = [
-        'translations'
+        'translations',
     ];
 
     /**
@@ -222,7 +221,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     /**
      * Get the route suffix.
      *
-     * @param null $prefix
+     * @param  null        $prefix
      * @return null|string
      */
     public function getRouteSuffix($prefix = null)

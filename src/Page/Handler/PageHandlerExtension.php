@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Addon\Extension\Extension;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Handler
  */
 class PageHandlerExtension extends Extension implements PageHandlerInterface
 {

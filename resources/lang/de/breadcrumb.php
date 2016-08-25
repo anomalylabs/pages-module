@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'fields' => 'Felder'
+    'fields' => 'Felder',
 ];

@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Http\Controller\AdminController;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class SettingsController extends AdminController
 {
@@ -17,7 +16,7 @@ class SettingsController extends AdminController
     /**
      * Return a form to edit the Pages module settings.
      *
-     * @param SettingFormBuilder $form
+     * @param  SettingFormBuilder                         $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(SettingFormBuilder $form)

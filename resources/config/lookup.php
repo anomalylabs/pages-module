@@ -6,13 +6,13 @@ return [
             'search' => [
                 'fields' => [
                     'title',
-                    'path'
-                ]
-            ]
+                    'path',
+                ],
+            ],
         ],
         'columns' => [
             'title',
-            'path'
-        ]
-    ]
+            'path',
+        ],
+    ],
 ];

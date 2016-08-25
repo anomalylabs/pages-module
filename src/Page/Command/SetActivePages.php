@@ -3,7 +3,6 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\View\ViewTemplate;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -12,9 +11,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @page          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Command
  */
-class SetActivePages implements SelfHandling
+class SetActivePages
 {
 
     use DispatchesJobs;
@@ -53,14 +51,14 @@ class SetActivePages implements SelfHandling
         /* @var PageInterface $page */
         foreach ($this->pages as $page) {
 
-            /**
+            /*
              * Already flagged.
              */
             if ($page->isActive() || $page->isCurrent()) {
                 continue;
             }
 
-            /**
+            /*
              * Set active if the direct
              * parent of current page.
              */
@@ -69,7 +67,7 @@ class SetActivePages implements SelfHandling
                 $page->setActive(true);
             }
 
-            /**
+            /*
              * If the active page is in the children
              * of this page then mark it active too.
              */

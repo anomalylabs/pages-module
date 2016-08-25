@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Database\Seeder\Seeder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Seeder
  */
 class PageSeeder extends Seeder
 {
@@ -53,18 +52,18 @@ class PageSeeder extends Seeder
         $this->pages->create(
             [
                 'en'           => [
-                    'title' => 'Welcome'
+                    'title' => 'Welcome',
                 ],
                 'slug'         => 'welcome',
                 'entry'        => $type->getEntryModel()->create(
                     [
-                        'content' => '<p>Welcome to PyroCMS!</p>'
+                        'content' => '<p>Welcome to PyroCMS!</p>',
                     ]
                 ),
                 'type'         => $type,
                 'enabled'      => true,
                 'home'         => true,
-                'theme_layout' => 'theme::layouts/default.twig'
+                'theme_layout' => 'theme::layouts/default.twig',
             ]
         )->allowedRoles()->sync([]);
     }

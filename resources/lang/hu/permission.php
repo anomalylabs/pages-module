@@ -3,24 +3,24 @@
 return [
     'pages' => [
         'name' => 'Oldalak',
-    'option' => [
+    'option'   => [
         'read' => 'Hozzáférhet az oldalakhoz?',
-    'write' => 'Szerkeszthet oldalakat?',
-    'delete' => 'Törölhet oldalakat?',
+    'write'    => 'Szerkeszthet oldalakat?',
+    'delete'   => 'Törölhet oldalakat?',
     ],
     ],
     'types' => [
         'name' => 'Típusok',
-    'option' => [
+    'option'   => [
         'read' => 'Hozzáférhet típusokhoz?',
-    'write' => 'Szerkeszthet típusokat?',
-    'delete' => 'Törölhet típusokat?',
-    'fields' => 'Módosíthat mezőket?',
+    'write'    => 'Szerkeszthet típusokat?',
+    'delete'   => 'Törölhet típusokat?',
+    'fields'   => 'Módosíthat mezőket?',
     ],
     ],
     'fields' => [
         'name' => 'Mezők',
-    'option' => [
+    'option'   => [
         'manage' => 'Szerkesztheti a mezőket?',
     ],
     ],

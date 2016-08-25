@@ -13,7 +13,6 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class FieldsController extends AdminController
 {
@@ -21,7 +20,7 @@ class FieldsController extends AdminController
     /**
      * Return an index of existing fields.
      *
-     * @param FieldTableBuilder $table
+     * @param  FieldTableBuilder                          $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(FieldTableBuilder $table, PageModel $pages)
@@ -34,7 +33,7 @@ class FieldsController extends AdminController
     /**
      * Choose a field type for creating a field.
      *
-     * @param FieldTypeCollection $fieldTypes
+     * @param  FieldTypeCollection   $fieldTypes
      * @return \Illuminate\View\View
      */
     public function choose(FieldTypeCollection $fieldTypes)
@@ -45,9 +44,9 @@ class FieldsController extends AdminController
     /**
      * Return the form for a new field.
      *
-     * @param FieldFormBuilder          $form
-     * @param StreamRepositoryInterface $streams
-     * @param FieldTypeCollection       $fieldTypes
+     * @param  FieldFormBuilder                           $form
+     * @param  StreamRepositoryInterface                  $streams
+     * @param  FieldTypeCollection                        $fieldTypes
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(FieldFormBuilder $form, StreamRepositoryInterface $streams, FieldTypeCollection $fieldTypes)
@@ -62,8 +61,8 @@ class FieldsController extends AdminController
     /**
      * Return the form for an existing field.
      *
-     * @param FieldFormBuilder $form
-     * @param                  $id
+     * @param  FieldFormBuilder                           $form
+     * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(FieldFormBuilder $form, $id)

@@ -2,7 +2,6 @@
 
 use Anomaly\PagesModule\Page\Command\GetRealPath;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -11,9 +10,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Form
  */
-class PageFormFields implements SelfHandling
+class PageFormFields
 {
 
     use DispatchesJobs;
@@ -38,14 +36,14 @@ class PageFormFields implements SelfHandling
                 '*',
                 'slug'         => [
                     'config' => [
-                        'prefix' => ($parent ? url($this->dispatch(new GetRealPath($parent))) : url()) . '/'
-                    ]
+                        'prefix' => ($parent ? url($this->dispatch(new GetRealPath($parent))) : url()) . '/',
+                    ],
                 ],
                 'theme_layout' => [
                     'config' => [
-                        'default_value' => $type ? $type->getThemeLayout() : null
-                    ]
-                ]
+                        'default_value' => $type ? $type->getThemeLayout() : null,
+                    ],
+                ],
             ]
         );
     }

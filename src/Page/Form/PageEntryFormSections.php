@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Form
  */
 class PageEntryFormSections
 {
@@ -26,8 +25,8 @@ class PageEntryFormSections
                 'general' => [
                     'fields' => [
                         'page_title',
-                        'page_slug'
-                    ]
+                        'page_slug',
+                    ],
                 ],
                 'fields'  => [
                     'fields' => function (PageEntryFormBuilder $builder) {
@@ -42,14 +41,14 @@ class PageEntryFormSections
                                 }
                             )
                         );
-                    }
+                    },
                 ],
                 'seo'     => [
                     'fields' => [
                         'page_meta_title',
                         'page_meta_keywords',
-                        'page_meta_description'
-                    ]
+                        'page_meta_description',
+                    ],
                 ],
                 'options' => [
                     'fields' => [
@@ -58,9 +57,9 @@ class PageEntryFormSections
                         'page_home',
                         'page_visible',
                         'page_exact',
-                        'page_allowed_roles'
-                    ]
-                ]
+                        'page_allowed_roles',
+                    ],
+                ],
             ]
         );
     }

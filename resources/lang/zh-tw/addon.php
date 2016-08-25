@@ -7,6 +7,6 @@ return [
     'section'     => [
         'pages'  => '頁面',
         'types'  => '型別',
-        'fields' => '欄位'
-    ]
+        'fields' => '欄位',
+    ],
 ];

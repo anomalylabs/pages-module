@@ -2,9 +2,9 @@
 
 return [
     'pages'      => [
-        'name' => 'Sidor'
+        'name' => 'Sidor',
     ],
     'page_types' => [
-        'name' => 'Sidtyper'
-    ]
+        'name' => 'Sidtyper',
+    ],
 ];

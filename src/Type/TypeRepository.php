@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Entry\EntryRepository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Type
  */
 class TypeRepository extends EntryRepository implements TypeRepositoryInterface
 {

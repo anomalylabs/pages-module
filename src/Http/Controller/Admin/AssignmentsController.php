@@ -13,7 +13,6 @@ use Anomaly\Streams\Platform\Http\Controller\AdminController;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class AssignmentsController extends AdminController
 {
@@ -21,9 +20,9 @@ class AssignmentsController extends AdminController
     /**
      * Return an index of existing assignments.
      *
-     * @param AssignmentTableBuilder  $table
-     * @param TypeRepositoryInterface $types
-     * @param                         $type
+     * @param  AssignmentTableBuilder                     $table
+     * @param  TypeRepositoryInterface                    $types
+     * @param                                             $type
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(AssignmentTableBuilder $table, TypeRepositoryInterface $types, $type)
@@ -37,9 +36,9 @@ class AssignmentsController extends AdminController
     /**
      * Return the modal for choosing a field to assign.
      *
-     * @param FieldRepositoryInterface $fields
-     * @param TypeRepositoryInterface  $types
-     * @param                          $type
+     * @param  FieldRepositoryInterface              $fields
+     * @param  TypeRepositoryInterface               $types
+     * @param                                        $type
      * @return \Illuminate\Contracts\View\View|mixed
      */
     public function choose(FieldRepositoryInterface $fields, TypeRepositoryInterface $types, $type)
@@ -58,10 +57,10 @@ class AssignmentsController extends AdminController
     /**
      * Create a new assignment.
      *
-     * @param AssignmentFormBuilder    $builder
-     * @param TypeRepositoryInterface  $types
-     * @param FieldRepositoryInterface $fields
-     * @param                          $type
+     * @param  AssignmentFormBuilder                      $builder
+     * @param  TypeRepositoryInterface                    $types
+     * @param  FieldRepositoryInterface                   $fields
+     * @param                                             $type
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(
@@ -82,10 +81,10 @@ class AssignmentsController extends AdminController
     /**
      * Edit an existing assignment.
      *
-     * @param AssignmentFormBuilder   $builder
-     * @param TypeRepositoryInterface $types
-     * @param                         $type
-     * @param                         $id
+     * @param  AssignmentFormBuilder                      $builder
+     * @param  TypeRepositoryInterface                    $types
+     * @param                                             $type
+     * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(

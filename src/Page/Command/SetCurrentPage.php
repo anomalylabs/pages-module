@@ -3,7 +3,7 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\View\ViewTemplate;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class SetCurrentPage
@@ -11,9 +11,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @page          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Command
  */
-class SetCurrentPage implements SelfHandling
+class SetCurrentPage
 {
 
     /**

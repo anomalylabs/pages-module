@@ -5,7 +5,7 @@ use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PagePresenter;
 use Anomaly\Streams\Platform\Model\EloquentModel;
 use Anomaly\Streams\Platform\View\ViewTemplate;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class GetPage
@@ -13,9 +13,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Command
  */
-class GetPage implements SelfHandling
+class GetPage
 {
 
     /**
@@ -38,8 +37,8 @@ class GetPage implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param PageRepositoryInterface $pages
-     * @param ViewTemplate            $template
+     * @param  PageRepositoryInterface          $pages
+     * @param  ViewTemplate                     $template
      * @return PageInterface|EloquentModel|null
      */
     public function handle(PageRepositoryInterface $pages, ViewTemplate $template)

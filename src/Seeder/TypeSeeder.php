@@ -13,7 +13,6 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Seeder
  */
 class TypeSeeder extends Seeder
 {
@@ -82,14 +81,14 @@ class TypeSeeder extends Seeder
                 [
                     'en'           => [
                         'name'        => 'Default',
-                        'description' => 'A simple page type.'
+                        'description' => 'A simple page type.',
                     ],
                     'slug'         => 'default',
                     'handler'      => 'anomaly.extension.default_page_handler',
                     'theme_layout' => 'theme::layouts/default.twig',
                     'layout'       => '<h1>{{ page.title }}</h1>
 
-{{ page.content|raw }}'
+{{ page.content|raw }}',
                 ]
             );
 
@@ -98,7 +97,7 @@ class TypeSeeder extends Seeder
         $this->assignments->create(
             [
                 'stream' => $stream,
-                'field'  => $this->fields->findBySlugAndNamespace('content', 'pages')
+                'field'  => $this->fields->findBySlugAndNamespace('content', 'pages'),
             ]
         );
     }

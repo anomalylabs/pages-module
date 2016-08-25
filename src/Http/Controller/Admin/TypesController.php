@@ -16,7 +16,6 @@ use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Http\Controller\Admin
  */
 class TypesController extends AdminController
 {
@@ -24,7 +23,7 @@ class TypesController extends AdminController
     /**
      * Return an index of existing page types.
      *
-     * @param TypeTableBuilder $table
+     * @param  TypeTableBuilder                           $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(TypeTableBuilder $table)
@@ -35,7 +34,7 @@ class TypesController extends AdminController
     /**
      * Return a form for a new page type.
      *
-     * @param TypeFormBuilder $form
+     * @param  TypeFormBuilder                            $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(TypeFormBuilder $form)
@@ -46,8 +45,8 @@ class TypesController extends AdminController
     /**
      * Return a form for editing an existing page type.
      *
-     * @param TypeFormBuilder     $form
-     * @param                     $id
+     * @param  TypeFormBuilder                            $form
+     * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(TypeFormBuilder $form, $id)
@@ -58,10 +57,10 @@ class TypesController extends AdminController
     /**
      * Return a table of existing page type assignments.
      *
-     * @param AssignmentTableBuilder      $table
-     * @param TypeRepositoryInterface     $types
-     * @param BreadcrumbCollection        $breadcrumbs
-     * @param                             $id
+     * @param  AssignmentTableBuilder                     $table
+     * @param  TypeRepositoryInterface                    $types
+     * @param  BreadcrumbCollection                       $breadcrumbs
+     * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function fields(
@@ -76,8 +75,8 @@ class TypesController extends AdminController
             ->setButtons(
                 [
                     'edit' => [
-                        'href' => '{request.path}/assignment/{entry.id}'
-                    ]
+                        'href' => '{request.path}/assignment/{entry.id}',
+                    ],
                 ]
             )
             ->setStream($type->getEntryStream())
@@ -103,11 +102,11 @@ class TypesController extends AdminController
     /**
      * Return a form for an existing page type field and assignment.
      *
-     * @param AssignmentFormBuilder       $form
-     * @param StreamRepositoryInterface   $streams
-     * @param TypeRepositoryInterface     $types
-     * @param BreadcrumbCollection        $breadcrumbs
-     * @param                             $id
+     * @param  AssignmentFormBuilder                      $form
+     * @param  StreamRepositoryInterface                  $streams
+     * @param  TypeRepositoryInterface                    $types
+     * @param  BreadcrumbCollection                       $breadcrumbs
+     * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function assignment(

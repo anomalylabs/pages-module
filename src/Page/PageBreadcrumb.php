@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page
  */
 class PageBreadcrumb
 {
@@ -49,7 +48,7 @@ class PageBreadcrumb
     public function make(PageInterface $page)
     {
         $breadcrumbs = [
-            $page->getTitle() => $this->request->path()
+            $page->getTitle() => $this->request->path(),
         ];
 
         $this->loadParent($page, $breadcrumbs);

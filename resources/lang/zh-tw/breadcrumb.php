@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'fields' => '欄位'
+    'fields' => '欄位',
 ];

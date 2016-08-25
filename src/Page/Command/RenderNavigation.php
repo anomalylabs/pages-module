@@ -4,7 +4,6 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Support\Collection;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\View\Factory;
 
@@ -14,9 +13,8 @@ use Illuminate\View\Factory;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Command
  */
-class RenderNavigation implements SelfHandling
+class RenderNavigation
 {
 
     use DispatchesJobs;
@@ -41,7 +39,7 @@ class RenderNavigation implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param PageRepositoryInterface $pages
+     * @param  PageRepositoryInterface $pages
      * @return null|PageInterface
      */
     public function handle(PageRepositoryInterface $pages, Factory $view)

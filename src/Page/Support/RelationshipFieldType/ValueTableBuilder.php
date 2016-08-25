@@ -6,7 +6,6 @@
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Page\Support\RelationshipFieldType
  */
 class ValueTableBuilder extends \Anomaly\RelationshipFieldType\Table\ValueTableBuilder
 {
@@ -18,6 +17,6 @@ class ValueTableBuilder extends \Anomaly\RelationshipFieldType\Table\ValueTableB
      */
     protected $columns = [
         'title',
-        'path'
+        'path',
     ];
 }

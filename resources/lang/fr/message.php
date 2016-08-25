@@ -7,5 +7,5 @@ return [
     'restricted'        => 'Restreint',
     'disabled'          => 'Désactivé',
     'hidden'            => 'Caché',
-    'home'              => 'Accueil'
+    'home'              => 'Accueil',
 ];

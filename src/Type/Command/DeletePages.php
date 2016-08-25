@@ -2,7 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class DeletePages
@@ -10,9 +10,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PagesModule\Type\Command
  */
-class DeletePages implements SelfHandling
+class DeletePages
 {
 
     /**

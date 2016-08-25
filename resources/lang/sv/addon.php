@@ -7,6 +7,6 @@ return [
     'section'     => [
         'pages'  => 'Sidor',
         'types'  => 'Typer',
-        'fields' => 'Fält'
-    ]
+        'fields' => 'Fält',
+    ],
 ];

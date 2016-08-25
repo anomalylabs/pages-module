@@ -22,7 +22,7 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'title_column' => 'title',
         'translatable' => true,
         'sortable'     => true,
-        'trashable'    => true
+        'trashable'    => true,
     ];
 
     /**
@@ -32,20 +32,20 @@ class AnomalyModulePagesCreatePagesStream extends Migration
      */
     protected $assignments = [
         'str_id'           => [
-            'required' => true
+            'required' => true,
         ],
         'title'            => [
             'translatable' => true,
-            'required'     => true
+            'required'     => true,
         ],
         'slug'             => [
-            'required' => true
+            'required' => true,
         ],
         'path'             => [
-            'required' => true
+            'required' => true,
         ],
         'type'             => [
-            'required' => true
+            'required' => true,
         ],
         'ttl',
         'entry',
@@ -56,16 +56,16 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'home',
         'status',
         'meta_title'       => [
-            'translatable' => true
+            'translatable' => true,
         ],
         'meta_description' => [
-            'translatable' => true
+            'translatable' => true,
         ],
         'meta_keywords'    => [
-            'translatable' => true
+            'translatable' => true,
         ],
         'theme_layout',
-        'allowed_roles'
+        'allowed_roles',
     ];
 
 }

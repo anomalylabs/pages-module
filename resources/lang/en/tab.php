@@ -7,5 +7,5 @@ return [
     'layout'   => 'Layout',
     'fields'   => 'Fields',
     'page'     => 'Page',
-    'seo'      => 'SEO'
+    'seo'      => 'SEO',
 ];
