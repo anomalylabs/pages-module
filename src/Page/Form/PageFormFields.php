@@ -4,16 +4,8 @@ use Anomaly\PagesModule\Page\Command\GetRealPath;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
-/**
- * Class PageFormFields
- *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- */
 class PageFormFields
 {
-
     use DispatchesJobs;
 
     /**
@@ -36,7 +28,7 @@ class PageFormFields
                 '*',
                 'slug'         => [
                     'config' => [
-                        'prefix' => ($parent ? url($this->dispatch(new GetRealPath($parent))) : url()) . '/',
+                        'prefix' => ($parent ? url($this->dispatch(new GetRealPath($parent))) : url('/')) . '/',
                     ],
                 ],
                 'theme_layout' => [
