@@ -7,16 +7,8 @@ use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\View\Factory;
 
-/**
- * Class RenderNavigation
- *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- */
 class RenderNavigation
 {
-
     use DispatchesJobs;
 
     /**
@@ -31,7 +23,7 @@ class RenderNavigation
      *
      * @param Collection $options
      */
-    function __construct(Collection $options)
+    public function __construct(Collection $options)
     {
         $this->options = $options;
     }

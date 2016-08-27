@@ -4,15 +4,7 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Auth\Guard;
 
-/**
- * Class RemoveRestrictedPages
- *
- * @page          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- */
 class RemoveRestrictedPages
 {
 
@@ -46,7 +38,6 @@ class RemoveRestrictedPages
 
         /* @var PageInterface $page */
         foreach ($this->pages as $key => $page) {
-
             $roles = $page->getAllowedRoles();
 
             /*
@@ -55,7 +46,6 @@ class RemoveRestrictedPages
              * we can't authorize anything!
              */
             if (!$roles->isEmpty() && !$user) {
-
                 $this->pages->forget($key);
 
                 continue;
@@ -67,7 +57,6 @@ class RemoveRestrictedPages
              * any of them then don't show it.
              */
             if (!$roles->isEmpty() && !$user->hasAnyRole($roles)) {
-
                 $this->pages->forget($key);
 
                 continue;
