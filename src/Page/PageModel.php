@@ -6,18 +6,13 @@ use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
-use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\Eloquent\Builder;
+use Laravel\Scout\Searchable;
 
-/**
- * Class PageModel
- *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- */
 class PageModel extends PagesPagesEntryModel implements PageInterface
 {
+    use Searchable;
 
     /**
      * The cache minutes.
@@ -25,6 +20,8 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var int
      */
     protected $ttl = 99999;
+
+    protected $searchable = true;
 
     /**
      * Always eager load these.
