@@ -1,30 +1,24 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
-use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
-use Illuminate\Database\Eloquent\Builder;
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Database\Eloquent\Builder;
 
-/**
- * Class PageModel
- *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- */
 class PageModel extends PagesPagesEntryModel implements PageInterface
 {
-
     /**
      * The cache minutes.
      *
      * @var int
      */
     protected $ttl = 99999;
+
+    protected $searchable = true;
 
     /**
      * Always eager load these.
