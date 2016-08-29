@@ -5,12 +5,14 @@ use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
-use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\Eloquent\Builder;
+use Laravel\Scout\Searchable;
 
 class PageModel extends PagesPagesEntryModel implements PageInterface
 {
+    use Searchable;
+
     /**
      * The cache minutes.
      *
