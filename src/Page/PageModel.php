@@ -11,8 +11,6 @@ use Laravel\Scout\Searchable;
 
 class PageModel extends PagesPagesEntryModel implements PageInterface
 {
-    use Searchable;
-
     /**
      * The cache minutes.
      *
