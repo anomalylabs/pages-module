@@ -21,8 +21,9 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'slug'         => 'pages',
         'title_column' => 'title',
         'translatable' => true,
-        'sortable'     => true,
+        'searchable'   => true,
         'trashable'    => true,
+        'sortable'     => true,
     ];
 
     /**
@@ -67,5 +68,4 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'theme_layout',
         'allowed_roles',
     ];
-
 }
