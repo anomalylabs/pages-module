@@ -377,4 +377,20 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
         return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id')
             ->orderBy('sort_order', 'ASC');
     }
+
+    /**
+     * Return the page as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if ($entry = $this->getEntry()) {
+            $array = array_merge($array, $entry->toArray());
+        }
+
+        return $array;
+    }
 }
