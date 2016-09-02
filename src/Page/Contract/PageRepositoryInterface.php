@@ -6,27 +6,20 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 /**
  * Interface PageRepositoryInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Contract
  */
 interface PageRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
-     * Return only enabled pages.
+     * Return only accessible pages.
      *
      * @return PageCollection
      */
-    public function enabled();
-
-    /**
-     * Return only nav-enabled pages.
-     *
-     * @return PageCollection
-     */
-    public function navigation();
+    public function accessible();
 
     /**
      * Find a page by it's string ID.

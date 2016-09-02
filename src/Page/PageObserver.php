@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Command\DeleteChildren;
-use Anomaly\PagesModule\Page\Command\ResetHome;
+use Anomaly\PagesModule\Page\Command\DeleteEntry;
 use Anomaly\PagesModule\Page\Command\SetPath;
 use Anomaly\PagesModule\Page\Command\SetStrId;
 use Anomaly\PagesModule\Page\Command\UpdatePaths;
@@ -15,9 +15,9 @@ use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 /**
  * Class PageObserver
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageObserver extends EntryObserver
@@ -30,7 +30,6 @@ class PageObserver extends EntryObserver
      */
     public function saving(EntryInterface $entry)
     {
-        $this->dispatch(new ResetHome($entry));
         $this->dispatch(new SetStrid($entry));
         $this->dispatch(new SetPath($entry));
 
@@ -57,6 +56,7 @@ class PageObserver extends EntryObserver
     public function deleted(EntryInterface $entry)
     {
         $this->dispatch(new DeleteChildren($entry));
+        $this->dispatch(new DeleteEntry($entry));
 
         parent::deleted($entry);
     }

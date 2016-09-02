@@ -6,14 +6,15 @@ use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
+use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PageModel
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageModel extends PagesPagesEntryModel implements PageInterface
@@ -24,7 +25,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      *
      * @var int
      */
-    protected $cacheMinutes = 99999;
+    protected $ttl = 99999;
 
     /**
      * Always eager load these.
@@ -32,8 +33,22 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var array
      */
     protected $with = [
-        'type'
+        'translations'
     ];
+
+    /**
+     * The active flag.
+     *
+     * @var bool
+     */
+    protected $active = false;
+
+    /**
+     * The current flag.
+     *
+     * @var bool
+     */
+    protected $current = false;
 
     /**
      * The page's content.
@@ -50,13 +65,14 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     protected $response = null;
 
     /**
-     * Boot the model.
+     * Sort the query.
+     *
+     * @param Builder $builder
+     * @param string  $direction
      */
-    protected static function boot()
+    public function scopeSorted(Builder $builder, $direction = 'asc')
     {
-        self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
-
-        parent::boot();
+        $builder->orderBy('parent_id', $direction)->orderBy('sort_order', $direction);
     }
 
     /**
@@ -67,19 +83,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getPath()
     {
         return $this->path;
-    }
-
-    /**
-     * Set the path.
-     *
-     * @param $path
-     * @return $this
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
     }
 
     /**
@@ -137,16 +140,13 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Set the enabled flag.
+     * Get the exact flag.
      *
-     * @param $enabled
-     * @return $this
+     * @return bool
      */
-    public function setEnabled($enabled)
+    public function isExact()
     {
-        $this->enabled = $enabled;
-
-        return $this;
+        return $this->exact;
     }
 
     /**
@@ -216,7 +216,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function getAllowedRoles()
     {
-        return $this->allowedRoles()->get();
+        return $this->allowed_roles;
     }
 
     /**
@@ -245,11 +245,11 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      *
      * @return PageHandlerInterface
      */
-    public function getPageHandler()
+    public function getHandler()
     {
         $type = $this->getType();
 
-        return $type->getPageHandler();
+        return $type->getHandler();
     }
 
     /**
@@ -324,6 +324,52 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function setResponse(Response $response)
     {
         $this->response = $response;
+
+        return $this;
+    }
+
+    /**
+     * Get the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent()
+    {
+        return $this->current;
+    }
+
+    /**
+     * Set the current flag.
+     *
+     * @param $current
+     * @return $this
+     */
+    public function setCurrent($current)
+    {
+        $this->current = $current;
+
+        return $this;
+    }
+
+    /**
+     * Get the active flag.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the active flag.
+     *
+     * @param $active
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
 
         return $this;
     }

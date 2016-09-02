@@ -5,9 +5,9 @@ use Anomaly\Streams\Platform\Database\Migration\Migration;
 /**
  * Class AnomalyModulePagesCreateTypesStream
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  */
 class AnomalyModulePagesCreateTypesStream extends Migration
 {
@@ -20,7 +20,9 @@ class AnomalyModulePagesCreateTypesStream extends Migration
     protected $stream = [
         'slug'         => 'types',
         'title_column' => 'name',
-        'translatable' => true
+        'translatable' => true,
+        'trashable'    => true,
+        'sortable'     => true
     ];
 
     /**
@@ -30,29 +32,34 @@ class AnomalyModulePagesCreateTypesStream extends Migration
      */
     protected $assignments = [
         'name'         => [
-            'required' => true,
-            'unique'   => true
+            'translatable' => true,
+            'required'     => true,
+            'unique'       => true,
+            'config'       => [
+                'max' => 50
+            ]
         ],
         'slug'         => [
             'required' => true,
             'unique'   => true,
             'config'   => [
                 'slugify' => 'name',
-                'type'    => '_'
+                'type'    => '_',
+                'max'     => 50
             ]
         ],
-        'description',
+        'description'  => [
+            'translatable' => true
+        ],
         'theme_layout' => [
             'required' => true
         ],
         'layout'       => [
             'required' => true
         ],
-        'page_handler' => [
+        'handler'      => [
             'required' => true
-        ],
-        'css',
-        'js'
+        ]
     ];
 
 }

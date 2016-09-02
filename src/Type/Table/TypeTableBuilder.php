@@ -5,9 +5,9 @@ use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 /**
  * Class TypeTableBuilder
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Table
  */
 class TypeTableBuilder extends TableBuilder
@@ -19,8 +19,13 @@ class TypeTableBuilder extends TableBuilder
      * @var array
      */
     protected $filters = [
-        'name',
-        'description'
+        'search' => [
+            'fields' => [
+                'name',
+                'slug',
+                'description'
+            ]
+        ]
     ];
 
     /**
@@ -30,7 +35,6 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $columns = [
         'name',
-        'slug',
         'description'
     ];
 
@@ -41,7 +45,7 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $buttons = [
         'edit',
-        'fields'
+        'assignments'
     ];
 
     /**
@@ -51,6 +55,15 @@ class TypeTableBuilder extends TableBuilder
      */
     protected $actions = [
         'delete'
+    ];
+
+    /**
+     * The table options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'sortable' => true
     ];
 
 }

@@ -3,15 +3,16 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\UsersModule\User\Contract\UserInterface;
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Routing\ResponseFactory;
 
 /**
  * Class PageAuthorizer
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageAuthorizer
@@ -23,6 +24,13 @@ class PageAuthorizer
      * @var Guard
      */
     protected $guard;
+
+    /**
+     * The config repository.
+     *
+     * @var Repository
+     */
+    protected $config;
 
     /**
      * The response factory.
@@ -42,12 +50,14 @@ class PageAuthorizer
      * Create a new PageAuthorizer instance.
      *
      * @param Guard           $guard
+     * @param Repository      $config
      * @param Authorizer      $authorizer
      * @param ResponseFactory $response
      */
-    public function __construct(Guard $guard, Authorizer $authorizer, ResponseFactory $response)
+    public function __construct(Guard $guard, Repository $config, Authorizer $authorizer, ResponseFactory $response)
     {
         $this->guard      = $guard;
+        $this->config     = $config;
         $this->response   = $response;
         $this->authorizer = $authorizer;
     }
@@ -74,8 +84,8 @@ class PageAuthorizer
          * If the page is not enabled and we are
          * logged in then make sure we have permission.
          */
-        if (!$page->isEnabled()) {
-            $this->authorizer->authorize('anomaly.module.pages::view_drafts');
+        if (!$page->isEnabled() && !$this->authorizer->authorize('anomaly.module.pages::view_drafts')) {
+            abort(403);
         }
 
         /**
@@ -84,8 +94,24 @@ class PageAuthorizer
          */
         $allowed = $page->getAllowedRoles();
 
-        if (!$allowed->isEmpty() && (!$user || !$user->hasAnyRole($allowed))) {
-            $page->setResponse($this->response->redirectTo('login'));
+        /**
+         * If there is a guest role and
+         * there IS a user then this
+         * page can NOT display.
+         */
+        if ($allowed->has('guest') && $user && !$user->isAdmin()) {
+            abort(403);
+        }
+
+        // No longer needed.
+        $allowed->forget('guest');
+
+        /**
+         * Check the roles against the
+         * user if there are any.
+         */
+        if (!$allowed->isEmpty() && (!$user || (!$user->hasAnyRole($allowed) && !$user->isAdmin()))) {
+            $page->setResponse($this->response->redirectGuest('login'));
         }
     }
 }

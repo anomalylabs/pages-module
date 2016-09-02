@@ -1,19 +1,23 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\PagesModule\Page\Command\RemoveRestrictedPages;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class PageRepository
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageRepository extends EntryRepository implements PageRepositoryInterface
 {
+
+    use DispatchesJobs;
 
     /**
      * The page model.
@@ -33,27 +37,13 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     }
 
     /**
-     * Return only enabled pages.
+     * Return only accessible pages.
      *
      * @return PageCollection
      */
-    public function enabled()
+    public function accessible()
     {
-        return $this->model->where('enabled', true)->get();
-    }
-
-    /**
-     * Return only nav-enabled pages.
-     *
-     * @return PageCollection
-     */
-    public function navigation()
-    {
-        return $this->model
-            ->orderBy('sort_order', 'ASC')
-            ->where('enabled', true)
-            ->where('visible', true)
-            ->get();
+        return $this->dispatch(new RemoveRestrictedPages($this->all()));
     }
 
     /**

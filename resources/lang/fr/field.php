@@ -3,68 +3,79 @@
 return [
     'title'            => [
         'name'         => 'Titre',
-        'placeholder'  => 'Bonjour tout le monde !',
-        'instructions' => 'Quel est le titre de la page ?'
+        'instructions' => 'Entrez une titre pour cette page.'
     ],
     'slug'             => [
         'name'         => 'Slug',
-        'placeholder'  => 'bonjour-tout-le-monde',
-        'instructions' => "Le slug est utilisé pour identifier la page dans l'URL"
+        'instructions' => [
+            'types' => 'Le slug est utilisé pour nommer la table en base de données.',
+            'pages' => 'Le slug est utilisé pour l\'URL de la page.'
+        ]
     ],
     'meta_title'       => [
-        'name'         => 'Titre Méta',
-        'placeholder'  => 'Bonjour tout le monde !',
-        'instructions' => "Entrez un titre spécifiquement pour le référencement. Si vide, le titre sera utilisé."
+        'name'         => 'Méta titre',
+        'instructions' => 'Entrez le titre SEO de la page.',
+        'warning'      => 'Par défaut, le titre de la page sera utilisé.'
     ],
     'meta_description' => [
-        'name'         => 'Description Méta',
-        'placeholder'  => 'Bienvenue sur notre nouveau site !',
-        'instructions' => 'Entrez la description de la page pour les moteurs de recherche.'
+        'name'         => 'Méta description',
+        'instructions' => 'Entrez la description SEO de la page.'
     ],
     'meta_keywords'    => [
-        'name'         => 'Mots-clés Méta',
-        'instructions' => 'Entrez les mots-clés de la page pour les moteurs de recherche.'
-    ],
-    'ttl'              => [
-        'name'         => 'TTL',
-        'label'        => 'Durée de vie',
-        'instructions' => 'Combien de temps en secondes cette page doit-être mise en cache ?'
-    ],
-    'css'              => [
-        'name'         => 'CSS',
-        'instructions' => 'CSS personnalisé pour cette page, vous pouvez utiliser les tags.'
-    ],
-    'js'               => [
-        'name'         => 'JS',
-        'instructions' => 'JavaScript personnalisé pour cette page, vous pouvez utiliser les tags.'
+        'name'         => 'Méta mots-clés',
+        'instructions' => 'Entrez les mots-clés pour la SEO.'
     ],
     'name'             => [
         'name'         => 'Nom',
-        'instructions' => 'Quel est le nom de ce type de page ?'
+        'instructions' => 'Entrez un nom décrivant le type de page.'
     ],
     'description'      => [
         'name'         => 'Description',
-        'instructions' => 'Description du type de page.'
+        'instructions' => 'Décrivez brièvement le type de page.'
     ],
     'theme_layout'     => [
-        'name'         => 'Gabarit de thème',
-        'instructions' => 'Le contenu de la page sera affiché dans le gabarit de thème.'
+        'name'         => 'Layout du thème',
+        'instructions' => 'Choisissez un layout du thème pour inclure ce type de page.'
     ],
     'layout'           => [
-        'name'         => 'Gabarit personnalisé',
-        'instructions' => "Le gabarit personnalisé peut être utilisé pour afficher la page."
+        'name'         => 'Layout de la page',
+        'instructions' => 'Le layout à utiliser pour afficher le contenu de la page.'
     ],
     'allowed_roles'    => [
         'name'         => 'Rôles autorisés',
-        'instructions' => 'Quels rôles utilisateur est autorisé à afficher cette page ?'
+        'instructions' => 'Choisissez le rôles autorisés à consulter la page.',
+        'warning'      => 'Si aucun rôle n\'est choisi, tout le monde pourra consulter la page.'
+    ],
+    'visible'          => [
+        'name'         => 'Visibilité',
+        'label'        => 'Afficher cette page dans la navigation ?',
+        'instructions' => 'Désactivez pour ne pas afficher la page dans la navigation.',
+        'warning'      => 'Selon comment votre site est développé, cette option peut ne pas avoir d\'effet.'
+    ],
+    'exact'            => [
+        'name'         => 'URI exacte',
+        'label'        => 'Nécéssite une URI exacte pour accèder à la page.',
+        'instructions' => 'Désactiver pour autoriser des paramètres supplémentaires dans l\'URL.'
     ],
     'enabled'          => [
-        'name'         => 'Activé',
+        'name'         => 'Active',
         'label'        => 'Est-ce que cette page est active ?',
-        'instructions' => 'Seules les pages actives sont affichées sur le site.'
+        'instructions' => 'Si désactivée, vous pourrez toujours y accèder via le lien de prévisualisation.',
+        'warning'      => 'La page doit être activée pour être accessible sur la partie publique.'
+    ],
+    'home'             => [
+        'name'         => 'Page d\'accueil',
+        'label'        => 'Est-ce que cette page est la page d\'accueil ?',
+        'instructions' => 'La page d\'accueil est la page principale de votre site.'
     ],
     'parent'           => [
-        'name'         => 'Parent',
-        'instructions' => 'Choisissez un parent pour cette page si elle en a.'
+        'name' => 'Parent'
+    ],
+    'handler'          => [
+        'name'         => 'Handler',
+        'instructions' => 'Le Handler gère la construction de la réponse HTTP.'
+    ],
+    'content'          => [
+        'name' => 'Contenu'
     ]
 ];

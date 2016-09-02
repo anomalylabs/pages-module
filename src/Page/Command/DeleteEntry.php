@@ -2,17 +2,18 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\Streams\Platform\Model\Contract\EloquentRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class ResetHome
+ * Class DeleteEntry
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Command
  */
-class ResetHome implements SelfHandling
+class DeleteEntry implements SelfHandling
 {
 
     /**
@@ -23,7 +24,7 @@ class ResetHome implements SelfHandling
     protected $page;
 
     /**
-     * Create a new ResetHome instance.
+     * Create a new DeleteEntry instance.
      *
      * @param PageInterface $page
      */
@@ -34,11 +35,13 @@ class ResetHome implements SelfHandling
 
     /**
      * Handle the command.
+     *
+     * @param PageRepositoryInterface $pages
      */
-    public function handle(PageRepositoryInterface $pages)
+    public function handle(EloquentRepositoryInterface $repository)
     {
-        if ($this->page->isHome()) {
-            $pages->update(['home' => false]);
+        if ($entry = $this->page->getEntry()) {
+            $repository->delete($entry);
         }
     }
 }

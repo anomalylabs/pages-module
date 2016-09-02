@@ -3,6 +3,9 @@
 use Anomaly\PagesModule\Type\Command\CreateStream;
 use Anomaly\PagesModule\Type\Command\DeletePages;
 use Anomaly\PagesModule\Type\Command\DeleteStream;
+use Anomaly\PagesModule\Type\Command\RestorePages;
+use Anomaly\PagesModule\Type\Command\UpdatePages;
+use Anomaly\PagesModule\Type\Command\UpdateStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
@@ -10,9 +13,9 @@ use Anomaly\Streams\Platform\Entry\EntryObserver;
 /**
  * Class TypeObserver
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type
  */
 class TypeObserver extends EntryObserver
@@ -31,6 +34,19 @@ class TypeObserver extends EntryObserver
     }
 
     /**
+     * Fired before a page type is updated.
+     *
+     * @param EntryInterface|TypeInterface $entry
+     */
+    public function updating(EntryInterface $entry)
+    {
+        $this->commands->dispatch(new UpdateStream($entry));
+        $this->commands->dispatch(new UpdatePages($entry));
+
+        parent::updating($entry);
+    }
+
+    /**
      * Fired after a page type is deleted.
      *
      * @param EntryInterface|TypeInterface $entry
@@ -41,5 +57,17 @@ class TypeObserver extends EntryObserver
         $this->commands->dispatch(new DeleteStream($entry));
 
         parent::deleted($entry);
+    }
+
+    /**
+     * Fired after a page type is restored.
+     *
+     * @param EntryInterface|TypeInterface $entry
+     */
+    public function restored(EntryInterface $entry)
+    {
+        $this->commands->dispatch(new RestorePages($entry));
+
+        parent::restored($entry);
     }
 }

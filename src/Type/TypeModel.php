@@ -4,15 +4,16 @@ use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Command\GetStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
  * Class TypeModel
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type
  */
 class TypeModel extends PagesTypesEntryModel implements TypeInterface
@@ -23,17 +24,7 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      *
      * @var int
      */
-    protected $cacheMinutes = 99999;
-
-    /**
-     * Boot the model.
-     */
-    protected static function boot()
-    {
-        self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
-
-        parent::boot();
-    }
+    protected $ttl = 99999;
 
     /**
      * Get the name.
@@ -76,6 +67,18 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
+     * Get the related entry model.
+     *
+     * @return EntryModel
+     */
+    public function getEntryModel()
+    {
+        $stream = $this->getEntryStream();
+
+        return $stream->getEntryModel();
+    }
+
+    /**
      * Get the related entry model name.
      *
      * @return string
@@ -92,9 +95,9 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      *
      * @return PageHandlerInterface
      */
-    public function getPageHandler()
+    public function getHandler()
     {
-        return $this->page_handler;
+        return $this->handler;
     }
 
     /**

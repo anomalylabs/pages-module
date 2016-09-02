@@ -11,14 +11,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "AnomalyLabs, Inc.",
-            "email": "hello@anomaly.is",
-            "homepage": "http://anomaly.is/",
+            "name": "PyroCMS, Inc.",
+            "email": "support@pyrocms.com",
+            "homepage": "http://pyrocms.com/",
             "role": "Owner"
         }
     ],
     "support": {
-        "email": "support@anomaly.is"
+        "email": "support@pyrocms.com"
     },
     "autoload": {
         "psr-4": {

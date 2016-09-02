@@ -68,7 +68,7 @@ return [
         'name'         => 'Förälder',
         'instructions' => 'Välj en föräldersida om någon önskas.'
     ],
-    'page_handler'          => [
+    'handler'               => [
         'name'         => 'Sidhanteraren',
         'instructions' => 'Sidhanteraren ansvarar över att bygga HTTP-svaret för en sida.'
     ],

@@ -7,10 +7,10 @@
 
 <div class="modal-body">
     {% if not fields.isEmpty() %}
-        <ul class="nav nav-stacked">
+        <ul class="nav nav-pills nav-stacked">
             {% for field in fields %}
-                <li>
-                    <a href="{{ url_to('admin/pages/types/fields/' ~ id ~ '/assign/' ~ field.id) }}">
+                <li class="nav-item">
+                    <a href="{{ url_to('admin/pages/types/assignments/' ~ id ~ '/assign/' ~ field.id) }}" class="nav-link">
                         <strong>{{ trans(field.name) }}</strong>
                     </a>
                 </li>

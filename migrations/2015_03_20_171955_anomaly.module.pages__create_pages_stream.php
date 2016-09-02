@@ -5,9 +5,9 @@ use Anomaly\Streams\Platform\Database\Migration\Migration;
 /**
  * Class AnomalyModulePagesCreatePagesStream
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  */
 class AnomalyModulePagesCreatePagesStream extends Migration
 {
@@ -21,7 +21,8 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'slug'         => 'pages',
         'title_column' => 'title',
         'translatable' => true,
-        'sortable'     => true
+        'sortable'     => true,
+        'trashable'    => true
     ];
 
     /**
@@ -37,7 +38,9 @@ class AnomalyModulePagesCreatePagesStream extends Migration
             'translatable' => true,
             'required'     => true
         ],
-        'slug',
+        'slug'             => [
+            'required' => true
+        ],
         'path'             => [
             'required' => true
         ],
@@ -61,12 +64,8 @@ class AnomalyModulePagesCreatePagesStream extends Migration
         'meta_keywords'    => [
             'translatable' => true
         ],
-        'theme_layout'     => [
-            'required' => true
-        ],
-        'allowed_roles',
-        'css',
-        'js'
+        'theme_layout',
+        'allowed_roles'
     ];
 
 }

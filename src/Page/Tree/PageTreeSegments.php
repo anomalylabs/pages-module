@@ -5,9 +5,9 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 /**
  * Class PageTreeSegments
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Tree
  */
 class PageTreeSegments
@@ -23,6 +23,12 @@ class PageTreeSegments
         $builder->setSegments(
             [
                 'entry.edit_link',
+                [
+                    'class' => 'text-faded',
+                    'value' => function (PageInterface $entry) {
+                        return '<span class="small" style="padding-right:10px;">' . $entry->type->name . '</span>';
+                    },
+                ],
                 [
                     'data-toggle' => 'tooltip',
                     'class'       => 'text-success',
@@ -43,6 +49,20 @@ class PageTreeSegments
                     ],
                     'enabled'     => function (PageInterface $entry) {
                         return !$entry->isVisible();
+                    }
+                ],
+                [
+                    'data-toggle' => 'tooltip',
+                    'class'       => 'text-muted',
+                    'value'       => '<i class="fa fa-lock"></i>',
+                    'attributes'  => [
+                        'title' => 'module::message.restricted'
+                    ],
+                    'enabled'     => function (PageInterface $entry) {
+
+                        $roles = $entry->getAllowedRoles();
+
+                        return !$roles->isEmpty();
                     }
                 ],
                 [

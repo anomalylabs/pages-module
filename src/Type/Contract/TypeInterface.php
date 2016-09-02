@@ -3,14 +3,15 @@
 use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Stream\Contract\StreamInterface;
 
 /**
  * Interface TypeInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Contract
  */
 interface TypeInterface extends EntryInterface
@@ -45,6 +46,13 @@ interface TypeInterface extends EntryInterface
     public function getEntryStream();
 
     /**
+     * Get the related entry model.
+     *
+     * @return EntryModel
+     */
+    public function getEntryModel();
+
+    /**
      * Get the related entry model name.
      *
      * @return string
@@ -56,7 +64,7 @@ interface TypeInterface extends EntryInterface
      *
      * @return PageHandlerInterface
      */
-    public function getPageHandler();
+    public function getHandler();
 
     /**
      * Get the theme layout.
@@ -71,4 +79,11 @@ interface TypeInterface extends EntryInterface
      * @return PageCollection
      */
     public function getPages();
+
+    /**
+     * Return the pages relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages();
 }

@@ -1,18 +1,18 @@
 <?php namespace Anomaly\PagesModule\Type;
 
-use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
-use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Anomaly\PostsModule\Type\Contract\TypeInterface;
+use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
  * Class TypeRepository
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type
  */
-class TypeRepository implements TypeRepositoryInterface
+class TypeRepository extends EntryRepository implements TypeRepositoryInterface
 {
 
     /**
@@ -33,23 +33,13 @@ class TypeRepository implements TypeRepositoryInterface
     }
 
     /**
-     * Return all available page types.
+     * Find a type by it's slug.
      *
-     * @return EloquentCollection
+     * @param $slug
+     * @return TypeInterface
      */
-    public function all()
+    public function findBySlug($slug)
     {
-        return $this->model->all();
-    }
-
-    /**
-     * Find a page type by ID.
-     *
-     * @param $id
-     * @return null|TypeInterface
-     */
-    public function find($id)
-    {
-        return $this->model->find($id);
+        return $this->model->where('slug', $slug)->first();
     }
 }

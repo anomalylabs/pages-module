@@ -6,10 +6,10 @@
 </div>
 
 <div class="modal-body">
-    <ul class="nav nav-stacked">
+    <ul class="nav nav-pills nav-stacked">
         {% for field_type in field_types %}
-            <li>
-                <a href="{{ url_to('admin/pages/fields/create?field_type=' ~ field_type.namespace) }}">
+            <li class="nav-item">
+                <a href="{{ url_to('admin/pages/fields/create?field_type=' ~ field_type.namespace) }}" class="nav-link">
                     <strong>{{ trans(field_type.getTitle()) }}</strong>
                     <br>
                     <small>{{ trans(field_type.getDescription()) }}</small>

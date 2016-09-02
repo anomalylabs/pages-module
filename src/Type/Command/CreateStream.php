@@ -9,9 +9,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 /**
  * Class CreateStream
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Command
  */
 class CreateStream implements SelfHandling
@@ -50,10 +50,12 @@ class CreateStream implements SelfHandling
                     'name'        => $this->type->getName(),
                     'description' => $this->type->getDescription()
                 ],
-                'namespace'                         => 'pages',
                 'slug'                              => $this->type->getSlug() . '_pages',
+                'namespace'                         => 'pages',
+                'locked'                            => false,
                 'translatable'                      => true,
-                'locked'                            => false
+                'trashable'                         => true,
+                'hidden'                            => true
             ]
         );
     }

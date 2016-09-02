@@ -3,9 +3,9 @@
 /**
  * Class TypeFormSections
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Form
  */
 class TypeFormSections
@@ -21,35 +21,17 @@ class TypeFormSections
         $builder->setSections(
             [
                 'general' => [
-                    'tabs' => [
-                        'general' => [
-                            'title'  => 'module::tab.general',
-                            'fields' => [
-                                'name',
-                                'slug',
-                                'description',
-                                'page_handler'
-                            ]
-                        ],
-                        'layout'  => [
-                            'title'  => 'module::tab.layout',
-                            'fields' => [
-                                'theme_layout',
-                                'layout'
-                            ]
-                        ],
-                        'css'     => [
-                            'title'  => 'module::tab.css',
-                            'fields' => [
-                                'css'
-                            ]
-                        ],
-                        'js'      => [
-                            'title'  => 'module::tab.js',
-                            'fields' => [
-                                'js'
-                            ]
-                        ]
+                    'fields' => [
+                        'name',
+                        'slug',
+                        'description',
+                        'handler'
+                    ]
+                ],
+                'layout'  => [
+                    'fields' => [
+                        'theme_layout',
+                        'layout'
                     ]
                 ]
             ]

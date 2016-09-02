@@ -5,9 +5,9 @@ use Anomaly\Streams\Platform\Database\Migration\Migration;
 /**
  * Class AnomalyModulePagesCreatePagesFields
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  */
 class AnomalyModulePagesCreatePagesFields extends Migration
 {
@@ -27,11 +27,15 @@ class AnomalyModulePagesCreatePagesFields extends Migration
                 'type'    => '-'
             ]
         ],
+        'content'          => [
+            'type'   => 'anomaly.field_type.wysiwyg',
+            'locked' => 0 // Used with seeded pages.
+        ],
         'path'             => 'anomaly.field_type.text',
         'enabled'          => [
             'type'   => 'anomaly.field_type.boolean',
             'config' => [
-                'default_value' => false,
+                'default_value' => true,
             ]
         ],
         'home'             => [
@@ -43,18 +47,6 @@ class AnomalyModulePagesCreatePagesFields extends Migration
         'meta_title'       => 'anomaly.field_type.text',
         'meta_description' => 'anomaly.field_type.textarea',
         'meta_keywords'    => 'anomaly.field_type.tags',
-        'css'              => [
-            'type'   => 'anomaly.field_type.editor',
-            'config' => [
-                'mode' => 'css'
-            ]
-        ],
-        'js'               => [
-            'type'   => 'anomaly.field_type.editor',
-            'config' => [
-                'mode' => 'javascript'
-            ]
-        ],
         'layout'           => [
             'type'   => 'anomaly.field_type.editor',
             'config' => [
@@ -77,7 +69,8 @@ class AnomalyModulePagesCreatePagesFields extends Migration
         'theme_layout'     => [
             'type'   => 'anomaly.field_type.select',
             'config' => [
-                'handler' => 'Anomaly\SelectFieldType\Handler\Layouts@handle'
+                'default_value' => 'theme::layouts/default.twig',
+                'handler'       => 'Anomaly\SelectFieldType\Handler\Layouts@handle'
             ]
         ],
         'type'             => [
@@ -86,11 +79,11 @@ class AnomalyModulePagesCreatePagesFields extends Migration
                 'related' => 'Anomaly\PagesModule\Type\TypeModel'
             ]
         ],
-        'page_handler'     => [
+        'handler'          => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
                 'type'          => 'extension',
-                'search'        => 'anomaly.module.pages::page_handler.*',
+                'search'        => 'anomaly.module.pages::handler.*',
                 'default_value' => 'anomaly.extension.default_page_handler'
             ]
         ],

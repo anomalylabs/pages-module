@@ -2,17 +2,25 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
+use Illuminate\Http\Request;
 
 /**
  * Class PageBreadcrumb
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page
  */
 class PageBreadcrumb
 {
+
+    /**
+     * The request object.
+     *
+     * @var Request
+     */
+    protected $request;
 
     /**
      * The breadcrumb collection.
@@ -24,10 +32,12 @@ class PageBreadcrumb
     /**
      * Create a new PageBreadcrumb instance.
      *
+     * @param Request              $request
      * @param BreadcrumbCollection $breadcrumbs
      */
-    public function __construct(BreadcrumbCollection $breadcrumbs)
+    public function __construct(Request $request, BreadcrumbCollection $breadcrumbs)
     {
+        $this->request     = $request;
         $this->breadcrumbs = $breadcrumbs;
     }
 
@@ -39,12 +49,12 @@ class PageBreadcrumb
     public function make(PageInterface $page)
     {
         $breadcrumbs = [
-            $page->getTitle() => $page->getPath()
+            $page->getTitle() => $this->request->path()
         ];
 
         $this->loadParent($page, $breadcrumbs);
 
-        foreach ($breadcrumbs as $key => $url) {
+        foreach (array_reverse($breadcrumbs) as $key => $url) {
             $this->breadcrumbs->add($key, $url);
         }
     }

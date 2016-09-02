@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'name'        => 'Pages',
-    'description' => 'Gestion des pages.',
+    'title'       => 'Pages',
+    'name'        => 'Module Pages',
+    'description' => 'Créer des pages, des types de page et tout type de contenu pour votre site.',
     'section'     => [
-        'pages'    => 'Pages',
-        'types'    => 'Types',
-        'fields'   => 'Champs',
-        'settings' => 'Paramètres'
+        'pages'  => 'Pages',
+        'types'  => 'Types',
+        'fields' => 'Champs'
     ]
 ];

@@ -73,7 +73,7 @@ return [
         'name'         => '父頁面',
         'instructions' => '如有需要，請指定上層頁面。'
     ],
-    'page_handler'     => [
+    'handler'          => [
         'name'         => '頁面處理器',
         'instructions' => '頁面處理器將負責建立頁面的 HTTP 回應。'
     ]

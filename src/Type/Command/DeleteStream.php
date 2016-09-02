@@ -7,9 +7,9 @@ use Illuminate\Contracts\Bus\SelfHandling;
 /**
  * Class DeleteStream
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Type\Command
  */
 class DeleteStream implements SelfHandling
@@ -39,6 +39,10 @@ class DeleteStream implements SelfHandling
      */
     public function handle(StreamRepositoryInterface $streams)
     {
+        if (!$this->type->isForceDeleting()) {
+            return;
+        }
+        
         $streams->delete($streams->findBySlugAndNamespace($this->type->getSlug() . '_pages', 'pages'));
     }
 }

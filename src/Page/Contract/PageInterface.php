@@ -5,14 +5,15 @@ use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Interface PageInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Contract
  */
 interface PageInterface extends EntryInterface
@@ -24,14 +25,6 @@ interface PageInterface extends EntryInterface
      * @return string
      */
     public function getPath();
-
-    /**
-     * Set the path.
-     *
-     * @param $string
-     * @return $this
-     */
-    public function setPath($string);
 
     /**
      * Get the string ID.
@@ -55,6 +48,36 @@ interface PageInterface extends EntryInterface
     public function getTitle();
 
     /**
+     * Get the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent();
+
+    /**
+     * Set the current flag.
+     *
+     * @param $current
+     * @return $this
+     */
+    public function setCurrent($current);
+
+    /**
+     * Get the active flag.
+     *
+     * @return bool
+     */
+    public function isActive();
+
+    /**
+     * Set the active flag.
+     *
+     * @param $active
+     * @return $this
+     */
+    public function setActive($active);
+
+    /**
      * Get the meta title.
      *
      * @return string
@@ -76,12 +99,11 @@ interface PageInterface extends EntryInterface
     public function getMetaDescription();
 
     /**
-     * Set the enabled flag.
+     * Get the exact flag.
      *
-     * @param $enabled
-     * @return $this
+     * @return bool
      */
-    public function setEnabled($enabled);
+    public function isExact();
 
     /**
      * Get the enabled flag.
@@ -144,7 +166,7 @@ interface PageInterface extends EntryInterface
      *
      * @return PageHandlerInterface
      */
-    public function getPageHandler();
+    public function getHandler();
 
     /**
      * Get the theme layout.
@@ -166,6 +188,13 @@ interface PageInterface extends EntryInterface
      * @return null|int
      */
     public function getEntryId();
+
+    /**
+     * Return the entry relationship.
+     *
+     * @return MorphTo
+     */
+    public function entry();
 
     /**
      * Get the content.

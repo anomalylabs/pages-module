@@ -68,7 +68,7 @@ return [
         'name'         => 'Elternseite',
         'instructions' => 'Wählen Sie die Elternseite, falls es eine gibt.'
     ],
-    'page_handler'          => [
+    'handler'               => [
         'name'         => 'Seiten-Handler',
         'instructions' => 'Wählen Sie den Seiten-Handler, der für den Aufbau des <em>HTTP response</em> einer Seite verantwortlich ist.'
     ],

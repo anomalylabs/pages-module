@@ -7,9 +7,9 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 /**
  * Class PageFormBuilder
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\PagesModule\Page\Form
  */
 class PageFormBuilder extends FormBuilder
@@ -51,18 +51,6 @@ class PageFormBuilder extends FormBuilder
     {
         if (!$this->getType() && !$this->getEntry()) {
             throw new \Exception('The $type parameter is required when creating a page.');
-        }
-
-        if (($type = $this->getType()) && !$this->getEntry()) {
-
-            $this->fields = [
-                '*',
-                'theme_layout' => [
-                    'config' => [
-                        'default_value' => $type->getThemeLayout()
-                    ]
-                ]
-            ];
         }
     }
 
