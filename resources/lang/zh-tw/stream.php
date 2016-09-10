@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'pages'      => [
+    'pages' => [
         'name' => '頁面',
     ],
-    'page_types' => [
+    'types' => [
         'name' => '頁面型別',
     ],
 ];
