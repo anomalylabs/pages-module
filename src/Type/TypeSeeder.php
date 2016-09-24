@@ -1,4 +1,4 @@
-<?php namespace Anomaly\PagesModule\Seeder;
+<?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
@@ -10,9 +10,9 @@ use Anomaly\Streams\Platform\Stream\Contract\StreamRepositoryInterface;
 /**
  * Class TypeSeeder
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class TypeSeeder extends Seeder
 {
@@ -88,7 +88,7 @@ class TypeSeeder extends Seeder
                     'theme_layout' => 'theme::layouts/default.twig',
                     'layout'       => '<h1>{{ page.title }}</h1>
 
-{{ page.content|raw }}',
+{{ page.content.render|raw }}',
                 ]
             );
 

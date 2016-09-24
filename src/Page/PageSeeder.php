@@ -1,4 +1,4 @@
-<?php namespace Anomaly\PagesModule\Seeder;
+<?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
@@ -7,9 +7,9 @@ use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 /**
  * Class PageSeeder
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PageSeeder extends Seeder
 {

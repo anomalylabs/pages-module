@@ -1,15 +1,15 @@
 <?php namespace Anomaly\PagesModule;
 
-use Anomaly\PagesModule\Seeder\PageSeeder;
-use Anomaly\PagesModule\Seeder\TypeSeeder;
+use Anomaly\PagesModule\Page\PageSeeder;
+use Anomaly\PagesModule\Type\TypeSeeder;
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 
 /**
  * Class PagesModuleSeeder
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PagesModuleSeeder extends Seeder
 {
