@@ -2,15 +2,22 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
-use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\Eloquent\Builder;
-use Laravel\Scout\Searchable;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class PageModel
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class PageModel extends PagesPagesEntryModel implements PageInterface
 {
+
     /**
      * The cache minutes.
      *
@@ -215,7 +222,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     /**
      * Get the route suffix.
      *
-     * @param  null        $prefix
+     * @param  null $prefix
      * @return null|string
      */
     public function getRouteSuffix($prefix = null)
@@ -385,8 +392,12 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function toSearchableArray()
     {
-        $entry = $this->getEntry();
+        $array = parent::toSearchableArray();
 
-        return array_merge($entry->toSearchableArray(), parent::toSearchableArray());
+        if ($entry = $this->getEntry()) {
+            $array = array_merge($entry->toSearchableArray(), $array);
+        }
+
+        return $array;
     }
 }
