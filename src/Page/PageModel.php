@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
@@ -24,8 +25,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var int
      */
     protected $ttl = 99999;
-
-    protected $searchable = true;
 
     /**
      * Always eager load these.
@@ -68,11 +67,37 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * Sort the query.
      *
      * @param Builder $builder
-     * @param string  $direction
+     * @param string $direction
      */
     public function scopeSorted(Builder $builder, $direction = 'asc')
     {
         $builder->orderBy('parent_id', $direction)->orderBy('sort_order', $direction);
+    }
+
+    /**
+     * Make the page.
+     *
+     * @return $this
+     */
+    public function make()
+    {
+        $handler = $this->getHandler();
+
+        $handler->make($this);
+
+        return $this;
+    }
+
+    /**
+     * Return the page content.
+     *
+     * @return null|string
+     */
+    public function content()
+    {
+        return $this
+            ->make()
+            ->getContent();
     }
 
     /**

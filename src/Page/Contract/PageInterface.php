@@ -19,6 +19,20 @@ interface PageInterface extends EntryInterface
 {
 
     /**
+     * Make the page.
+     *
+     * @return $this
+     */
+    public function make();
+
+    /**
+     * Return the page content.
+     *
+     * @return null|string
+     */
+    public function content();
+
+    /**
      * Get the path.
      *
      * @return string
