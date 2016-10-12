@@ -6,16 +6,28 @@
         {{ page.current ? options.get('current_class', 'current') }}
         {{ options.item_class }}">
 
-        <a href="{{ url(page.path) }}" class="{{ options.link_class }}">
+        <a
+                href="{{ url(page.path) }}"
+                class="{{ options.link_class }}"
+                {{ html_attributes(options.get('link_attributes', [])) }}
+                {% if page.children.count() %}
+                    {{ html_attributes(options.get('link_attributes_dropdown', [])) }}
+                {% endif %}
+        >
             {{ page.title }}
-        </a>
-
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-chevron-left"></i>
         </a>
 
         {% if not page.children.isEmpty() %}
             {% if depth+1 <= options.get('depth', 999) %}
+
+                {% if options.get('dropdown_toggle') %}
+                    <{{ options.get('dropdown_toggle') }}
+                    class="{{ options.get('dropdown_toggle_class') }}"
+                    {{ html_attributes(options.get('dropdown_toggle_attributes', []))|raw }}>
+                    {{ options.get('dropdown_toggle_text')|raw }}
+                    </{{ options.get('dropdown_toggle') }}>
+                {% endif %}
+
                 <{{ options.child_list_tag ?: options.list_tag ?: 'ul' }} class="{{ options.child_list_class }}">
                 {{ _self.links(page.children, collection, options, depth+1) }}
                 </{{ options.child_list_tag ?: options.list_tag ?: 'ul' }}>
