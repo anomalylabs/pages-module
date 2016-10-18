@@ -4,6 +4,7 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 
 /**
@@ -77,9 +78,16 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * Map additional routes.
      *
      * @param PageRepositoryInterface $pages
+     * @param Request                 $request
+     * @param Router                  $router
      */
-    public function map(PageRepositoryInterface $pages, Router $router)
+    public function map(PageRepositoryInterface $pages, Request $request, Router $router)
     {
+        // Don't map if in admin.
+        if ($request->segment(1) == 'admin') {
+            return;
+        }
+
         /* @var PageCollection $pages */
         $pages = $pages->sorted();
 
