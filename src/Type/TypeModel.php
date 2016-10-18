@@ -26,6 +26,15 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     protected $ttl = 99999;
 
     /**
+     * Always eager load these.
+     *
+     * @var array
+     */
+    protected $with = [
+        'translations',
+    ];
+
+    /**
      * Get the name.
      *
      * @return string

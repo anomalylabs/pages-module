@@ -32,7 +32,10 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * @var array
      */
     protected $with = [
+        'type',
+        'entry',
         'translations',
+        'allowedRoles',
     ];
 
     /**
@@ -67,7 +70,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * Sort the query.
      *
      * @param Builder $builder
-     * @param string $direction
+     * @param string  $direction
      */
     public function scopeSorted(Builder $builder, $direction = 'asc')
     {
