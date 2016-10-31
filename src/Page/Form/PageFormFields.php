@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class PageFormFields
 {
+
     use DispatchesJobs;
 
     /**
@@ -26,14 +27,9 @@ class PageFormFields
         $builder->setFields(
             [
                 '*',
-                'slug'         => [
+                'slug' => [
                     'config' => [
                         'prefix' => ($parent ? url($this->dispatch(new GetRealPath($parent))) : url('/')) . '/',
-                    ],
-                ],
-                'theme_layout' => [
-                    'config' => [
-                        'default_value' => $type ? $type->getThemeLayout() : null,
                     ],
                 ],
             ]
