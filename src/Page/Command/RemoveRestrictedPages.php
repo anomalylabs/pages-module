@@ -5,6 +5,13 @@ use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Class RemoveRestrictedPages
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class RemoveRestrictedPages
 {
 
@@ -28,7 +35,7 @@ class RemoveRestrictedPages
     /**
      * Handle the command.
      *
-     * @param  Guard          $auth
+     * @param  Guard $auth
      * @return PageCollection
      */
     public function handle(Guard $auth)
@@ -38,7 +45,38 @@ class RemoveRestrictedPages
 
         /* @var PageInterface $page */
         foreach ($this->pages as $key => $page) {
+
             $roles = $page->getAllowedRoles();
+
+            /*
+             * Admin's can see
+             * absolutely everything.
+             */
+            if ($user && $user->isAdmin()) {
+                continue;
+            }
+
+            /*
+             * If there is a guest role and
+             * no user then this page
+             * can display. Otherwise
+             * we need to hide it.
+             */
+            if ($roles->has('guest') && !$user) {
+                continue;
+            }
+
+            /*
+             * If there is a guest role and
+             * there IS a user then this page
+             * can NOT display. Forget it.
+             */
+            if ($roles->has('guest') && $user) {
+
+                $this->pages->forget($key);
+
+                continue;
+            }
 
             /*
              * If there are role restrictions
@@ -46,6 +84,7 @@ class RemoveRestrictedPages
              * we can't authorize anything!
              */
             if (!$roles->isEmpty() && !$user) {
+
                 $this->pages->forget($key);
 
                 continue;
@@ -57,6 +96,7 @@ class RemoveRestrictedPages
              * any of them then don't show it.
              */
             if (!$roles->isEmpty() && !$user->hasAnyRole($roles)) {
+
                 $this->pages->forget($key);
 
                 continue;
