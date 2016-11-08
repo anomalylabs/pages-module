@@ -7,8 +7,16 @@ use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\View\Factory;
 
+/**
+ * Class RenderNavigation
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class RenderNavigation
 {
+
     use DispatchesJobs;
 
     /**
@@ -44,9 +52,11 @@ class RenderNavigation
 
         $this->dispatch(new SetCurrentPage($pages));
         $this->dispatch(new SetActivePages($pages));
+        $this->dispatch(new RemoveRestrictedPages($pages));
+
+        // After modifying set the relations.
         $this->dispatch(new SetParentRelations($pages));
         $this->dispatch(new SetChildrenRelations($pages));
-        $this->dispatch(new RemoveRestrictedPages($pages));
 
         if ($options->has('root')) {
             if ($page = $this->dispatch(new GetPage($options->get('root')))) {
