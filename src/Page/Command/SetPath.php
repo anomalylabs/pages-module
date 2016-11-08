@@ -39,7 +39,7 @@ class SetPath
             $path = 'pages/preview/' . $this->page->getStrId();
         } else {
             if ($parent = $this->page->getParent()) {
-                $path = $parent->getPath() . '/' . $this->page->getSlug();
+                $path = ($parent->isHome() ? $parent->getSlug() : $parent->getPath()) . '/' . $this->page->getSlug();
             } elseif ($this->page->isHome()) {
                 $path = '/';
             } else {
