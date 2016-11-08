@@ -5,6 +5,13 @@ use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Class RemoveRestrictedPages
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class RemoveRestrictedPages
 {
 
@@ -51,7 +58,7 @@ class RemoveRestrictedPages
 
             /*
              * If there is a guest role and
-             * no user then this link
+             * no user then this page
              * can display. Otherwise
              * we need to hide it.
              */
@@ -61,7 +68,7 @@ class RemoveRestrictedPages
 
             /*
              * If there is a guest role and
-             * there IS a user then this link
+             * there IS a user then this page
              * can NOT display. Forget it.
              */
             if ($roles->has('guest') && $user) {
