@@ -57,10 +57,8 @@ class PageSeeder extends Seeder
                 'slug'         => 'welcome',
                 'entry'        => $type->getEntryModel()->create(
                     [
-                        [
-                            'en' => [
-                                'content' => '<p>Welcome to PyroCMS!</p>',
-                            ],
+                        'en' => [
+                            'content' => '<p>Welcome to PyroCMS!</p>',
                         ],
                     ]
                 ),
