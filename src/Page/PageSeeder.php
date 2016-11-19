@@ -68,5 +68,25 @@ class PageSeeder extends Seeder
                 'theme_layout' => 'theme::layouts/default.twig',
             ]
         )->allowedRoles()->sync([]);
+
+        $this->pages->create(
+            [
+                'en'           => [
+                    'title' => 'Contact',
+                ],
+                'slug'         => 'contact',
+                'entry'        => $type->getEntryModel()->create(
+                    [
+                        'en' => [
+                            'content' => '<p>Drop us a line! We\'d love to hear from you!</p><p><br></p>
+<p>{{ form(\'contact\').to(\'example@domain.com\')|raw }}</p>',
+                        ],
+                    ]
+                ),
+                'type'         => $type,
+                'enabled'      => true,
+                'theme_layout' => 'theme::layouts/default.twig',
+            ]
+        )->allowedRoles()->sync([]);
     }
 }
