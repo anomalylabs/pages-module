@@ -6,6 +6,9 @@
 </div>
 
 <div class="modal-body">
+
+    {% include "streams::modals/filter" %}
+
     {% if not fields.isEmpty() %}
         <ul class="nav nav-pills nav-stacked">
             {% for field in fields %}

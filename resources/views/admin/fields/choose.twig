@@ -6,6 +6,9 @@
 </div>
 
 <div class="modal-body">
+
+    {% include "streams::modals/filter" %}
+
     <ul class="nav nav-pills nav-stacked">
         {% for field_type in field_types %}
             <li class="nav-item">

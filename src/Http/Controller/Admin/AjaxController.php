@@ -23,7 +23,7 @@ class AjaxController extends AdminController
      */
     public function chooseType(TypeRepositoryInterface $types)
     {
-        return view('module::ajax/choose_type', ['types' => $types->all()]);
+        return view('module::admin/pages/choose', ['types' => $types->all()]);
     }
 
     /**
@@ -36,7 +36,7 @@ class AjaxController extends AdminController
     {
         $url = $_SERVER['HTTP_REFERER'];
 
-        return view('module::ajax/choose_field_type', ['field_types' => $fieldTypes->all(), 'url' => $url]);
+        return view('module::admin/fields/choose', ['field_types' => $fieldTypes->all(), 'url' => $url]);
     }
 
     /**
@@ -50,7 +50,7 @@ class AjaxController extends AdminController
         $type = $types->find($id);
 
         return view(
-            'module::ajax/choose_field',
+            'module::admin/types/choose',
             [
                 'fields' => $fields->findAllByNamespace('pages')->notAssignedTo($type->getEntryStream())->unlocked(),
                 'id'     => $id,
