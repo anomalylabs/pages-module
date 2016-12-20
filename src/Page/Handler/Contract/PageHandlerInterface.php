@@ -18,4 +18,11 @@ interface PageHandlerInterface
      * @param PageInterface $page
      */
     public function make(PageInterface $page);
+
+    /**
+     * Route the page's response.
+     *
+     * @param PageInterface $page
+     */
+    public function route(PageInterface $page);
 }
