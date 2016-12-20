@@ -23,4 +23,39 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
     {
         throw new \Exception('Implement make() method.');
     }
+
+    /**
+     * Route the page's response.
+     *
+     * @param PageInterface $page
+     */
+    public function route(PageInterface $page)
+    {
+
+        if (!$page->isExact()) {
+
+            \Route::any(
+                $page->getPath() . '/{any?}',
+                [
+                    'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
+                    'streams::addon'             => 'anomaly.module.pages',
+                    'anomaly.module.pages::page' => $page->getId(),
+                    'where'                      => [
+                        'any' => '(.*)',
+                    ],
+                ]
+            );
+
+            return;
+        }
+
+        \Route::any(
+            $page->getPath(),
+            [
+                'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
+                'streams::addon'             => 'anomaly.module.pages',
+                'anomaly.module.pages::page' => $page->getId(),
+            ]
+        );
+    }
 }

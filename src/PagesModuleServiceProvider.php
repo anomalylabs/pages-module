@@ -5,7 +5,6 @@ use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Router;
 
 /**
  * Class PagesModuleServiceProvider
@@ -79,9 +78,8 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      *
      * @param PageRepositoryInterface $pages
      * @param Request                 $request
-     * @param Router                  $router
      */
-    public function map(PageRepositoryInterface $pages, Request $request, Router $router)
+    public function map(PageRepositoryInterface $pages, Request $request)
     {
         // Don't map if in admin.
         if ($request->segment(1) == 'admin') {
@@ -92,30 +90,11 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         $pages = $pages->sorted();
 
         /* @var PageInterface $page */
-        foreach ($pages->exact(true) as $page) {
-            $router->any(
-                $page->getPath(),
-                [
-                    'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
-                    'streams::addon'             => 'anomaly.module.pages',
-                    'anomaly.module.pages::page' => $page->getId(),
-                ]
-            );
-        }
+        foreach ($pages as $page) {
 
-        /* @var PageInterface $page */
-        foreach ($pages->exact(false) as $page) {
-            $router->any(
-                $page->getPath() . '/{any?}',
-                [
-                    'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
-                    'streams::addon'             => 'anomaly.module.pages',
-                    'anomaly.module.pages::page' => $page->getId(),
-                    'where'                      => [
-                        'any' => '(.*)',
-                    ],
-                ]
-            );
+            $extension = $page->getHandler();
+
+            $extension->route($page);
         }
     }
 }
