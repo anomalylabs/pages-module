@@ -98,7 +98,7 @@ class PageAuthorizer
          * there IS a user then this
          * page can NOT display.
          */
-        if ($allowed->has('guest') && $user && !$user->isAdmin()) {
+        if ($allowed->has('guest') && $user) {
             abort(403);
         }
 
