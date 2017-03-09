@@ -39,6 +39,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     ];
 
     /**
+     * The cascaded relations.
+     *
+     * @var array
+     */
+    protected $cascades = [
+        'children',
+        'entry',
+    ];
+
+    /**
      * The active flag.
      *
      * @var bool

@@ -19,19 +19,21 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
 {
 
     /**
-     * The cache minutes.
-     *
-     * @var int
-     */
-    protected $ttl = 99999;
-
-    /**
      * Always eager load these.
      *
      * @var array
      */
     protected $with = [
         'translations',
+    ];
+
+    /**
+     * The cascaded relations.
+     *
+     * @var array
+     */
+    protected $cascades = [
+        'pages',
     ];
 
     /**

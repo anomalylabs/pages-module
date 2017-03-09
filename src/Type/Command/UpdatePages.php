@@ -44,7 +44,9 @@ class UpdatePages
     public function handle(TypeRepositoryInterface $types, PageRepositoryInterface $pages)
     {
         /* @var TypeInterface $type */
-        $type = $types->find($this->type->getId());
+        if (!$type = $types->find($this->type->getId())) {
+            return;
+        }
 
         /* @var PageInterface $page */
         foreach ($type->getPages() as $page) {

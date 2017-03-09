@@ -3,7 +3,14 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageCollection;
+use Anomaly\PagesModule\Page\PageModel;
+use Anomaly\PagesModule\Page\PageRepository;
+use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
+use Anomaly\PagesModule\Type\TypeModel;
+use Anomaly\PagesModule\Type\TypeRepository;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
+use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Illuminate\Http\Request;
 
 /**
@@ -22,7 +29,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PagesModule\PagesModulePlugin',
+        PagesModulePlugin::class,
     ];
 
     /**
@@ -31,8 +38,8 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $bindings = [
-        'Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel' => 'Anomaly\PagesModule\Page\PageModel',
-        'Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel' => 'Anomaly\PagesModule\Type\TypeModel',
+        PagesPagesEntryModel::class => PageModel::class,
+        PagesTypesEntryModel::class => TypeModel::class,
     ];
 
     /**
@@ -41,8 +48,8 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $singletons = [
-        'Anomaly\PagesModule\Page\Contract\PageRepositoryInterface' => 'Anomaly\PagesModule\Page\PageRepository',
-        'Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface' => 'Anomaly\PagesModule\Type\TypeRepository',
+        PageRepositoryInterface::class => PageRepository::class,
+        TypeRepositoryInterface::class => TypeRepository::class,
     ];
 
     /**

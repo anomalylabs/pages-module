@@ -1,9 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\PagesModule\Type\Command\CreateStream;
-use Anomaly\PagesModule\Type\Command\DeletePages;
 use Anomaly\PagesModule\Type\Command\DeleteStream;
-use Anomaly\PagesModule\Type\Command\RestorePages;
 use Anomaly\PagesModule\Type\Command\UpdatePages;
 use Anomaly\PagesModule\Type\Command\UpdateStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
@@ -52,21 +50,8 @@ class TypeObserver extends EntryObserver
      */
     public function deleted(EntryInterface $entry)
     {
-        $this->commands->dispatch(new DeletePages($entry));
         $this->commands->dispatch(new DeleteStream($entry));
 
         parent::deleted($entry);
-    }
-
-    /**
-     * Fired after a page type is restored.
-     *
-     * @param EntryInterface|TypeInterface $entry
-     */
-    public function restored(EntryInterface $entry)
-    {
-        $this->commands->dispatch(new RestorePages($entry));
-
-        parent::restored($entry);
     }
 }

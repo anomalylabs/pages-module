@@ -46,7 +46,9 @@ class UpdateStream
     public function handle(StreamRepositoryInterface $streams, TypeRepositoryInterface $types, Repository $config)
     {
         /* @var TypeInterface $type */
-        $type = $types->find($this->type->getId());
+        if (!$type = $types->find($this->type->getId())) {
+            return;
+        }
 
         /* @var StreamInterface $stream */
         $stream = $type->getEntryStream();
