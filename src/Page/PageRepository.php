@@ -46,6 +46,16 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     }
 
     /**
+     * Unset home pages.
+     *
+     * @return void
+     */
+    public function unsetHomePages()
+    {
+        $this->model->where('home', true)->update(['home' => false]);
+    }
+
+    /**
      * Find a page by it's string ID.
      *
      * @param $id

@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Command\SetPath;
 use Anomaly\PagesModule\Page\Command\SetStrId;
+use Anomaly\PagesModule\Page\Command\UnsetHome;
 use Anomaly\PagesModule\Page\Command\UpdatePaths;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
@@ -25,6 +26,7 @@ class PageObserver extends EntryObserver
      */
     public function saving(EntryInterface $entry)
     {
+        $this->dispatch(new UnsetHome($entry));
         $this->dispatch(new SetStrid($entry));
         $this->dispatch(new SetPath($entry));
 

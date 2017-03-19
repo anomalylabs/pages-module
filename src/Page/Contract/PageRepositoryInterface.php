@@ -21,6 +21,13 @@ interface PageRepositoryInterface extends EntryRepositoryInterface
     public function accessible();
 
     /**
+     * Unset home pages.
+     *
+     * @return void
+     */
+    public function unsetHomePages();
+
+    /**
      * Find a page by it's string ID.
      *
      * @param $id
