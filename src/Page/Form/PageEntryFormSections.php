@@ -22,13 +22,37 @@ class PageEntryFormSections
     {
         $builder->setSections(
             [
-                'general' => [
-                    'fields' => [
-                        'page_title',
-                        'page_slug',
+                'page'   => [
+                    'tabs' => [
+                        'general' => [
+                            'title'  => 'anomaly.module.pages::tab.general',
+                            'fields' => [
+                                'page_title',
+                                'page_slug',
+                            ],
+                        ],
+                        'seo'     => [
+                            'title'  => 'anomaly.module.pages::tab.seo',
+                            'fields' => [
+                                'page_meta_title',
+                                'page_meta_keywords',
+                                'page_meta_description',
+                            ],
+                        ],
+                        'options' => [
+                            'title'  => 'anomaly.module.pages::tab.options',
+                            'fields' => [
+                                'page_enabled',
+                                'page_home',
+                                'page_visible',
+                                'page_exact',
+                                'page_allowed_roles',
+                                'page_theme_layout',
+                            ],
+                        ],
                     ],
                 ],
-                'fields'  => [
+                'fields' => [
                     'fields' => function (PageEntryFormBuilder $builder) {
                         return array_map(
                             function (FieldType $field) {
@@ -42,23 +66,6 @@ class PageEntryFormSections
                             )
                         );
                     },
-                ],
-                'seo'     => [
-                    'fields' => [
-                        'page_meta_title',
-                        'page_meta_keywords',
-                        'page_meta_description',
-                    ],
-                ],
-                'options' => [
-                    'fields' => [
-                        'page_theme_layout',
-                        'page_enabled',
-                        'page_home',
-                        'page_visible',
-                        'page_exact',
-                        'page_allowed_roles',
-                    ],
                 ],
             ]
         );
