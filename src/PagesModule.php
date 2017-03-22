@@ -40,6 +40,7 @@ class PagesModule extends Module
             ],
             'sections' => [
                 'assignments' => [
+                    'hidden'  => true,
                     'href'    => 'admin/pages/types/assignments/{request.route.parameters.type}',
                     'buttons' => [
                         'assign_fields' => [
