@@ -15,6 +15,20 @@ class PageEntryFormBuilder extends MultipleFormBuilder
 {
 
     /**
+     * The form buttons.
+     *
+     * @var array
+     */
+    protected $buttons = [
+        'cancel',
+        'view' => [
+            'enabled' => 'edit',
+            'target'  => '_blank',
+            'href'    => 'admin/pages/view/{request.route.parameters.id}',
+        ],
+    ];
+
+    /**
      * Fired after the entry form is saved.
      *
      * After the entry form is saved take the
