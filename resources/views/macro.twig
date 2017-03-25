@@ -1,9 +1,9 @@
 {% macro links(pages, collection, options, depth) %}
     {% for page in pages %}
-        <{{ options.link_tag ?: 'li' }} class="
+        <{{ options.item_tag ?: 'li' }} class="
         {{ page.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
         {{ page.active ? options.get('active_class', 'active') }}
-        {{ page.current ? options.get('current_class', 'current') }}
+        {{ page.current ? options.get('selected_class', options.get('current_class', 'selected')) }}
         {{ options.item_class }}">
 
         <a
