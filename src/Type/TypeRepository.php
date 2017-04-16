@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\PostsModule\Type\Contract\TypeInterface;
+use Anomaly\PagesModule\Type\Command\DeleteStream;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
@@ -40,5 +41,22 @@ class TypeRepository extends EntryRepository implements TypeRepositoryInterface
     public function findBySlug($slug)
     {
         return $this->model->where('slug', $slug)->first();
+    }
+
+    /**
+     * Truncate the entries.
+     *
+     * @return $this
+     */
+    public function truncate()
+    {
+        parent::truncate();
+
+        foreach ($this->model->all() as $entry)
+        {
+            $this->dispatch(new DeleteStream($entry));
+        }
+
+        return $this;
     }
 }
