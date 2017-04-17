@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PagesModule\Type;
 
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
-use Anomaly\PostsModule\Type\Contract\TypeInterface;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
