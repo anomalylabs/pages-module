@@ -94,7 +94,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         }
 
         /* @var PageCollection $pages */
-        $pages = $pages->sorted();
+        $pages = $pages->sorted('desc');
 
         /* @var PageInterface $page */
         foreach ($pages as $page) {
