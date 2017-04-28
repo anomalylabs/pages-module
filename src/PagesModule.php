@@ -41,12 +41,12 @@ class PagesModule extends Module
             'sections' => [
                 'assignments' => [
                     'hidden'  => true,
-                    'href'    => 'admin/pages/types/assignments/{request.route.parameters.type}',
+                    'href'    => 'admin/pages/types/assignments/{request.route.parameters.stream}',
                     'buttons' => [
                         'assign_fields' => [
                             'data-toggle' => 'modal',
                             'data-target' => '#modal',
-                            'href'        => 'admin/pages/types/assignments/{request.route.parameters.type}/choose',
+                            'href'        => 'admin/pages/types/assignments/{request.route.parameters.stream}/choose',
                         ],
                     ],
                 ],

@@ -77,6 +77,20 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
     }
 
     /**
+     * Get the related entry stream ID.
+     *
+     * @return int
+     */
+    public function getEntryStreamId()
+    {
+        if (!$stream = $this->getEntryStream()) {
+            return null;
+        }
+
+        return $stream->getId();
+    }
+
+    /**
      * Get the related entry model.
      *
      * @return EntryModel
