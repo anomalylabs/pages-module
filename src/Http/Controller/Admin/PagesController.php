@@ -26,7 +26,7 @@ class PagesController extends AdminController
     /**
      * Return a tree of existing pages.
      *
-     * @param  PageTreeBuilder           $tree
+     * @param  PageTreeBuilder $tree
      * @return \Illuminate\Http\Response
      */
     public function index(PageTreeBuilder $tree)
@@ -37,7 +37,7 @@ class PagesController extends AdminController
     /**
      * Return the form for creating a new page.
      *
-     * @param  PageEntryFormBuilder                       $form
+     * @param  PageEntryFormBuilder $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(PageEntryFormBuilder $form, PageRepositoryInterface $pages)
@@ -108,7 +108,9 @@ class PagesController extends AdminController
      */
     public function delete(PageRepositoryInterface $pages, Authorizer $authorizer, $id)
     {
-        $authorizer->authorize('anomaly.module.pages::pages.delete');
+        if (!$authorizer->authorize('anomaly.module.pages::pages.delete')) {
+            abort(403);
+        }
 
         $pages->delete($page = $pages->find($id));
 
