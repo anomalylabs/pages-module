@@ -109,7 +109,10 @@ class PagesController extends AdminController
     public function delete(PageRepositoryInterface $pages, Authorizer $authorizer, $id)
     {
         if (!$authorizer->authorize('anomaly.module.pages::pages.delete')) {
-            abort(403);
+
+            $this->messages->error('streams::message.access_denied');
+
+            return $this->redirect->back();
         }
 
         $pages->delete($page = $pages->find($id));
