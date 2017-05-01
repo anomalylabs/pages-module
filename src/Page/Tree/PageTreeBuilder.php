@@ -27,7 +27,9 @@ class PageTreeBuilder extends TreeBuilder
         'view' => [
             'target' => '_blank',
         ],
-        'delete',
+        'delete' => [
+            'permission' => 'anomaly.module.pages::pages.delete'
+        ],
     ];
 
 }
