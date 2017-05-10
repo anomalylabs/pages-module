@@ -20,13 +20,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
 {
 
     /**
-     * The cache minutes.
-     *
-     * @var int
-     */
-    protected $ttl = 99999;
-
-    /**
      * Always eager load these.
      *
      * @var array
