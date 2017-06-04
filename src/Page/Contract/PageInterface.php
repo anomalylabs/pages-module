@@ -5,6 +5,7 @@ use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -160,6 +161,13 @@ interface PageInterface extends EntryInterface
     public function getChildren();
 
     /**
+     * Get the related sibling pages.
+     *
+     * @return PageCollection
+     */
+    public function getSiblings();
+
+    /**
      * Get the related roles allowed.
      *
      * @return EloquentCollection
@@ -230,4 +238,18 @@ interface PageInterface extends EntryInterface
      * @return $this
      */
     public function setResponse(Response $response);
+
+    /**
+     * Return the children relationship.
+     *
+     * @return HasMany
+     */
+    public function children();
+
+    /**
+     * Return the siblings relationship.
+     *
+     * @return HasMany
+     */
+    public function siblings();
 }

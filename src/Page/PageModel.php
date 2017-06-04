@@ -7,6 +7,7 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -241,6 +242,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Get the related sibling pages.
+     *
+     * @return PageCollection
+     */
+    public function getSiblings()
+    {
+        return $this->siblings;
+    }
+
+    /**
      * Get the related roles allowed.
      *
      * @return EloquentCollection
@@ -406,13 +417,24 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Return the children pages relationship.
+     * Return the children relationship.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function children()
     {
         return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id')
+            ->orderBy('sort_order', 'ASC');
+    }
+
+    /**
+     * Return the siblings relationship.
+     *
+     * @return HasMany
+     */
+    public function siblings()
+    {
+        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'parent_id')
             ->orderBy('sort_order', 'ASC');
     }
 
