@@ -36,15 +36,14 @@ class GetRealPath
     public function handle()
     {
         if ($parent = $this->page->getParent()) {
-            if ($parent->isHome()) {
-                return $parent->getSlug() . '/' . $this->page->getSlug();
-            } else {
-                return $parent->getPath() . '/' . $this->page->getSlug();
-            }
-        } elseif ($this->page->isHome()) {
-            return '/';
-        } else {
-            return '/' . $this->page->getSlug();
+            return ($parent->isHome())
+            ? $parent->getSlug() . '/' . $this->page->getSlug()
+            : $parent->getPath() . '/' . $this->page->getSlug();
+        }
+        else {
+            return ($this->page->isHome())
+            ? '/'
+            : '/' . $this->page->getSlug();
         }
     }
 }
