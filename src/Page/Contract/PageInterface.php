@@ -253,18 +253,4 @@ interface PageInterface extends EntryInterface
      */
     public function siblings();
 
-    /**
-     * Get the preview flag.
-     *
-     * @return bool
-     */
-    public function isPreview();
-
-    /**
-     * Set the preview flag.
-     *
-     * @param $preview
-     * @return $this
-     */
-    public function setPreview($preview);
 }

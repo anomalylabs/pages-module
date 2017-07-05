@@ -21,8 +21,8 @@ class PagesController extends PublicController
     /**
      * Return a rendered page.
      *
-     * @param  PageResolver                                    $resolver
-     * @param  ViewTemplate                                    $template
+     * @param  PageResolver $resolver
+     * @param  ViewTemplate $template
      * @return null|\Symfony\Component\HttpFoundation\Response
      */
     public function view(PageResolver $resolver, ViewTemplate $template)
@@ -58,9 +58,6 @@ class PagesController extends PublicController
             abort(404);
         }
 
-        $page->setAttribute('enabled', true);
-        $page->setPreview(true);
-
         $type    = $page->getType();
         $handler = $type->getHandler();
 
@@ -74,9 +71,9 @@ class PagesController extends PublicController
     /**
      * Redirect elsewhere.
      *
-     * @param  PageRepositoryInterface                $pages
-     * @param  Redirector                             $redirector
-     * @param  Route                                  $route
+     * @param  PageRepositoryInterface $pages
+     * @param  Redirector              $redirector
+     * @param  Route                   $route
      * @return \Illuminate\Http\RedirectResponse|void
      */
     public function redirect(PageRepositoryInterface $pages, Redirector $redirector, Route $route)

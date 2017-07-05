@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Support\Authorizer;
+use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Config\Repository;
@@ -71,45 +72,26 @@ class PageAuthorizer
         /* @var UserInterface $user */
         $user = $this->guard->user();
 
-        /*
-         * If the page is not enabled or is a preview and we
-         * are not logged in then 404.
-         */
-        if ((!$page->isEnabled() || $page->isPreview()) && !$user) {
-            abort(404);
-        }
-
-        /*
-         * If the page is enabled and is a preview and we are
-         * logged in then make sure we have permission.
-         */
-        if ($page->isEnabled() && $page->isPreview() && !$this->authorizer->authorize('anomaly.module.pages::pages.preview')) {
-            abort(403);
-        }
-
-        /*
-         * If the page is restricted to specific
-         * roles then make sure our user is one of them.
-         */
+        /* @var RoleCollection $allowed */
         $allowed = $page->getAllowedRoles();
 
         /*
-         * If there is a guest role and
-         * there IS a user then this
-         * page can NOT display.
+         * If the page is not enabled yet check and make
+         * sure that we are allowed to preview it first.
          */
-        if ($allowed->has('guest') && $user) {
+        if (!$page->isEnabled() && !$this->authorizer->authorize('anomaly.module.pages::pages.preview')) {
             abort(403);
         }
-
-        // No longer needed.
-        $allowed->forget('guest');
 
         /*
          * Check the roles against the
          * user if there are any.
          */
-        if (!$allowed->isEmpty() && (!$user || (!$user->hasAnyRole($allowed) && !$user->isAdmin()))) {
+        if (
+            $page->isEnabled()
+            && !$allowed->isEmpty()
+            && (!$user || (!$user->hasAnyRole($allowed) && !$user->isAdmin()))
+        ) {
             $page->setResponse($this->response->redirectGuest('login'));
         }
     }

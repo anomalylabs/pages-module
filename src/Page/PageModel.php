@@ -453,25 +453,5 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
 
         return $array;
     }
-
-    /**
-     * Set the preview flag.
-     *
-     * @param $preview
-     * @return $this
-     */
-    public function setPreview($preview)
-    {
-        $this->preview = $preview;
-
-        return $this;
-    }
-
-    /**
-     * Get the preview flag.
-     */
-    public function isPreview()
-    {
-        return $this->preview;
-    }
+    
 }
