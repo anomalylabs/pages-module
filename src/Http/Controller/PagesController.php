@@ -59,6 +59,7 @@ class PagesController extends PublicController
         }
 
         $page->setAttribute('enabled', true);
+        $page->setPreview(true);
 
         $type    = $page->getType();
         $handler = $type->getHandler();

@@ -7,6 +7,7 @@ return [
             'read'   => 'Can read pages?',
             'write'  => 'Can write pages?',
             'delete' => 'Can delete pages?',
+            'preview' => 'Can preview pages?'
         ],
     ],
     'types'  => [
