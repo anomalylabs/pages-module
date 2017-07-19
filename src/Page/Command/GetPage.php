@@ -52,7 +52,7 @@ class GetPage
         }
 
         if (is_string($this->identifier)) {
-            return $pages->findByPath($this->identifier);
+            return $pages->findByPath('/' . ltrim($this->identifier, '/'));
         }
 
         if ($this->identifier instanceof PageInterface) {
