@@ -21,10 +21,6 @@ return [
         'name' => 'Meta 說明',
     'instructions' => '請輸入這頁面的 SEO 說明。',
     ],
-    'meta_keywords' => [
-        'name' => 'Meta 關鍵字',
-    'instructions' => '請輸入這頁面的 SEO 關鍵字。',
-    ],
     'name' => [
         'name' => '名稱',
     'instructions' => '請問這頁面的 型別(page type) 名稱是什麼？',

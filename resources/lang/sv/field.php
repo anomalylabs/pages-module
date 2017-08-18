@@ -17,10 +17,6 @@ return [
         'name'         => 'Metabeskrivning',
         'instructions' => 'Skriv in sidans SEO-beskrivning.',
     ],
-    'meta_keywords'         => [
-        'name'         => 'Metanyckelord',
-        'instructions' => 'Skriv in sidans SEO-nyckelord. Använd bara ett lagom antal nyckelord.',
-    ],
     'ttl'                   => [
         'name'         => 'TTL',
         'label'        => 'Time to live (TTL)',

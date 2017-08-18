@@ -21,10 +21,6 @@ return [
         'name'         => 'Méta description',
         'instructions' => 'Entrez la description SEO de la page.',
     ],
-    'meta_keywords'    => [
-        'name'         => 'Méta mots-clés',
-        'instructions' => 'Entrez les mots-clés pour la SEO.',
-    ],
     'name'             => [
         'name'         => 'Nom',
         'instructions' => 'Entrez un nom décrivant le type de page.',

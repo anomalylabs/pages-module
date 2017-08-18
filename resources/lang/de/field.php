@@ -17,10 +17,6 @@ return [
         'name'         => 'Meta Beschreibung',
         'instructions' => 'Geben Sie die SEO-Beschreibung der Seite ein.',
     ],
-    'meta_keywords'         => [
-        'name'         => 'Meta Keywords',
-        'instructions' => 'Geben Sie die SEO-Keywords der Seite ein. Benutzen Sie NUR soviele, wie auch Sinn macht.',
-    ],
     'ttl'                   => [
         'name'         => 'TTL',
         'label'        => 'Time to live (TTL)',

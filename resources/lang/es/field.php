@@ -21,10 +21,6 @@ return [
         'placeholder'  => 'Bienvenidos a nuestro sitio!',
         'instructions' => 'Ingrese la descripción para SEO de la página.',
     ],
-    'meta_keywords'    => [
-        'name'         => 'Meta Keywords',
-        'instructions' => 'Ingrese las palabrás clave del sitio.',
-    ],
     'ttl'              => [
         'name'         => 'TTL',
         'label'        => 'Tiempo de Vida (TTL)',

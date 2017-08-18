@@ -21,10 +21,6 @@ return [
         'name'     => 'Meta Description',
     'instructions' => 'Határozz meg egy SEO description-t.',
     ],
-    'meta_keywords' => [
-        'name'     => 'Meta Keywords',
-    'instructions' => 'Határozz meg egy SEO keywords-öt.',
-    ],
     'name' => [
         'name'     => 'Név',
     'instructions' => 'Határozz meg egy rövid leíró mebet az oldal típusnak.',

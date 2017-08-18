@@ -21,10 +21,6 @@ return [
         'name'         => 'Meta 描述',
         'instructions' => '指定 SEO 描述内容.',
     ],
-    'meta_keywords'    => [
-        'name'         => 'Meta 关键字',
-        'instructions' => '指定 SEO 关键字.',
-    ],
     'name'             => [
         'name'         => '名称',
         'instructions' => '为页面类型指定一个简短的名称.',

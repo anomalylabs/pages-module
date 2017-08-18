@@ -21,10 +21,6 @@ return [
         'name'         => 'Meta Description',
         'instructions' => 'Specify the SEO description.',
     ],
-    'meta_keywords'    => [
-        'name'         => 'Meta Keywords',
-        'instructions' => 'Specify the SEO keywords.',
-    ],
     'name'             => [
         'name'         => 'Name',
         'instructions' => 'Specify a short descriptive name for this page type.',

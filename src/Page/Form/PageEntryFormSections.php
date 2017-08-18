@@ -35,7 +35,6 @@ class PageEntryFormSections
                             'title'  => 'anomaly.module.pages::tab.seo',
                             'fields' => [
                                 'page_meta_title',
-                                'page_meta_keywords',
                                 'page_meta_description',
                             ],
                         ],

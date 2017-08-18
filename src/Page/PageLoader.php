@@ -39,7 +39,6 @@ class PageLoader
     {
         $this->template->set('title', $page->getTitle());
         $this->template->set('meta_title', $page->getMetaTitle());
-        $this->template->set('meta_keywords', $page->getMetaKeywords());
         $this->template->set('meta_description', $page->getMetaDescription());
     }
 }

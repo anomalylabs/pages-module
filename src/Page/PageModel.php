@@ -152,16 +152,6 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
-     * Get the meta keywords.
-     *
-     * @return array
-     */
-    public function getMetaKeywords()
-    {
-        return $this->meta_keywords;
-    }
-
-    /**
      * Get the meta description.
      *
      * @return string
