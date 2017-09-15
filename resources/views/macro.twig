@@ -1,25 +1,23 @@
-{% macro links(links, collection, options, depth) %}
-    {% for link in links %}
+{% macro links(pages, collection, options, depth) %}
+    {% for page in pages %}
         <{{ options.item_tag ?: 'li' }} class="
-        {{ link.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
-        {{ link.active ? options.get('active_class', 'active') }}
-        {{ link.current ? options.get('selected_class', options.get('current_class', 'selected')) }}
-        {{ options.item_class }}
-        {{ link.class }}">
+        {{ page.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
+        {{ page.active ? options.get('active_class', 'active') }}
+        {{ page.current ? options.get('selected_class', options.get('current_class', 'selected')) }}
+        {{ options.item_class }}">
 
         <a
-                href="{{ link.url }}"
-                target="{{ link.target }}"
-                class="{{ options.link_class }} {{ link.children.count() ? options.get('link_class_dropdown') }}"
+                href="{{ url(page.path) }}"
+                class="{{ options.link_class }}"
                 {{ html_attributes(options.get('link_attributes', [])) }}
-                {% if link.children.count() %}
+                {% if page.children.count() %}
                     {{ html_attributes(options.get('link_attributes_dropdown', [])) }}
                 {% endif %}
         >
-           {{ link.title|raw }}
+            {{ page.title }}
         </a>
 
-        {% if not link.children.isEmpty() %}
+        {% if not page.children.isEmpty() %}
             {% if depth+1 <= options.get('depth', 999) %}
 
                 {% if options.get('dropdown_toggle') %}
@@ -31,8 +29,8 @@
                 {% endif %}
 
                 <{{ options.child_list_tag ?: options.list_tag ?: 'ul' }} class="{{ options.child_list_class }}">
-                 {% import options.get('macro', _self ) as macro %}
-                 {{ macro.links(link.children, collection, options, depth+1) }}
+                {% import options.get('macro', _self ) as macro %}
+                 {{ macro.links(page.children, collection, options, depth+1) }}
                 </{{ options.child_list_tag ?: options.list_tag ?: 'ul' }}>
             {% endif %}
         {% endif %}
