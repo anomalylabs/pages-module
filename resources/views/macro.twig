@@ -1,4 +1,7 @@
 {% macro links(pages, collection, options, depth) %}
+
+    {% import _self as self %}
+
     {% for page in pages %}
         <{{ options.item_tag ?: 'li' }} class="
         {{ page.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
@@ -29,7 +32,7 @@
                 {% endif %}
 
                 <{{ options.child_list_tag ?: options.list_tag ?: 'ul' }} class="{{ options.child_list_class }}">
-                {{ _self.links(page.children, collection, options, depth+1) }}
+                {{ self.links(page.children, collection, options, depth+1) }}
                 </{{ options.child_list_tag ?: options.list_tag ?: 'ul' }}>
             {% endif %}
         {% endif %}
