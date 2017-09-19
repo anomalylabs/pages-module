@@ -423,7 +423,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function children()
     {
-        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'id')
+        return $this->hasMany(get_class($this), 'parent_id', 'id')
             ->orderBy('sort_order', 'ASC');
     }
 
@@ -434,7 +434,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function siblings()
     {
-        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'parent_id', 'parent_id')
+        return $this->hasMany(get_class($this), 'parent_id', 'parent_id')
             ->orderBy('sort_order', 'ASC');
     }
 
