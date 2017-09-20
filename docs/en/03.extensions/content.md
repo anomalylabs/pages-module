@@ -1,0 +1,12 @@
+## Extensions[](#extensions)
+
+This section will go over the extensions available for extending the behavior of the Pages module.
+
+
+### Handlers[](#extensions/handlers)
+
+Page `handler` are an extension that let you extend the behavior of pages.
+
+For example you could use a `URL Page Handler` to change the UI for the page into that of a simple redirect. This will prevent you from having to use the Navigation module for a simple off-site link or top level navigation item.
+
+Another example could be a `GitHub Page Handler` that pulls it's content from a github repository to allow collaboration on it. Where all the user has to do is define the source file.
