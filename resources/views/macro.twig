@@ -17,7 +17,7 @@
                     {{ html_attributes(options.get('link_attributes_dropdown', [])) }}
                 {% endif %}
         >
-            {{ page.title }}
+            {{ page.title }} {{ page.children.isEmpty() ? '' : '<span class="caret"></span>' }}
         </a>
 
         {% if not page.children.isEmpty() %}
