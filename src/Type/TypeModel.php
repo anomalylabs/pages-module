@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\PagesModule\Page\PageCollection;
+use Anomaly\PagesModule\Page\PageModel;
 use Anomaly\PagesModule\Type\Command\GetStream;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\EntryModel;
@@ -151,6 +152,6 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      */
     public function pages()
     {
-        return $this->hasMany('Anomaly\PagesModule\Page\PageModel', 'type_id');
+        return $this->hasMany(PageModel::class, 'type_id');
     }
 }
