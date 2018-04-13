@@ -13,7 +13,7 @@ return [
         return $page->lastModified()->toAtomString();
     },
     'entries' => function (PageRepositoryInterface $pages) {
-        return $pages->accessible()->visible();
+        return $pages->accessible()->enabled();
     },
     'handler' => function (Sitemap $sitemap, Repository $config, PageInterface $entry) {
 
