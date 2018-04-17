@@ -63,6 +63,7 @@ class AnomalyModulePagesCreatePagesFields extends Migration
         'parent'           => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
+                'mode'    => 'lookup',
                 'related' => 'Anomaly\PagesModule\Page\PageModel',
             ],
         ],

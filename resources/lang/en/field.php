@@ -65,7 +65,8 @@ return [
         'instructions' => 'The home page is the default landing page for your website.',
     ],
     'parent'           => [
-        'name' => 'Parent',
+        'name'         => 'Parent Page',
+        'instructions' => 'Specify a parent page to organize it within the parent\'s URI structure.',
     ],
     'handler'          => [
         'name'         => 'Handler',

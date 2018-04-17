@@ -20,8 +20,13 @@ class PageEntryFormBuilder extends MultipleFormBuilder
      * @var array
      */
     protected $buttons = [
+        'versions' => [
+            'text' => 'streams::button.versions',
+            'type' => 'primary',
+            'icon' => 'history',
+        ],
         'cancel',
-        'view' => [
+        'view'     => [
             'enabled' => 'edit',
             'target'  => '_blank',
             'href'    => 'admin/pages/view/{request.route.parameters.id}',

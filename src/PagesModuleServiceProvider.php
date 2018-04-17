@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Http\Controller\Admin\AssignmentsController;
 use Anomaly\PagesModule\Http\Controller\Admin\FieldsController;
+use Anomaly\PagesModule\Http\Controller\Admin\VersionsController;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageCollection;
@@ -15,6 +16,7 @@ use Anomaly\Streams\Platform\Assignment\AssignmentRouter;
 use Anomaly\Streams\Platform\Field\FieldRouter;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
+use Anomaly\Streams\Platform\Version\VersionRouter;
 use Illuminate\Http\Request;
 
 /**
@@ -66,11 +68,12 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         'admin/pages/create'           => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@create',
         'admin/pages/edit/{id}'        => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@edit',
         'admin/pages/view/{id}'        => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@view',
+        'admin/pages/change/{id}'      => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@change',
         'admin/pages/delete/{id}'      => 'Anomaly\PagesModule\Http\Controller\Admin\PagesController@delete',
         'admin/pages/types'            => 'Anomaly\PagesModule\Http\Controller\Admin\TypesController@index',
         'admin/pages/types/create'     => 'Anomaly\PagesModule\Http\Controller\Admin\TypesController@create',
         'admin/pages/types/edit/{id}'  => 'Anomaly\PagesModule\Http\Controller\Admin\TypesController@edit',
-        'admin/pages/ajax/choose_type' => 'Anomaly\PagesModule\Http\Controller\Admin\AjaxController@chooseType',
+        'admin/pages/ajax/choose_type' => 'Anomaly\PagesModule\Http\Controller\Admin\TypesController@choose',
         'admin/pages/settings'         => 'Anomaly\PagesModule\Http\Controller\Admin\SettingsController@index',
         'pages/preview/{id}'           => 'Anomaly\PagesModule\Http\Controller\PagesController@preview',
     ];
@@ -85,10 +88,13 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      */
     public function map(
         FieldRouter $fields,
+        VersionRouter $versions,
         AssignmentRouter $assignments,
         PageRepositoryInterface $pages,
         Request $request
     ) {
+        $versions->route($this->addon, VersionsController::class);
+
         $fields->route($this->addon, FieldsController::class);
         $assignments->route($this->addon, AssignmentsController::class, 'admin/pages/types');
 

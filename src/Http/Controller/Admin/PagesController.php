@@ -8,7 +8,9 @@ use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromPage;
 use Anomaly\PagesModule\Page\Form\Command\AddPageFormFromRequest;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
+use Anomaly\PagesModule\Page\Table\PageTableBuilder;
 use Anomaly\PagesModule\Page\Tree\PageTreeBuilder;
+use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
 use Illuminate\Routing\Redirector;
@@ -16,22 +18,45 @@ use Illuminate\Routing\Redirector;
 /**
  * Class PagesController
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PagesController extends AdminController
 {
 
     /**
-     * Return a tree of existing pages.
+     * Return a table/tree of existing pages.
      *
-     * @param  PageTreeBuilder $tree
-     * @return \Illuminate\Http\Response
+     * @param PageTreeBuilder               $tree
+     * @param PageTableBuilder              $table
+     * @param PreferenceRepositoryInterface $preferences
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(PageTreeBuilder $tree)
-    {
+    public function index(
+        PageTreeBuilder $tree,
+        PageTableBuilder $table,
+        PreferenceRepositoryInterface $preferences
+    ) {
+        if ($preferences->value('anomaly.module.pages::page_view', 'tree') == 'table') {
+            return $table->render();
+        }
+
         return $tree->render();
+    }
+
+    /**
+     * Change the pages view.
+     *
+     * @param PreferenceRepositoryInterface $preferences
+     * @param                               $view
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function change(PreferenceRepositoryInterface $preferences, $view)
+    {
+        $preferences->set('anomaly.module.pages::page_view', $view);
+
+        return $this->redirect->back();
     }
 
     /**
@@ -45,12 +70,13 @@ class PagesController extends AdminController
         $this->dispatch(new AddEntryFormFromRequest($form));
         $this->dispatch(new AddPageFormFromRequest($form));
 
-        if ($parent = $this->request->get('parent')) {
+        /* @var PageInterface $parent */
+        if ($parent = $pages->find($this->request->get('parent'))) {
 
             /* @var PageFormBuilder $pageForm */
             $pageForm = $form->getChildForm('page');
 
-            $pageForm->setParent($pages->find($parent));
+            $pageForm->setParent($parent);
         }
 
         return $form->render();
@@ -66,6 +92,7 @@ class PagesController extends AdminController
      */
     public function edit(PageRepositoryInterface $pages, PageEntryFormBuilder $form, $id)
     {
+        /* @var PageInterface $page */
         $page = $pages->find($id);
 
         $this->dispatch(new AddEntryFormFromPage($form, $page));

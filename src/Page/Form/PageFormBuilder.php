@@ -38,7 +38,6 @@ class PageFormBuilder extends FormBuilder
         'path',
         'type',
         'entry',
-        'parent',
     ];
 
     /**

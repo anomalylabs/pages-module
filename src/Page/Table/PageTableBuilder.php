@@ -27,37 +27,12 @@ class PageTableBuilder extends TableBuilder
     ];
 
     /**
-     * The table columns.
-     *
-     * @var array
-     */
-    protected $columns = [
-        'title' => [
-            'sort_column' => 'path',
-            'wrapper'     => '
-                    <strong>{value.title}</strong>
-                    <br>
-                    <small class="text-muted">{value.path}</small>',
-            'value'       => [
-                'path'  => 'entry.path',
-                'title' => 'entry.title',
-            ],
-        ],
-        'entry.enabled.label',
-    ];
-
-    /**
      * The table buttons.
      *
      * @var array
      */
     protected $buttons = [
-        'add'  => [
-            'data-toggle' => 'modal',
-            'data-target' => '#modal',
-            'text'        => 'anomaly.module.pages::button.create_child_page',
-            'href'        => 'admin/pages/ajax/choose_type?parent={entry.id}',
-        ],
+        'edit',
         'view' => [
             'target' => '_blank',
         ],
@@ -79,6 +54,10 @@ class PageTableBuilder extends TableBuilder
      */
     protected $options = [
         'sortable' => false,
+        'order_by' => [
+            'parent'     => 'ASC',
+            'sort_order' => 'ASC',
+        ],
     ];
 
 }

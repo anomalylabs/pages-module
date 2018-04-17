@@ -1,7 +1,7 @@
 {
     "name": "anomaly/pages-module",
     "type": "streams-addon",
-    "description": "A powerful module for the Streams Platform that lets you create pages, generate navigation, manage content, and build websites faster than ever.",
+    "description": "Create pages, generate navigation, manage content, and build websites faster than ever.",
     "keywords": [
         "pages",
         "module",
@@ -24,7 +24,8 @@
         }
     ],
     "require": {
-        "anomaly/streams-platform": "~1.3.0"
+        "anomaly/streams-platform": "~1.4.0",
+        "anomaly/preferences-module": "~2.1.0"
     },
     "autoload": {
         "psr-4": {

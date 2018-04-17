@@ -47,6 +47,7 @@ class PageEntryFormSections
                                 'page_exact',
                                 'page_allowed_roles',
                                 'page_theme_layout',
+                                'page_parent',
                             ],
                         ],
                     ],

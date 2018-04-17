@@ -21,6 +21,13 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
 {
 
     /**
+     * The versionable flag.
+     *
+     * @var bool
+     */
+    protected $versionable = true;
+
+    /**
      * Always eager load these.
      *
      * @var array
@@ -443,5 +450,5 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
 
         return $array;
     }
-    
+
 }
