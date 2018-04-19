@@ -29,7 +29,6 @@ class PageEntryFormBuilder extends MultipleFormBuilder
         'view'     => [
             'enabled' => 'edit',
             'target'  => '_blank',
-            'href'    => 'admin/pages/view/{request.route.parameters.id}',
         ],
     ];
 
