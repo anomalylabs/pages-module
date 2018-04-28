@@ -24,6 +24,7 @@ class PageTableBuilder extends TableBuilder
                 'path',
             ],
         ],
+        'type',
     ];
 
     /**

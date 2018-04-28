@@ -78,4 +78,7 @@ return [
     'path'             => [
         'name' => 'Path',
     ],
+    'type'             => [
+        'name' => 'Type',
+    ],
 ];

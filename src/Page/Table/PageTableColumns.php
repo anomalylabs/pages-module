@@ -60,6 +60,7 @@ class PageTableColumns
                         },
                     ],
                 ],
+                'type',
             ]
         );
     }
