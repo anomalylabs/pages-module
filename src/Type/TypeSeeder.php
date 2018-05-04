@@ -81,12 +81,14 @@ class TypeSeeder extends Seeder
                 [
                     'en'           => [
                         'name'        => 'Default',
-                        'description' => 'A block content page type.',
+                        'description' => 'A simple page type.',
                     ],
                     'slug'         => 'default',
                     'handler'      => 'anomaly.extension.default_page_handler',
                     'theme_layout' => 'theme::layouts/default.twig',
-                    'layout'       => '{{ page.content.render|raw }}',
+                    'layout'       => '<h1>{{ page.title }}</h1>
+
+{{ page.content.render|raw }}',
                 ]
             );
 
