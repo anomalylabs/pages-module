@@ -3,12 +3,25 @@
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\ControlPanel\ControlPanelBuilder;
 
+/**
+ * Class PagesModuleSections
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class PagesModuleSections
 {
 
+    /**
+     * Handle the sections.
+     *
+     * @param ControlPanelBuilder           $builder
+     * @param PreferenceRepositoryInterface $preferences
+     */
     public function handle(ControlPanelBuilder $builder, PreferenceRepositoryInterface $preferences)
     {
-        $view = $preferences->value('anomaly.module.pages::page_view', 'list');
+        $view = $preferences->value('anomaly.module.pages::page_view', 'tree');
 
         $builder->setSections(
             [
@@ -22,7 +35,7 @@ class PagesModuleSections
                         'change_view' => [
                             'type'    => 'info',
                             'enabled' => 'admin/pages',
-                            'icon'    => ($view == 'list' ? 'fa fa-table' : 'list-ul'),
+                            'icon'    => ($view == 'tree' ? 'fa fa-table' : 'list-ul'),
                             'href'    => 'admin/pages/change/' . ($view == 'tree' ? 'table' : 'tree'),
                             'text'    => 'anomaly.module.pages::button.' . ($view == 'tree' ? 'table_view' : 'tree_view'),
                         ],
