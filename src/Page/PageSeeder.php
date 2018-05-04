@@ -1,8 +1,11 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\BlocksModule\Block\Contract\BlockRepositoryInterface;
+use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
+use Anomaly\Streams\Platform\Model\WysiwygBlock\WysiwygBlockBlocksEntryModel;
 
 /**
  * Class PageSeeder
@@ -29,15 +32,28 @@ class PageSeeder extends Seeder
     protected $types;
 
     /**
+     * The blocks repository.
+     *
+     * @var BlockRepositoryInterface
+     */
+    protected $blocks;
+
+    /**
      * Create a new PageSeeder instance.
      *
      * @param PageRepositoryInterface $pages
      * @param TypeRepositoryInterface $types
      */
-    public function __construct(PageRepositoryInterface $pages, TypeRepositoryInterface $types)
-    {
-        $this->pages = $pages;
-        $this->types = $types;
+    public function __construct(
+        PageRepositoryInterface $pages,
+        TypeRepositoryInterface $types,
+        BlockRepositoryInterface $blocks
+    ) {
+        $this->pages  = $pages;
+        $this->types  = $types;
+        $this->blocks = $blocks;
+
+        parent::__construct();
     }
 
     /**
@@ -49,44 +65,36 @@ class PageSeeder extends Seeder
 
         $type = $this->types->findBySlug('default');
 
-        $this->pages->create(
+        $field = $this->fields->findBySlugAndNamespace('content', 'pages');
+
+        /* @var PageInterface $page */
+        $page = $this->pages->create(
             [
                 'en'           => [
                     'title' => 'Welcome',
                 ],
                 'slug'         => 'welcome',
-                'entry'        => $type->getEntryModel()->create(
+                'entry'        => $type->getEntryModel()->create(),
+                'type'         => $type,
+                'enabled'      => true,
+                'home'         => true,
+                'theme_layout' => 'theme::layouts/default.twig',
+            ]
+        );
+
+        $this->blocks->create(
+            [
+                'field'     => $field,
+                'area'      => $page->getEntry(),
+                'extension' => 'anomaly.extension.wysiwyg_block',
+                'entry'     => WysiwygBlockBlocksEntryModel::create(
                     [
                         'en' => [
                             'content' => '<p>Welcome to PyroCMS!</p>',
                         ],
                     ]
                 ),
-                'type'         => $type,
-                'enabled'      => true,
-                'home'         => true,
-                'theme_layout' => 'theme::layouts/default.twig',
             ]
-        )->allowedRoles()->sync([]);
-
-        $this->pages->create(
-            [
-                'en'           => [
-                    'title' => 'Contact',
-                ],
-                'slug'         => 'contact',
-                'entry'        => $type->getEntryModel()->create(
-                    [
-                        'en' => [
-                            'content' => '<p>Drop us a line! We\'d love to hear from you!</p><p><br></p>
-<p>{{ form(\'contact\').to(\'example@domain.com\')|raw }}</p>',
-                        ],
-                    ]
-                ),
-                'type'         => $type,
-                'enabled'      => true,
-                'theme_layout' => 'theme::layouts/default.twig',
-            ]
-        )->allowedRoles()->sync([]);
+        );
     }
 }
