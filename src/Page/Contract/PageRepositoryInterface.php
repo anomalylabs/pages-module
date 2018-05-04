@@ -23,9 +23,10 @@ interface PageRepositoryInterface extends EntryRepositoryInterface
     /**
      * Unset home pages.
      *
+     * @param PageInterface $page
      * @return void
      */
-    public function unsetHomePages();
+    public function unsetHomePages(PageInterface $page);
 
     /**
      * Find a page by it's string ID.
