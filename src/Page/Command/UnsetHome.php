@@ -39,7 +39,7 @@ class UnsetHome
     public function handle(PageRepositoryInterface $pages)
     {
         if ($this->page->isHome()) {
-            $pages->unsetHomePages();
+            $pages->unsetHomePages($this->page);
         }
     }
 }
