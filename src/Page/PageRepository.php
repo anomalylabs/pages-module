@@ -48,6 +48,7 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     /**
      * Unset home pages.
      *
+     * @param PageInterface $home
      * @return void
      */
     public function unsetHomePages(PageInterface $home)
