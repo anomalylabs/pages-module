@@ -38,6 +38,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
                 $page->getPath() . '/{any?}',
                 [
                     'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
+                    'as'                         => 'anomaly.module.pages::pages.' . $page->getId(),
                     'streams::addon'             => 'anomaly.module.pages',
                     'anomaly.module.pages::page' => $page->getId(),
                     'where'                      => [
@@ -53,6 +54,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
             $page->getPath(),
             [
                 'uses'                       => 'Anomaly\PagesModule\Http\Controller\PagesController@view',
+                'as'                         => 'anomaly.module.pages::pages.' . $page->getId(),
                 'streams::addon'             => 'anomaly.module.pages',
                 'anomaly.module.pages::page' => $page->getId(),
             ]
