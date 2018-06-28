@@ -105,7 +105,7 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         }
 
         // Route the exact match.
-        if ($page = $pages->findByPath($request->path())) {
+        if ($page = $pages->findByPath($request->getPathInfo())) {
 
             $extension = $page->getHandler();
 
