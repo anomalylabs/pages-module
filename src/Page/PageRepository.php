@@ -36,6 +36,19 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     }
 
     /**
+     * Return only routable pages.
+     *
+     * @return PageCollection
+     */
+    public function routable()
+    {
+        return $this->model
+            ->newQueryWithoutRelationships()
+            ->where('exact', false)
+            ->get();
+    }
+
+    /**
      * Return only accessible pages.
      *
      * @return PageCollection

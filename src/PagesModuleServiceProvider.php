@@ -81,10 +81,11 @@ class PagesModuleServiceProvider extends AddonServiceProvider
     /**
      * Map additional routes.
      *
-     * @param FieldRouter             $fields
-     * @param AssignmentRouter        $assignments
+     * @param FieldRouter $fields
+     * @param VersionRouter $versions
+     * @param AssignmentRouter $assignments
      * @param PageRepositoryInterface $pages
-     * @param Request                 $request
+     * @param Request $request
      */
     public function map(
         FieldRouter $fields,
@@ -103,8 +104,23 @@ class PagesModuleServiceProvider extends AddonServiceProvider
             return;
         }
 
+        // Route the exact match.
+        if ($page = $pages->findByPath($request->path())) {
+
+            $extension = $page->getHandler();
+
+            $extension->route($page);
+
+            $this->app->bind(
+                'anomaly.module.pages::pages.current',
+                function () use ($page) {
+                    return $page;
+                }
+            );
+        }
+
         /* @var PageCollection $pages */
-        $pages = $pages->sorted('desc');
+        $pages = $pages->routable();
 
         /* @var PageInterface $page */
         foreach ($pages as $page) {

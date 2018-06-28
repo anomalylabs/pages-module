@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Routing\Route;
 
 /**
@@ -28,15 +29,24 @@ class PageResolver
     protected $route;
 
     /**
+     * The service container.
+     *
+     * @var Container
+     */
+    protected $container;
+
+    /**
      * Create a new PageResolver instance.
      *
      * @param PageRepositoryInterface $pages
-     * @param Route                   $route
+     * @param Route $route
+     * @param Container $container
      */
-    public function __construct(PageRepositoryInterface $pages, Route $route)
+    public function __construct(PageRepositoryInterface $pages, Route $route, Container $container)
     {
-        $this->pages = $pages;
-        $this->route = $route;
+        $this->pages     = $pages;
+        $this->route     = $route;
+        $this->container = $container;
     }
 
     /**
@@ -46,6 +56,11 @@ class PageResolver
      */
     public function resolve()
     {
+
+        if ($page = $this->container->make('anomaly.module.pages::pages.current')) {
+            return $page;
+        }
+
         $action = $this->route->getAction();
 
         if ($id = array_get($action, 'anomaly.module.pages::page')) {

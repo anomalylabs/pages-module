@@ -14,6 +14,13 @@ interface PageRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
+     * Return only routable pages.
+     *
+     * @return PageCollection
+     */
+    public function routable();
+
+    /**
      * Return only accessible pages.
      *
      * @return PageCollection
