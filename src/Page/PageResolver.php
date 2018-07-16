@@ -57,8 +57,8 @@ class PageResolver
     public function resolve()
     {
 
-        if ($page = $this->container->make('anomaly.module.pages::pages.current')) {
-            return $page;
+        if ($this->container->has('anomaly.module.pages::pages.current')) {
+            return $this->container->get('anomaly.module.pages::pages.current');
         }
 
         $action = $this->route->getAction();
