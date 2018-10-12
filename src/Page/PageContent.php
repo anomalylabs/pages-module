@@ -3,6 +3,7 @@
 use Anomaly\EditorFieldType\EditorFieldType;
 use Anomaly\EditorFieldType\EditorFieldTypePresenter;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\Streams\Platform\Support\Template;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\View\Factory;
 use Robbo\Presenter\Decorator;
@@ -25,11 +26,11 @@ class PageContent
     protected $view;
 
     /**
-     * The decorator utility.
+     * The template engine.
      *
-     * @var Decorator
+     * @var Template
      */
-    protected $decorator;
+    protected $template;
 
     /**
      * The response factory.
@@ -39,17 +40,26 @@ class PageContent
     protected $response;
 
     /**
+     * The decorator utility.
+     *
+     * @var Decorator
+     */
+    protected $decorator;
+
+    /**
      * Create a new PageContent instance.
      *
-     * @param Factory         $view
-     * @param Decorator       $decorator
+     * @param Factory $view
+     * @param Template $template
+     * @param Decorator $decorator
      * @param ResponseFactory $response
      */
-    public function __construct(Factory $view, Decorator $decorator, ResponseFactory $response)
+    public function __construct(Factory $view, Template $template, Decorator $decorator, ResponseFactory $response)
     {
         $this->view      = $view;
-        $this->decorator = $decorator;
+        $this->template  = $template;
         $this->response  = $response;
+        $this->decorator = $decorator;
     }
 
     /**
@@ -66,7 +76,18 @@ class PageContent
         $layout    = $type->getFieldType('layout');
         $presenter = $type->getFieldTypePresenter('layout');
 
-        $page->setContent($this->view->make($layout->getViewPath(), compact('page'))->render());
+        $view = $layout->getViewPath();
+
+        if (
+            strpos($presenter->content(), '{% block') !== false &&
+            strpos($presenter->content(), '{% extends') === false
+        ) {
+            $view = $this->template->make(
+                '{% extends page.theme_layout.key ?: page.type.theme_layout.key %}' . $presenter->content()
+            );
+        }
+
+        $page->setContent($this->view->make($view, compact('page'))->render());
 
         /**
          * If the type layout is taking the
@@ -75,8 +96,14 @@ class PageContent
          * This will let layouts natively
          * extend parent view blocks.
          */
-        if (strpos($presenter->content(), '{% extends') !== false) {
+        if (
+            strpos($presenter->content(), '{% extends') !== false ||
+            strpos($presenter->content(), '{% block') !== false
+        ) {
+
             $page->setResponse($this->response->make($page->getContent()));
+
+            return;
         }
     }
 }
