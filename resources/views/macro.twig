@@ -11,7 +11,7 @@
 
         <a
                 href="{{ url(page.path) }}"
-                class="{{ options.link_class }}"
+                class="{{ depth > 1 ? options.child_link_class ?: options.link_class : options.link_class }}"
                 {{ html_attributes(options.get('link_attributes', [])) }}
                 {% if page.children.count() %}
                     {{ html_attributes(options.get('link_attributes_dropdown', [])) }}
