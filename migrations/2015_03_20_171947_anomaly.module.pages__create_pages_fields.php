@@ -70,7 +70,6 @@ class AnomalyModulePagesCreatePagesFields extends Migration
         'theme_layout'     => [
             'type'   => 'anomaly.field_type.select',
             'config' => [
-                'mode'          => 'search',
                 'default_value' => 'theme::layouts/default.twig',
                 'handler'       => 'Anomaly\SelectFieldType\Handler\Layouts@handle',
             ],
