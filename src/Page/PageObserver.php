@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PagesModule\Page;
 
+use Anomaly\PagesModule\Page\Command\PurgeCache;
 use Anomaly\PagesModule\Page\Command\SetPath;
 use Anomaly\PagesModule\Page\Command\SetStrId;
 use Anomaly\PagesModule\Page\Command\UnsetHome;
@@ -41,6 +42,7 @@ class PageObserver extends EntryObserver
     public function saved(EntryInterface $entry)
     {
         $this->dispatch(new UpdatePaths($entry));
+        $this->dispatch(new PurgeCache($entry));
 
         parent::saved($entry);
     }

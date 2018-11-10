@@ -38,9 +38,17 @@ class PageResponse
     public function make(PageInterface $page)
     {
         if (!$page->getResponse()) {
-            $page->setResponse(
-                $this->response->view('anomaly.module.pages::page', ['page' => $page, 'content' => $page->getContent()])
+
+            $response = $this->response->view(
+                'anomaly.module.pages::page',
+                ['page' => $page, 'content' => $page->getContent()]
             );
+
+            if (!$page->isEnabled()) {
+                $response->setTtl(0);
+            }
+
+            $page->setResponse($response);
         }
     }
 }
