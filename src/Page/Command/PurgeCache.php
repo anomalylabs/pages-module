@@ -37,8 +37,6 @@ class PurgeCache
      */
     public function handle(HttpCache $cache)
     {
-        $cache
-            ->getStore()
-            ->purge($this->page->getPath());
+        $cache->purge($this->page->getPath());
     }
 }

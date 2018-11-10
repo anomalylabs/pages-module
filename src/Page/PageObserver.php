@@ -27,9 +27,12 @@ class PageObserver extends EntryObserver
      */
     public function saving(EntryInterface $entry)
     {
+        $this->dispatch(new PurgeCache($entry)); // Pre-path
         $this->dispatch(new UnsetHome($entry));
         $this->dispatch(new SetStrid($entry));
         $this->dispatch(new SetPath($entry));
+
+        $this->dispatch(new PurgeCache($entry)); // Post-path
 
         parent::saving($entry);
     }
@@ -42,7 +45,6 @@ class PageObserver extends EntryObserver
     public function saved(EntryInterface $entry)
     {
         $this->dispatch(new UpdatePaths($entry));
-        $this->dispatch(new PurgeCache($entry));
 
         parent::saved($entry);
     }

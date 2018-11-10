@@ -41,7 +41,10 @@ class PageResponse
 
             $response = $this->response->view(
                 'anomaly.module.pages::page',
-                ['page' => $page, 'content' => $page->getContent()]
+                [
+                    'page'    => $page,
+                    'content' => $page->getContent(),
+                ]
             );
 
             if (!$page->isEnabled()) {
