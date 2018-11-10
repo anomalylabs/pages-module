@@ -39,4 +39,5 @@ class PurgeCache
     {
         $cache->purge($this->page->getPath());
     }
+
 }
