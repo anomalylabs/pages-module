@@ -99,11 +99,6 @@ class PagesModuleServiceProvider extends AddonServiceProvider
         $fields->route($this->addon, FieldsController::class);
         $assignments->route($this->addon, AssignmentsController::class, 'admin/pages/types');
 
-        // Don't map if in admin.
-        if ($request->segment(1) == 'admin') {
-            return;
-        }
-
         // Route the exact match.
         if ($page = $pages->findByPath($request->getPathInfo())) {
 
