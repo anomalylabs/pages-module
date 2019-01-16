@@ -22,7 +22,13 @@ class PageEntryFormBuilder extends MultipleFormBuilder
     protected $buttons = [
         'versions',
         'cancel',
-        'view' => [
+        'change' => [
+            'enabled'     => 'edit',
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'href'        => 'admin/pages/ajax/change_type/{request.route.parameters.id}',
+        ],
+        'view'   => [
             'enabled' => 'edit',
             'target'  => '_blank',
         ],

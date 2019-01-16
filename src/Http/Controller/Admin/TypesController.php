@@ -43,6 +43,23 @@ class TypesController extends AdminController
     }
 
     /**
+     * Return the modal to change a page type.
+     *
+     * @param TypeRepositoryInterface $types
+     * @return \Illuminate\Contracts\View\View|mixed
+     */
+    public function change(TypeRepositoryInterface $types, $id)
+    {
+        return $this->view->make(
+            'module::admin/pages/change',
+            [
+                'types' => $types->all(),
+                'page'  => $id,
+            ]
+        );
+    }
+
+    /**
      * Return a form for a new page type.
      *
      * @param  TypeFormBuilder $form
@@ -56,7 +73,7 @@ class TypesController extends AdminController
     /**
      * Return a form for editing an existing page type.
      *
-     * @param  TypeFormBuilder                            $form
+     * @param  TypeFormBuilder $form
      * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
