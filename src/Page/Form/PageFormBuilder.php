@@ -61,7 +61,7 @@ class PageFormBuilder extends FormBuilder
         $parent = $this->getParent();
         $type   = $this->getType();
 
-        if (!$entry->type_id) {
+        if ($type) {
             $entry->type_id = $type->getId();
         }
 

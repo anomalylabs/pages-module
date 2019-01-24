@@ -3,6 +3,7 @@
 use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
+use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -35,7 +36,7 @@ class AddEntryFormFromPage
      * Create a new AddEntryFormFromPage instance.
      *
      * @param PageEntryFormBuilder $builder
-     * @param PageInterface        $page
+     * @param PageInterface $page
      */
     public function __construct(PageEntryFormBuilder $builder, PageInterface $page)
     {
@@ -47,10 +48,18 @@ class AddEntryFormFromPage
      * Handle the command.
      *
      * @param EntryFormBuilder $builder
+     * @param TypeRepositoryInterface $types
      */
-    public function handle(EntryFormBuilder $builder)
+    public function handle(EntryFormBuilder $builder, TypeRepositoryInterface $types)
     {
         $type = $this->page->getType();
+
+        if (request()->has('type')) {
+
+            $type = $types->find(request('type'));
+
+            $this->builder->setOption('redirect', 'admin/pages/edit/' . $this->page->getId());
+        }
 
         $builder->setModel($type->getEntryModelName());
         $builder->setEntry($this->page->getEntryId());

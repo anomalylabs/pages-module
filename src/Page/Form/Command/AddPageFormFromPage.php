@@ -3,6 +3,8 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageFormBuilder;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
+use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -47,10 +49,19 @@ class AddPageFormFromPage
      * Handle the command.
      *
      * @param PageFormBuilder $builder
+     * @param TypeRepositoryInterface $types
      */
-    public function handle(PageFormBuilder $builder)
+    public function handle(PageFormBuilder $builder, TypeRepositoryInterface $types)
     {
         $builder->setEntry($this->page->getId());
+
+        if (request()->has('type')) {
+
+            /* @var TypeInterface $type */
+            $type = $types->find(request('type'));
+
+            $builder->setType($type);
+        }
 
         $this->builder->addForm('page', $builder);
     }

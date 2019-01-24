@@ -28,8 +28,8 @@ class PagesController extends AdminController
     /**
      * Return a table/tree of existing pages.
      *
-     * @param PageTreeBuilder               $tree
-     * @param PageTableBuilder              $table
+     * @param PageTreeBuilder $tree
+     * @param PageTableBuilder $table
      * @param PreferenceRepositoryInterface $preferences
      * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
@@ -85,8 +85,8 @@ class PagesController extends AdminController
     /**
      * Return the form for editing an existing page.
      *
-     * @param  PageRepositoryInterface                    $pages
-     * @param  PageEntryFormBuilder                       $form
+     * @param  PageRepositoryInterface $pages
+     * @param  PageEntryFormBuilder $form
      * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -104,8 +104,8 @@ class PagesController extends AdminController
     /**
      * Redirect to a page's URL.
      *
-     * @param  PageRepositoryInterface           $pages
-     * @param  Redirector                        $redirect
+     * @param  PageRepositoryInterface $pages
+     * @param  Redirector $redirect
      * @param                                    $id
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -128,8 +128,8 @@ class PagesController extends AdminController
     /**
      * Delete a page and go back.
      *
-     * @param  PageRepositoryInterface           $pages
-     * @param  Authorizer                        $authorizer
+     * @param  PageRepositoryInterface $pages
+     * @param  Authorizer $authorizer
      * @param                                    $id
      * @return \Illuminate\Http\RedirectResponse
      */
