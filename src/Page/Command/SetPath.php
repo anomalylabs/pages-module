@@ -35,16 +35,12 @@ class SetPath
      */
     public function handle()
     {
-        if (!$this->page->isEnabled()) {
-            $path = 'pages/preview/' . $this->page->getStrId();
+        if ($parent = $this->page->getParent()) {
+            $path = ($parent->isHome() ? $parent->getSlug() : $parent->getPath()) . '/' . $this->page->getSlug();
+        } elseif ($this->page->isHome()) {
+            $path = '/';
         } else {
-            if ($parent = $this->page->getParent()) {
-                $path = ($parent->isHome() ? $parent->getSlug() : $parent->getPath()) . '/' . $this->page->getSlug();
-            } elseif ($this->page->isHome()) {
-                $path = '/';
-            } else {
-                $path = '/' . $this->page->getSlug();
-            }
+            $path = '/' . $this->page->getSlug();
         }
 
         $this->page->setAttribute('path', $path);
