@@ -19,4 +19,15 @@ class PagesModule extends Module
      */
     protected $icon = 'laptop';
 
+    /**
+     * The addon shortcuts.
+     *
+     * @var array
+     */
+    protected $shortcuts = [
+        'pages' => [
+            'icon' => 'comments',
+        ],
+    ];
+
 }

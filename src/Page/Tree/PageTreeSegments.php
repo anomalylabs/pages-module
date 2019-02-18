@@ -21,7 +21,9 @@ class PageTreeSegments
     {
         $builder->setSegments(
             [
-                'entry.edit_link',
+                'title' => [
+                    'href' => '/admin/pages/edit/{entry.id}',
+                ],
                 [
                     'class' => 'text-faded',
                     'value' => function (PageInterface $entry) {
