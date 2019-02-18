@@ -22,7 +22,7 @@ class PageTreeSegments
         $builder->setSegments(
             [
                 'title' => [
-                    'href' => '/admin/pages/edit/{entry.id}',
+                    'href' => 'admin/pages/edit/{entry.id}',
                 ],
                 [
                     'class' => 'text-faded',
