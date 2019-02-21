@@ -18,17 +18,17 @@ class PageTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $buttons = [
-        'add'  => [
+        'add'    => [
             'data-toggle' => 'modal',
             'data-target' => '#modal',
             'text'        => 'anomaly.module.pages::button.create_child_page',
-            'href'        => 'admin/pages/ajax/choose_type?parent={entry.id}',
+            'href'        => 'admin/pages/types/choose?parent={entry.id}',
         ],
-        'view' => [
+        'view'   => [
             'target' => '_blank',
         ],
         'delete' => [
-            'permission' => 'anomaly.module.pages::pages.delete'
+            'permission' => 'anomaly.module.pages::pages.delete',
         ],
     ];
 

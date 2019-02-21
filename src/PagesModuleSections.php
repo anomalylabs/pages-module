@@ -30,7 +30,7 @@ class PagesModuleSections
                         'new_page'    => [
                             'data-toggle' => 'modal',
                             'data-target' => '#modal',
-                            'href'        => 'admin/pages/ajax/choose_type',
+                            'href'        => 'admin/pages/types/choose',
                         ],
                         'change_view' => [
                             'type'    => 'info',

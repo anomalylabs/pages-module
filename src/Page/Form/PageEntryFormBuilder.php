@@ -26,7 +26,7 @@ class PageEntryFormBuilder extends MultipleFormBuilder
             'enabled'     => 'edit',
             'data-toggle' => 'modal',
             'data-target' => '#modal',
-            'href'        => 'admin/pages/ajax/change_type/{request.route.parameters.id}',
+            'href'        => 'admin/pages/types/change/{request.route.parameters.id}',
         ],
         'view'   => [
             'enabled' => 'edit',
