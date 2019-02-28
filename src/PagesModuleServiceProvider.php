@@ -1,11 +1,11 @@
 <?php namespace Anomaly\PagesModule;
 
+use Anomaly\PagesModule\Console\Dump;
 use Anomaly\PagesModule\Http\Controller\Admin\AssignmentsController;
 use Anomaly\PagesModule\Http\Controller\Admin\FieldsController;
 use Anomaly\PagesModule\Http\Controller\Admin\VersionsController;
-use Anomaly\PagesModule\Page\Contract\PageInterface;
+use Anomaly\PagesModule\Page\Command\DumpPages;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
-use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Page\PageModel;
 use Anomaly\PagesModule\Page\PageRepository;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
@@ -17,7 +17,6 @@ use Anomaly\Streams\Platform\Field\FieldRouter;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Version\VersionRouter;
-use Illuminate\Http\Request;
 
 /**
  * Class PagesModuleServiceProvider
@@ -28,6 +27,15 @@ use Illuminate\Http\Request;
  */
 class PagesModuleServiceProvider extends AddonServiceProvider
 {
+
+    /**
+     * The addon commands.
+     *
+     * @var array
+     */
+    protected $commands = [
+        Dump::class,
+    ];
 
     /**
      * The addon plugins.
@@ -73,45 +81,21 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @param FieldRouter $fields
      * @param VersionRouter $versions
      * @param AssignmentRouter $assignments
-     * @param PageRepositoryInterface $pages
-     * @param Request $request
      */
     public function map(
         FieldRouter $fields,
         VersionRouter $versions,
-        AssignmentRouter $assignments,
-        PageRepositoryInterface $pages,
-        Request $request
+        AssignmentRouter $assignments
     ) {
         $versions->route($this->addon, VersionsController::class);
 
         $fields->route($this->addon, FieldsController::class);
         $assignments->route($this->addon, AssignmentsController::class, 'admin/pages/types');
 
-        // Route the exact match.
-        if ($page = $pages->findByPath($request->getPathInfo())) {
-
-            $extension = $page->getHandler();
-
-            $extension->route($page);
-
-            $this->app->bind(
-                'anomaly.module.pages::pages.current',
-                function () use ($page) {
-                    return $page;
-                }
-            );
+        if (!file_exists($routes = app_storage_path('pages/routes.php'))) {
+            dispatch_now(new DumpPages());
         }
 
-        /* @var PageCollection $pages */
-        $pages = $pages->routable();
-
-        /* @var PageInterface $page */
-        foreach ($pages as $page) {
-
-            $extension = $page->getHandler();
-
-            $extension->route($page);
-        }
+        require $routes;
     }
 }

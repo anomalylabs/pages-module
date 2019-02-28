@@ -44,7 +44,6 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     {
         return $this->model
             ->newQueryWithoutRelationships()
-            ->where('exact', false)
             ->get();
     }
 
