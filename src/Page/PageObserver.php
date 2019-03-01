@@ -43,8 +43,9 @@ class PageObserver extends EntryObserver
     public function saved(EntryInterface $entry)
     {
         $this->dispatch(new UpdatePaths($entry));
-        $this->dispatch(new DumpPages($entry));
 
         parent::saved($entry);
+
+        $this->dispatch(new DumpPages($entry));
     }
 }
