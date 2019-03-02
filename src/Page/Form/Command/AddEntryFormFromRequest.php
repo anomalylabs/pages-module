@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
+use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -39,13 +40,17 @@ class AddEntryFormFromRequest
      * Handle the command.
      *
      * @param TypeRepositoryInterface $types
-     * @param EntryFormBuilder        $builder
-     * @param Request                 $request
+     * @param EntryFormBuilder $builder
+     * @param Request $request
      */
     public function handle(TypeRepositoryInterface $types, EntryFormBuilder $builder, Request $request)
     {
+        /* @var TypeInterface $type */
         $type = $types->find($request->get('type'));
 
-        $this->builder->addForm('entry', $builder->setModel($type->getEntryModelName()));
+        $this->builder->addForm(
+            'entry',
+            $builder->setModel($type->getEntryModelName())
+        );
     }
 }
