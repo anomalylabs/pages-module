@@ -23,7 +23,7 @@
     ],
     "support": {
         "docs": "https://pyrocms.com/documentation/pages-module",
-        "pages": "https://pyrocms.com/pages/channels/pages-module",
+        "pages": "https://pyrocms.com/forum/channels/pages-module",
         "slack": "https://pyrocms.com/slack",
         "issues": "https://github.com/pyrocms/pyrocms/issues?q=is:issue is:open [pages-module]",
         "source": "https://github.com/anomalylabs/pages-module"
