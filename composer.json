@@ -5,26 +5,28 @@
     "keywords": [
         "pages",
         "module",
-        "streams platform"
+        "pyrocms"
     ],
-    "homepage": "http://pyrocms.com/",
+    "homepage": "http://pyrocms.com/addons/anomaly/pages-module",
     "license": "MIT",
     "authors": [
         {
             "name": "PyroCMS, Inc.",
-            "email": "support@pyrocms.com",
             "homepage": "http://pyrocms.com/",
             "role": "Owner"
         },
         {
             "name": "Ryan Thompson",
-            "email": "ryan@pyrocms.com",
             "homepage": "http://ryanthepyro.com/",
             "role": "Developer"
         }
     ],
     "support": {
-        "email": "support@pyrocms.com"
+        "docs": "https://pyrocms.com/documentation/pages-module",
+        "pages": "https://pyrocms.com/pages/channels/pages-module",
+        "slack": "https://pyrocms.com/slack",
+        "issues": "https://github.com/pyrocms/pyrocms/issues?q=is:issue is:open [pages-module]",
+        "source": "https://github.com/anomalylabs/pages-module"
     },
     "require": {
         "anomaly/streams-platform": "^1.6",
