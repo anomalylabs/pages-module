@@ -77,6 +77,17 @@ class PageTreeSegments
                         return !$entry->isEnabled();
                     },
                 ],
+                [
+                    'data-toggle' => 'tooltip',
+                    'class'       => 'text-info',
+                    'value'       => '<i class="fa fa-clock-o"></i>',
+                    'attributes'  => [
+                        'title' => 'module::message.scheduled',
+                    ],
+                    'enabled'     => function (PageInterface $entry) {
+                        return !$entry->isPublished();
+                    },
+                ],
             ]
         );
     }

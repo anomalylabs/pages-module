@@ -47,7 +47,7 @@ class PageResponse
                 ]
             );
 
-            if (!$page->isEnabled()) {
+            if (!$page->isLive()) {
                 $response->setTtl(0);
             }
 

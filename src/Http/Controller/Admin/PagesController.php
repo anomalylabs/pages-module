@@ -114,7 +114,7 @@ class PagesController extends AdminController
         /* @var PageInterface $page */
         $page = $pages->find($id);
 
-        if (!$page->isEnabled()) {
+        if (!$page->isLive()) {
             return $redirect->to('pages/preview/' . $page->getStrId());
         }
 

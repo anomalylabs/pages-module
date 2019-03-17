@@ -59,6 +59,11 @@ return [
         'instructions' => 'If disabled, you can still access a secure preview link in the control panel.',
         'warning'      => 'This page must be enabled before it can be viewed <strong>publicly</strong>.',
     ],
+    'publish_at'       => [
+        'name'         => 'Publish Date/Time',
+        'instructions' => 'Specify the publish date/time for this page.',
+        'warning'      => 'If set to the future, this page will not be visible until then.',
+    ],
     'home'             => [
         'name'         => 'Home Page',
         'label'        => 'Is this the home page?',
@@ -71,6 +76,14 @@ return [
     'handler'          => [
         'name'         => 'Handler',
         'instructions' => 'The page handler is responsible for building the entire HTTP response for a page.',
+    ],
+    'status'           => [
+        'name'   => 'Status',
+        'option' => [
+            'live'      => 'Live',
+            'draft'     => 'Draft',
+            'scheduled' => 'Scheduled',
+        ],
     ],
     'content'          => [
         'name' => 'Content',

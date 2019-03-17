@@ -39,7 +39,7 @@ class UpdatePaths
     public function handle(PageRepositoryInterface $pages)
     {
         foreach ($this->page->getChildren() as $page) {
-            if ($page instanceof PageInterface && $page->isEnabled()) {
+            if ($page instanceof PageInterface && $page->isLive()) {
                 $pages->save(
                     $page->setAttribute(
                         'path',

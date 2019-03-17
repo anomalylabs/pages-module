@@ -52,6 +52,25 @@ class PageCollection extends EntryCollection
     }
 
     /**
+     * Return only live pages.
+     *
+     * @return PageCollection
+     */
+    public function live($enabled = true)
+    {
+        return self::make(
+            array_filter(
+                $this->items,
+                function ($page) use ($enabled) {
+
+                    /* @var PageInterface $page */
+                    return $page->isLive() == $enabled;
+                }
+            )
+        );
+    }
+
+    /**
      * Return only visible pages.
      *
      * @param  bool           $visible
@@ -65,7 +84,7 @@ class PageCollection extends EntryCollection
             function ($page) use ($visible) {
 
                 /* @var PageInterface $page */
-                return $page->isVisible() == $visible;
+                return $page->isLive() == $visible;
             }
         );
     }

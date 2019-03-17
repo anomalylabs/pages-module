@@ -79,7 +79,7 @@ class PageAuthorizer
          * If the page is not enabled yet check and make
          * sure that we are allowed to preview it first.
          */
-        if (!$page->isEnabled() && !$this->authorizer->authorize('anomaly.module.pages::pages.preview')) {
+        if (!$page->isLive() && !$this->authorizer->authorize('anomaly.module.pages::pages.preview')) {
             abort(403);
         }
 
@@ -88,7 +88,7 @@ class PageAuthorizer
          * user if there are any.
          */
         if (
-            $page->isEnabled()
+            $page->isLive()
             && !$allowed->isEmpty()
             && (!$user || (!$user->hasAnyRole($allowed) && !$user->isAdmin()))
         ) {

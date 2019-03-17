@@ -26,7 +26,7 @@ class PageTableColumns
                     'wrapper'     => '
                     <strong>{value.title}</strong>
                     &nbsp;
-                    {value.home} {value.visible} {value.locked}
+                    {value.home} {value.visible} {value.locked} {value.scheduled}
                     <br>
                     <small class="text-muted">{value.path}</small>',
                     'value'       => [
@@ -57,6 +57,14 @@ class PageTableColumns
                             }
 
                             return '<i class="fa fa-lock text-muted"></i>';
+                        },
+                        'scheduled'  => function (PageInterface $entry) {
+
+                            if ($entry->isPublished()) {
+                                return null;
+                            }
+
+                            return '<i class="fa fa-clock-o text-info"></i>';
                         },
                     ],
                 ],

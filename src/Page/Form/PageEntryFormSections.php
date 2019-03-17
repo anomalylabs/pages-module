@@ -42,6 +42,7 @@ class PageEntryFormSections
                             'title'  => 'anomaly.module.pages::tab.options',
                             'fields' => [
                                 'page_enabled',
+                                'page_publish_at',
                                 'page_home',
                                 'page_visible',
                                 'page_exact',

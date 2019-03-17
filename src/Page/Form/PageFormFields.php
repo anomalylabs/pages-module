@@ -13,7 +13,7 @@ class PageFormFields
     /**
      * Handle the page fields.
      *
-     * @param PageFormBuilder               $builder
+     * @param PageFormBuilder $builder
      * @param PreferenceRepositoryInterface $preferences
      */
     public function handle(PageFormBuilder $builder, PreferenceRepositoryInterface $preferences)
@@ -28,15 +28,21 @@ class PageFormFields
         $builder->setFields(
             [
                 '*',
-                'parent' => [
+                'parent'     => [
                     'config' => [
                         'mode'          => 'lookup',
                         'default_value' => $parent ? $parent->getId() : null,
                     ],
                 ],
-                'slug'   => [
+                'slug'       => [
                     'config' => [
                         'prefix' => ($parent ? url($this->dispatch(new GetRealPath($parent))) : url('/')) . '/',
+                    ],
+                ],
+                'publish_at' => [
+                    'config' => [
+                        'default_value' => 'now',
+                        'timezone' => config('app.timezone')
                     ],
                 ],
             ]

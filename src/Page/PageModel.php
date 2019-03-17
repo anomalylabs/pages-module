@@ -6,6 +6,7 @@ use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,7 +82,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      * Sort the query.
      *
      * @param Builder $builder
-     * @param string  $direction
+     * @param string $direction
      */
     public function scopeSorted(Builder $builder, $direction = 'asc')
     {
@@ -169,6 +170,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Return if schedule is due.
+     *
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return !($this->getPublishAt()->diff(now(config('streams::datetime.default_timezone')))->invert);
+    }
+
+    /**
      * Get the exact flag.
      *
      * @return bool
@@ -176,6 +187,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function isExact()
     {
         return $this->exact;
+    }
+
+    /**
+     * Get the live flag.
+     *
+     * @return bool
+     */
+    public function isLive()
+    {
+        return $this->isEnabled() && $this->isPublished();
     }
 
     /**
@@ -246,6 +267,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     public function getSiblings()
     {
         return $this->siblings;
+    }
+
+    /**
+     * Return the publish at date.
+     *
+     * @return Carbon
+     */
+    public function getPublishAt()
+    {
+        return $this->publish_at ?: now();
     }
 
     /**

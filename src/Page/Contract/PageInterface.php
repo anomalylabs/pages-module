@@ -5,6 +5,7 @@ use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentCollection;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -105,11 +106,25 @@ interface PageInterface extends EntryInterface
     public function getMetaDescription();
 
     /**
+     * Return if schedule is met.
+     *
+     * @return bool
+     */
+    public function isPublished();
+
+    /**
      * Get the exact flag.
      *
      * @return bool
      */
     public function isExact();
+
+    /**
+     * Get the live flag.
+     *
+     * @return bool
+     */
+    public function isLive();
 
     /**
      * Get the enabled flag.
@@ -159,6 +174,13 @@ interface PageInterface extends EntryInterface
      * @return PageCollection
      */
     public function getSiblings();
+
+    /**
+     * Return the publish at date.
+     *
+     * @return Carbon
+     */
+    public function getPublishAt();
 
     /**
      * Get the related roles allowed.

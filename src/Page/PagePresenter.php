@@ -33,6 +33,58 @@ class PagePresenter extends EntryPresenter
     }
 
     /**
+     * Return the user's status as a label.
+     *
+     * @param  string      $size
+     * @return null|string
+     */
+    public function statusLabel($size = 'sm')
+    {
+        $color  = 'default';
+        $status = $this->status();
+
+        switch ($status) {
+            case 'scheduled':
+                $color = 'info';
+                break;
+
+            case 'draft':
+                $color = 'default';
+                break;
+
+            case 'live':
+                $color = 'success';
+                break;
+        }
+
+        return '<span class="tag tag-' . $size . ' tag-' . $color . '">' . trans(
+                'anomaly.module.pages::field.status.option.' . $status
+            ) . '</span>';
+    }
+
+    /**
+     * Return the status key.
+     *
+     * @return null|string
+     */
+    public function status()
+    {
+        if (!$this->object->isEnabled()) {
+            return 'draft';
+        }
+
+        if ($this->object->isEnabled() && !$this->object->isLive()) {
+            return 'scheduled';
+        }
+
+        if ($this->object->isEnabled() && $this->object->isLive()) {
+            return 'live';
+        }
+
+        return null;
+    }
+
+    /**
      * Catch calls to fields on
      * the page's related entry.
      *
