@@ -176,7 +176,7 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function isPublished()
     {
-        return !($this->getPublishAt()->diff(now(config('streams::datetime.default_timezone')))->invert);
+        return !($this->getPublishAt()->diff(now(config('app.timezone')))->invert);
     }
 
     /**

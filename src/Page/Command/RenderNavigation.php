@@ -39,8 +39,9 @@ class RenderNavigation
     /**
      * Handle the command.
      *
-     * @param  PageRepositoryInterface $pages
-     * @return null|PageInterface
+     * @param PageRepositoryInterface $pages
+     * @param Factory $view
+     * @return string
      */
     public function handle(PageRepositoryInterface $pages, Factory $view)
     {
