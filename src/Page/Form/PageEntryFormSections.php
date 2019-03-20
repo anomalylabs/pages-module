@@ -6,9 +6,9 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 /**
  * Class PageEntryFormSections
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PageEntryFormSections
 {
@@ -49,6 +49,7 @@ class PageEntryFormSections
                                 'page_allowed_roles',
                                 'page_theme_layout',
                                 'page_parent',
+                                'page_route_name',
                             ],
                         ],
                     ],

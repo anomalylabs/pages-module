@@ -94,4 +94,9 @@ return [
     'type'             => [
         'name' => 'Type',
     ],
+    'route_name'       => [
+        'name'         => 'Route Name',
+        'instructions' => 'Specify the immutable route name for this page.',
+        'warning'      => 'Changing this might adversely effect your system.',
+    ],
 ];

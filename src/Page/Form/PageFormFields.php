@@ -15,7 +15,7 @@ class PageFormFields
      * @param PageFormBuilder $builder
      * @param PreferenceRepositoryInterface $preferences
      */
-    public function handle(PageFormBuilder $builder, PreferenceRepositoryInterface $preferences)
+    public function handle(PageFormBuilder $builder)
     {
         $parent = $builder->getParent();
 
@@ -38,6 +38,15 @@ class PageFormFields
                         'default_value' => 'now',
                         'timezone'      => config('app.timezone'),
                     ],
+                ],
+                'route_name' => [
+                    'value'       => !$builder->getFormEntryId()
+                        ? null : "anomaly.module.pages::pages.{$builder->getFormEntryId()}",
+                    'placeholder' => !$builder->getFormEntryId()
+                        ? "anomaly.module.pages::pages.{\$id}"
+                        : "anomaly.module.pages::pages.{$builder->getFormEntryId()}",
+                    'warning'     => !$builder->getFormEntryId()
+                        ? '' : "anomaly.module.pages::field.route_name.warning",
                 ],
             ]
         );

@@ -50,7 +50,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
                          */
                         return "Route::any('{$translation->path}', [
     'uses'                       => 'Anomaly\\PagesModule\\Http\\Controller\\PagesController@view',
-    'as'                         => 'anomaly.module.pages::pages.{$page->getId()}',
+    'as'                         => '" . ($page->getRouteName() ?: 'anomaly.module.pages::pages.' . $page->getId()) . "',
     'streams::addon'             => 'anomaly.module.pages',
     'anomaly.module.pages::page' => {$page->getId()},
 ]);";
@@ -74,7 +74,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
                          */
                         return "Route::any('{$translation->path}/{any?}', [
     'uses'                       => 'Anomaly\\PagesModule\\Http\\Controller\\PagesController@view',
-    'as'                         => 'anomaly.module.pages::pages.{$page->getId()}',
+    'as'                         => '" . ($page->getRouteName() ?: 'anomaly.module.pages::pages.' . $page->getId()) . "',
     'streams::addon'             => 'anomaly.module.pages',
     'anomaly.module.pages::page' => {$page->getId()},
     'where'                      => [

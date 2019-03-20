@@ -92,6 +92,13 @@ interface PageInterface extends EntryInterface
     public function setActive($active);
 
     /**
+     * Get the route name.
+     *
+     * @return string
+     */
+    public function getRouteName();
+
+    /**
      * Get the meta title.
      *
      * @return string

@@ -1,8 +1,8 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Command\DumpPages;
-use Anomaly\PagesModule\Page\Command\PurgeCache;
 use Anomaly\PagesModule\Page\Command\SetPath;
+use Anomaly\PagesModule\Page\Command\SetRouteName;
 use Anomaly\PagesModule\Page\Command\SetStrId;
 use Anomaly\PagesModule\Page\Command\UnsetHome;
 use Anomaly\PagesModule\Page\Command\UpdatePaths;
@@ -47,5 +47,17 @@ class PageObserver extends EntryObserver
         parent::saved($entry);
 
         $this->dispatch(new DumpPages($entry));
+    }
+
+    /**
+     * Fired after updated the page.
+     *
+     * @param EntryInterface|PageInterface|EntryModel $entry
+     */
+    public function updated(EntryInterface $entry)
+    {
+        $this->dispatch(new SetRouteName($entry));
+
+        parent::updated($entry);
     }
 }

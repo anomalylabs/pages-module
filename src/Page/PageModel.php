@@ -445,6 +445,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Get the route name.
+     *
+     * @return string
+     */
+    public function getRouteName()
+    {
+        return $this->route_name;
+    }
+
+    /**
      * Return the children relationship.
      *
      * @return HasMany
