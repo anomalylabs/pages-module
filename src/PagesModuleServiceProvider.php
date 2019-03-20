@@ -8,6 +8,7 @@ use Anomaly\PagesModule\Page\Command\DumpPages;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageModel;
 use Anomaly\PagesModule\Page\PageRepository;
+use Anomaly\PagesModule\Page\PageTranslationsModel;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\PagesModule\Type\TypeModel;
 use Anomaly\PagesModule\Type\TypeRepository;
@@ -15,6 +16,7 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Assignment\AssignmentRouter;
 use Anomaly\Streams\Platform\Field\FieldRouter;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
+use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryTranslationsModel;
 use Anomaly\Streams\Platform\Model\Pages\PagesTypesEntryModel;
 use Anomaly\Streams\Platform\Version\VersionRouter;
 
@@ -52,8 +54,9 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $bindings = [
-        PagesPagesEntryModel::class => PageModel::class,
-        PagesTypesEntryModel::class => TypeModel::class,
+        PagesPagesEntryModel::class             => PageModel::class,
+        PagesTypesEntryModel::class             => TypeModel::class,
+        PagesPagesEntryTranslationsModel::class => PageTranslationsModel::class,
     ];
 
     /**

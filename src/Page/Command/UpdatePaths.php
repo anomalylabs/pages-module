@@ -2,6 +2,7 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
+use Anomaly\PagesModule\Page\PageTranslationsModel;
 
 
 /**
@@ -15,20 +16,20 @@ class UpdatePaths
 {
 
     /**
-     * The page instance.
+     * The page translation instance.
      *
-     * @var PageInterface
+     * @var PageTranslationsModel
      */
-    protected $page;
+    protected $translation;
 
     /**
      * Create a new UpdatePaths instance.
      *
-     * @param PageInterface $page
+     * @param PageTranslationsModel $translation
      */
-    public function __construct(PageInterface $page)
+    public function __construct(PageTranslationsModel $translation)
     {
-        $this->page = $page;
+        $this->translation = $translation;
     }
 
     /**
@@ -38,15 +39,20 @@ class UpdatePaths
      */
     public function handle(PageRepositoryInterface $pages)
     {
-        foreach ($this->page->getChildren() as $page) {
+        /* @var PageInterface $parent */
+        $parent = $this->translation->getParent();
+
+        foreach ($parent->getChildren() as $page) {
             if ($page instanceof PageInterface && $page->isLive()) {
-                $pages->save(
-                    $page->setAttribute(
+                foreach ($page->getTranslations() as $translation) {
+                    $pages->save($translation->setAttribute(
                         'path',
-                        ($this->page->isHome() ? $this->page->getSlug() : $this->page->getPath())
-                        . '/' . $page->getSlug()
-                    )
-                );
+                        ($parent->isHome()
+                            ? $parent->translateOrDefault($translation->getLocale())->slug
+                            : $parent->translateOrDefault($translation->getLocale())->path
+                        ) . '/' . $translation->slug
+                    ));
+                }
             }
         }
     }

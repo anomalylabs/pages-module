@@ -1,33 +1,33 @@
 <?php namespace Anomaly\PagesModule\Page\Command;
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
-
+use Anomaly\PagesModule\Page\PageTranslationsModel;
 
 /**
  * Class SetPath
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class SetPath
 {
 
     /**
-     * The page instance.
+     * The page translation instance.
      *
-     * @var PageInterface
+     * @var PageTranslationsModel
      */
-    protected $page;
+    protected $translation;
 
     /**
      * Create a new SetPath instance.
      *
-     * @param PageInterface $page
+     * @param PageTranslationsModel $translation
      */
-    public function __construct(PageInterface $page)
+    public function __construct(PageTranslationsModel $translation)
     {
-        $this->page = $page;
+        $this->translation = $translation;
     }
 
     /**
@@ -35,14 +35,20 @@ class SetPath
      */
     public function handle()
     {
-        if ($parent = $this->page->getParent()) {
-            $path = ($parent->isHome() ? $parent->getSlug() : $parent->getPath()) . '/' . $this->page->getSlug();
-        } elseif ($this->page->isHome()) {
+        /* @var PageInterface $page */
+        $page = $this->translation->getParent();
+
+        if ($parent = $page->getParent()) {
+            $path = ($parent->isHome()
+                    ? $parent->translate($this->translation->getLocale())->slug
+                    : $parent->translate($this->translation->getLocale())->path
+                ) . '/' . $this->translation->slug;
+        } elseif ($page->isHome()) {
             $path = '/';
         } else {
-            $path = '/' . $this->page->getSlug();
+            $path = '/' . $this->translation->slug;
         }
 
-        $this->page->setAttribute('path', $path);
+        $this->translation->setAttribute('path', $path);
     }
 }

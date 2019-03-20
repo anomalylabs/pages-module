@@ -1,10 +1,8 @@
 <?php namespace Anomaly\PagesModule\Page;
 
 use Anomaly\PagesModule\Page\Command\DumpPages;
-use Anomaly\PagesModule\Page\Command\SetPath;
 use Anomaly\PagesModule\Page\Command\SetStrId;
 use Anomaly\PagesModule\Page\Command\UnsetHome;
-use Anomaly\PagesModule\Page\Command\UpdatePaths;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryModel;
@@ -29,7 +27,6 @@ class PageObserver extends EntryObserver
     {
         $this->dispatch(new UnsetHome($entry));
         $this->dispatch(new SetStrid($entry));
-        $this->dispatch(new SetPath($entry));
 
         parent::saving($entry);
     }
@@ -41,8 +38,6 @@ class PageObserver extends EntryObserver
      */
     public function saved(EntryInterface $entry)
     {
-        $this->dispatch(new UpdatePaths($entry));
-
         parent::saved($entry);
 
         $this->dispatch(new DumpPages($entry));
