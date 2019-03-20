@@ -24,23 +24,8 @@ class PageFormFields
             $parent = $entry->getParent();
         }
 
-        $translations = $parent->getTranslations();
-
-        $slugs = $translations->map(
-            function ($translation) {
-
-                return [
-                    'field'        => 'slug',
-                    'locale'       => $translation->locale,
-                    'config'       => [
-                        'prefix' => $translation->path,
-                    ],
-                ];
-            }
-        )->all();
-
         $builder->setFields(
-            array_merge([
+            [
                 '*',
                 'parent'     => [
                     'config' => [
@@ -54,7 +39,27 @@ class PageFormFields
                         'timezone'      => config('app.timezone'),
                     ],
                 ],
-            ], $slugs)
+            ]
         );
+
+        if ($parent && $translations = $parent->getTranslations()) {
+            $builder->setFields(
+                array_merge(
+                    $builder->getFields(),
+                    $translations->map(
+                        function ($translation) {
+
+                            return [
+                                'field'  => 'slug',
+                                'locale' => $translation->locale,
+                                'config' => [
+                                    'prefix' => $translation->path,
+                                ],
+                            ];
+                        }
+                    )->all()
+                )
+            );
+        }
     }
 }
