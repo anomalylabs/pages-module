@@ -4,6 +4,13 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
+/**
+ * Class PageFormFields
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class PageFormFields
 {
 
@@ -39,15 +46,6 @@ class PageFormFields
                         'timezone'      => config('app.timezone'),
                     ],
                 ],
-                'route_name' => [
-                    'value'       => !$builder->getFormEntryId()
-                        ? null : "anomaly.module.pages::pages.{$builder->getFormEntryId()}",
-                    'placeholder' => !$builder->getFormEntryId()
-                        ? "anomaly.module.pages::pages.{\$id}"
-                        : "anomaly.module.pages::pages.{$builder->getFormEntryId()}",
-                    'warning'     => !$builder->getFormEntryId()
-                        ? '' : "anomaly.module.pages::field.route_name.warning",
-                ],
             ]
         );
 
@@ -67,6 +65,30 @@ class PageFormFields
                             ];
                         }
                     )->all()
+                )
+            );
+        }
+
+        foreach (config('streams::locales.enabled') as $locale) {
+            $builder->setFields(
+                array_merge(
+                    $builder->getFields(),
+                    [
+                        [
+                            'readonly'     => true,
+                            'translatable' => true,
+                            'save'         => false,
+                            'enabled'      => 'edit',
+                            'locale'       => $locale,
+                            'field'        => 'route_name',
+                            'type'         => 'anomaly.field_type.text',
+                            'label'        => 'anomaly.module.pages::field.route_name.name',
+                            'hidden'       => $locale !== config('streams::locales.default'),
+                            'instructions' => 'anomaly.module.pages::field.route_name.instructions',
+                            'value'        => $builder->getFormEntryId(
+                            ) ? "pages::{$builder->getFormEntryId()}.{$locale}" : null,
+                        ],
+                    ]
                 )
             );
         }

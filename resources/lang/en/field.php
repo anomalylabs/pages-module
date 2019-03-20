@@ -96,7 +96,6 @@ return [
     ],
     'route_name'       => [
         'name'         => 'Route Name',
-        'instructions' => 'Specify the immutable route name for this page.',
-        'warning'      => 'Changing this might adversely effect your system.',
+        'instructions' => 'This is the page\'s immutable route name.',
     ],
 ];
