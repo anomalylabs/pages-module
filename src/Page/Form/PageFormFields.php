@@ -1,6 +1,5 @@
 <?php namespace Anomaly\PagesModule\Page\Form;
 
-use Anomaly\PagesModule\Page\Command\GetRealPath;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -25,8 +24,23 @@ class PageFormFields
             $parent = $entry->getParent();
         }
 
+        $translations = $parent->getTranslations();
+
+        $slugs = $translations->map(
+            function ($translation) {
+
+                return [
+                    'field'        => 'slug',
+                    'locale'       => $translation->locale,
+                    'config'       => [
+                        'prefix' => $translation->path,
+                    ],
+                ];
+            }
+        )->all();
+
         $builder->setFields(
-            [
+            array_merge([
                 '*',
                 'parent'     => [
                     'config' => [
@@ -34,18 +48,13 @@ class PageFormFields
                         'default_value' => $parent ? $parent->getId() : null,
                     ],
                 ],
-                'slug'       => [
-                    'config' => [
-                        'prefix' => ($parent ? url($this->dispatch(new GetRealPath($parent))) : url('/')) . '/',
-                    ],
-                ],
                 'publish_at' => [
                     'config' => [
                         'default_value' => 'now',
-                        'timezone' => config('app.timezone')
+                        'timezone'      => config('app.timezone'),
                     ],
                 ],
-            ]
+            ], $slugs)
         );
     }
 }

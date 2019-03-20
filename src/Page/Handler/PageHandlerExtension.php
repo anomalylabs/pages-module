@@ -3,6 +3,7 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Handler\Contract\PageHandlerInterface;
 use Anomaly\Streams\Platform\Addon\Extension\Extension;
+use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryTranslationsModel;
 
 /**
  * Class PageHandlerExtension
@@ -32,18 +33,30 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
      */
     public function route(PageInterface $page)
     {
+        $translations = $page->getTranslations();
 
         /**
          * If the page is exact then
          * return it as is with no {any}.
          */
         if ($page->isExact()) {
-            return "Route::any('{$page->getPath()}', [
+            return implode(
+                "\n\n",
+                $translations->map(
+                    function ($translation) use ($page) {
+
+                        /**
+                         * @var PageInterface|PagesPagesEntryTranslationsModel $translation
+                         */
+                        return "Route::any('{$translation->path}', [
     'uses'                       => 'Anomaly\\PagesModule\\Http\\Controller\\PagesController@view',
     'as'                         => 'anomaly.module.pages::pages.{$page->getId()}',
     'streams::addon'             => 'anomaly.module.pages',
     'anomaly.module.pages::page' => {$page->getId()},
 ]);";
+                    }
+                )->all()
+            );
         }
 
         /**
@@ -51,7 +64,15 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
          * it must accommodate {any}.
          */
         if (!$page->isExact()) {
-            return "Route::any('{$page->getPath()}/{any?}', [
+            return implode(
+                "\n\n",
+                $translations->map(
+                    function ($translation) use ($page) {
+
+                        /**
+                         * @var PageInterface|PagesPagesEntryTranslationsModel $translation
+                         */
+                        return "Route::any('{$translation->path}/{any?}', [
     'uses'                       => 'Anomaly\\PagesModule\\Http\\Controller\\PagesController@view',
     'as'                         => 'anomaly.module.pages::pages.{$page->getId()}',
     'streams::addon'             => 'anomaly.module.pages',
@@ -60,6 +81,9 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
         'any' => '(.*)',
     ],
 ]);";
+                    }
+                )->all()
+            );
         }
 
         return null;

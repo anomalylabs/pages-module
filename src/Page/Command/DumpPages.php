@@ -33,7 +33,6 @@ class DumpPages
                 ->routable()
                 ->map(
                     function (PageInterface $page) {
-
                         return $page
                             ->getHandler()
                             ->route($page);
