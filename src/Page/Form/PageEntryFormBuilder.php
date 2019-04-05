@@ -33,6 +33,19 @@ class PageEntryFormBuilder extends MultipleFormBuilder
             'target'  => '_blank',
         ],
     ];
+    
+    /**
+     * Fired when the builder is ready to build.
+     */
+    public function onReady()
+    {
+        /* @var FormBuilder $form */
+        $form = $this->forms->get('page');
+        $type = $form->getType();
+
+        $this->setOption('title', $type->getName());
+        $this->setOption('description', $type->getDescription());
+    }
 
     /**
      * Fired after the entry form is saved.
