@@ -21,10 +21,11 @@ class PagesModuleCriteria extends PluginCriteria
     {
         $this->options['link_attributes_dropdown'] = ['data-toggle' => 'dropdown'];
         $this->options['child_list_class']         = 'dropdown-menu';
-        $this->options['child_linkClass']          = 'dropdown-item';
+        $this->options['child_link_class']         = 'dropdown-item';
         $this->options['item_class']               = 'nav-item';
         $this->options['link_class']               = 'nav-link';
         $this->options['list_class']               = 'nav';
+        $this->options['child_item_class']         = '';
 
         return $this;
     }

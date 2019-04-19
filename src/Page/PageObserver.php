@@ -18,6 +18,18 @@ class PageObserver extends EntryObserver
 {
 
     /**
+     * Fired before creating the page.
+     *
+     * @param EntryInterface|PageInterface|EntryModel $entry
+     */
+    public function creating(EntryInterface $entry)
+    {
+        $entry->setAttribute('str_id', str_random(24));
+
+        parent::creating($entry);
+    }
+
+    /**
      * Fired before saving the page.
      *
      * @param EntryInterface|PageInterface|EntryModel $entry
@@ -25,9 +37,7 @@ class PageObserver extends EntryObserver
     public function saving(EntryInterface $entry)
     {
         $this->dispatch(new UnsetHome($entry));
-
-        $entry->setAttribute('str_id', str_random(24));
-
+        
         parent::saving($entry);
     }
 
