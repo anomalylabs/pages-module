@@ -84,7 +84,7 @@ class PageCollection extends EntryCollection
             function ($page) use ($visible) {
 
                 /* @var PageInterface $page */
-                return $page->isLive() == $visible;
+                return $page->isVisible() == $visible;
             }
         );
     }

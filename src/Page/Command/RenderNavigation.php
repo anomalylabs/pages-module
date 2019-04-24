@@ -1,6 +1,5 @@
 <?php namespace Anomaly\PagesModule\Page\Command;
 
-use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Support\Collection;
@@ -49,6 +48,8 @@ class RenderNavigation
 
         /* @var PageCollection $pages */
         $pages = $pages->sorted();
+
+        $pages = $pages->live();
         $pages = $pages->visible();
 
         $this->dispatch(new SetCurrentPage($pages));
