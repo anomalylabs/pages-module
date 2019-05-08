@@ -9,9 +9,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 /**
  * Class PageRepository
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PageRepository extends EntryRepository implements PageRepositoryInterface
 {
@@ -85,10 +85,14 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
      * Find a page by it's path.
      *
      * @param $path
+     * @param null $locale
      * @return PageInterface|null
      */
-    public function findByPath($path)
+    public function findByPath($path, $locale = null)
     {
-        return $this->model->where('path', $path)->first();
+        return $this->model
+            ->where('path', $path)
+            ->translate($locale)
+            ->first();
     }
 }
