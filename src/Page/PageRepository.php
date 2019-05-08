@@ -4,6 +4,7 @@ use Anomaly\PagesModule\Page\Command\RemoveRestrictedPages;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -85,14 +86,17 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
      * Find a page by it's path.
      *
      * @param $path
-     * @param null $locale
      * @return PageInterface|null
      */
-    public function findByPath($path, $locale = null)
+    public function findByPath($path)
     {
         return $this->model
-            ->where('path', $path)
-            ->translate($locale)
+            ->whereHas(
+                'translations',
+                function (Builder $query) use ($path) {
+                    $query->where('path', $path);
+                }
+            )
             ->first();
     }
 }
