@@ -3,6 +3,7 @@
 use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Anomaly\Streams\Platform\Ui\Form\Multiple\MultipleFormBuilder;
+use Anomaly\Streams\Platform\Version\Contract\VersionInterface;
 
 /**
  * Class PageEntryFormBuilder
@@ -67,5 +68,20 @@ class PageEntryFormBuilder extends MultipleFormBuilder
         $form = $this->forms->get('page');
 
         return $form->getContextualId();
+    }
+
+    /**
+     * Load the entry off the versioned page.
+     *
+     * @param VersionInterface $version
+     */
+    public function onVersioning(VersionInterface $version)
+    {
+        $this->setChildFormEntry(
+            'entry',
+            $version
+                ->getModel()
+                ->getAttribute('entry')
+        );
     }
 }
