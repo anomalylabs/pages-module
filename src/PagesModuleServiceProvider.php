@@ -4,6 +4,7 @@ use Anomaly\PagesModule\Console\Dump;
 use Anomaly\PagesModule\Http\Controller\Admin\AssignmentsController;
 use Anomaly\PagesModule\Http\Controller\Admin\FieldsController;
 use Anomaly\PagesModule\Http\Controller\Admin\VersionsController;
+use Anomaly\PagesModule\Listener\RefreshPagesModule;
 use Anomaly\PagesModule\Page\Command\DumpPages;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageModel;
@@ -13,6 +14,7 @@ use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
 use Anomaly\PagesModule\Type\TypeModel;
 use Anomaly\PagesModule\Type\TypeRepository;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Anomaly\Streams\Platform\Application\Event\SystemIsRefreshing;
 use Anomaly\Streams\Platform\Assignment\AssignmentRouter;
 use Anomaly\Streams\Platform\Field\FieldRouter;
 use Anomaly\Streams\Platform\Model\Pages\PagesPagesEntryModel;
@@ -23,9 +25,9 @@ use Anomaly\Streams\Platform\Version\VersionRouter;
 /**
  * Class PagesModuleServiceProvider
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PagesModuleServiceProvider extends AddonServiceProvider
 {
@@ -46,6 +48,17 @@ class PagesModuleServiceProvider extends AddonServiceProvider
      */
     protected $plugins = [
         PagesModulePlugin::class,
+    ];
+
+    /**
+     * The addon listeners.
+     *
+     * @var array
+     */
+    protected $listeners = [
+        SystemIsRefreshing::class => [
+            RefreshPagesModule::class,
+        ],
     ];
 
     /**
