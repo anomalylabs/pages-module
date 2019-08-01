@@ -14,6 +14,13 @@ interface PageRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
+     * Return live posts.
+     *
+     * @return PageCollection
+     */
+    public function live();
+
+    /**
      * Return only routable pages.
      *
      * @return PageCollection
