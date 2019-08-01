@@ -90,6 +90,31 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Restrict to live posts only.
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopeLive(Builder $query)
+    {
+        return $query
+            ->fresh()
+            ->where('enabled', 1)
+            ->where(
+                function (Builder $query) {
+                    $query->where(
+                        'publish_at',
+                        '<=',
+                        (new Carbon(null, config('streams::datetime.default_timezone')))
+                            ->setTimezone(config('streams::datetime.database_timezone'))
+                            ->format('Y-m-d H:i:s')
+                    )
+                        ->orWhereNull('publish_at');
+                }
+            );
+    }
+
+    /**
      * Make the page.
      *
      * @return $this

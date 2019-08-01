@@ -59,6 +59,32 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
     }
 
     /**
+     * Return live posts.
+     *
+     * @return PageCollection
+     */
+    public function live()
+    {
+        return $this->model
+            ->live()
+            ->sorted()
+            ->get();
+    }
+
+    /**
+     * Return the sitemap entries query.
+     *
+     * @return Builder
+     */
+    public function sitemap()
+    {
+        return $this->model
+            ->live()
+            ->sorted()
+            ->where('visible', true);
+    }
+
+    /**
      * Unset home pages.
      *
      * @param PageInterface $home
