@@ -50,6 +50,18 @@ class PageObserver extends EntryObserver
     {
         parent::saved($entry);
 
-        $this->dispatch(new DumpPages($entry));
+        $this->dispatch(new DumpPages());
+    }
+
+    /**
+     * Fired after saving the page.
+     *
+     * @param EntryInterface|PageInterface|EntryModel $entry
+     */
+    public function deleted(EntryInterface $entry)
+    {
+        parent::deleted($entry);
+
+        $this->dispatch(new DumpPages());
     }
 }
