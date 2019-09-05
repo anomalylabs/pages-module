@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PagesModule\Listener;
 
 use Anomaly\Streams\Platform\Application\Event\SystemIsRefreshing;
+use Anomaly\Streams\Platform\Console\Kernel;
 
 /**
  * Class RefreshPagesModule
@@ -21,6 +22,9 @@ class RefreshPagesModule
     {
         $command = $event->getCommand();
 
-        $command->call('pages:dump');
+        app(Kernel::class)->call('pages:dump');
+
+        $command->info('Pages cache refreshed.');
+
     }
 }
