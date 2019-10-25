@@ -1,11 +1,11 @@
 <?php
 
 return [
-    "advanced" => "ileri",
-    "general" => "Genel",
-    "options" => "Seçenekler",
-    "layout" => "düzen",
-    "fields" => "Alanlar",
-    "page" => "Sayfa",
-    "seo" => "SEO"
+    'advanced' => 'Gelişmiş',
+    'general'  => 'Genel',
+    'options'  => 'Seçenekler',
+    'layout'   => 'Yerleşim',
+    'fields'   => 'Alanlar',
+    'page'     => 'Sayfa',
+    'seo'      => 'SEO',
 ];

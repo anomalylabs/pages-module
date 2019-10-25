@@ -1,13 +1,10 @@
 <?php
 
 return [
-    "pages" => [
-        "name" => "Sayfalar",
-
+    'pages'      => [
+        'name' => 'Sayfalar',
     ],
-    "types" => [
-        "name" => "Sayfa Türleri",
-
+    'types' => [
+        'name' => 'Sayfa Türleri',
     ],
-
 ];
