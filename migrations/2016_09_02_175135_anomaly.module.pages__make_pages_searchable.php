@@ -12,7 +12,7 @@ class AnomalyModulePagesMakePagesSearchable extends Migration
      */
     public function up()
     {
-        $this->streams()->findBySlugAndNamespace('pages', 'pages')->setAttribute('searchable', true)->save();
+        //$this->streams()->findBySlugAndNamespace('pages', 'pages')->setAttribute('searchable', true)->save();
     }
 
     /**
@@ -22,6 +22,6 @@ class AnomalyModulePagesMakePagesSearchable extends Migration
      */
     public function down()
     {
-        $this->streams()->findBySlugAndNamespace('pages', 'pages')->setAttribute('searchable', false)->save();
+        //$this->streams()->findBySlugAndNamespace('pages', 'pages')->setAttribute('searchable', false)->save();
     }
 }

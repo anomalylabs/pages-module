@@ -19,12 +19,12 @@ class AnomalyModulePagesMakePageSlugsTranslatable extends Migration
      */
     public function up()
     {
-        $stream = $this->streams()->findBySlugAndNamespace('pages', 'pages');
+       /* $stream = $this->streams()->findBySlugAndNamespace('pages', 'pages');
         $field  = $this->fields()->findBySlugAndNamespace('slug', 'pages');
 
         $assignment = $this->assignments()->findByStreamAndField($stream, $field);
 
-        $this->assignments()->save($assignment->setAttribute('translatable', true));
+        $this->assignments()->save($assignment->setAttribute('translatable', true));*/
     }
 
     /**
@@ -34,11 +34,11 @@ class AnomalyModulePagesMakePageSlugsTranslatable extends Migration
      */
     public function down()
     {
-        $stream = $this->streams()->findBySlugAndNamespace('pages', 'pages');
+        /*$stream = $this->streams()->findBySlugAndNamespace('pages', 'pages');
         $field  = $this->fields()->findBySlugAndNamespace('slug', 'pages');
 
         $assignment = $this->assignments()->findByStreamAndField($stream, $field);
 
-        $this->assignments()->save($assignment->setAttribute('translatable', false));
+        $this->assignments()->save($assignment->setAttribute('translatable', false));*/
     }
 }
