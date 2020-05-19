@@ -1,11 +1,11 @@
 <?php
 
 return [
-    "new_page" => "Yeni sayfa",
-    "new_field" => "Yeni alan",
-    "add_field" => "Alan ekle",
-    "tree_view" => "Ağaç görünümü",
-    "table_view" => "Tablo görünümü",
-    "new_type" => "Yeni Sayfa Türü",
-    "create_child_page" => "Alt Sayfa Oluştur"
+    'new_page'          => 'Yeni Sayfa',
+    'new_field'         => 'Yeni Alan',
+    'add_field'         => 'Alan ',
+    'tree_view'         => 'görüntüleme',
+    'table_view'        => 'Tablo Görünümü',
+    'new_type'          => 'Yeni Sayfa Tipi',
+    'create_child_page' => 'Alt sayfa oluştur',
 ];
