@@ -508,11 +508,18 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
      */
     public function toSearchableArray()
     {
+        if (!$this->isLive()) {
+            return [];
+        }
+
         $array = parent::toSearchableArray();
 
         if ($entry = $this->getEntry()) {
-            $array = array_merge($entry->toSearchableArray(), $array);
+            $array = array_filter(array_merge($entry->toSearchableArray(), $array));
         }
+
+        $array['title'] = array_get($array, 'meta_title', array_get($array, 'title'));
+        $array['description'] = array_get($array, 'meta_description', array_get($array, 'description'));
 
         return $array;
     }
