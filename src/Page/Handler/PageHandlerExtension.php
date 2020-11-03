@@ -39,7 +39,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
          * If the page is exact then
          * return it as is with no {any}.
          */
-        if ($page->isExact() && !$page->isHome()) {
+        if ($page->isExact()) {
             return implode(
                 "\n\n",
                 $translations->map(
@@ -63,7 +63,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
          * If the page is not exact
          * it must accommodate {any}.
          */
-        if (!$page->isExact()) {
+        if (!$page->isExact()&& !$page->isHome()) {
             return implode(
                 "\n\n",
                 $translations->map(
