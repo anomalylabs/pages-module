@@ -40,8 +40,8 @@ class SetPath
 
         if ($parent = $page->getParent()) {
             $path = ($parent->isHome()
-                    ? $parent->translate($this->translation->getLocale())->slug
-                    : $parent->translate($this->translation->getLocale())->path
+                    ? $parent->translate($this->translation->getLocale(), true)->slug
+                    : $parent->translate($this->translation->getLocale(), true)->path
                 ) . '/' . $this->translation->slug;
         } elseif ($page->isHome()) {
             $path = '/';
