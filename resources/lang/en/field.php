@@ -87,6 +87,7 @@ return [
     ],
     'content'          => [
         'name' => 'Content',
+        'instructions' => ''
     ],
     'path'             => [
         'name' => 'Path',
