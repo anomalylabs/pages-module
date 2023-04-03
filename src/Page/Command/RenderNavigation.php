@@ -52,16 +52,16 @@ class RenderNavigation
         $pages = $pages->live();
         $pages = $pages->visible();
 
-        $this->dispatch(new SetCurrentPage($pages));
-        $this->dispatch(new SetActivePages($pages));
-        $this->dispatch(new RemoveRestrictedPages($pages));
+        $this->dispatchSync(new SetCurrentPage($pages));
+        $this->dispatchSync(new SetActivePages($pages));
+        $this->dispatchSync(new RemoveRestrictedPages($pages));
 
         // After modifying set the relations.
-        $this->dispatch(new SetParentRelations($pages));
-        $this->dispatch(new SetChildrenRelations($pages));
+        $this->dispatchSync(new SetParentRelations($pages));
+        $this->dispatchSync(new SetChildrenRelations($pages));
 
         if ($options->has('root')) {
-            if ($page = $this->dispatch(new GetPage($options->get('root')))) {
+            if ($page = $this->dispatchSync(new GetPage($options->get('root')))) {
                 $options->put('parent', $page);
             }
         }

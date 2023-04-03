@@ -16,7 +16,7 @@ class SetActivePages
 {
 
     use DispatchesJobs;
-    
+
     /**
      * The page collection.
      *
@@ -75,7 +75,7 @@ class SetActivePages
 
                 $page->setActive(true);
 
-                $this->dispatch(new SetActivePages($this->pages));
+                $this->dispatchSync(new SetActivePages($this->pages));
             }
         }
     }

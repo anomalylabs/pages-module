@@ -55,7 +55,7 @@ class PageRepository extends EntryRepository implements PageRepositoryInterface
      */
     public function accessible()
     {
-        return $this->dispatch(new RemoveRestrictedPages($this->all()));
+        return $this->dispatchSync(new RemoveRestrictedPages($this->all()));
     }
 
     /**

@@ -25,7 +25,7 @@ class Dump extends Command
      */
     public function handle()
     {
-        dispatch_now(new DumpPages());
+        dispatch_sync(new DumpPages());
 
         $this->info('Wrote: ' . app_storage_path('pages/routes.php'));
     }

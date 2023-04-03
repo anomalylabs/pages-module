@@ -36,7 +36,7 @@ class PagesModulePlugin extends Plugin
                                 $options->put('root', $root);
                             }
 
-                            return $this->dispatch(new RenderNavigation($options));
+                            return $this->dispatchSync(new RenderNavigation($options));
                         }
                     ))
                         ->setModel(PageModel::class)
@@ -46,7 +46,7 @@ class PagesModulePlugin extends Plugin
             new \Twig_SimpleFunction(
                 'page',
                 function ($identifier = null) {
-                    return (new Decorator())->decorate($this->dispatch(new GetPage($identifier)));
+                    return (new Decorator())->decorate($this->dispatchSync(new GetPage($identifier)));
                 }
             ),
         ];

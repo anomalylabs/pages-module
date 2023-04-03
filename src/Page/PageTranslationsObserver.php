@@ -22,7 +22,7 @@ class PageTranslationsObserver extends EntryTranslationsObserver
      */
     public function saving(EntryTranslationsModel $entry)
     {
-        $this->dispatch(new SetPath($entry));
+        $this->dispatchSync(new SetPath($entry));
 
         parent::saving($entry);
     }
@@ -34,7 +34,7 @@ class PageTranslationsObserver extends EntryTranslationsObserver
      */
     public function saved(EntryTranslationsModel $entry)
     {
-        $this->dispatch(new UpdatePaths($entry));
+        $this->dispatchSync(new UpdatePaths($entry));
 
         parent::saved($entry);
     }
