@@ -4,7 +4,6 @@ use Anomaly\PagesModule\Entry\Form\EntryFormBuilder;
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Form\PageEntryFormBuilder;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class AddEntryFormFromPage
@@ -15,9 +14,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class AddEntryFormFromPage
 {
-
-    use DispatchesJobs;
-
     /**
      * The multiple form builder.
      *

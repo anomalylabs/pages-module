@@ -73,7 +73,7 @@ class TypeModel extends PagesTypesEntryModel implements TypeInterface
      */
     public function getEntryStream()
     {
-        return $this->dispatchSync(new GetStream($this));
+        return dispatch_sync(new GetStream($this));
     }
 
     /**

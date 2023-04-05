@@ -3,7 +3,6 @@
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\Support\Collection;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\View\Factory;
 
 /**
@@ -15,9 +14,6 @@ use Illuminate\View\Factory;
  */
 class RenderNavigation
 {
-
-    use DispatchesJobs;
-
     /**
      * The rendering options.
      *
@@ -52,16 +48,16 @@ class RenderNavigation
         $pages = $pages->live();
         $pages = $pages->visible();
 
-        $this->dispatchSync(new SetCurrentPage($pages));
-        $this->dispatchSync(new SetActivePages($pages));
-        $this->dispatchSync(new RemoveRestrictedPages($pages));
+        dispatch_sync(new SetCurrentPage($pages));
+        dispatch_sync(new SetActivePages($pages));
+        dispatch_sync(new RemoveRestrictedPages($pages));
 
         // After modifying set the relations.
-        $this->dispatchSync(new SetParentRelations($pages));
-        $this->dispatchSync(new SetChildrenRelations($pages));
+        dispatch_sync(new SetParentRelations($pages));
+        dispatch_sync(new SetChildrenRelations($pages));
 
         if ($options->has('root')) {
-            if ($page = $this->dispatchSync(new GetPage($options->get('root')))) {
+            if ($page = dispatch_sync(new GetPage($options->get('root')))) {
                 $options->put('parent', $page);
             }
         }

@@ -3,7 +3,6 @@
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\PageCollection;
 use Anomaly\Streams\Platform\View\ViewTemplate;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class SetActivePages
@@ -14,9 +13,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class SetActivePages
 {
-
-    use DispatchesJobs;
-
     /**
      * The page collection.
      *
@@ -75,7 +71,7 @@ class SetActivePages
 
                 $page->setActive(true);
 
-                $this->dispatchSync(new SetActivePages($this->pages));
+                dispatch_sync(new SetActivePages($this->pages));
             }
         }
     }

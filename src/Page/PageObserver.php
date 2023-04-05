@@ -36,7 +36,7 @@ class PageObserver extends EntryObserver
      */
     public function saving(EntryInterface $entry)
     {
-        $this->dispatchSync(new UnsetHome($entry));
+        dispatch_sync(new UnsetHome($entry));
 
         parent::saving($entry);
     }
@@ -50,7 +50,7 @@ class PageObserver extends EntryObserver
     {
         parent::saved($entry);
 
-        $this->dispatchSync(new DumpPages());
+        dispatch_sync(new DumpPages());
     }
 
     /**
@@ -62,6 +62,6 @@ class PageObserver extends EntryObserver
     {
         parent::deleted($entry);
 
-        $this->dispatchSync(new DumpPages());
+        dispatch_sync(new DumpPages());
     }
 }

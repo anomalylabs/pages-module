@@ -2,7 +2,6 @@
 
 use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class PageFormFields
@@ -13,9 +12,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class PageFormFields
 {
-
-    use DispatchesJobs;
-
     /**
      * Handle the page fields.
      *

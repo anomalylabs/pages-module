@@ -4,7 +4,6 @@ use Anomaly\PagesModule\Page\Contract\PageInterface;
 use Anomaly\PagesModule\Page\Contract\PageRepositoryInterface;
 use Anomaly\PagesModule\Type\Contract\TypeInterface;
 use Anomaly\PagesModule\Type\Contract\TypeRepositoryInterface;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class UpdatePages
@@ -15,9 +14,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class UpdatePages
 {
-
-    use DispatchesJobs;
-
     /**
      * The page type instance.
      *

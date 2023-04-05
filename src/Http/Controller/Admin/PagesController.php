@@ -67,8 +67,8 @@ class PagesController extends AdminController
      */
     public function create(PageEntryFormBuilder $form, PageRepositoryInterface $pages)
     {
-        $this->dispatchSync(new AddEntryFormFromRequest($form));
-        $this->dispatchSync(new AddPageFormFromRequest($form));
+        dispatch_sync(new AddEntryFormFromRequest($form));
+        dispatch_sync(new AddPageFormFromRequest($form));
 
         /* @var PageInterface $parent */
         if ($parent = $pages->find($this->request->get('parent'))) {
@@ -95,8 +95,8 @@ class PagesController extends AdminController
         /* @var PageInterface $page */
         $page = $pages->find($id);
 
-        $this->dispatchSync(new AddPageFormFromPage($form, $page)); // First
-        $this->dispatchSync(new AddEntryFormFromPage($form, $page)); // Second
+        dispatch_sync(new AddPageFormFromPage($form, $page)); // First
+        dispatch_sync(new AddEntryFormFromPage($form, $page)); // Second
 
         return $form->render($page);
     }
