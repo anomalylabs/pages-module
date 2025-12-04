@@ -30,7 +30,7 @@
         "source": "https://github.com/anomalylabs/pages-module"
     },
     "require": {
-        "anomaly/streams-platform": "^1.8",
+        "anomaly/streams-platform": "^1.10",
         "anomaly/preferences-module": "^2.3"
     },
     "autoload": {
