@@ -87,12 +87,27 @@ class PageAuthorizer
          * Check the roles against the
          * user if there are any.
          */
-        if (
-            $page->isLive()
-            && !$allowed->isEmpty()
-            && (!$user || (!$user->hasAnyRole($allowed) && !$user->isAdmin()))
-        ) {
-            $page->setResponse($this->response->redirectGuest('login'));
+        if ($page->isLive() && !$allowed->isEmpty()) {
+
+            // Pull out the guest role by slug.
+            $guest = $allowed->findBy('slug', 'guest');
+
+            if (!$user) {
+
+                /*
+                 * An anonymous visitor is judged as the guest
+                 * role: allowed when guest is a permitted audience.
+                 */
+                if (!$guest) {
+                    $page->setResponse($this->response->redirectGuest('login'));
+                }
+            } elseif (!$user->hasAnyRole($allowed) && !$user->isAdmin()) {
+
+                /*
+                 * A signed in user needs one of the listed roles.
+                 */
+                $page->setResponse($this->response->redirectGuest('login'));
+            }
         }
     }
 }

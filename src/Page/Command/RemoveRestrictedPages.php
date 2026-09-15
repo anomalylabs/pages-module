@@ -49,6 +49,14 @@ class RemoveRestrictedPages
             $roles = $page->getAllowedRoles();
 
             /*
+             * No restrictions means
+             * anyone can see it.
+             */
+            if ($roles->isEmpty()) {
+                continue;
+            }
+
+            /*
              * Admin's can see
              * absolutely everything.
              */
@@ -56,46 +64,30 @@ class RemoveRestrictedPages
                 continue;
             }
 
-            /*
-             * If there is a guest role and
-             * no user then this page
-             * can display. Otherwise
-             * we need to hide it.
-             */
-            if ($roles->has('guest') && !$user) {
-                continue;
-            }
+            // Pull out the guest role by slug.
+            $guest = $roles->findBy('slug', 'guest');
 
             /*
-             * If there is a guest role and
-             * there IS a user then this page
-             * can NOT display. Forget it.
+             * An anonymous visitor is judged as
+             * the guest role: show the page when
+             * guest is a permitted audience,
+             * otherwise hide it.
              */
-            if ($roles->has('guest') && $user) {
+            if (!$user) {
 
-                $this->pages->forget($key);
-
-                continue;
-            }
-
-            /*
-             * If there are role restrictions
-             * but no user is signed in then
-             * we can't authorize anything!
-             */
-            if (!$roles->isEmpty() && !$user) {
-
-                $this->pages->forget($key);
+                if (!$guest) {
+                    $this->pages->forget($key);
+                }
 
                 continue;
             }
 
             /*
-             * If there are role restrictions
-             * and the user does not belong to
-             * any of them then don't show it.
+             * A signed in user needs one of the
+             * listed roles. The guest role is one
+             * permitted audience and excludes no one.
              */
-            if (!$roles->isEmpty() && !$user->hasAnyRole($roles)) {
+            if (!$user->hasAnyRole($roles)) {
 
                 $this->pages->forget($key);
 
