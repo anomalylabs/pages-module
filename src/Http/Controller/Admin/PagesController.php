@@ -49,11 +49,20 @@ class PagesController extends AdminController
      * Change the pages view.
      *
      * @param PreferenceRepositoryInterface $preferences
+     * @param Authorizer $authorizer
      * @param                               $view
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function change(PreferenceRepositoryInterface $preferences, $view)
+    public function change(PreferenceRepositoryInterface $preferences, Authorizer $authorizer, $view)
     {
+        if (!$authorizer->authorize('anomaly.module.pages::pages.read')) {
+            abort(403);
+        }
+
+        if (!in_array($view, ['tree', 'table'])) {
+            abort(404);
+        }
+
         $preferences->set('anomaly.module.pages::page_view', $view);
 
         return $this->redirect->back();
@@ -106,15 +115,27 @@ class PagesController extends AdminController
      *
      * @param  PageRepositoryInterface $pages
      * @param  Redirector $redirect
+     * @param  Authorizer $authorizer
      * @param                                    $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function view(PageRepositoryInterface $pages, Redirector $redirect, $id)
+    public function view(PageRepositoryInterface $pages, Redirector $redirect, Authorizer $authorizer, $id)
     {
+        if (!$authorizer->authorize('anomaly.module.pages::pages.read')) {
+            abort(403);
+        }
+
         /* @var PageInterface $page */
-        $page = $pages->find($id);
+        if (!$page = $pages->find($id)) {
+            abort(404);
+        }
 
         if (!$page->isLive()) {
+
+            if (!$authorizer->authorize('anomaly.module.pages::pages.preview')) {
+                abort(403);
+            }
+
             return $redirect->to('pages/preview/' . $page->getStrId());
         }
 
