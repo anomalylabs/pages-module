@@ -48,7 +48,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
                         /**
                          * @var PageInterface|PagesPagesEntryTranslationsModel $translation
                          */
-                        return "Route::any('{$translation->path}', [
+                        return "Route::any(" . var_export($translation->path, true) . ", [
     'uses'                       => 'Anomaly\\PagesModule\\Http\\Controller\\PagesController@view',
     'as'                         => 'pages::{$page->getId()}.{$translation->locale}',
     'streams::addon'             => 'anomaly.module.pages',
@@ -72,7 +72,7 @@ class PageHandlerExtension extends Extension implements PageHandlerInterface
                         /**
                          * @var PageInterface|PagesPagesEntryTranslationsModel $translation
                          */
-                        return "Route::any('{$translation->path}/{any?}', [
+                        return "Route::any(" . var_export($translation->path . '/{any?}', true) . ", [
     'uses'                       => 'Anomaly\\PagesModule\\Http\\Controller\\PagesController@view',
     'as'                         => 'pages::{$page->getId()}.{$translation->locale}',
     'streams::addon'             => 'anomaly.module.pages',
