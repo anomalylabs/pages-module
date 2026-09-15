@@ -29,7 +29,20 @@ class PageTreeBuilder extends TreeBuilder
         ],
         'delete' => [
             'permission' => 'anomaly.module.pages::pages.delete',
+            'href'       => 'admin/pages/delete/{entry.id}',
         ],
     ];
+
+    /**
+     * Fired when the builder is ready to build.
+     */
+    public function onReady()
+    {
+        $buttons = $this->getButtons();
+
+        $buttons['delete']['href'] .= '?_token=' . csrf_token();
+
+        $this->setButtons($buttons);
+    }
 
 }

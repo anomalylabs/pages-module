@@ -156,6 +156,13 @@ class PagesController extends AdminController
      */
     public function delete(PageRepositoryInterface $pages, Authorizer $authorizer, $id)
     {
+        if (!hash_equals((string)csrf_token(), (string)$this->request->get('_token'))) {
+
+            $this->messages->error('streams::message.csrf_token_mismatch');
+
+            return $this->redirect->back();
+        }
+
         if (!$authorizer->authorize('anomaly.module.pages::pages.delete')) {
 
             $this->messages->error('streams::message.access_denied');
@@ -163,9 +170,15 @@ class PagesController extends AdminController
             return $this->redirect->back();
         }
 
-        $pages->delete($page = $pages->find($id));
+        if (!$page = $pages->find($id)) {
+            abort(404);
+        }
 
-        $page->entry->delete();
+        $pages->delete($page);
+
+        if ($entry = $page->getEntry()) {
+            $entry->delete();
+        }
 
         return redirect()->back();
     }
