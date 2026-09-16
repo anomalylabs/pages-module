@@ -121,7 +121,14 @@ class PagesController extends AdminController
      */
     public function view(PageRepositoryInterface $pages, Redirector $redirect, Authorizer $authorizer, $id)
     {
-        if (!$authorizer->authorize('anomaly.module.pages::pages.read')) {
+        if (!$authorizer->authorizeAny(
+            [
+                'anomaly.module.pages::pages.read',
+                'anomaly.module.pages::pages.write',
+            ],
+            null,
+            true
+        )) {
             abort(403);
         }
 
