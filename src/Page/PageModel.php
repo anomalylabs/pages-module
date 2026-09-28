@@ -502,6 +502,16 @@ class PageModel extends PagesPagesEntryModel implements PageInterface
     }
 
     /**
+     * Return whether the model is searchable or not.
+     *
+     * @return bool
+     */
+    public function isSearchable()
+    {
+        return parent::isSearchable() && !config('anomaly.module.pages::search.disable_search_index', false);
+    }
+
+    /**
      * Return the searchable array.
      *
      * @return array
